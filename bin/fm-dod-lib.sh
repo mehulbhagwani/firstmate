@@ -338,10 +338,49 @@ There is no pull request, no \`gh-axi\` call, and no forge CI result to report: 
 EOF
 }
 
-fm_dod_block() {  # <mode> <task-id> [branch] [<forge>]
-  local mode=$1 id=$2 forge=${4:-none}
+fm_dod_block() {  # <mode> <task-id> [branch] [<forge>] [<existing-pr-url>]
+  local mode=$1 id=$2 forge=${4:-none} existing_pr=${5:-}
   local branch=${3:-fm/$id}
   fm_forge_valid_for_mode "$forge" "$mode" fm_dod_block || return 1
+  if [ -n "$existing_pr" ]; then
+    [ "$forge" = none ] || {
+      echo "error: existing PR tasks cannot select forge=$forge; the existing PR URL is the review target" >&2
+      return 1
+    }
+    case "$mode" in
+      direct-PR)
+        cat <<EOF
+# Definition of done
+Delivery contract: mode=direct-PR
+Ship branch: $branch
+Existing PR: $existing_pr
+This task ships **direct-PR** by updating the existing PR, without the no-mistakes pipeline.
+The task is complete only when committed on the existing PR branch, pushed to that same branch, and the existing PR's checks are green.
+Never open a second PR.
+When it is ready, append \`done [at=<epoch>]: PR $existing_pr head <sha> checks green\` to the status file, replacing \`<sha>\` with the pushed commit's full SHA, and stop.
+Do NOT run /no-mistakes. The configured merge authority decides whether to merge the PR; firstmate relays the outcome.
+EOF
+        ;;
+      no-mistakes)
+        cat <<EOF
+# Definition of done
+Delivery contract: mode=no-mistakes
+Ship branch: $branch
+Existing PR: $existing_pr
+The task is complete only when committed on the existing PR branch.
+When you believe it is complete, append \`done [at=<epoch>]: {summary}\` to the status file and stop.
+Firstmate will then instruct you to run /no-mistakes to validate and update this existing PR.
+Never open a second PR, and never allow the pipeline to replace the existing PR branch with a new branch.
+EOF
+        fm_nm_driving_block "$forge"
+        ;;
+      *)
+        echo "error: fm_dod_block: existing PR requires no-mistakes or direct-PR mode" >&2
+        return 1
+        ;;
+    esac
+    return 0
+  fi
   case "$mode:$forge" in
     direct-PR:gerrit)
       cat <<EOF
