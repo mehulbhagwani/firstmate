@@ -6,10 +6,10 @@
 # receives. Both paths must hand the worker the same contract: a promoted
 # no-mistakes worker that never received the ask-user escalation rule or the
 # `--yes` ban is the exact delivery hole this single owner exists to close.
-# fm_dod_block <no-mistakes|direct-PR|local-only> <task-id> [branch] [<forge>]
+# fm_dod_block <no-mistakes|direct-PR|local-only> <task-id> [branch] [<forge>] [<existing-pr-url>] [<base-branch>]
 # prints the block on stdout with no trailing blank line. The caller validates the
-# mode; an unknown mode is refused rather than silently rendered as the pipeline
-# contract.
+# mode and existing PR URL; an unknown mode is refused rather than silently
+# rendered as the pipeline contract.
 # The optional third argument is the task's full ship-branch name (a project's
 # registered prefix may replace the legacy `fm/` one); it defaults to `fm/<task-id>`
 # and is the immutable task branch rendered in every delivery contract.
@@ -177,6 +177,39 @@ fm_brief_task_placeholders_present() {  # <file>
   return 1
 }
 
+# Return 0 when an existing-PR scaffold still lacks its head branch.
+# Match only the generated checkout target so an illustrative token in filled
+# Task prose does not cause the same false refusal this parser avoids for Task.
+fm_brief_existing_pr_branch_placeholder_present() {  # <file>
+  local file=$1
+  [ -f "$file" ] || return 1
+  grep -Fq "origin/{EXISTING_PR_BRANCH}" "$file"
+}
+
+# Return 0 when an existing-PR no-mistakes brief lacks a valid base branch.
+fm_brief_existing_pr_base_invalid() {  # <file>
+  local file=$1 record base tab
+  [ -f "$file" ] || return 1
+  tab=$(printf '\t')
+  record=$(awk '
+    $0 == "Delivery contract: mode=no-mistakes" {
+      if ((getline existing) <= 0 || existing !~ /^Existing PR: /) next
+      if ((getline base) <= 0 || base !~ /^Existing PR base branch: /) {
+        print existing "\t"
+        exit
+      }
+      sub(/^Existing PR base branch: /, "", base)
+      print existing "\t" base
+      exit
+    }
+  ' "$file")
+  [ -n "$record" ] || return 1
+  base=${record#*"$tab"}
+  [ -n "$base" ] && [ "$base" != '{EXISTING_PR_BASE_BRANCH}' ] || return 0
+  git check-ref-format --branch "$base" >/dev/null 2>&1 || return 0
+  return 1
+}
+
 # Print the words of every provenance-marked line in a legacy `# Task` body.
 # The marker is read the way bin/fm-brief-heading-lib.sh reads a heading: a
 # line inside a ``` or ~~~ fenced block, or indented four spaces or a tab as an
@@ -287,6 +320,7 @@ fm_nm_driving_block() {  # <forge>
     pr_reattach_clause="; once checks are green it returns \`checks-passed\` immediately, and"
   fi
   cat <<EOF
+
 You drive no-mistakes by responding to its gates, not by implementing fixes.
 Follow the guidance no-mistakes itself provides for the mechanics: it loads when you invoke /no-mistakes, and \`no-mistakes axi run --help\` plus the \`help\` lines in each \`axi\` response are authoritative and version-matched to the installed binary.
 When starting no-mistakes, pass \`--intent\` as only this brief's \`## Captain's intent\` subsection body, not its heading, plus any later words the captain actually said.
@@ -338,8 +372,8 @@ There is no pull request, no \`gh-axi\` call, and no forge CI result to report: 
 EOF
 }
 
-fm_dod_block() {  # <mode> <task-id> [branch] [<forge>] [<existing-pr-url>]
-  local mode=$1 id=$2 forge=${4:-none} existing_pr=${5:-}
+fm_dod_block() {  # <mode> <task-id> [branch] [<forge>] [<existing-pr-url>] [<base-branch>]
+  local mode=$1 id=$2 forge=${4:-none} existing_pr=${5:-} base_branch=${6:-}
   local branch=${3:-fm/$id}
   fm_forge_valid_for_mode "$forge" "$mode" fm_dod_block || return 1
   if [ -n "$existing_pr" ]; then
@@ -367,9 +401,11 @@ EOF
 Delivery contract: mode=no-mistakes
 Ship branch: $branch
 Existing PR: $existing_pr
+Existing PR base branch: $base_branch
 The task is complete only when committed on the existing PR branch.
 When you believe it is complete, append \`done [at=<epoch>]: {summary}\` to the status file and stop.
 Firstmate will then instruct you to run /no-mistakes to validate and update this existing PR.
+When starting that run, pass the existing PR base branch recorded above as \`--base-branch\` so rebase, PR lookup, and CI target the PR's actual base.
 Never open a second PR, and never allow the pipeline to replace the existing PR branch with a new branch.
 EOF
         fm_nm_driving_block "$forge"

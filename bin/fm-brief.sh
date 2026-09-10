@@ -14,7 +14,7 @@
 # charters still use a single `{TASK}` charter fill. Firstmate may adjust other
 # sections when the task genuinely deviates (e.g. working an existing external
 # PR instead of shipping a new one).
-# Usage: fm-brief.sh <task-id> <repo-name> --mode <no-mistakes|direct-PR|local-only> [--branch-prefix <prefix>] [--forge <none|gerrit> [--shape squash]] [--existing-pr <url>] [--branch <name>] [--herdr-lab]
+# Usage: fm-brief.sh <task-id> <repo-name> --mode <no-mistakes|direct-PR|local-only> [--branch-prefix <prefix>] [--forge <none|gerrit> [--shape squash]] [--existing-pr <url>] [--branch <name>] [--base-branch <name>] [--herdr-lab]
 #        fm-brief.sh <task-id> <repo-name> --scout [--herdr-lab]
 #        fm-brief.sh <task-id> --secondmate {<project>...|--no-projects}
 #   --scout writes the scout contract instead: the deliverable is a report at
@@ -38,14 +38,16 @@
 #   after scaffolding and the caller-supplied repo string cannot reliably
 #   identify this repo. Briefs made without it carry a loud declaration so an
 #   omitted contract cannot be silent.
-#   --existing-pr scaffolds work on an existing GitHub pull request or GitLab
-#   merge request instead of a new branch and PR. It applies only to ship tasks
+#   --existing-pr scaffolds work on an existing GitHub pull request instead of
+#   a new branch and PR. It applies only to ship tasks
 #   in no-mistakes or direct-PR mode. The worker fetches and checks out the PR's
-#   origin-hosted head branch from origin, pushes only to that same branch without
-#   force, and never opens a second PR. Fork-hosted heads are intentionally
-#   unsupported because this contract never redirects a push away from origin.
-#   Pass --branch <name> when known; otherwise the brief retains
-#   {EXISTING_PR_BRANCH}, which bin/fm-spawn.sh refuses until filled.
+#   origin-hosted head branch through gh-axi, verifies that branch belongs to
+#   origin, fetches it from origin, pushes only to that same branch without force,
+#   and never opens a second PR. Fork-hosted heads are intentionally unsupported
+#   because this contract never redirects a push away from origin. Optional
+#   --branch <name> adds an assertion against the forge-reported head branch.
+#   Existing-PR no-mistakes briefs also require --base-branch <name>, or retain a
+#   guarded {EXISTING_PR_BASE_BRANCH} field that bin/fm-spawn.sh refuses until filled.
 # For ship tasks, --mode is REQUIRED and shapes the definition of done. Firstmate
 # resolves it per task at intake (AGENTS.md section 7); data/projects.md holds the
 # captain's standing posture as context, and this script never reads it:
@@ -87,7 +89,7 @@
 # recorded task metadata cannot drift apart.
 # Ship briefs begin with a worktree-isolation assertion before the branch step.
 # Both crewmate scaffolds carry one shared rule against administering the infrastructure every lane shares - the no-mistakes daemon and the worktree pool their own slot came from - so ship and scout cannot drift apart. A secondmate charter omits it: that home allocates and returns slots for its own crewmates.
-# Every scaffold records the absolute Firstmate home and absolute task-artifact directory so home-relative data/<task-id>/ references cannot be mistaken for project-worktree paths.
+# Every ship/scout scaffold records the absolute Firstmate home and absolute task-artifact directory so home-relative data/<task-id>/ references cannot be mistaken for project-worktree paths.
 # --mode, --forge, and --shape are refused on scout and secondmate scaffolds: a scout's deliverable is a report rather than a merge, and a charter is not a delivery contract.
 # There is no --yolo flag here. The worker never owns merge decisions, so yolo is
 # a spawn-time and firstmate-side input only (AGENTS.md section 7).
@@ -199,6 +201,8 @@ EXISTING_PR=
 EXISTING_PR_SET=0
 BRANCH=
 BRANCH_SET=0
+BASE_BRANCH=
+BASE_BRANCH_SET=0
 POS=()
 want_value=
 for a in "$@"; do
@@ -213,6 +217,7 @@ for a in "$@"; do
       shape) SHAPE=$a; SHAPE_SET=1 ;;
       existing-pr) EXISTING_PR=$a; EXISTING_PR_SET=1 ;;
       branch) BRANCH=$a; BRANCH_SET=1 ;;
+      base-branch) BASE_BRANCH=$a; BASE_BRANCH_SET=1 ;;
       *) echo "error: internal parser state for --$want_value" >&2; exit 1 ;;
     esac
     want_value=
@@ -235,6 +240,8 @@ for a in "$@"; do
     --existing-pr=*) EXISTING_PR=${a#--existing-pr=}; EXISTING_PR_SET=1 ;;
     --branch) want_value=branch ;;
     --branch=*) BRANCH=${a#--branch=}; BRANCH_SET=1 ;;
+    --base-branch) want_value=base-branch ;;
+    --base-branch=*) BASE_BRANCH=${a#--base-branch=}; BASE_BRANCH_SET=1 ;;
     # yolo never reaches the worker: it is firstmate's merge authority, not a
     # brief input. Refuse it loudly so it is never silently dropped here and then
     # believed to have been recorded.
@@ -307,7 +314,11 @@ if [ "$EXISTING_PR_SET" -eq 1 ]; then
   # shellcheck source=bin/fm-pr-lib.sh
   . "$SCRIPT_DIR/fm-pr-lib.sh"
   fm_pr_url_parse "$EXISTING_PR" || {
-    echo "error: --existing-pr requires a canonical GitHub pull request or GitLab merge request URL" >&2
+    echo "error: --existing-pr requires a canonical GitHub pull request URL" >&2
+    exit 1
+  }
+  [ "$FM_PR_PROVIDER" = github ] || {
+    echo "error: --existing-pr currently supports GitHub pull request URLs only" >&2
     exit 1
   }
   EXISTING_PR=$FM_PR_URL
@@ -330,6 +341,18 @@ else
     echo "error: --branch-prefix and task id must form a valid git branch (got '$BRANCH')" >&2
     exit 1
   fi
+fi
+if [ "$BASE_BRANCH_SET" -eq 1 ]; then
+  [ "$EXISTING_PR_SET" -eq 1 ] && [ "$MODE" = no-mistakes ] || {
+    echo "error: --base-branch applies only to an existing-PR no-mistakes brief" >&2
+    exit 1
+  }
+  git check-ref-format --branch "$BASE_BRANCH" >/dev/null 2>&1 || {
+    echo "error: --base-branch is not a valid git branch name: $BASE_BRANCH" >&2
+    exit 1
+  }
+elif [ "$EXISTING_PR_SET" -eq 1 ] && [ "$MODE" = no-mistakes ]; then
+  BASE_BRANCH='{EXISTING_PR_BASE_BRANCH}'
 fi
 ID=${POS[0]}
 printf -v BRANCH_Q '%q' "$BRANCH"
@@ -385,10 +408,16 @@ shell_quote() {
 }
 
 if [ "$EXISTING_PR_SET" -eq 1 ]; then
-  BRANCH_QUOTED=$(shell_quote "$BRANCH")
-  ORIGIN_BRANCH_QUOTED=$(shell_quote "origin/$BRANCH")
-  PUSH_BRANCH_QUOTED=$(shell_quote "HEAD:$BRANCH")
-  FETCH_REFSPEC_QUOTED=$(shell_quote "+refs/heads/$BRANCH:refs/remotes/origin/$BRANCH")
+  EXPECTED_ORIGIN_HTTPS=$(shell_quote "https://github.com/$FM_PR_OWNER/$FM_PR_REPO")
+  EXPECTED_ORIGIN_HTTPS_GIT=$(shell_quote "https://github.com/$FM_PR_OWNER/$FM_PR_REPO.git")
+  EXPECTED_ORIGIN_SSH=$(shell_quote "git@github.com:$FM_PR_OWNER/$FM_PR_REPO.git")
+  EXPECTED_ORIGIN_SSH_URL=$(shell_quote "ssh://git@github.com/$FM_PR_OWNER/$FM_PR_REPO.git")
+  if [ "$BRANCH_SET" -eq 1 ]; then
+    EXPECTED_BRANCH_QUOTED=$(shell_quote "$BRANCH")
+    BRANCH_ASSERT=" && [ \"\$PR_BRANCH\" = $EXPECTED_BRANCH_QUOTED ] || { echo 'error: forge-reported PR head branch does not match --branch' >&2; exit 1; }"
+  else
+    BRANCH_ASSERT=
+  fi
 fi
 
 STATUS_FILE=$(shell_quote "$STATE/$ID.status")
@@ -661,15 +690,15 @@ fi
 # bin/fm-spawn.sh checks against its own explicit --mode and the project's
 # registered forge before launching.
 if [ "$EXISTING_PR_SET" -eq 1 ]; then
-  SETUP1="1. First action: fetch and check out the existing PR head branch from origin: \`git fetch origin $FETCH_REFSPEC_QUOTED && git checkout -B $BRANCH_QUOTED $ORIGIN_BRANCH_QUOTED\`.
-   This scaffold supports only a PR head branch hosted on origin. If origin does not have the branch or you cannot push it, append \`blocked: existing PR head branch is not writable on origin\` and stop; never redirect the push to another remote."
+  SETUP1="1. First action: resolve the existing PR head through gh-axi, verify its repository and upstream are origin, then refresh and check out that exact origin branch: \`case \"\$(git remote get-url origin)\" in $EXPECTED_ORIGIN_HTTPS|$EXPECTED_ORIGIN_HTTPS_GIT|$EXPECTED_ORIGIN_SSH|$EXPECTED_ORIGIN_SSH_URL) ;; *) echo 'error: origin does not match the existing PR repository' >&2; exit 1 ;; esac; gh-axi pr checkout $FM_PR_NUMBER && PR_BRANCH=\$(git branch --show-current) && git check-ref-format --branch \"\$PR_BRANCH\" >/dev/null$BRANCH_ASSERT; [ \"\$(git config --get \"branch.\$PR_BRANCH.remote\")\" = origin ] || { echo 'error: existing PR head is not hosted on origin' >&2; exit 1; }; git fetch origin \"+refs/heads/\$PR_BRANCH:refs/remotes/origin/\$PR_BRANCH\" && git checkout -B \"\$PR_BRANCH\" \"origin/\$PR_BRANCH\"\`.
+   If the PR head is fork-hosted, origin lacks the branch, or you cannot push it, append \`blocked: existing PR head branch is not writable on origin\` and stop; never redirect the push to another remote."
   if [ "$MODE" = no-mistakes ]; then
     SETUP2="
 2. Run \`no-mistakes doctor\`; if it reports the repo is not initialized here, run \`no-mistakes init\`."
   else
     SETUP2=""
   fi
-  RULE1="1. Commit on \`$BRANCH\` and push only to that same origin branch with \`git push origin $PUSH_BRANCH_QUOTED\`. Never force-push, never open a second PR, and never merge the existing PR."
+  RULE1="1. Commit on the checked-out existing PR branch and push only to that same origin branch with \`PR_BRANCH=\$(git branch --show-current) && git push origin \"HEAD:\$PR_BRANCH\"\`. Never force-push, never open a second PR, and never merge the existing PR."
 else
   SETUP1="1. First action: create your branch: \`git checkout -b $BRANCH_Q --\`"
   case "$MODE" in
@@ -683,7 +712,7 @@ else
   esac
   RULE1=$(fm_ship_rule_one "$MODE" "$ID" "$BRANCH" "$FORGE") || exit 1
 fi
-DOD=$(fm_dod_block "$MODE" "$ID" "$BRANCH" "$FORGE" "$EXISTING_PR") || exit 1
+DOD=$(fm_dod_block "$MODE" "$ID" "$BRANCH" "$FORGE" "$EXISTING_PR" "$BASE_BRANCH") || exit 1
 
 cat > "$BRIEF" <<EOF
 You are a crewmate: an autonomous worker agent managed by firstmate. Work on your own; do not wait for a human.
