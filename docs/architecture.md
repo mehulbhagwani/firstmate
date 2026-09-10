@@ -365,8 +365,9 @@ The `data/secondmates.md` line contract is owned by the [`secondmate-provisionin
 Each task's mode and `yolo` merge posture are firstmate's decision at intake.
 The mode is passed explicitly to `bin/fm-brief.sh`, and both values are passed explicitly to `bin/fm-spawn.sh` and `bin/fm-promote.sh`; each command refuses to guess the values it consumes.
 A ship brief records its mode as a fixed machine-readable line and the spawn refuses to launch on a different one, so the worker's instructions and the recorded task delivery cannot diverge.
-An existing-PR ship brief additionally records the canonical PR URL and its origin head branch, replaces new-branch and new-PR instructions with same-branch checkout and non-force push rules, and is refused at spawn while its optional branch placeholder remains unfilled.
-Every generated brief records the absolute Firstmate home and task-artifact directory so a home-relative report or evidence path cannot be mistaken for a path inside the project worktree.
+An existing-PR ship brief additionally records the canonical PR URL and its origin-hosted head branch, replaces new-branch and new-PR instructions with same-branch checkout and non-force push rules, and is refused at spawn while its optional branch placeholder remains unfilled.
+Fork-hosted heads are refused by the worker because the brief contract never redirects a push away from origin.
+Every generated ship or scout brief records the absolute Firstmate home and task-artifact directory so a home-relative report or evidence path cannot be mistaken for a path inside the project worktree.
 `bin/fm-dod-lib.sh` is the one owner of that mode's definition of done, rendered into a generated ship brief, the ship instructions a promoted scout receives, and that scout's own `brief.md` so a later relaunch reads the same contract, so a promoted worker cannot be handed a weaker contract than a briefed one.
 It also owns the named-head reachability gate that refuses a ship `done:` while that head exists only in the worker's disposable copy, testing the named head rather than whether some branch moved.
 `bin/fm-crew-state.sh`, `bin/fm-pr-check.sh`, and the secondmate ledger-first publisher call that same gate before treating a ship `done:` as ready.
