@@ -739,6 +739,10 @@ The executable interrupt and exit mechanics live in [`bin/fm-control-lib.sh`](..
 Launch mechanics, including the verified command templates, live in [`bin/fm-spawn.sh`](../bin/fm-spawn.sh).
 For a follow-up that must update an existing GitHub pull request, pass `--pr <url>` to `fm-spawn.sh`; it resolves the open PR head, requires its repository to be a configured push remote, checks out that branch at the reported commit, and records `pr=` and `pr_head=` so no-mistakes updates the same PR instead of opening another one.
 A merged or closed PR, an existing local branch at a different commit, or a head repository without a matching push remote is refused before the worker starts.
+A Claude worker's launch brief is published as an operational record in the receiving home's state and delivered as a printable doorbell; if publication fails, the spawn reports the failure and launches nothing rather than sending a marker that Claude Code would strip.
+Other harnesses retain the typed operational-marker launch path.
+
+
 Pi-family launches adapt the regular-TUI safeguard to the installed CLI's capabilities; [`fm-spawn.sh --help`](../bin/fm-spawn.sh) owns the exact version-safe launch mechanics.
 Enabled primary-session turn-end guard integrations are tracked as repo-level hook files and documented in [`docs/turnend-guard.md`](turnend-guard.md).
 
