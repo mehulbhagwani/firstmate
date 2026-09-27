@@ -102,7 +102,7 @@ b64url() { printf '%s' "$1" | base64 | tr '+/' '-_' | tr -d '=\n'; }
 JWT="$(b64url '{"alg":"none","typ":"JWT"}').$(b64url '{"https://api.openai.com/auth":{"chatgpt_account_id":"fm-live-guard"}}').unsigned"
 printf '{"providers":{"openai-codex":{"baseUrl":"http://127.0.0.1:%s","apiKey":"%s"}}}\n' "$PORT" "$JWT" > "$WORK/pi/models.json"
 
-tmux -L "$SOCKET" new-session -d -s "$SESSION" -x 120 -y 40 -c "$WORK"
+tmux -L "$SOCKET" new-session -d -s "$SESSION" -x 120 -y 24 -c "$WORK"
 tmux -L "$SOCKET" new-window -d -t "$SESSION:" -n "$WIN" -c "$WORK" -- \
   env PI_CODING_AGENT_DIR="$WORK/pi" pi --model openai-codex/gpt-5.5 --no-session --no-context-files \
   || fail "pi ($VERSION): could not launch in the isolated tmux server"
