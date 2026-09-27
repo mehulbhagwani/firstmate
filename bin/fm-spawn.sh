@@ -77,7 +77,7 @@
 #   secondmate whose endpoint is gone is respawned by its own owner
 #   (`--secondmate`, driven by the session-start liveness sweep).
 #   Every fresh ship/scout launch and replacement explicitly enters the recorded
-#   worktree immediately before trust setup and brief delivery, and a post-launch
+#   worktree immediately before trust setup and brief delivery, and a pre-launch
 #   cwd check refuses any endpoint that still reports another copy; a Herdr shell
 #   that has drifted out of the recorded worktree is told once to return, and
 #   only a shell that will not go refuses.
@@ -1820,7 +1820,7 @@ if [ "$RELAUNCH" -eq 1 ]; then
     PR_URL=
     PR_HEAD=
   fi
-  if [ "$KIND" = ship ] && [ "$PR_ACTIVE" -ne 1 ]; then
+  if [ "$KIND" = ship ]; then
     BRANCH=$(fm_meta_get "$RELAUNCH_META" branch)
     [ -n "$BRANCH" ] || BRANCH="fm/$ID"
     if ! git check-ref-format --branch "$BRANCH" >/dev/null 2>&1; then
@@ -4004,10 +4004,9 @@ spawn_enter_recorded_worktree() {
   }
 }
 
-# The pane cwd check above proves the shell handoff, but the foreground process
-# can still be launched by a backend-specific restore or wrapper. Re-read after
-# launch so the worker itself, not only its terminal, is proven to start in the
-# recorded copy before the task is reported as launched.
+# Verify the endpoint's cwd after the explicit handoff but before any harness
+# starts. Zellij and cmux implement this read with a shell probe, so keeping it
+# before launch prevents the probe from becoming input to a live worker.
 spawn_assert_agent_worktree() {
   local expected seen i
   [ "$KIND" = secondmate ] && return 0
@@ -4459,6 +4458,9 @@ if [ "$PR_ACTIVE" -eq 1 ] && [ -z "$PR_BRANCH" ]; then
   }
 fi
 if [ "$PR_ACTIVE" -eq 1 ]; then
+  BRANCH=$PR_BRANCH
+fi
+if [ "$PR_ACTIVE" -eq 1 ]; then
   {
     printf '\n# Existing pull-request follow-up\n'
     printf 'This task is already checked out on the existing pull-request branch %s for %s. Do not run the generic git checkout -b fm/%s setup or create another branch. Keep working on the current branch so the validation and push update that pull request.\n' "$PR_BRANCH" "$PR_URL" "$ID"
@@ -4473,6 +4475,7 @@ fi
 # started, so a later host restart inherits the task worktree rather than the
 # tab's original project directory.
 spawn_enter_recorded_worktree
+spawn_assert_agent_worktree
 
 # Pre-register Claude's workspace trust for the directory this launch starts in,
 # at the first point that directory is known and before any per-task state is
@@ -5541,7 +5544,6 @@ if [ "$HARNESS" = agy ]; then
     exit 1
   fi
 fi
-spawn_assert_agent_worktree
 
 if [ "$KIND" = secondmate ] && [ "${FM_SKIP_SECONDMATE_INHERIT:-0}" != 1 ]; then
   if ! fm_config_reread_discard_pending "$PROJ_ABS" "$ID" "$FM_HOME"; then
