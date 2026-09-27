@@ -1,0 +1,18 @@
+Command: FM_COMPOSER_PI_BANNER_LIVE=1 bash tests/fm-composer-pi-codex-banner-live-e2e.test.sh
+Installed pi version: 0.87.1
+
+# pi (0.87.1): rendered banner row: Error: Codex error: The usage limit has been reached
+ok - pi (0.87.1): banner screen classifies empty on the cursorless styled read with a working status
+ok - pi (0.87.1): banner screen classifies empty on the cursorless styled read with a unknown status
+ok - pi (0.87.1): banner screen classifies empty on the cursorless styled read with a idle status
+ok - pi (0.87.1): the banner over the same screen with the identity probe absent stays unknown
+ok - pi (0.87.1): banner screen classifies empty on the cursor-anchored tmux read
+ok - live pi banner guard verified 5 live surface(s)
+EXIT: 0
+
+This is a genuine live run: the installed pi binary was launched in an isolated tmux
+server against a local stub Codex endpoint returning the usage-limit stream error,
+capturing pi's actual rendered screen (including the new 0.87.1 bug-report hint row)
+and feeding it through the shared fm-composer-lib.sh classifier. Previous rounds
+failed here because the tmux pane was too large for pi to render the banner at all;
+commit 56f7cfc shrank the pane and this run now completes and passes.
