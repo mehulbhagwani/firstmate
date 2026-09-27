@@ -47,6 +47,7 @@ omp publishes no marker of its own; `FM_OMP_HARNESS=omp` is Firstmate's launch m
 `../../../bin/fm-harness.sh crew` resolves `config/crew-harness`, where absent or `default` means firstmate's own harness.
 `../../../bin/fm-harness.sh secondmate` resolves `config/secondmate-harness` -> `config/crew-harness` -> firstmate's own harness.
 `../../../bin/fm-spawn.sh` re-resolves on every spawn, and an explicit per-spawn argument wins for that spawn.
+For any follow-up to an existing pull request, firstmate passes `--pr <url>` so the worker stays on that PR's branch instead of creating a new branch.
 A new adapter's verified marker and command name must land in `../../../bin/fm-harness.sh`.
 
 ## Operation-to-reference matrix

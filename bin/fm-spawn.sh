@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 # Spawn a direct report: a crewmate in a treehouse or Orca worktree, or a
 # secondmate in its isolated firstmate home.
-# Usage: fm-spawn.sh <task-id> <project-dir> --mode <no-mistakes|direct-PR|local-only> --yolo <on|off> [--harness <name>|harness|launch-command] [--model <name>] [--effort <level>] [--backend <name>]
+# Usage: fm-spawn.sh <task-id> <project-dir> --mode <no-mistakes|direct-PR|local-only> --yolo <on|off> [--pr <url>] [--harness <name>|harness|launch-command] [--model <name>] [--effort <level>] [--backend <name>]
 #        fm-spawn.sh <task-id> <project-dir> --scout [--harness <name>|harness|launch-command] [--model <name>] [--effort <level>] [--backend <name>]
+#   --pr <url> starts a ship worker on the named open GitHub pull request's head
+#   branch. The head repository must be a configured push remote, and the branch
+#   is checked out at the forge-reported head before the worker starts. A local
+#   branch at another commit, a closed or merged pull request, or a missing push
+#   remote refuses before an endpoint or task record is created. A relaunch
+#   reuses the existing task's recorded PR branch and does not resolve a new PR.
 #        fm-spawn.sh <task-id> [<firstmate-home>] [--harness <name>|harness|launch-command] [--model <name>] [--effort <level>] [--backend <name>] --secondmate
 #   --mode and --yolo are this task's delivery contract, REQUIRED for every ship
 #   spawn and refused on --scout and --secondmate spawns. Firstmate resolves both
@@ -579,6 +585,7 @@ EFFORT=
 BACKEND_ARG=
 MODE=
 YOLO=
+PR_ARG=
 TRACEPARENT_ARG=
 HARNESS_SET=0
 MODEL_SET=0
@@ -586,6 +593,7 @@ EFFORT_SET=0
 BACKEND_SET=0
 MODE_SET=0
 YOLO_SET=0
+PR_SET=0
 TRACEPARENT_SET=0
 RELAUNCH=0
 POS=()
@@ -622,6 +630,10 @@ for a in "$@"; do
     yolo)
       YOLO=$a
       YOLO_SET=1
+      ;;
+    pr)
+      PR_ARG=$a
+      PR_SET=1
       ;;
     traceparent)
       TRACEPARENT_ARG=$a
@@ -674,6 +686,13 @@ for a in "$@"; do
   --yolo=*)
     YOLO=${a#--yolo=}
     YOLO_SET=1
+    ;;
+  --pr)
+    want_value='pr'
+    ;;
+  --pr=*)
+    PR_ARG=${a#--pr=}
+    PR_SET=1
     ;;
   --traceparent) want_value=traceparent ;;
   --traceparent=*)
@@ -735,6 +754,18 @@ case "$EFFORT" in
   exit 1
   ;;
 esac
+[ "$PR_SET" -eq 0 ] || [ -n "$PR_ARG" ] || {
+  echo "error: --pr requires a non-empty GitHub pull-request URL" >&2
+  exit 1
+}
+[ "$PR_SET" -eq 0 ] || [ "$KIND" = ship ] || {
+  echo "error: --pr applies only to ship spawns; scouts and secondmates do not publish pull-request follow-ups" >&2
+  exit 1
+}
+[ "$PR_SET" -eq 0 ] || [ "$RELAUNCH" -eq 0 ] || {
+  echo "error: --relaunch reuses the task's recorded pull-request branch; --pr cannot override it" >&2
+  exit 1
+}
 
 # --relaunch reuses an existing task's endpoint, worktree, project, and kind,
 # so every axis this block resolves for a fresh spawn instead comes from that
@@ -1357,6 +1388,7 @@ if [ "${#POS[@]}" -gt 0 ] && [ "${POS[0]}" != "$idpart" ] && case "$idpart" in *
   [ -z "$MODEL" ] || shared_args+=(--model "$MODEL")
   [ -z "$EFFORT" ] || shared_args+=(--effort "$EFFORT")
   [ -z "$BACKEND_ARG" ] || shared_args+=(--backend "$BACKEND_ARG")
+  [ -z "$PR_ARG" ] || shared_args+=(--pr "$PR_ARG")
   # One delivery contract applies to every pair in a batch, exactly like the shared
   # harness. Each pair still re-validates it against its own brief, so a batch
   # spanning several modes is two invocations rather than a silent mixed dispatch.
@@ -1562,6 +1594,11 @@ PROJ=
 ARG3=
 FIRSTMATE_HOME=
 RAW_LAUNCH=0
+PR_URL=
+PR_HEAD=
+PR_BRANCH=
+PR_REMOTE=
+PR_ACTIVE=0
 
 # --relaunch adoption: every identity axis comes from the task's own validated
 # durable record, never from the command line, so a relaunch can only ever
@@ -1670,6 +1707,16 @@ if [ "$RELAUNCH" -eq 1 ]; then
   fi
   MODE=$(fm_meta_get "$RELAUNCH_META" mode)
   YOLO=$(fm_meta_get "$RELAUNCH_META" yolo)
+  PR_URL=$(fm_meta_get "$RELAUNCH_META" pr)
+  PR_HEAD=$(fm_meta_get "$RELAUNCH_META" pr_head)
+  if [ -n "$PR_URL" ] && fm_pr_url_parse "$PR_URL" &&
+    [ "$FM_PR_PROVIDER" = github ] && fm_pr_head_valid "$PR_HEAD"; then
+    PR_URL=$FM_PR_URL
+    PR_ACTIVE=1
+  else
+    PR_URL=
+    PR_HEAD=
+  fi
   RELAUNCH_WT=$(fm_meta_get "$RELAUNCH_META" worktree)
   [ -n "$RELAUNCH_WT" ] && [ -d "$RELAUNCH_WT" ] || {
     echo "error: task $ID's recorded worktree '${RELAUNCH_WT:-none}' is missing; refusing to relaunch without the local copy its work lives in" >&2
@@ -3037,6 +3084,145 @@ freshen_spawn_worktree_base() { # <worktree>
   fi
 }
 
+github_remote_repo() { # <remote-url> -> owner/repository
+  local raw=$1 repo=
+  case "$raw" in
+    https://github.com/*) repo=${raw#https://github.com/} ;;
+    http://github.com/*) repo=${raw#http://github.com/} ;;
+    ssh://git@github.com/*) repo=${raw#ssh://git@github.com/} ;;
+    git@github.com:*) repo=${raw#git@github.com:} ;;
+    *) return 1 ;;
+  esac
+  repo=${repo%.git}
+  case "$repo" in
+    */*|*[!A-Za-z0-9._/-]*) printf '%s\n' "$repo" ;;
+    *) return 1 ;;
+  esac
+}
+
+resolve_existing_pr() { # <project-directory>
+  local project=$1 json state owner repo remote fetch_url push_urls push_url push_ok
+  [ -n "$PR_ARG" ] || return 0
+  fm_pr_url_parse "$PR_ARG" || {
+    echo "error: --pr requires a canonical https://github.com/<owner>/<repo>/pull/<number> URL" >&2
+    return 1
+  }
+  [ "$FM_PR_PROVIDER" = github ] || {
+    echo "error: --pr currently supports GitHub pull requests only" >&2
+    return 1
+  }
+  command -v gh >/dev/null 2>&1 || {
+    echo "error: --pr needs gh to resolve the pull request head" >&2
+    return 1
+  }
+  command -v jq >/dev/null 2>&1 || {
+    echo "error: --pr needs jq to resolve the pull request head" >&2
+    return 1
+  }
+  json=$(gh pr view "$FM_PR_URL" --json state,headRefName,headRefOid,headRepositoryOwner,headRepository 2>/dev/null) || {
+    echo "error: could not read $FM_PR_URL from GitHub" >&2
+    return 1
+  }
+  state=$(printf '%s' "$json" | jq -r '.state // empty' 2>/dev/null || true)
+  [ "$state" = OPEN ] || {
+    case "$state" in MERGED) echo "error: $FM_PR_URL is merged; refusing to start a follow-up on a closed pull request" >&2 ;; *) echo "error: $FM_PR_URL is not open (state=${state:-unreadable}); refusing to start a follow-up" >&2 ;; esac
+    return 1
+  }
+  PR_BRANCH=$(printf '%s' "$json" | jq -r '.headRefName // empty' 2>/dev/null || true)
+  PR_HEAD=$(printf '%s' "$json" | jq -r '.headRefOid // empty' 2>/dev/null || true)
+  owner=$(printf '%s' "$json" | jq -r '.headRepositoryOwner.login // empty' 2>/dev/null || true)
+  repo=$(printf '%s' "$json" | jq -r '.headRepository.name // empty' 2>/dev/null || true)
+  if [ -z "$PR_BRANCH" ] || ! git -C "$project" check-ref-format --branch "$PR_BRANCH" >/dev/null 2>&1; then
+    echo "error: $FM_PR_URL returned an invalid head branch" >&2
+    return 1
+  fi
+  fm_pr_head_valid "$PR_HEAD" || {
+    echo "error: $FM_PR_URL returned an invalid head commit" >&2
+    return 1
+  }
+  [ -n "$owner" ] && [ -n "$repo" ] || {
+    echo "error: $FM_PR_URL has no accessible head repository; refusing to guess where follow-up changes could be pushed" >&2
+    return 1
+  }
+  PR_HEAD_REPO="$owner/$repo"
+  PR_REMOTE=
+  while IFS= read -r remote; do
+    [ -n "$remote" ] || continue
+    fetch_url=$(git -C "$project" remote get-url "$remote" 2>/dev/null || true)
+    [ -n "$fetch_url" ] || continue
+    push_urls=$(git -C "$project" config --get-all "remote.$remote.pushurl" 2>/dev/null || true)
+    [ -n "$push_urls" ] || push_urls=$fetch_url
+    push_ok=1
+    while IFS= read -r push_url; do
+      [ -n "$push_url" ] || continue
+      if [ "$(github_remote_repo "$push_url" 2>/dev/null || true)" != "$PR_HEAD_REPO" ]; then
+        push_ok=0
+      fi
+    done <<EOF
+$push_urls
+EOF
+    if [ "$push_ok" = 1 ]; then
+      PR_REMOTE=$remote
+      break
+    fi
+  done < <(git -C "$project" remote)
+  [ -n "$PR_REMOTE" ] || {
+    echo "error: $FM_PR_URL's head repository $PR_HEAD_REPO is not a configured remote with a push URL to that repository" >&2
+    return 1
+  }
+  PR_URL=$FM_PR_URL
+  PR_ACTIVE=1
+}
+
+prepare_existing_pr_branch() { # <worktree>
+  local worktree=$1 local_head remote_ref fetched local_exists=0
+  [ -n "$PR_REMOTE" ] && [ -n "$PR_BRANCH" ] && [ -n "$PR_HEAD" ] || {
+    echo "error: existing pull-request branch details are incomplete" >&2
+    return 1
+  }
+  [ -z "$(git -C "$worktree" status --porcelain 2>/dev/null)" ] || {
+    echo "error: PR follow-up worktree '$worktree' is not clean; refusing to move unlanded work" >&2
+    return 1
+  }
+  if local_head=$(git -C "$worktree" rev-parse --verify "refs/heads/$PR_BRANCH^{commit}" 2>/dev/null); then
+    local_exists=1
+    [ "$local_head" = "$PR_HEAD" ] || {
+      echo "error: local branch '$PR_BRANCH' already exists at a different commit ($local_head, expected $PR_HEAD); refusing to move it" >&2
+      return 1
+    }
+  fi
+  git -C "$worktree" fetch --quiet "$PR_REMOTE" "refs/heads/$PR_BRANCH:refs/remotes/$PR_REMOTE/$PR_BRANCH" || {
+    echo "error: could not fetch $PR_REMOTE/$PR_BRANCH for $PR_URL; refusing to start away from the PR head" >&2
+    return 1
+  }
+  remote_ref="refs/remotes/$PR_REMOTE/$PR_BRANCH"
+  fetched=$(git -C "$worktree" rev-parse --verify "$remote_ref^{commit}" 2>/dev/null || true)
+  [ "$fetched" = "$PR_HEAD" ] || {
+    echo "error: $PR_REMOTE/$PR_BRANCH is at '${fetched:-unreadable}', not the pull request head $PR_HEAD; refusing a moving PR" >&2
+    return 1
+  }
+  if [ "$local_exists" = 1 ]; then
+    git -C "$worktree" checkout --quiet "$PR_BRANCH" || {
+      echo "error: could not check out existing PR branch '$PR_BRANCH'; it may already be in another worktree" >&2
+      return 1
+    }
+  else
+    git -C "$worktree" checkout --quiet -b "$PR_BRANCH" "$remote_ref" || {
+      echo "error: could not create local PR branch '$PR_BRANCH' at $PR_HEAD" >&2
+      return 1
+    }
+  fi
+  git -C "$worktree" branch --quiet --set-upstream-to="$PR_REMOTE/$PR_BRANCH" "$PR_BRANCH" || {
+    echo "error: could not configure '$PR_BRANCH' to track $PR_REMOTE/$PR_BRANCH" >&2
+    return 1
+  }
+  [ "$(git -C "$worktree" symbolic-ref --quiet --short HEAD 2>/dev/null || true)" = "$PR_BRANCH" ] &&
+    [ "$(git -C "$worktree" rev-parse HEAD 2>/dev/null || true)" = "$PR_HEAD" ] || {
+    echo "error: PR follow-up checkout did not settle on '$PR_BRANCH' at $PR_HEAD" >&2
+    return 1
+  }
+}
+
 herdr_projection_meta_field_exact() { # <meta> <key>
   local meta=$1 key=$2 count
   [ -f "$meta" ] && [ ! -L "$meta" ] || return 1
@@ -3117,6 +3303,10 @@ herdr_projection_existing_meta_allows_flat() { # <meta>
     ;;
   esac
 }
+
+if [ "$PR_SET" -eq 1 ]; then
+  resolve_existing_pr "$PROJ_ABS" || exit 1
+fi
 
 # Backlog preflight (bin/fm-backlog-transition-lib.sh). This spawn is about to
 # become the sole owner of the row's In-flight transition, so prove the row is
@@ -3955,6 +4145,25 @@ elif [ "$KIND" != secondmate ] && [ "$BACKEND" != orca ]; then
 fi
 if [ "$RELAUNCH" -eq 0 ] && [ "$KIND" != secondmate ]; then
   freshen_spawn_worktree_base "$WT" || exit 1
+  if [ "$PR_ACTIVE" -eq 1 ]; then
+    prepare_existing_pr_branch "$WT" || exit 1
+  fi
+fi
+if [ "$PR_ACTIVE" -eq 1 ] && [ -z "$PR_BRANCH" ]; then
+  PR_BRANCH=$(git -C "$WT" symbolic-ref --quiet --short HEAD 2>/dev/null || true)
+  [ -n "$PR_BRANCH" ] || {
+    echo "error: task $ID's pull-request worktree is not on a named branch; refusing relaunch" >&2
+    exit 1
+  }
+fi
+if [ "$PR_ACTIVE" -eq 1 ]; then
+  {
+    printf '\n# Existing pull-request follow-up\n'
+    printf 'This task is already checked out on the existing pull-request branch %s for %s. Do not run the generic git checkout -b fm/%s setup or create another branch. Keep working on the current branch so the validation and push update that pull request.\n' "$PR_BRANCH" "$PR_URL" "$ID"
+  } >>"$BRIEF" || {
+    echo "error: could not append the existing pull-request branch instructions" >&2
+    exit 1
+  }
 fi
 
 # Pre-register Claude's workspace trust for the directory this launch starts in,
@@ -4504,6 +4713,10 @@ preserve_relaunch_meta() {
   echo "kind=$KIND"
   [ -z "$MODE" ] || echo "mode=$MODE"
   [ -z "$YOLO" ] || echo "yolo=$YOLO"
+  if [ "$RELAUNCH" -eq 0 ]; then
+    [ -z "$PR_URL" ] || echo "pr=$PR_URL"
+    [ -z "$PR_HEAD" ] || echo "pr_head=$PR_HEAD"
+  fi
   echo "tasktmp=$TASK_TMP"
   echo "model=${MODEL:-default}"
   echo "effort=${EFFORT:-default}"
