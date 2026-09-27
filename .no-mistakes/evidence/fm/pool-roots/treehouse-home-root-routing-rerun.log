@@ -1,0 +1,39 @@
+ok - the worktree root is per home and independent of how the home or base is spelled
+ok - the worktree root falls back to Treehouse's own base and otherwise refuses
+ok - each home's spawn acquires its worktree from that home's own root
+Note: switching to 'a8080f478fa9a31f068faec23abc39cf5d733427'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+ok - a leased secondmate home comes from the seeding home's own worktree root
+Note: switching to 'a8080f478fa9a31f068faec23abc39cf5d733427'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+ok - a rollback return names the worktree path, so worktrees leased under any root stay returnable
