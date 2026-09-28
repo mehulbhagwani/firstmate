@@ -579,7 +579,8 @@ EOF
 
   id=delivery-unfilled-existing-base
   FM_HOME="$home" "$BRIEF" "$id" proj --mode no-mistakes \
-    --existing-pr https://github.com/kunchenguid/firstmate/pull/2460 >/dev/null 2>&1 \
+    --existing-pr https://github.com/kunchenguid/firstmate/pull/2460 \
+    --branch bookie/existing-head >/dev/null 2>&1 \
     || fail "existing-PR no-mistakes brief with a base placeholder should scaffold"
   fill_brief_subsections "$home/data/$id/brief.md" \
     "Update the existing pull request." \
@@ -598,6 +599,37 @@ EOF
   assert_contains "$out" "fill {EXISTING_PR_BASE_BRANCH}" \
     "existing-PR spawn ignored base placeholders outside delivery metadata"
   assert_absent "$home/state/$id.meta" "operational existing-PR base placeholder spawn wrote task metadata"
+
+  id=delivery-unfilled-existing-branch
+  FM_HOME="$home" "$BRIEF" "$id" proj --mode direct-PR \
+    --existing-pr https://github.com/kunchenguid/firstmate/pull/2460 >/dev/null 2>&1 \
+    || fail "existing-PR brief with a branch placeholder should scaffold"
+  fill_brief_subsections "$home/data/$id/brief.md" \
+    "Update the existing pull request." \
+    "Keep the existing head branch."
+  out=$(run_spawn "$home" "$fakebin" "$id" "$proj" claude --mode direct-PR --yolo off)
+  status=$?
+  [ "$status" -ne 0 ] || fail "spawn with an unfilled existing-PR head branch should exit non-zero"
+  assert_contains "$out" "{EXISTING_PR_BRANCH}"     "existing-PR spawn did not name the leftover head branch placeholder"
+  assert_absent "$home/state/$id.meta" "unfilled existing-PR branch spawn wrote task metadata"
+
+  id=delivery-existing-branch
+  FM_HOME="$home" "$BRIEF" "$id" proj --mode direct-PR \
+    --existing-pr https://github.com/kunchenguid/firstmate/pull/2460 \
+    --branch bookie/existing-head >/dev/null 2>&1 \
+    || fail "existing-PR brief with a head branch should scaffold"
+  fill_brief_subsections "$home/data/$id/brief.md" \
+    "Update the existing pull request." \
+    "Keep the existing head branch."
+  out=$(run_spawn "$home" "$fakebin" "$id" "$proj" claude --mode direct-PR --yolo off)
+  assert_not_contains "$out" "defaulting to legacy branch" \
+    "existing-PR spawn fell back to the legacy task branch"
+  assert_not_contains "$out" "records no ship branch" \
+    "existing-PR spawn ignored the recorded head branch"
+  if [ -f "$home/state/$id.meta" ]; then
+    assert_grep "^branch=bookie/existing-head$" "$home/state/$id.meta" \
+      "existing-PR spawn did not record the PR head as the ship branch"
+  fi
 
   id=delivery-filled-ship
   FM_HOME="$home" "$BRIEF" "$id" proj --mode direct-PR >/dev/null 2>&1 \

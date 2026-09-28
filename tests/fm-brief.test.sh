@@ -306,8 +306,10 @@ test_existing_pr_ship_briefs_replace_new_pr_contract() {
   FM_HOME="$home" "$ROOT/bin/fm-brief.sh" "$id" firstmate --mode direct-PR \
     --existing-pr "$url" >/dev/null 2>&1 \
     || fail "existing-PR brief without --branch should scaffold for forge resolution"
-  assert_no_grep "{EXISTING_PR_BRANCH}" "$home/data/$id/brief.md" \
-    "existing-PR brief without --branch retained unsafe shell-substitution text"
+  grep -Fxq "Ship branch: {EXISTING_PR_BRANCH}" "$home/data/$id/brief.md" \
+    || fail "existing-PR brief without --branch did not leave a guarded Ship branch field"
+  [ "$(grep -Fc '{EXISTING_PR_BRANCH}' "$home/data/$id/brief.md")" -eq 1 ] \
+    || fail "existing-PR brief without --branch retained unsafe shell-substitution text"
   pass "fm-brief.sh: existing-PR ship briefs replace new-branch and new-PR contracts"
 }
 

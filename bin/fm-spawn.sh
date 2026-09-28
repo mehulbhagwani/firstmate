@@ -3008,6 +3008,13 @@ if [ "$KIND" = ship ] || [ "$KIND" = scout ]; then
     echo "error: $BRIEF still contains {EXISTING_PR_BRANCH}; fill the existing PR head branch before spawn" >&2
     exit 1
   fi
+  if [ "$RELAUNCH" -eq 0 ] && [ "$KIND" = ship ] && grep -q '^Existing PR: ' "$BRIEF"; then
+    BRANCH=$(sed -n 's/^Ship branch: //p' "$BRIEF" | head -n 1)
+    if [ -z "$BRANCH" ] || ! git check-ref-format --branch "$BRANCH" >/dev/null 2>&1; then
+      echo "error: $BRIEF must record a valid Ship branch for the existing PR head" >&2
+      exit 1
+    fi
+  fi
   if fm_brief_existing_pr_base_invalid "$BRIEF"; then
     echo "error: $BRIEF must record a valid Existing PR base branch for no-mistakes; fill {EXISTING_PR_BASE_BRANCH} from the PR before spawn" >&2
     exit 1

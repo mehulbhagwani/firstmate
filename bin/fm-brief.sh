@@ -88,9 +88,13 @@
 # whose explicit --mode or registered forge disagrees, so an adjusted brief and the
 # recorded task metadata cannot drift apart.
 # Ship briefs begin with a worktree-isolation assertion before the branch step.
-# Both crewmate scaffolds carry one shared rule against administering the infrastructure every lane shares - the no-mistakes daemon and the worktree pool their own slot came from - so ship and scout cannot drift apart. A secondmate charter omits it: that home allocates and returns slots for its own crewmates.
-# Every ship/scout scaffold records the absolute Firstmate home and absolute task-artifact directory so home-relative data/<task-id>/ references cannot be mistaken for project-worktree paths.
-# --mode, --forge, and --shape are refused on scout and secondmate scaffolds: a scout's deliverable is a report rather than a merge, and a charter is not a delivery contract.
+# Both crewmate scaffolds carry one shared rule against administering the
+# infrastructure every lane shares - the no-mistakes daemon and the worktree pool
+# their own slot came from - so ship and scout cannot drift apart. A secondmate
+# charter omits it: that home allocates and returns slots for its own crewmates.
+# --mode, --forge, and --shape are refused on scout and secondmate scaffolds: a
+# scout's deliverable is a report rather than a merge, and a charter is not a
+# delivery contract.
 # There is no --yolo flag here. The worker never owns merge decisions, so yolo is
 # a spawn-time and firstmate-side input only (AGENTS.md section 7).
 # Every scaffold's status protocol distinguishes the configured

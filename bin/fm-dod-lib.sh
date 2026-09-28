@@ -178,12 +178,12 @@ fm_brief_task_placeholders_present() {  # <file>
 }
 
 # Return 0 when an existing-PR scaffold still lacks its head branch.
-# Match only the generated checkout target so an illustrative token in filled
+# Match only the generated Ship branch line so an illustrative token in filled
 # Task prose does not cause the same false refusal this parser avoids for Task.
 fm_brief_existing_pr_branch_placeholder_present() {  # <file>
   local file=$1
   [ -f "$file" ] || return 1
-  grep -Fq "origin/{EXISTING_PR_BRANCH}" "$file"
+  grep -Fxq "Ship branch: {EXISTING_PR_BRANCH}" "$file"
 }
 
 # Return 0 when an existing-PR no-mistakes brief lacks a valid base branch.
@@ -327,8 +327,6 @@ fm_nm_driving_block() {  # <forge>
     pr_reattach_clause="; once checks are green it returns \`checks-passed\` immediately, and"
   fi
   cat <<EOF
-
-
 You drive no-mistakes by responding to its gates, not by implementing fixes.
 Follow the guidance no-mistakes itself provides for the mechanics: it loads when you invoke /no-mistakes, and \`no-mistakes axi run --help\` plus the \`help\` lines in each \`axi\` response are authoritative and version-matched to the installed binary.
 When starting no-mistakes, pass \`--intent\` as only this brief's \`## Captain's intent\` subsection body, not its heading, plus any later words the captain actually said.
@@ -395,6 +393,7 @@ fm_dod_block() {  # <mode> <task-id> [branch] [<forge>] [<existing-pr-url>] [<ba
 # Definition of done
 Delivery contract: mode=direct-PR
 Existing PR: $existing_pr
+Ship branch: $branch
 This task ships **direct-PR** by updating the existing PR, without the no-mistakes pipeline.
 The task is complete only when committed on the existing PR branch, pushed to that same branch, and the existing PR's checks are green.
 Never open a second PR.
@@ -408,6 +407,7 @@ EOF
 Delivery contract: mode=no-mistakes
 Existing PR: $existing_pr
 Existing PR base branch: $base_branch
+Ship branch: $branch
 The task is complete only when committed on the existing PR branch.
 When you believe it is complete, append \`done [at=<epoch>]: {summary}\` to the status file and stop.
 Firstmate will then instruct you to run /no-mistakes to validate and update this existing PR.
