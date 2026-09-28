@@ -394,12 +394,11 @@ fm_dod_block() {  # <mode> <task-id> [branch] [<forge>] [<existing-pr-url>] [<ba
         cat <<EOF
 # Definition of done
 Delivery contract: mode=direct-PR
-Ship branch: $branch
 Existing PR: $existing_pr
 This task ships **direct-PR** by updating the existing PR, without the no-mistakes pipeline.
 The task is complete only when committed on the existing PR branch, pushed to that same branch, and the existing PR's checks are green.
 Never open a second PR.
-When it is ready, append \`done [at=<epoch>]: PR $existing_pr head <sha> checks green\` to the status file, replacing \`<sha>\` with the pushed commit's full SHA, and stop.
+When it is ready, append \`done: PR $existing_pr head <sha> checks green\` to the status file, replacing \`<sha>\` with the pushed commit's full SHA, and stop.
 Do NOT run /no-mistakes. The configured merge authority decides whether to merge the PR; firstmate relays the outcome.
 EOF
         ;;
@@ -407,7 +406,6 @@ EOF
         cat <<EOF
 # Definition of done
 Delivery contract: mode=no-mistakes
-Ship branch: $branch
 Existing PR: $existing_pr
 Existing PR base branch: $base_branch
 The task is complete only when committed on the existing PR branch.
@@ -415,6 +413,7 @@ When you believe it is complete, append \`done [at=<epoch>]: {summary}\` to the 
 Firstmate will then instruct you to run /no-mistakes to validate and update this existing PR.
 When starting that run, pass the existing PR base branch recorded above as \`--base-branch\` so rebase, PR lookup, and CI target the PR's actual base.
 Never open a second PR, and never allow the pipeline to replace the existing PR branch with a new branch.
+After the pipeline reports the existing PR ready with green checks, append \`done: PR $existing_pr head <sha> checks green\`, replacing \`<sha>\` with the pushed commit's full SHA.
 EOF
         fm_nm_driving_block "$forge"
         ;;

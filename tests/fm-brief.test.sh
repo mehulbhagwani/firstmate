@@ -312,7 +312,7 @@ test_existing_pr_ship_briefs_replace_new_pr_contract() {
 }
 
 test_existing_pr_setup_checks_out_a_new_origin_branch() {
-  local root remote source work holder home brief setup_command setup_out source_head fakebin real_git reuse_brief reuse_command reuse_out base_brief base_command base_out wrong_base_brief wrong_base_command wrong_base_out closed_brief closed_command closed_out multi_out held_brief held_command held_out default_brief default_command default_out
+  local root remote source work holder home brief setup_command setup_out source_head fakebin real_git reuse_brief reuse_command reuse_out diverged_brief diverged_command diverged_out base_brief base_command base_out wrong_base_brief wrong_base_command wrong_base_out closed_brief closed_command closed_out merged_brief merged_command merged_out multi_out wrong_push_out held_brief held_command held_out default_brief default_command default_out
   root="$TMP_ROOT/existing-pr-checkout"
   remote="$root/remote.git"
   source="$root/source"
@@ -349,7 +349,11 @@ if [ "\${1:-}" = remote ] && [ "\${2:-}" = get-url ] && [ "\${3:-}" = origin ]; 
 fi
 if [ "\${1:-}" = remote ] && [ "\${2:-}" = get-url ] && [ "\${3:-}" = --push ] \
   && [ "\${4:-}" = --all ] && [ "\${5:-}" = origin ]; then
-  printf '%s\n' ssh://git@github.com/kunchenguid/firstmate.git/
+  if [ "\${FM_TEST_WRONG_PUSH:-0}" = 1 ]; then
+    printf '%s\n' https://github.com/example/unrelated
+  else
+    printf '%s\n' ssh://git@github.com/kunchenguid/firstmate.git/
+  fi
   if [ "\${FM_TEST_EXTRA_PUSH:-0}" = 1 ]; then
     printf '%s\n' https://github.com/example/unrelated
   fi
@@ -372,6 +376,7 @@ if [ "$1" = pr ] && [ "$2" = list ]; then
     esac
   done
   if [ "${FM_TEST_PR_OPEN:-1}" = 1 ] \
+    && [ "${FM_TEST_PR_STATE:-open}" = open ] \
     && { [ -z "${listed_base:-}" ] || [ "$listed_base" = "${FM_TEST_PR_BASE:-main}" ]; }; then
     printf '%s\n' '  2460,"fixture",open,test,no,none,"https://github.com/kunchenguid/firstmate/pull/2460"'
   fi
@@ -402,6 +407,25 @@ EOF
   git -C "$work" switch main >/dev/null 2>&1
   git -C "$work" config --unset-all branch.existing/head.remote
   git -C "$work" config --unset-all branch.existing/head.merge
+  git -C "$work" switch existing/head >/dev/null 2>&1
+  printf 'local divergence\n' >> "$work/file"
+  git -C "$work" config user.email test@example.com
+  git -C "$work" config user.name Test
+  git -C "$work" commit -am local-divergence >/dev/null 2>&1 \
+    || fail "could not create the divergent local PR branch fixture"
+  git -C "$work" switch main >/dev/null 2>&1
+  FM_HOME="$home" "$ROOT/bin/fm-brief.sh" checkout-diverged firstmate --mode direct-PR \
+    --existing-pr https://github.com/kunchenguid/firstmate/pull/2460 \
+    --branch existing/head >/dev/null 2>&1
+  diverged_brief="$home/data/checkout-diverged/brief.md"
+  # shellcheck disable=SC2016 # The sed expression is a literal parser for the generated Markdown command.
+  diverged_command=$(sed -n 's/^1\. First action:.*: `\(.*\)`\.$/\1/p' "$diverged_brief")
+  if diverged_out=$(cd "$work" && FM_TEST_PR_REMOTE="$remote" PATH="$fakebin:$PATH" eval "$diverged_command" 2>&1); then
+    fail "generated existing-PR setup accepted a local branch at a different commit"
+  fi
+  assert_contains "$diverged_out" "existing local PR branch differs from origin" \
+    "generated existing-PR setup did not explain the local branch mismatch"
+  git -C "$work" branch -f existing/head origin/existing/head >/dev/null 2>&1
 
   FM_HOME="$home" "$ROOT/bin/fm-brief.sh" checkout-reuse firstmate --mode direct-PR \
     --existing-pr https://github.com/kunchenguid/firstmate/pull/2460 \
@@ -453,6 +477,23 @@ EOF
   fi
   assert_contains "$multi_out" "origin must have exactly one push URL" \
     "generated existing-PR setup did not explain its multiple-push-URL refusal"
+  if wrong_push_out=$(cd "$work" && FM_TEST_PR_REMOTE="$remote" FM_TEST_WRONG_PUSH=1 PATH="$fakebin:$PATH" eval "$closed_command" 2>&1); then
+    fail "generated existing-PR setup accepted an origin push URL for a different repository"
+  fi
+  assert_contains "$wrong_push_out" "origin must have exactly one push URL matching the existing PR repository" \
+    "generated existing-PR setup did not explain the wrong origin push repository"
+
+  FM_HOME="$home" "$ROOT/bin/fm-brief.sh" checkout-merged firstmate --mode direct-PR \
+    --existing-pr https://github.com/kunchenguid/firstmate/pull/2460 \
+    --branch existing/head >/dev/null 2>&1
+  merged_brief="$home/data/checkout-merged/brief.md"
+  # shellcheck disable=SC2016 # The sed expression is a literal parser for the generated Markdown command.
+  merged_command=$(sed -n 's/^1\. First action:.*: `\(.*\)`\.$/\1/p' "$merged_brief")
+  if merged_out=$(cd "$work" && FM_TEST_PR_REMOTE="$remote" FM_TEST_PR_STATE=merged PATH="$fakebin:$PATH" eval "$merged_command" 2>&1); then
+    fail "generated existing-PR setup accepted a merged PR"
+  fi
+  assert_contains "$merged_out" "existing PR is not open" \
+    "generated existing-PR setup did not explain its merged-PR refusal"
 
   holder="$root/holder"
   git -C "$work" worktree add "$holder" existing/head >/dev/null 2>&1 \
