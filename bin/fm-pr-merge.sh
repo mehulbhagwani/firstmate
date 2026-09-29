@@ -138,16 +138,32 @@
 # FM_PR_MERGE_UNKNOWN_BACKOFF_SECS whole seconds between attempts. These
 # environment overrides are intended for tests and operators diagnosing forge
 # recalculation delays; an exhausted retry remains pending with exit code 3.
+# Both overrides are clamped to fixed maximums (FM_PR_MERGE_UNKNOWN_RETRIES_MAX,
+# FM_PR_MERGE_UNKNOWN_BACKOFF_SECS_MAX) so a mistyped or malicious override
+# cannot hold the task control lock for an unbounded wait; a non-numeric or
+# negative override falls back to the default instead of erroring.
 set -eu
 
-UNKNOWN_RETRY_LIMIT=${FM_PR_MERGE_UNKNOWN_RETRIES:-3}
-UNKNOWN_RETRY_BACKOFF_SECS=${FM_PR_MERGE_UNKNOWN_BACKOFF_SECS:-5}
+UNKNOWN_RETRY_LIMIT_DEFAULT=3
+UNKNOWN_RETRY_BACKOFF_SECS_DEFAULT=5
+UNKNOWN_RETRY_LIMIT_MAX=10
+UNKNOWN_RETRY_BACKOFF_SECS_MAX=30
+
+UNKNOWN_RETRY_LIMIT=${FM_PR_MERGE_UNKNOWN_RETRIES:-$UNKNOWN_RETRY_LIMIT_DEFAULT}
 case "$UNKNOWN_RETRY_LIMIT" in
-  ''|*[!0-9]*) echo "error: FM_PR_MERGE_UNKNOWN_RETRIES must be a non-negative whole number" >&2; exit 2 ;;
+  ''|*[!0-9]*) UNKNOWN_RETRY_LIMIT=$UNKNOWN_RETRY_LIMIT_DEFAULT ;;
 esac
+if [ "$UNKNOWN_RETRY_LIMIT" -gt "$UNKNOWN_RETRY_LIMIT_MAX" ]; then
+  UNKNOWN_RETRY_LIMIT=$UNKNOWN_RETRY_LIMIT_MAX
+fi
+
+UNKNOWN_RETRY_BACKOFF_SECS=${FM_PR_MERGE_UNKNOWN_BACKOFF_SECS:-$UNKNOWN_RETRY_BACKOFF_SECS_DEFAULT}
 case "$UNKNOWN_RETRY_BACKOFF_SECS" in
-  ''|*[!0-9]*) echo "error: FM_PR_MERGE_UNKNOWN_BACKOFF_SECS must be a non-negative whole number" >&2; exit 2 ;;
+  ''|*[!0-9]*) UNKNOWN_RETRY_BACKOFF_SECS=$UNKNOWN_RETRY_BACKOFF_SECS_DEFAULT ;;
 esac
+if [ "$UNKNOWN_RETRY_BACKOFF_SECS" -gt "$UNKNOWN_RETRY_BACKOFF_SECS_MAX" ]; then
+  UNKNOWN_RETRY_BACKOFF_SECS=$UNKNOWN_RETRY_BACKOFF_SECS_MAX
+fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 FM_ROOT="${FM_ROOT_OVERRIDE:-$(cd "$SCRIPT_DIR/.." && pwd)}"

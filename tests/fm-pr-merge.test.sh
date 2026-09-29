@@ -2597,6 +2597,39 @@ test_github_unknown_head_change_refuses() {
   pass "fm-pr-merge refuses a head change during UNKNOWN retry"
 }
 
+# A blocker that was absent on the first UNKNOWN view (the PR was open and
+# ready) but appears by the retried view (the PR became a draft) must still
+# refuse the merge; the retry re-checks every live condition, not just
+# mergeability, so a newly introduced blocker is caught on the retried pass.
+test_github_unknown_retry_new_draft_blocker_refuses() {
+  local case_dir rc head
+  head=ffffffffffffffffffffffffffffffffffffffff
+  case_dir=$(make_case github-unknown-retry-new-draft)
+  mkdir -p "$case_dir/wt"
+  add_gh_mocks "$case_dir" "$head"
+  {
+    write_github_unknown_json "$case_dir" "$head"
+    write_github_live_json "$case_dir" "$head"
+    jq -c '.isDraft = true' "$case_dir/github-view.json"
+  } > "$case_dir/github-view-sequence"
+
+  set +e
+  FM_TEST_GH_VIEW_SEQUENCE="$case_dir/github-view-sequence" \
+  FM_TEST_UNKNOWN_RETRIES=1 FM_TEST_UNKNOWN_BACKOFF_SECS=0 \
+    run_pr_merge "$case_dir" task-x1 https://github.com/example/repo/pull/85 \
+      > "$case_dir/stdout" 2> "$case_dir/stderr"
+  rc=$?
+  set -e
+  expect_code 1 "$rc" "github-unknown-retry-new-draft: a draft appearing on retry should refuse"
+  [ "$(cat "$case_dir/github-view-sequence-pos")" -eq 2 ] \
+    || fail "github-unknown-retry-new-draft: full verification did not rerun"
+  assert_grep "the pull request is a draft" "$case_dir/stderr" \
+    "github-unknown-retry-new-draft: the draft blocker was not named"
+  assert_no_grep 'pr merge' "$case_dir/gh.log" \
+    "github-unknown-retry-new-draft: gh pr merge ran after a blocker appeared on retry"
+  pass "fm-pr-merge refuses a merge when a blocker appears between the first UNKNOWN view and the retry"
+}
+
 # A draft cannot be merged, and neither can a pull request whose draft state the
 # forge did not report as a boolean; both refuse before any merge call.
 test_github_draft_or_unreadable_draft_state_refuses() {
@@ -3815,6 +3848,7 @@ test_github_unknown_then_mergeable_retries_full_verification
 test_github_unknown_exhausted_reports_pending
 test_github_unknown_conflict_refuses_without_retry
 test_github_unknown_head_change_refuses
+test_github_unknown_retry_new_draft_blocker_refuses
 test_github_draft_or_unreadable_draft_state_refuses
 test_superseded_failed_check_run_no_longer_refuses
 test_check_runs_never_supersede_status_contexts
