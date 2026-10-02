@@ -1,0 +1,7 @@
+# pi (0.87.1): rendered banner row: Error: Codex error: The usage limit has been reached
+ok - pi (0.87.1): banner screen classifies empty on the cursorless styled read with a working status
+ok - pi (0.87.1): banner screen classifies empty on the cursorless styled read with a unknown status
+ok - pi (0.87.1): banner screen classifies empty on the cursorless styled read with a idle status
+ok - pi (0.87.1): the banner over the same screen with the identity probe absent stays unknown
+ok - pi (0.87.1): banner screen classifies empty on the cursor-anchored tmux read
+ok - live pi banner guard verified 5 live surface(s)
