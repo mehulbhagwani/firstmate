@@ -1,0 +1,4 @@
+ok - no-mistakes worktree with pushed but unmerged work is refused
+ok - pushed work with a recorded open PR is not refused
+ok - pushed work with a recorded but closed-unmerged PR is refused
+ok - local-only worktree with truly unpushed work is refused (safety preserved)
