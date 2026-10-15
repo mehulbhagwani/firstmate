@@ -1,0 +1,10 @@
+Pi Codex usage-limit banner validation (PR #5709 / #5000)
+
+Live e2e (tests/fm-composer-pi-codex-banner-live-e2e.test.sh):
+- Installed pi 1.2.0 is outside pinned set; adapter correctly refuses settling stale working/unknown to empty
+- Banner row still renders: Error: Codex error: The usage limit has been reached
+- idle status still empty; cursor-anchored read empty; 5 live surfaces verified; exit 0
+
+Unit/matrix:
+- tests/fm-composer-lib.test.sh exit 0 (banner settle + pinned version matrix)
+- tests/fm-control.test.sh exit 0 (pi parked on banner still exits /quit when pinned)
