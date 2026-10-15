@@ -1,0 +1,27 @@
+=== treehouse version ===
+v3.1.0
+=== fm-treehouse-home-root.test.sh ===
+FM_TEST_BEGIN 2026-10-15T10:40:00Z tests/fm-treehouse-home-root.test.sh family=unclassified expected_gate_skip=none
+ok - the worktree root is per home and independent of how the home or base is spelled
+ok - the worktree root falls back to Treehouse's own base and otherwise refuses
+ok - the derived worktree root stays outside the active and root Firstmate homes
+ok - a not-yet-created base reached through a symlinked ancestor into a home is still rejected
+ok - absent bases with dot segments are refused while ordinary absent bases derive
+ok - each home's spawn acquires its worktree from that home's own root
+ok - a leased secondmate home comes from the seeding home's own worktree root
+ok - a rollback return names the worktree path, so worktrees leased under any root stay returnable
+FM_TEST_END 2026-10-15T10:40:11Z tests/fm-treehouse-home-root.test.sh exit=0 duration_ms=11079 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=11181
+FM_TEST_SUMMARY_FAMILY family=unclassified count=1 duration_ms=11079 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-treehouse-home-root.test.sh duration_ms=11079
+=== fm-treehouse-pool-isolation-live-e2e.test.sh ===
+FM_TEST_BEGIN 2026-10-15T10:40:11Z tests/fm-treehouse-pool-isolation-live-e2e.test.sh family=live-harness-optin expected_gate_skip=live-capability
+ok - two clones of one origin still share a single pool under a single root (v3.1.0)
+ok - under a shared root Treehouse returns the slot to the acquiring clone (v3.1.0)
+ok - the interactive acquire the worker's shell runs enters a worktree below the root it is given
+ok - two homes cloning one origin acquire concurrently from their own roots with no contention
+ok - a worktree leased under a different root still returns to its own pool, so nothing in flight has to be migrated
+FM_TEST_END 2026-10-15T10:40:16Z tests/fm-treehouse-pool-isolation-live-e2e.test.sh exit=0 duration_ms=4503 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=4604
+FM_TEST_SUMMARY_FAMILY family=live-harness-optin count=1 duration_ms=4503 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-treehouse-pool-isolation-live-e2e.test.sh duration_ms=4503
