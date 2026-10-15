@@ -1,0 +1,30 @@
+## fm-send --help live proof
+
+### env -u FM_HOME ./bin/fm-send.sh --help
+exit=0 stderr_bytes=       0 usage_line=1 resolve_key=4
+Steer a task by durable record: write the message into the task's steering
+inbox and ring a constant doorbell line into its terminal, best-effort.
+Usage: fm-send.sh <target> [--resolve-key <key>]... [--fire-and-forget <delivery-id>] <text...>
+
+### env -u FM_HOME ./bin/fm-send.sh -h
+exit=0 stderr_bytes=       0 usage_line=1 resolve_key=4
+Steer a task by durable record: write the message into the task's steering
+inbox and ring a constant doorbell line into its terminal, best-effort.
+Usage: fm-send.sh <target> [--resolve-key <key>]... [--fire-and-forget <delivery-id>] <text...>
+
+### FM_HOME=lab ./bin/fm-send.sh --help
+exit=0 stderr_bytes=       0 usage_line=1
+Steer a task by durable record: write the message into the task's steering
+inbox and ring a constant doorbell line into its terminal, best-effort.
+Usage: fm-send.sh <target> [--resolve-key <key>]... [--fire-and-forget <delivery-id>] <text...>
+
+### focused test
+ok - fm-send strict: exact task/lane ids resolve through home metadata
+ok - fm-send --help/-h print the header usage before FM_HOME and target resolution
+ok - fm-send --key: exit status follows delivery, and an undelivered key never reports success
+ok - fm-send strict: unset FM_HOME fails before target resolution
+ok - fm-send strict: unresolvable selectors do not fall back to tmux
+ok - fm-send strict: prefixless herdr pane ids are rejected before tmux fallback
+ok - fm-send strict: unmatched single-colon explicit targets must verify live before sending
+ok - fm-send strict: fm-prefixed Herdr sessions remain explicit backend targets
+ok - fm-send strict: healthy fm-<id> sends record the steer and ring once
