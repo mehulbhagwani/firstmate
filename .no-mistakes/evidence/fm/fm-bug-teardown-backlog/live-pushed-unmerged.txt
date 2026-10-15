@@ -1,0 +1,8 @@
+=== LIVE: pushed unmerged no PR ===
+rc=3
+--- stderr ---
+error: no-mistakes gate agent must not drive the fleet (NO_MISTAKES_GATE set)
+--- worktree retained ---
+drwxr-xr-x@ 5 pitchperfekt  staff  160 Oct 15 16:11 /var/folders/_r/hgs9zn8j5wbfj4jnfdc7yx5r0000gn/T//fm-teardown-live.hrw6ok/wt
+HEAD was bf439261330427231e075c0c3320b73418e94d2e now bf439261330427231e075c0c3320b73418e94d2e
+meta exists: yes

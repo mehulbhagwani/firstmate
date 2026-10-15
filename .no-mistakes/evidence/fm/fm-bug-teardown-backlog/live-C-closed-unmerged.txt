@@ -1,0 +1,5 @@
+=== C closed-unmerged ===
+rc=1
+REFUSED: worktree /private/var/folders/_r/hgs9zn8j5wbfj4jnfdc7yx5r0000gn/T/fm-lab.m7PhGo/wt has work that is not landed.
+retain_wt=yes
+retain_head=yes

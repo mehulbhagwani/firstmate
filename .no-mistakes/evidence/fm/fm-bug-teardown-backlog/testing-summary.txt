@@ -1,0 +1,8 @@
+Live CLI matrix (bin/fm-teardown.sh + marked FM_HOME lab):
+
+A pushed no-mistakes no PR: REFUSED not landed; wt+head+meta retained
+B pushed open PR: past landed safety (failed later on unmanaged treehouse fixture)
+C pushed closed-unmerged PR: REFUSED not landed; wt+head retained
+D local-only pushed: past landed safety (treehouse fixture)
+
+Harness: tests/fm-teardown.test.sh matrix cases all ok

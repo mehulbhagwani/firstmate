@@ -1,0 +1,21 @@
+=== B open PR ===
+rc=1
+/private/var/folders/_r/hgs9zn8j5wbfj4jnfdc7yx5r0000gn/T/fm-lab.dx5iaA/err:error: treehouse return failed for worktree /private/var/folders/_r/hgs9zn8j5wbfj4jnfdc7yx5r0000gn/T/fm-lab.dx5iaA/wt; teardown aborted
+err_tail:
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/var/folders/_r/hgs9zn8j5wbfj4jnfdc7yx5r0000gn/T/fm-lab.dx5iaA
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair a missing or failed watcher cycle with the Pi tool fm_watch_arm_pi, or restart Pi with -e /Users/pitchperfekt/.no-mistakes/worktrees/6cd9116ff40c/01M4ZHRQKKP904ADNEG1AD41QS/.pi/extensions/fm-primary-turnend-guard.ts -e /Users/pitchperfekt/.no-mistakes/worktrees/6cd9116ff40c/01M4ZHRQKKP904ADNEG1AD41QS/.pi/extensions/fm-primary-pi-watch.ts if the extensions are not loaded.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+teardown: reaping leaked worktree process(es) for task-x1: 65612
+A new version of treehouse is available: v3.1.0 → v3.1.3
+Run "treehouse update" to update
+
+worktree /private/var/folders/_r/hgs9zn8j5wbfj4jnfdc7yx5r0000gn/T/fm-lab.dx5iaA/wt is not managed by treehouse
+error: treehouse return failed for worktree /private/var/folders/_r/hgs9zn8j5wbfj4jnfdc7yx5r0000gn/T/fm-lab.dx5iaA/wt; teardown aborted
+out_tail:
+meta=yes
+wt=yes
