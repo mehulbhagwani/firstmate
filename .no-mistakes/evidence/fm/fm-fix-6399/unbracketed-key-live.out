@@ -1,0 +1,13 @@
+OPEN_TWO:
+nm-mirror-rebased	blocked	mirror refuses
+nm-agent-grok-refused	blocked	grok refusedAFTER_RESOLVE_ONE:
+nm-agent-grok-refused	blocked	grok refusedKEY_a:a
+KEY_bracket_wins:b
+KEY_invalid:REJECTED
+CLOSING_VERB_TAB:resolved
+NOTE_LOSING:[key=b] details
+NOTE_WINNING:details
+MID_NOTE_FOLD:[default	blocked	waiting on [key=evil] elsewhere]
+BAD_EMPTY=yes
+NOTAG:a	blocked	no tag before the key
+MIXED:a	blocked	tag after
