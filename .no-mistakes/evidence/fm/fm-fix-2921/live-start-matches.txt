@@ -1,0 +1,9 @@
+live_pid=17944
+legacy_start=[Thu Oct 15 15:58:54 2026    ]
+legacy_match=yes
+process_start=[Thu Oct 15 15:58:54 2026    ]
+fake_proc_token=[proc-starttime=424242]
+proc_token_match=yes
+legacy_under_proc_override=yes
+drifted=no
+after_death=no

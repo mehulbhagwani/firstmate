@@ -1,0 +1,11 @@
+ok - fake /proc starttime is a stable single-line token parsed after the last )
+ok - token changes when the starttime changes (pid reuse)
+ok - malformed /proc stat data and pids are rejected
+ok - ps lstart is the fallback when /proc is absent
+ok - pre-update bare lstart still verifies; drifted and dead cookies do not
+tests/fm-remote-job-process-start.test.sh: line 196: 92787 Killed: 9               nohup env HOME="$account_home" FM_ROOT_OVERRIDE="$root" FM_REMOTE_JOB_STATE_ROOT="$FM_REMOTE_JOB_STATE" FM_REMOTE_JOB_PLATFORM_OVERRIDE="${FM_REMOTE_JOB_PLATFORM_OVERRIDE:-}" "$worker" >> "$FM_REMOTE_JOB_STATE/logs/$FM_REMOTE_JOB_LABEL.log" 2>&1 < /dev/null
+ok - a dead owner with a stale heartbeat yields exactly one replacement
+ok - pre-update worker lock upgrade skipped without /proc
+ok - repeated-ensure supervisor count skipped without /proc
+ALL TESTS PASSED
+tests/lib.sh: line 255: 94186 Killed: 9               nohup env HOME="$account_home" FM_ROOT_OVERRIDE="$root" FM_REMOTE_JOB_STATE_ROOT="$FM_REMOTE_JOB_STATE" FM_REMOTE_JOB_PLATFORM_OVERRIDE="${FM_REMOTE_JOB_PLATFORM_OVERRIDE:-}" "$worker" >> "$FM_REMOTE_JOB_STATE/logs/$FM_REMOTE_JOB_LABEL.log" 2>&1 < /dev/null
