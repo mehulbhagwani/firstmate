@@ -1,0 +1,8 @@
+ok - active current run beats a stale overview row
+ok - active current run beats a stale failed overview row
+ok - older live status does not hide a newer completed run
+ok - newer failed run remains failed beside an older live run
+LIVE_OK
+
+
+EXIT 0

@@ -1,0 +1,12 @@
+=== scenario: current_active_run_beats_stale_overview_row ===
+state: working · source: run-step · validating (running) · run: 01NEW
+
+=== scenario: current_active_run_beats_stale_failed_overview_row ===
+state: working · source: run-step · validating (running) · run: 01NEW
+
+=== scenario: older_live_status_does_not_hide_newer_completed_run ===
+state: done · source: run-step · run passed: PR merged · run: 01NEW
+
+=== scenario: newer_failed_run_is_not_hidden_by_older_live_run ===
+state: failed · source: run-step · run failed · run: 01NEW
+
