@@ -1,0 +1,4 @@
+Bash tool return after 3903 ms: SMOKE_GATE_READY 2026-10-21T22:13:38Z
+Subsequent Pi report: SMOKE_GATE_READY 2026-10-21T22:13:38Z
+Exit: 0; total seconds: 8.868
+One initial prompt; no subsequent input. Initial non-executable fixture failed with exit 126; executable fixture rerun succeeded. Temporary fixtures removed.

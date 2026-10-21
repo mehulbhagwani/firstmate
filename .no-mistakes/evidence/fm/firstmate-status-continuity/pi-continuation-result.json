@@ -1,0 +1,12 @@
+{
+  "tool_command": {
+    "command": "bash ./drive.sh",
+    "timeout": 120
+  },
+  "tool_duration_ms": 3040,
+  "tool_output": "SMOKE_GATE_READY 2026-10-21T22:22:21Z",
+  "subsequent_assistant_report": "SMOKE_GATE_READY 2026-10-21T22:22:21Z",
+  "user_messages": 1,
+  "followup_messages": 0,
+  "scope": "Actual Pi CLI with test-only delayed Bash stand-in; no real validation run."
+}

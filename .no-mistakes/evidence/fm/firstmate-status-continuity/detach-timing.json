@@ -1,0 +1,16 @@
+[
+  {
+    "shape": "nohup",
+    "pid_return_seconds": 0.029,
+    "pid": "38663",
+    "output_at_return": "",
+    "output_after_delay": "DELAYED_GATE\n"
+  },
+  {
+    "shape": "ampersand",
+    "pid_return_seconds": 0.023,
+    "pid": "42441",
+    "output_at_return": "",
+    "output_after_delay": "DELAYED_GATE\n"
+  }
+]
