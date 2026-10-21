@@ -1,0 +1,7 @@
+Legacy C cookie accepted under German locale for live worker 31685
+Upgrade replaced old worker 31685 with 33232; old process exited
+Ensure 1: same worker 33232, 2 worker-command processes (supervisor and heartbeat)
+Ensure 2: same worker 33232, 2 worker-command processes (supervisor and heartbeat)
+Ensure 3: same worker 33232, 2 worker-command processes (supervisor and heartbeat)
+Ensure 4: same worker 33232, 2 worker-command processes (supervisor and heartbeat)
+Ensure 5: same worker 33232, 2 worker-command processes (supervisor and heartbeat)
