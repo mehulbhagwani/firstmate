@@ -1,0 +1,8 @@
+gh pr view https://github.com/cli/cli/pull/14716 --json headRefOid -q .headRefOid
+gh pr view https://github.com/cli/cli/pull/14716 --json state,isDraft,mergeable,mergeStateStatus,headRefOid,baseRefName,statusCheckRollup
+gh api repos/cli/cli/branches/trunk
+gh api --paginate repos/cli/cli/rules/branches/trunk
+gh pr merge 14716 --repo cli/cli --match-head-commit 936921fa9e67cdbf78fb25abc6252afabafef056 --squash
+GUARD-REFUSED gh pr merge 14716 --repo cli/cli --match-head-commit 936921fa9e67cdbf78fb25abc6252afabafef056 --squash
+gh api graphql -f query=query($owner:String!,$repo:String!,$number:Int!){repository(owner:$owner,name:$repo){pullRequest(number:$number){state merged isInMergeQueue baseRefName}}} -F owner=cli -F repo=cli -F number=14716 --jq .data.repository.pullRequest | "state=" + (.state // ""), "merged=" + (.merged | tostring), "queued=" + (.isInMergeQueue | tostring), "base=" + (.baseRefName // "")
+gh api --paginate repos/cli/cli/rules/branches/trunk --jq .[] | select(.type == "merge_queue") | "merge_method=" + (.parameters.merge_method // "")

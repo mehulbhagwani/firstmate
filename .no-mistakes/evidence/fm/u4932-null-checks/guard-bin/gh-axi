@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+printf 'gh-axi %s\n' "$*" >> "$FM_GUARD_LOG"
+case "${1:-} ${2:-}" in "pr view") exec /opt/homebrew/bin/gh-axi "$@" ;; esac
+printf 'GUARD-REFUSED gh-axi %s\n' "$*" >> "$FM_GUARD_LOG"; exit 97

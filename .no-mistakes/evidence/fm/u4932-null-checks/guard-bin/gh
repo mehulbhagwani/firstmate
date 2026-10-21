@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Read-only guard: passes GitHub reads to the real gh, refuses every mutation locally.
+printf 'gh %s\n' "$*" >> "$FM_GUARD_LOG"
+case "${1:-} ${2:-}" in
+  "pr view") exec /opt/homebrew/bin/gh "$@" ;;
+  "api graphql")
+    case "$*" in *mutation*) printf 'GUARD-REFUSED gh %s\n' "$*" >> "$FM_GUARD_LOG"; exit 97 ;; esac
+    exec /opt/homebrew/bin/gh "$@" ;;
+  "api "*)
+    for a in "$@"; do
+      case "$a" in -X|--method|-X*|--method=*|-f|-F|--field|--raw-field|--input|-f*|-F*) 
+        printf 'GUARD: refused mutating gh api call (never sent)\n' >&2; printf 'GUARD-REFUSED gh %s\n' "$*" >> "$FM_GUARD_LOG"; exit 97 ;;
+      esac
+    done
+    case "${2:-}" in
+      repos/*/branches/*)
+        if [ -n "${FM_GUARD_BRANCH_TRANSFORM:-}" ]; then
+          # Hybrid only: fetch the REAL branch payload, then apply a declared jq
+          # transform so a shape absent from the live forge can be exercised.
+          real=$(/opt/homebrew/bin/gh "$@") || exit $?
+          printf 'TRANSFORMED branch payload with: %s\n' "$FM_GUARD_BRANCH_TRANSFORM" >> "$FM_GUARD_LOG"
+          printf '%s' "$real" | jq -c "$FM_GUARD_BRANCH_TRANSFORM"
+          exit $?
+        fi ;;
+    esac
+    exec /opt/homebrew/bin/gh "$@" ;;
+esac
+printf 'GUARD: refused gh %s (never sent to GitHub)\n' "$1 ${2:-}" >&2
+printf 'GUARD-REFUSED gh %s\n' "$*" >> "$FM_GUARD_LOG"
+exit 97

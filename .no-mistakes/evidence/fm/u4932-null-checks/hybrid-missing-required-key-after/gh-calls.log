@@ -1,0 +1,5 @@
+gh pr view https://github.com/cli/cli/pull/14716 --json headRefOid -q .headRefOid
+gh pr view https://github.com/cli/cli/pull/14716 --json state,isDraft,mergeable,mergeStateStatus,headRefOid,baseRefName,statusCheckRollup
+gh api repos/cli/cli/branches/trunk
+TRANSFORMED branch payload with: del(.protection.required_status_checks)
+gh api --paginate repos/cli/cli/rules/branches/trunk

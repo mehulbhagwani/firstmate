@@ -1,0 +1,4 @@
+gh pr view https://github.com/cli/cli/pull/14727 --json headRefOid -q .headRefOid
+gh pr view https://github.com/cli/cli/pull/14727 --json state,isDraft,mergeable,mergeStateStatus,headRefOid,baseRefName,statusCheckRollup
+gh api repos/cli/cli/branches/trunk
+gh api --paginate repos/cli/cli/rules/branches/trunk
