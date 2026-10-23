@@ -1,0 +1,20 @@
+Live disposable Codex trust/completion check
+
+Product path:
+- bin/fm-codex-trust.sh registered the exact worktree in a disposable CODEX_HOME.
+- real codex exec used model gpt-5.6-luna and model_reasoning_effort=medium.
+
+Observed output:
+trusted: /Users/rac/.no-mistakes/worktrees/ba74ac5033c4/01M5M3PEH558WV25ASBXCV7N4E
+{"type":"thread.started"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"type":"agent_message","text":"TRUST_LIVE_OK"}}
+{"type":"turn.completed","usage":{"output_tokens":81,"reasoning_output_tokens":70}}
+codex_exec_rc=0
+
+The disposable CODEX_HOME and transcript were removed after capture.
+
+Live trusted idle-screen check:
+# codex (codex-cli 0.163.0): starfield furniture observed=yes placeholder observed=yes
+ok - codex (codex-cli 0.163.0): real idle screen classifies empty on the cursor-anchored tmux read and the cursorless styled read
+ok - live codex idle-screen guard verified 1 live surface(s)
