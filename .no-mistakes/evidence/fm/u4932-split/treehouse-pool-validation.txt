@@ -1,0 +1,21 @@
+Target commit: 49ed91f19fc2c94b6c5c0f2d5ce57055e2549ee7
+Provider: treehouse v3.1.0
+
+$ bash tests/fm-treehouse-home-root.test.sh
+ok - the worktree root is per home and independent of how the home or base is spelled
+ok - each home's spawn acquires its worktree from that home's own root
+ok - a leased secondmate home comes from the seeding home's own worktree root
+ok - a rollback return names the worktree path, so worktrees leased under any root stay returnable
+
+$ bash tests/fm-treehouse-pool-isolation-live-e2e.test.sh
+ok - two clones of one origin still share a single pool under a single root (v3.1.0)
+ok - under a shared root Treehouse returns the slot to the acquiring clone (v3.1.0)
+ok - the interactive acquire the worker's shell runs enters a worktree below the root it is given
+ok - two homes cloning one origin acquire concurrently from their own roots with no contention
+ok - a worktree leased under a different root still returns to its own pool, so nothing in flight has to be migrated
+
+$ bash tests/fm-bootstrap.test.sh
+ok - bootstrap reports treehouse lease + tasks-axi/quota-axi bootstrap contracts
+
+$ bash tests/fm-tangle-guard.test.sh
+ok - fm-spawn: aborts unless the resolved worktree is a genuine, isolated worktree
