@@ -1,0 +1,9 @@
+{
+  "command": "bash -c 'sleep 3; printf \"TRACKED_GATE_READY\\n\"'",
+  "initial_returncode": null,
+  "completion_seconds": 3.05,
+  "returncode": 0,
+  "tool_output": "TRACKED_GATE_READY\n",
+  "stderr": "",
+  "result": "tracked command output collected at completion"
+}

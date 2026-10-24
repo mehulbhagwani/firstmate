@@ -1,0 +1,5 @@
+nohup: pid=97486 returned after 0s; child running; GATE absent
+nohup: child completed after 9s; GATE present
+ampersand: pid=99274 returned after 0s; child running; GATE absent
+ampersand: child completed after 8s; GATE present
+ok - nm-drive-detach: Bash detach returns before GATE; generated instruction contract checked
