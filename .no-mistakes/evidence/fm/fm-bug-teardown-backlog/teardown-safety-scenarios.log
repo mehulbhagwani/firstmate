@@ -1,0 +1,6 @@
+bash: test_no_mistakes_pushed_unmerged_refuses: command not found
+bash: test_no_mistakes_pushed_with_open_pr_allowed: command not found
+bash: test_no_mistakes_pushed_with_closed_unmerged_pr_refuses: command not found
+bash: test_pushed_followup_after_merged_pr_refuses: command not found
+bash: test_no_mistakes_pushed_with_open_forgejo_pr_allowed: command not found
+bash: test_no_mistakes_pushed_with_closed_unmerged_forgejo_pr_refuses: command not found
