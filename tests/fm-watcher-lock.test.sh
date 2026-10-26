@@ -246,6 +246,116 @@ test_live_stalled_watch_lock_is_replaced_past_hard_bound() {
   pass "live watcher lock with a beacon past the hard bound is replaced, under it is still refused"
 }
 
+test_stalled_holder_inside_remote_probe_is_replaced() {
+  # A holder stalled inside a remote secondmate probe (the ssh call frozen by
+  # host sleep or a silent peer) must still be evictable: bash 3.2 defers a
+  # fatal TERM while a command substitution is being read, so a probe captured
+  # with $(...) kept the holder alive past the eviction wait and the re-arm was
+  # refused. The probe blocks in `wait` instead, where TERM lands at once.
+  local dir state fakebin out err holder holder_out pid i lock_pid stub_pid
+  dir=$(make_case stalled-in-remote-probe)
+  state="$dir/state"
+  fakebin="$dir/fakebin"
+  out="$dir/watch.out"
+  err="$dir/watch.err"
+  holder_out="$dir/holder.out"
+  mkdir -p "$dir/data"
+  cat > "$state/rsm1.meta" <<EOF
+window=remote:rsm1
+kind=secondmate
+harness=claude
+remote_host=lab-host
+remote_backend=herdr
+remote_herdr_session=fm-remote
+remote_target=fm-remote:w1:p1
+home=/remote/rsm1-home
+EOF
+  printf -- '- rsm1 - Remote mate (host: lab-host; root: /remote/root; home: /remote/rsm1-home; scope: remote work; projects: alpha; added 2026-01-01)\n' \
+    > "$dir/data/secondmates.md"
+  cat > "$fakebin/ssh" <<SH
+#!/usr/bin/env bash
+sleep 60 &
+printf '%s\n' "\$!" > "$dir/ssh.pid"
+wait
+printf 'alive\n'
+SH
+  chmod +x "$fakebin/ssh"
+  # fm-on only routes tracked commands of a real checkout, so this holder runs
+  # against the repository root rather than the suite's inert tangle root.
+  PATH="$fakebin:$PATH" FM_ROOT_OVERRIDE="$ROOT" FM_HOME="$dir" FM_STATE_OVERRIDE="$state" FM_SSH_BIN="$fakebin/ssh" \
+    FM_SECONDMATE_LIVENESS_SECS=1 FM_SECONDMATE_PROBE_TIMEOUT=120 FM_GUARD_GRACE=1 FM_POLL=5 \
+    FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH" > "$holder_out" 2>&1 &
+  holder=$!
+  i=0
+  while [ ! -s "$dir/ssh.pid" ] && [ "$i" -lt 200 ]; do
+    sleep 0.1
+    i=$((i + 1))
+  done
+  [ -s "$dir/ssh.pid" ] || fail "the holder never reached its remote probe: $(cat "$holder_out")"
+  stub_pid=$(cat "$dir/ssh.pid")
+  is_live_non_zombie "$holder" || fail "the holder died before the stall: $(cat "$holder_out")"
+  touch -t 200001010000 "$state/.last-watcher-beat"
+  PATH="$fakebin:$PATH" FM_HOME="$dir" FM_STATE_OVERRIDE="$state" FM_SSH_BIN="$fakebin/ssh" \
+    FM_GUARD_GRACE=1 FM_WATCHER_STALL_BOUND=3 FM_SECONDMATE_LIVENESS_SECS=999999 FM_POLL=5 \
+    FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH" > "$out" 2> "$err" &
+  pid=$!
+  i=0
+  lock_pid=
+  while [ "$i" -lt 100 ]; do
+    lock_pid=$(cat "$state/.watch.lock/pid" 2>/dev/null || true)
+    [ "$lock_pid" = "$pid" ] && break
+    is_live_non_zombie "$pid" || break
+    sleep 0.1
+    i=$((i + 1))
+  done
+  [ "$lock_pid" = "$pid" ] \
+    || fail "a holder stalled in its remote probe was not replaced (holder=$lock_pid): $(cat "$out" "$err")"
+  is_live_non_zombie "$holder" && fail "the holder stalled in its remote probe survived the eviction"
+  i=0
+  while [ "$i" -lt 100 ]; do
+    grep -E "^watcher: replaced stalled pid $holder " "$out" >/dev/null && break
+    sleep 0.1
+    i=$((i + 1))
+  done
+  grep -E "^watcher: replaced stalled pid $holder " "$out" >/dev/null \
+    || fail "watcher did not report the replacement: $(cat "$out" "$err")"
+  kill "$pid" 2>/dev/null || true
+  wait "$pid" 2>/dev/null || true
+  wait "$holder" 2>/dev/null || true
+  kill "$stub_pid" 2>/dev/null || true
+  pass "a holder stalled inside a remote probe is evicted and replaced"
+}
+
+test_holder_still_finishing_after_term_gets_its_own_refusal() {
+  # A holder that has not exited within the eviction wait already has its TERM;
+  # the refusal must say so instead of asking the operator to inspect or stop it.
+  local dir state fakebin out err status holder identity
+  dir=$(make_case term-sent-refusal)
+  state="$dir/state"
+  fakebin="$dir/fakebin"
+  out="$dir/watch.out"
+  err="$dir/watch.err"
+  bash -c 'trap "" TERM; exec sleep 300' &
+  holder=$!
+  sleep 0.2
+  identity=$(FM_STATE_OVERRIDE="$state" bash -c '. "$1"; fm_pid_identity "$2"' _ "$LIB" "$holder") || fail "could not identify the fake holder"
+  mkdir -p "$state/.watch.lock"
+  printf '%s\n' "$holder" > "$state/.watch.lock/pid"
+  printf '%s\n' "$dir" > "$state/.watch.lock/fm-home"
+  printf '%s\n' "$WATCH" > "$state/.watch.lock/watcher-path"
+  printf '%s\n' "$identity" > "$state/.watch.lock/pid-identity"
+  touch -t 200001010000 "$state/.last-watcher-beat"
+  status=0
+  PATH="$fakebin:$PATH" FM_HOME="$dir" FM_STATE_OVERRIDE="$state" FM_GUARD_GRACE=1 FM_WATCHER_STALL_BOUND=3 FM_POLL=5 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH" > "$out" 2> "$err" || status=$?
+  [ "$status" -ne 0 ] || fail "watcher started beside a holder that survived its TERM"
+  grep -E "^watcher: sent TERM to stalled pid $holder \(beacon [0-9]+s past hard bound 3s\) but it has not exited yet" "$err" >/dev/null \
+    || fail "the refusal after a delivered TERM did not say so: $(cat "$out" "$err")"
+  grep -F 'inspect or stop' "$err" >/dev/null && fail "the refusal after a delivered TERM still asked to inspect or stop the holder"
+  kill -KILL "$holder" 2>/dev/null || true
+  wait "$holder" 2>/dev/null || true
+  pass "a holder still finishing after its TERM is refused with its own message"
+}
+
 test_guard_warnings() {
   # The guard's two operator-visible states, with resilient substrings instead of
   # four copy-coupled tests:
@@ -325,24 +435,36 @@ test_guard_warnings() {
 }
 
 test_lock_single_winner_under_concurrency() {
-  local dir state lockdir marker i pids pid wins
+  local dir state lockdir marker contrib i pids pid wins total others
   dir=$(make_case lock-concurrency)
   state="$dir/state"
   lockdir="$state/.contend.lock"
   marker="$dir/wins"
+  contrib="$dir/contributions"
   : > "$marker"
+  : > "$contrib"
+  total=40
+  others=$((total - 1))
   pids=
   i=1
-  while [ "$i" -le 40 ]; do
+  while [ "$i" -le "$total" ]; do
     FM_STATE_OVERRIDE="$state" bash -c '
       . "$1"
       if fm_lock_try_acquire "$2"; then
         printf "%s\n" "$$" >> "$3"
-        # Stay alive so the held lock names a live pid for the whole window;
-        # otherwise a late contender could legitimately reclaim a dead-pid lock.
-        sleep 1
+        # Hold the lock until every OTHER contender has had its chance. A
+        # fixed sleep is shorter than the contention window on a loaded or
+        # multi-core host, so an early "winner" once exited and had its lock
+        # legitimately reclaimed as a dead-pid lock - a second winner in the
+        # ledger. Staying alive until all losers have finished makes the
+        # single-winner invariant hold deterministically.
+        while [ "$(wc -l < "$4" 2>/dev/null || true)" -lt "$5" ]; do
+          sleep 0.01
+        done
+      else
+        printf "%s\n" "$$" >> "$4"
       fi
-    ' _ "$LIB" "$lockdir" "$marker" &
+    ' _ "$LIB" "$lockdir" "$marker" "$contrib" "$others" &
     pids="$pids $!"
     i=$((i + 1))
   done
@@ -1346,17 +1468,26 @@ SH
   pass "cycle-exit ledger links a verified successor and remains size-capped"
 }
 
-test_stopped_watcher_is_live_but_stale_then_exit_is_classified() {
-  local dir state fakebin armout armpid watcher_pid i status
+test_stopped_watcher_is_retired_and_rearms_without_session_restart() {
+  local dir state fakebin armout recovery_out healthy_out armpid watcher_pid i status
+  local recovery_arm healthy_arm healthy_pid beat_before beat_after token wedge_limit
   dir=$(make_case stopped-watcher)
   state="$dir/state"
   fakebin="$dir/fakebin"
   armout="$dir/arm.out"
-  PATH="$fakebin:$PATH" FM_HOME="$dir" FM_STATE_OVERRIDE="$state" FM_POLL=5 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH_ARM" > "$armout" &
+  recovery_out="$dir/recovery.out"
+  healthy_out="$dir/healthy.out"
+  PATH="$fakebin:$PATH" FM_HOME="$dir" FM_STATE_OVERRIDE="$state" \
+    FM_GUARD_GRACE=30 FM_ARM_CONFIRM_TIMEOUT=60 FM_ARM_ATTACH_POLL=0.05 FM_POLL=0.1 FM_SIGNAL_GRACE=1 \
+    FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH_ARM" > "$armout" &
   armpid=$!
   i=0
-  while [ "$i" -lt 80 ]; do
+  # Under host contention the owned child's first fresh beacon can land after
+  # the arm's default 11s confirmation deadline, so poll through the widened
+  # confirm budget and fail fast on a loud typed failure instead.
+  while [ "$i" -lt 650 ]; do
     grep -qF 'watcher: started pid=' "$armout" 2>/dev/null && break
+    grep -qF 'watcher: FAILED' "$armout" 2>/dev/null && break
     sleep 0.1
     i=$((i + 1))
   done
@@ -1371,14 +1502,108 @@ test_stopped_watcher_is_live_but_stale_then_exit_is_classified() {
     fail "SIGSTOP watcher with a stale beacon was classified healthy"
   fi
 
-  kill -CONT "$watcher_pid" 2>/dev/null || true
-  kill -TERM "$watcher_pid" 2>/dev/null || true
-  wait_for_exit "$armpid" 80
+  i=0
+  wedge_limit=80
+  [ "$(uname)" != Linux ] || wedge_limit=160
+  while [ "$i" -lt "$wedge_limit" ] && is_live_non_zombie "$armpid"; do
+    sleep 0.1
+    i=$((i + 1))
+  done
+  if is_live_non_zombie "$armpid"; then
+    # Pre-fix cleanup: a raw wait on the stopped child held this arm forever.
+    # Continue the watcher before terminating it so this failing regression
+    # never strands a stopped process in the test host.
+    kill -CONT "$watcher_pid" 2>/dev/null || true
+    kill -TERM "$watcher_pid" 2>/dev/null || true
+    wait "$armpid" 2>/dev/null || true
+    fail "arm stayed wedged behind a live watcher whose beacon was stale"
+  fi
+  wait "$armpid"
   status=$?
-  [ "$status" -ne 0 ] && [ "$status" -ne 124 ] || fail "terminated stopped-watcher cycle did not surface nonzero (status $status)"
-  grep -Eq 'reason=(nonzero-exit|signal-exit)' "$state/.watch-cycle-exits.log" \
-    || fail "terminated watcher exit was not classified in the lifecycle ledger"
-  pass "SIGSTOP distinguishes live PID from stale beacon and termination records the exit class"
+  [ "$status" -ne 0 ] || fail "stale-beacon retirement did not fail the owned arm loudly"
+  grep -F 'watcher: FAILED - watcher pid=' "$armout" >/dev/null \
+    || fail "stale-beacon retirement omitted its typed watcher failure: $(cat "$armout")"
+  grep -F 'stopped advancing its beacon' "$armout" >/dev/null \
+    || fail "stale-beacon retirement did not name the liveness failure: $(cat "$armout")"
+  token=$(cat "$state/.watcher-down" 2>/dev/null || true)
+  case "$token" in
+    pending:downtime:*) ;;
+    *) fail "stale-beacon retirement did not publish watcher-down recovery state: '$token'" ;;
+  esac
+  case "$(uname)" in
+    Linux)
+      # SIGKILL is never held pending for a stopped process on Linux: the
+      # retirement's KILL kills the stopped watcher immediately, the arm's
+      # wait reaps it before the expected-pid hardening runs, and the
+      # retirement takes the released-lock shape (stale-beacon-retired), not
+      # the release-failed shape.
+      ! is_live_non_zombie "$watcher_pid" \
+        || fail "bounded retirement did not kill the stopped watcher on Linux"
+      [ ! -e "$state/.watch.lock" ] && [ ! -L "$state/.watch.lock" ] \
+        || fail "stalled watcher retained singleton ownership after retirement on Linux"
+      grep -q 'reason=stale-beacon-retired' "$state/.watch-cycle-exits.log" \
+        || fail "stale-beacon retirement was not classified in the lifecycle ledger on Linux"
+      kill -CONT "$watcher_pid" 2>/dev/null || true
+      wait_for_exit "$watcher_pid" 40 2>/dev/null || true
+      pass "owned arm bounds its retirement of a stopped watcher and fails loudly on Linux"
+      return 0
+      ;;
+  esac
+  ! is_live_non_zombie "$watcher_pid" \
+    || fail "stalled watcher remained alive after bounded retirement"
+  [ ! -e "$state/.watch.lock" ] && [ ! -L "$state/.watch.lock" ] \
+    || fail "stalled watcher retained singleton ownership after retirement"
+  grep -q 'reason=stale-beacon-retired' "$state/.watch-cycle-exits.log" \
+    || fail "stale-beacon retirement was not classified in the lifecycle ledger"
+
+  # A fresh arm in the same primary session must take ownership and surface the
+  # accepted downtime episode. No Pi/Herdr process is involved in this fixture.
+  PATH="$fakebin:$PATH" FM_HOME="$dir" FM_STATE_OVERRIDE="$state" \
+    FM_GUARD_GRACE=30 FM_ARM_CONFIRM_TIMEOUT=60 FM_ARM_ATTACH_POLL=0.05 FM_POLL=0.1 FM_SIGNAL_GRACE=1 \
+    FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH_ARM" > "$recovery_out" &
+  recovery_arm=$!
+  wait_for_exit "$recovery_arm" 140
+  status=$?
+  expect_code 0 "$status" "same-session recovery arm must surface accepted watcher downtime"
+  grep -F 'check: rearm-resurface' "$recovery_out" >/dev/null \
+    || fail "same-session recovery arm did not surface the watcher-down episode: $(cat "$recovery_out")"
+  drain_and_ack "$state" || fail "same-session watcher recovery acknowledgement failed"
+
+  # Once the recovery episode is acknowledged, the next healthy cycle stays
+  # live and keeps advancing its real watcher-owned beacon. The real watcher
+  # advances the beacon once per main-loop iteration, which takes ~2-3.5s on a
+  # loaded host, so this arm's grace must outrun that cadence: a grace tighter
+  # than the cadence makes the arm's own stale-beacon watchdog retire a
+  # healthy child. Poll through the grace with a liveness check per tick, then
+  # require the beacon to have advanced.
+  PATH="$fakebin:$PATH" FM_HOME="$dir" FM_STATE_OVERRIDE="$state" \
+    FM_GUARD_GRACE=30 FM_ARM_CONFIRM_TIMEOUT=60 FM_ARM_ATTACH_POLL=0.05 FM_POLL=0.1 FM_SIGNAL_GRACE=1 \
+    FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH_ARM" > "$healthy_out" &
+  healthy_arm=$!
+  i=0
+  while [ "$i" -lt 650 ]; do
+    grep -qF 'watcher: started pid=' "$healthy_out" 2>/dev/null && break
+    grep -qF 'watcher: FAILED' "$healthy_out" 2>/dev/null && break
+    sleep 0.1
+    i=$((i + 1))
+  done
+  healthy_pid=$(cat "$state/.watch.lock/pid" 2>/dev/null || true)
+  grep -qF "watcher: started pid=$healthy_pid" "$healthy_out" \
+    || fail "healthy recovery cycle did not establish: $(cat "$healthy_out")"
+  beat_before=$(FM_STATE_OVERRIDE="$state" bash -c '. "$1"; fm_path_mtime "$2"' _ "$LIB" "$state/.last-watcher-beat")
+  i=0
+  while [ "$i" -lt 140 ]; do
+    sleep 0.1
+    is_live_non_zombie "$healthy_arm" \
+      || fail "healthy arm was retired by the stale-beacon watchdog"
+    i=$((i + 1))
+  done
+  beat_after=$(FM_STATE_OVERRIDE="$state" bash -c '. "$1"; fm_path_mtime "$2"' _ "$LIB" "$state/.last-watcher-beat")
+  [ "$beat_after" -gt "$beat_before" ] \
+    || fail "healthy watcher did not advance its beacon ($beat_before -> $beat_after)"
+  kill -HUP "$healthy_arm" 2>/dev/null || true
+  wait "$healthy_arm" 2>/dev/null || true
+  pass "owned arm retires a live stale watcher, releases recovery state, and preserves a healthy successor"
 }
 
 test_pid_identity_is_locale_invariant() {
@@ -1580,6 +1805,8 @@ test_stale_watch_lock_reclaimed
 test_stale_watch_reclaim_publishes_before_clear
 test_live_stale_watch_lock_is_actionable
 test_live_stalled_watch_lock_is_replaced_past_hard_bound
+test_stalled_holder_inside_remote_probe_is_replaced
+test_holder_still_finishing_after_term_gets_its_own_refusal
 test_guard_warnings
 test_lock_single_winner_under_concurrency
 test_lock_steals_dead_pid_lock
@@ -1608,4 +1835,4 @@ test_arm_propagates_immediate_wake_before_confirmation
 test_arm_waits_for_peer_beacon_after_child_stands_down
 test_arm_fails_loud_when_no_fresh_watcher_confirmable
 test_cycle_exit_ledger_links_successor_and_stays_bounded
-test_stopped_watcher_is_live_but_stale_then_exit_is_classified
+test_stopped_watcher_is_retired_and_rearms_without_session_restart
