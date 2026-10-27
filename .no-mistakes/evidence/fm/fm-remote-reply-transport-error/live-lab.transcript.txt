@@ -1,0 +1,31 @@
+== real ssh to unreachable host (direct fm-on probe) ==
+ssh: connect to host 127.0.0.1 port 1: Connection refused
+fm-on.sh exit=255
+== arm ==
+registered: remote-reply-ios (remote-reply)
+armed: remote-reply-ios offset=0
+== one source leg with real ssh exit 255 ==
+ssh: connect to host 127.0.0.1 port 1: Connection refused
+source exit=75 stdout_bytes=0
+== start runner; transport dead ==
+ssh legs while dead: 12
+runner alive: yes
+SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-ios             remote-reply live       0
+== switch to Windows WSL-shaped diagnostic transport ==
+ssh legs with WSL diagnostic: 9
+runner alive: yes
+captured results so far: 0
+cursor files: 
+parent ios.status: <absent>
+leftover staged files: 0
+== transport recovers; remote mate writes a reply ==
+parent ios.status: done [corr=0123456789abcdef] [at=1700000000]: build verified after link drop
+runner alive (same pid 75001): yes
+captured results: parent/state/procevent-inbox/remote-reply-ios.1.result
+SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-ios             remote-reply live       1
+== stop listener (TERM process group) ==
+leftover staged files after stop: 0
+== runner log tail ==
+lab removed
