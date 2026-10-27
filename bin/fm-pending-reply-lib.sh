@@ -114,6 +114,9 @@
 #                                 completion for the recovery repost, and from
 #                                 the recovery turn's completion for the
 #                                 missed-report escalation - never from delivery
+#   FM_PENDING_REPLY_OBSERVE_TIMEOUT
+#                                 default 20; seconds bounding one remote
+#                                 busy/idle observation in the tick
 #   FM_PENDING_REPLY_DIR_OVERRIDE override the pending-replies directory (tests)
 #   FM_PENDING_REPLY_SEND_HOOK    optional command template for recovery delivery
 #                                 (tests); receives task_id and full message as args
@@ -136,6 +139,8 @@ _FM_PENDING_REPLY_LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd 2>/dev/n
 # bin/fm-wake-lib.sh's single directed expansion below; a second directive
 # here would re-expand the same transitive graph.
 . "$_FM_PENDING_REPLY_LIB_DIR/fm-classify-lib.sh"
+# shellcheck source=bin/fm-timeout-lib.sh
+. "$_FM_PENDING_REPLY_LIB_DIR/fm-timeout-lib.sh"
 
 FM_PENDING_REPLY_SCHEMA='fm-pending-reply.v1'
 FM_PENDING_REPLY_CORR_RE='corr=[A-Fa-f0-9]{16}'
@@ -1456,6 +1461,17 @@ fm_pending_reply_restatement_copy_same_basename() {  # <state-dir> <corr_id> <se
   fm_parent_channel_append_once "$parent_status" "$line"
 }
 
+# Hard bound in seconds for one remote `observe` call in the tick, so a host
+# that stops answering cannot hold the watcher's poll; a call that fails or hits
+# the bound observes `unknown`.
+fm_pending_reply_observe_timeout() {
+  case "${FM_PENDING_REPLY_OBSERVE_TIMEOUT:-}" in
+    ''|*[!0-9]*) printf '20\n' ;;
+    *[1-9]*) printf '%s\n' "$FM_PENDING_REPLY_OBSERVE_TIMEOUT" ;;
+    *) printf '20\n' ;;
+  esac
+}
+
 # One reconciliation tick for a single record: resolve, observe, recover, escalate.
 # busy_state is busy|idle|unknown for the secondmate endpoint.
 # secondmate_home may be empty when unknown.
@@ -1668,8 +1684,12 @@ fm_pending_reply_tick() {  # <state-dir>
         done
         if [ "$found" = 0 ]; then
           if [ -n "$remote_host" ]; then
-            observation=$("$_FM_PENDING_REPLY_LIB_DIR/fm-on.sh" "$task_id" \
-              fm-remote-secondmate-control.sh observe "$task_id" < /dev/null 2>/dev/null || printf 'unknown')
+            observation=unknown
+            if fm_run_timed_capture "$(fm_pending_reply_observe_timeout)" \
+              "$_FM_PENDING_REPLY_LIB_DIR/fm-on.sh" "$task_id" \
+              fm-remote-secondmate-control.sh observe "$task_id" < /dev/null 2>/dev/null; then
+              observation=$FM_TIMED_CAPTURE
+            fi
             case "$observation" in busy|idle|fallback-idle|unknown) ;; *) observation=unknown ;; esac
           else
             observation=$(fm_pending_reply_backend_observation "$backend" "$target" "$label" "$harness")

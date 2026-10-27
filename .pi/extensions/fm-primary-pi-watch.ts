@@ -36,7 +36,7 @@
 // consumption changes.
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { createHash } from "node:crypto";
-import { mkdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, renameSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { ExtensionAPI, Theme } from "@earendil-works/pi-coding-agent";
@@ -97,6 +97,14 @@ type UnconsumedWake = {
   pending: PendingActionableClose;
 };
 
+type StaleOwnedTransition = {
+  armPid: string;
+  armIdentity: string;
+  watcherPid: string;
+  watcherIdentity: string;
+  watcherPath: string;
+};
+
 type SessionGeneration = {
   id: number;
   stopping: boolean;
@@ -105,6 +113,7 @@ type SessionGeneration = {
   retryTimer: ReturnType<typeof setTimeout> | null;
   cleanupTimer: ReturnType<typeof setTimeout> | null;
   retryFailures: number;
+  continuityTransition: Promise<void> | null;
   restoring: boolean;
   seq: number;
   pendingActionables: PendingActionableClose[];
@@ -164,6 +173,7 @@ const armReadyTimeoutMs = positiveInteger(
   process.platform === "win32" ? 35000 : 12000,
 );
 const armRetireTimeoutMs = positiveInteger("FM_WATCH_ARM_RETIRE_TIMEOUT_MS", 1000);
+const staleOwnerGraceMs = positiveInteger("FM_WATCHER_STALE_GRACE", 300) * 1000;
 const repairOnlyHint = "call fm_watch_arm_pi again only after a later notification says the cycle is missing, failed, or unhealthy";
 const shuttingDownMessage = "watcher: not armed - Pi session is shutting down";
 
@@ -241,6 +251,36 @@ function pidAlive(pid: string): boolean {
   } catch {
     return false;
   }
+}
+
+function processCommand(pid: string): string {
+  const result = spawnSync("ps", ["-o", "command=", "-p", pid], { encoding: "utf8" });
+  return result.status === 0 ? result.stdout.trim() : "";
+}
+
+function processIdentity(pid: string): string {
+  const script = `. \"$1/bin/fm-wake-lib.sh\"; fm_pid_identity \"$2\"`;
+  const result = spawnSync("bash", ["-c", script, "_", fmRoot, pid], { encoding: "utf8" });
+  return result.status === 0 ? result.stdout.trim() : "";
+}
+
+function waitForPidExit(pid: string, timeoutMs: number): Promise<boolean> {
+  return new Promise((resolveExit) => {
+    const deadline = Date.now() + timeoutMs;
+    const poll = (): void => {
+      if (!pidAlive(pid)) {
+        resolveExit(true);
+        return;
+      }
+      if (Date.now() >= deadline) {
+        resolveExit(false);
+        return;
+      }
+      const timer = setTimeout(poll, 50);
+      timer.unref();
+    };
+    poll();
+  });
 }
 
 // An arm child whose process is gone but whose close event has not fired yet
@@ -556,6 +596,7 @@ function createGeneration(): SessionGeneration {
     retryTimer: null,
     cleanupTimer: null,
     retryFailures: 0,
+    continuityTransition: null,
     restoring: false,
     seq: 0,
     pendingActionables: [],
@@ -1017,6 +1058,74 @@ export default function (pi: ExtensionAPI) {
     });
   }
 
+  function readStaleOwnedTransition(owner: SessionGeneration): StaleOwnedTransition | null {
+    if (!generationIsLive(owner)) return null;
+    const lockDir = `${state}/.watch.lock`;
+    try {
+      const home = readFileSync(`${lockDir}/fm-home`, "utf8").trim();
+      const watcherPid = readFileSync(`${lockDir}/pid`, "utf8").trim();
+      const watcherIdentity = readFileSync(`${lockDir}/pid-identity`, "utf8").trim();
+      const watcherPath = readFileSync(`${lockDir}/watcher-path`, "utf8").trim();
+      const beat = `${state}/.last-watcher-beat`;
+      if (home !== fmHome || watcherPath !== `${fmRoot}/bin/fm-watch.sh` || !watcherPid || !watcherIdentity) return null;
+      if (!existsSync(beat) || Date.now() - statSync(beat).mtimeMs < staleOwnerGraceMs) return null;
+      if (lockOwnership() !== "owned") return null;
+      if (!pidAlive(watcherPid) || processIdentity(watcherPid) !== watcherIdentity) return null;
+      const armPid = parentPid(watcherPid);
+      if (!armPid || !pidAlive(armPid) || parentPid(armPid) !== String(process.pid)) return null;
+      const armCommand = processCommand(armPid);
+      const watcherCommand = processCommand(watcherPid);
+      if (!/fm-watch-arm\.sh(?:\s|$)/.test(armCommand) || !/\s--restart(?:\s|$)/.test(armCommand)) return null;
+      if (!/fm-watch\.sh(?:\s|$)/.test(watcherCommand)) return null;
+      const armIdentity = processIdentity(armPid);
+      if (!armIdentity) return null;
+      return { armPid, armIdentity, watcherPid, watcherIdentity, watcherPath };
+    } catch {
+      return null;
+    }
+  }
+
+  async function retireStaleOwnedTransition(owner: SessionGeneration): Promise<string> {
+    const transition = readStaleOwnedTransition(owner);
+    if (!transition) return "";
+    const sameLock = (): boolean => {
+      const lockDir = `${state}/.watch.lock`;
+      try {
+        if (lockOwnership() !== "owned"
+          || !existsSync(`${state}/.last-watcher-beat`)
+          || Date.now() - statSync(`${state}/.last-watcher-beat`).mtimeMs < staleOwnerGraceMs
+          || readFileSync(`${lockDir}/fm-home`, "utf8").trim() !== fmHome
+          || readFileSync(`${lockDir}/pid`, "utf8").trim() !== transition.watcherPid
+          || readFileSync(`${lockDir}/pid-identity`, "utf8").trim() !== transition.watcherIdentity
+          || readFileSync(`${lockDir}/watcher-path`, "utf8").trim() !== transition.watcherPath) return false;
+        return !pidAlive(transition.watcherPid) || processIdentity(transition.watcherPid) === transition.watcherIdentity;
+      } catch {
+        return false;
+      }
+    };
+    const sameWatcher = (): boolean => sameLock()
+      && pidAlive(transition.watcherPid)
+      && parentPid(transition.watcherPid) === transition.armPid;
+    const sameArm = (): boolean => sameLock()
+      && pidAlive(transition.armPid)
+      && parentPid(transition.armPid) === String(process.pid)
+      && processIdentity(transition.armPid) === transition.armIdentity
+      && /fm-watch-arm\.sh(?:\s|$)/.test(processCommand(transition.armPid));
+    const retirePid = async (pid: string, identity: string, guard: () => boolean): Promise<boolean> => {
+      if (!generationIsLive(owner) || !guard() || !pidAlive(pid) || processIdentity(pid) !== identity) return false;
+      process.kill(Number(pid), "SIGTERM");
+      if (await waitForPidExit(pid, armRetireTimeoutMs)) return true;
+      if (!generationIsLive(owner) || !guard() || !pidAlive(pid) || processIdentity(pid) !== identity) return false;
+      process.kill(Number(pid), "SIGKILL");
+      return waitForPidExit(pid, armRetireTimeoutMs);
+    };
+    if (!sameWatcher()) return "";
+    if (!await retirePid(transition.watcherPid, transition.watcherIdentity, sameWatcher)) return "";
+    if (sameArm() && !await retirePid(transition.armPid, transition.armIdentity, sameArm)) return "";
+    appendExtensionLog(`retired stale owned watcher=${transition.watcherPid} arm=${transition.armPid} by identity-verified PID escalation`);
+    return `watcher: stale owned arm ${transition.armPid} and watcher ${transition.watcherPid} were retired by identity-verified PID escalation`;
+  }
+
   async function restoreAfterActionableClose(owner: SessionGeneration, predecessorArmPid: string): Promise<{
     failure: string;
     recovery?: { generation: string; watcherPid: string };
@@ -1046,6 +1155,12 @@ export default function (pi: ExtensionAPI) {
           : `watcher: FAILED - Pi extension could not start the successor watcher cycle\n${replacement.message}`;
         if (/(?:read-only|no live session)/.test(replacement.message)) break;
       }
+      const retiredStaleOwner = await retireStaleOwnedTransition(owner);
+      if (retiredStaleOwner) {
+        failure = retiredStaleOwner;
+        appendExtensionLog(`restore attempt=${attempt} ${retiredStaleOwner}`);
+        continue;
+      }
       if (attempt === retryLimit) break;
       await waitForRetry(attempt + 1);
     }
@@ -1067,17 +1182,31 @@ export default function (pi: ExtensionAPI) {
     }
     const timer = setTimeout(() => {
       if (owner.retryTimer === timer) owner.retryTimer = null;
-      if (!generationIsLive(owner)) return;
-      const result = startArm(owner, predecessorArmPid);
-      if (!result.ok) {
-        surfaceFailure(owner, `watcher: FAILED - Pi extension could not launch a continuity retry\n${result.message}`);
-      }
+      const transition = (async (): Promise<void> => {
+        if (!generationIsLive(owner)) return;
+        const retiredStaleOwner = await retireStaleOwnedTransition(owner);
+        if (retiredStaleOwner) appendExtensionLog(`scheduled retry ${retiredStaleOwner}`);
+        if (!generationIsLive(owner)) return;
+        const result = startArm(owner, predecessorArmPid, true);
+        if (!result.ok) {
+          surfaceFailure(owner, `watcher: FAILED - Pi extension could not launch a continuity retry\\n${result.message}`);
+        }
+      })();
+      owner.continuityTransition = transition;
+      void transition.then(
+        () => {
+          if (owner.continuityTransition === transition) owner.continuityTransition = null;
+        },
+        () => {
+          if (owner.continuityTransition === transition) owner.continuityTransition = null;
+        },
+      );
     }, retryDelay(owner.retryFailures));
     timer.unref();
     owner.retryTimer = timer;
   }
 
-  function startArm(owner: SessionGeneration, predecessorArmPid = ""): ArmResult {
+  function startArm(owner: SessionGeneration, predecessorArmPid = "", internalTransition = false): ArmResult {
     if (!generationIsLive(owner)) return { ok: false, message: shuttingDownMessage };
     const ownership = lockOwnership();
     if (ownership === "other") return { ok: false, message: "watcher: read-only - session lock is held by another firstmate session" };
@@ -1098,6 +1227,12 @@ export default function (pi: ExtensionAPI) {
       return {
         ok: true,
         message: `watcher: unchanged - Pi extension already owns a scheduled continuity retry; no manual re-arm needed; ${repairOnlyHint}`,
+      };
+    }
+    if (!internalTransition && owner.continuityTransition) {
+      return {
+        ok: true,
+        message: `watcher: unchanged - Pi extension is completing an owner-scoped continuity transition; no manual re-arm needed; ${repairOnlyHint}`,
       };
     }
     const id = ++owner.seq;

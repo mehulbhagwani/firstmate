@@ -163,6 +163,40 @@ fm_task_inbox_handled_dir() {  # <state-dir> <task-id>
   printf '%s/%s.inbox/handled' "$1" "$2"
 }
 
+# A verified explicit `fm-control exit` retires only the current task
+# generation's inbox ladder. The record stays unread and auditable.
+fm_task_inbox_user_stop_path() {  # <state-dir> <task-id>
+  printf '%s/%s.inbox/.user-stop' "$1" "$2"
+}
+
+fm_task_inbox_mark_user_stop() {  # <state-dir> <task-id> <spawn-gen> <endpoint>
+  local path=$(_fm_task_inbox_user_stop_path "$1" "$2") tmp expected
+  mkdir -p "${path%/*}" || return 1
+  if [ -L "$path" ] || { [ -e "$path" ] && [ ! -f "$path" ]; }; then
+    return 1
+  fi
+  tmp=$(mktemp "${path}.XXXXXX") || return 1
+  expected=$(printf 'spawn_gen=%s\nendpoint=%s\ntask=%s\nat=' "$3" "$4" "$2")
+  printf '%s%s\nreason=explicit-control-exit\n' "$expected" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$tmp" || { rm -f "$tmp"; return 1; }
+  mv "$tmp" "$path" || { rm -f "$tmp"; return 1; }
+  [ -f "$path" ] && [ ! -L "$path" ] || return 1
+  grep -Fqx "spawn_gen=$3" "$path" && grep -Fqx "endpoint=$4" "$path" \
+    && grep -Fqx "task=$2" "$path" && grep -Fxq 'reason=explicit-control-exit' "$path"
+}
+
+_fm_task_inbox_user_stop_path() { fm_task_inbox_user_stop_path "$@"; }
+
+fm_task_inbox_user_stop_matches() {  # <state-dir> <task-id> <meta-path>
+  local path gen endpoint recorded_gen recorded_endpoint
+  path=$(fm_task_inbox_user_stop_path "$1" "$2")
+  [ -f "$path" ] || return 1
+  gen=$(fm_meta_get "$3" spawn_gen 2>/dev/null || true)
+  endpoint=$(fm_meta_get "$3" window 2>/dev/null || true)
+  recorded_gen=$(awk -F= '$1=="spawn_gen" {print substr($0, index($0,"=")+1)}' "$path" 2>/dev/null)
+  recorded_endpoint=$(awk -F= '$1=="endpoint" {print substr($0, index($0,"=")+1)}' "$path" 2>/dev/null)
+  [ -n "$gen" ] && [ "$recorded_gen" = "$gen" ] && [ "$recorded_endpoint" = "$endpoint" ]
+}
+
 # Numeric sequence of one record basename, or fail for a non-record name.
 fm_task_inbox_seq_of() {  # <basename>
   local n=${1%.msg}
@@ -473,6 +507,10 @@ fm_task_inbox_clear_retry() {  # <state-dir> <task-id> <record-path>
 fm_task_inbox_due_action() {  # <state-dir> <task-id>
   local dir oldest base now grace max ladder rec_base count last
   dir=$(fm_task_inbox_dir "$1" "$2")
+  if fm_task_inbox_user_stop_matches "$1" "$2" "$dir/../$2.meta"; then
+    printf 'quiet'
+    return 0
+  fi
   if ! oldest=$(fm_task_inbox_oldest_unhandled "$1" "$2"); then
     rm -f "$dir/.ring-state" "$dir/.escalated" "$dir/.busy-state" 2>/dev/null || true
     # The one retry ring exists only while config/wait-no-turns is present.

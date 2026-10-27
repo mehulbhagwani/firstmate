@@ -197,6 +197,8 @@ DATA="${FM_DATA_OVERRIDE:-$FM_HOME/data}"
 . "$SCRIPT_DIR/fm-pr-lib.sh"
 # shellcheck source=bin/fm-wake-lib.sh
 . "$SCRIPT_DIR/fm-wake-lib.sh"
+# shellcheck source=bin/fm-task-inbox-lib.sh
+. "$SCRIPT_DIR/fm-task-inbox-lib.sh"
 # shellcheck source=bin/fm-worker-account-lib.sh
 . "$SCRIPT_DIR/fm-worker-account-lib.sh"
 # shellcheck source=bin/fm-omp-profile-lib.sh
@@ -1285,6 +1287,10 @@ case "$VERB" in
     ;;
   exit)
     result=$(do_exit)
+    if [ "$result" = stopped ] || [ "$result" = already-stopped ]; then
+      fm_task_inbox_mark_user_stop "$STATE" "$ID" "$(fm_meta_get "$META" spawn_gen)" "$T" \
+        || die "task $ID stopped, but its user-stop inbox marker could not be recorded"
+    fi
     echo "$result $ID harness=$HARNESS backend=$BACKEND endpoint=$T worktree=$WT"
     ;;
   relaunch)
