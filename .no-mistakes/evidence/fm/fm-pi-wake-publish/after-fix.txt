@@ -1,0 +1,3 @@
+ok - a window silenced by the rollback-failure sentinel keeps the probe on its escalation cadence, not once per poll
+bash $F  5.87s user 9.98s system 42% cpu 37.094 total
+rc=0
