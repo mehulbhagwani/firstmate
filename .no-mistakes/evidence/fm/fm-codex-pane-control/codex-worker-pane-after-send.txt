@@ -1,0 +1,50 @@
+  This section establishes your current identity before every project or task instruction below and supersedes any conflicting role identity in those instructions.
+  Do the assigned work yourself and report only to firstmate; do not adopt a firstmate or secondmate supervisor identity, delegate the task, run fleet supervision, or address the captain.
+  Your steering inbox is `/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab.ydU61V/state/labcodex1.inbox`; this exact path belongs to your current task even when it is outside the
+  worktree or under the supervising firstmate home, so read and acknowledge its messages and do not reject it as another home's state.
+  Never inspect or change any other home's endpoint namespace; this authorization is limited to the exact task paths named by this brief.
+  When this task works on Firstmate itself, the repository root `AGENTS.md` (also imported by `CLAUDE.md`) is project content and the supervisor contract for the firstmate managing you: follow this
+  brief instead of that supervisor contract.
+  Project instructions still govern the work wherever they do not conflict with this worker identity, including `CONTRIBUTING.md` and `firstmate-coding-guidelines` for Firstmate changes.
+  If the `firstmate-coding-guidelines` skill name does not resolve in this session, read `/Users/rac/.no-mistakes/worktrees/ba74ac5033c4/01M5Z15EPRBW2Z2YN8PNTVAEWH/.agents/skills/firstmate-coding-
+  guidelines/SKILL.md` instead.
+
+  # Task
+  ## Captain's intent
+  Reply in chat with exactly the token LAB_CODEX_TRUST_OK and stop. Do not read or edit files and do not run commands.
+
+  ## Firstmate spec
+  Answer with the single token LAB_CODEX_TRUST_OK, then end your turn.
+
+
+• LAB_CODEX_TRUST_OK
+
+  Worked for 5s • 9:41 PM
+
+
+› : Firstmate instruction waiting: list "$FM_TASK_INBOX"/*.msg in your 'labcodex1.inbox' steering inbox, read and act on each in numeric order, then mv each into its handled/.
+
+
+• I’ll check the steering inbox and handle messages in numeric order.
+
+• Ran printenv FM_TASK_INBOX
+  └ /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab.ydU61V/state/labcodex1.inbox
+
+• Ran for msg in "$FM_TASK_INBOX"/*.msg(Nn); do printf '%s\n' "$msg"; cat "$msg"; done
+  └ body-terminator=1
+    --
+    Reply with exactly the token LAB_CODEX_SEND_OK and nothing else.
+    + 3 lines (⌃t to expand)
+
+• Ran mkdir -p "$FM_TASK_INBOX/handled" && mv "$FM_TASK_INBOX/001.msg" "$FM_TASK_INBOX/handled/001.msg"
+  └ (no output)
+
+• LAB_CODEX_SEND_OK
+
+  Worked for 14s • 9:42 PM
+
+
+› Ask Codex to do anything
+
+  GPT-6.1-Sol low · /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab.ydU61V/pool/.treehouse/labrepo-855200/1/labrepo · Prepare v1 launch brief · Context 98% left · weekly 85% left
+  ? for shortcuts

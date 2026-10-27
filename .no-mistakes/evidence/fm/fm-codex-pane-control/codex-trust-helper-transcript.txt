@@ -1,0 +1,44 @@
+## 1. preserve unrelated config + update existing untrusted entry (escaped """ and mid-line literal strings)
+trusted: <tmp>/wt
+exit=0
+model = "keep-me"
+note = """a \""" [projects."<tmp>/wt"]
+trust_level = "untrusted" """
+[projects."<tmp>/wt"]
+lit = '''
+trust_level = "untrusted"
+'''
+trust_level = "trusted"
+[mcp_servers.x]
+command = "y"
+parsed: keep-me {'lit': 'trust_level = "untrusted"\n', 'trust_level': 'trusted'} {'x': {'command': 'y'}} 'a """ [projects."<tmp>/wt"]\ntrust_level = "untrusted" '
+
+## 2. final header with no trailing newline
+trusted: <tmp>/wt
+exit=0
+[projects."<tmp>/wt"]
+trust_level = "trusted"
+
+## 3. primary checkout refused
+error: refusing to pre-register Codex trust: target '<tmp>/p' is a primary checkout, not an isolated worktree
+exit=1
+
+## 4. malformed TOML refused, file untouched
+Codex config '<tmp>/c/config.toml' is invalid TOML: Invalid value (at end of document)
+error: refusing to pre-register Codex trust: Codex trust registration failed
+exit=1 unchanged=yes
+
+## 5. neither CODEX_HOME nor HOME
+error: refusing to pre-register Codex trust: neither CODEX_HOME nor HOME is set
+exit=1
+
+## 6. relative CODEX_HOME
+error: refusing to pre-register Codex trust: CODEX_HOME must be an absolute path
+exit=1
+
+## 7. python3 on PATH lacks tomllib
+trusted: <tmp>/wt
+exit=0
+
+[projects."<tmp>/wt"]
+trust_level = "trusted"

@@ -1,0 +1,11 @@
+window=primary:fm-labcodex1
+endpoint_task_id=labcodex1
+worktree=/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab.ydU61V/pool/.treehouse/labrepo-855200/1/labrepo
+project=/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab.ydU61V/proj/labrepo
+harness=codex
+approval_mode=approve-for-me
+kind=scout
+tasktmp=/tmp/fm-labcodex1
+model=default
+effort=default
+spawn_gen=s1793117505.84469.20590
