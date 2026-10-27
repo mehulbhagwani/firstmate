@@ -1,0 +1,29 @@
+--- isolated tmux windows (exited worker + live sibling) ---
+fm-exited:zsh
+fm-live:sleep
+--- crew-state output from inside the same isolated tmux pane ---
+
+pitchperfekt@Pitchs-Mac-Studio 01M5Y7VCNNC3A9Q29KZ0W5FQ0R % FM_STATE_OVERRIDE=/v
+ar/folders/_r/hgs9zn8j5wbfj4jnfdc7yx5r0000gn/T//fm-tmux-proof.air1XP/state bin/f
+m-crew-state.sh exited
+state: unknown · source: pane · harness state unavailable (unknown missing)
+pitchperfekt@Pitchs-Mac-Studio 01M5Y7VCNNC3A9Q29KZ0W5FQ0R %
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

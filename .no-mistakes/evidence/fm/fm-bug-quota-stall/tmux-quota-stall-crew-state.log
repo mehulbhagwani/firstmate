@@ -1,0 +1,2 @@
+$ real disposable tmux shell-only quota-stall scenario
+state: unknown · source: none · backend target gone: primary:fm-quota-live (agent gone, pane shell remains)
