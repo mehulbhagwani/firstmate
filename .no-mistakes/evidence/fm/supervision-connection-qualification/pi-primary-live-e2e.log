@@ -1,0 +1,22 @@
+Note: switching to '88dd791698ae7e2c8efe206be3108a8ec54169c1'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+not ok - Pi Ahoy legacy-start case did not take Bearings: I can’t take the helm because this session has no visible `SESSION START` digest and no command-execution tool is available to run `bin/fm-session-start.sh`. `/ahoy` is blocked until that runs exactly once.
+candidate=88dd791698ae7e2c8efe206be3108a8ec54169c1
+watch-extension=819af5a664a5a458319ad1d494682cb3d9d98ec8
+command=FM_PI_LIVE_E2E=1 bash tests/fm-pi-primary-live-e2e.test.sh
+exit_code=1
