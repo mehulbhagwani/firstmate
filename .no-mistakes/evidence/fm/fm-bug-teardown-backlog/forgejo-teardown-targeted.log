@@ -1,0 +1,7 @@
+ok - teardown leaves opencode's busy plugin in the returned pool worktree as on main
+ok - no-mistakes worktree with pushed but unmerged work is refused
+ok - pushed work with a recorded open PR is not refused
+ok - pushed work with a recorded but closed-unmerged PR is refused
+ok - pushed work with a recorded open Forgejo PR is not refused
+ok - pushed work with a closed-unmerged Forgejo PR is refused and retained
+ok - teardown proves a Forgejo task landed from the merged pull request when the content check is inconclusive
