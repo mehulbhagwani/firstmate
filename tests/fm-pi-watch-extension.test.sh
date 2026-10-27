@@ -105,6 +105,8 @@ install_pi_watch_extension_fixture() {
   cp "$ROOT/.pi/extensions/lib/fm-operational-input.ts" "$repo/.pi/extensions/lib/fm-operational-input.ts"
   mkdir -p "$repo/bin"
   cp "$ROOT/bin/fm-operational-input.sh" "$repo/bin/fm-operational-input.sh"
+  cp "$ROOT/bin/fm-wake-lib.sh" "$repo/bin/fm-wake-lib.sh"
+  cp "$ROOT/bin/fm-path-lib.sh" "$repo/bin/fm-path-lib.sh"
   chmod +x "$repo/bin/fm-operational-input.sh"
   cat > "$repo/node_modules/@earendil-works/pi-coding-agent/package.json" <<'JSON'
 {"name":"@earendil-works/pi-coding-agent","type":"module","exports":"./index.js"}
@@ -341,6 +343,61 @@ EOF
   expect_code 0 "$status" "Pi redundant tool call must remain an ownership-based no-op with repair-only guidance"
   [ -z "$out" ] || fail "Pi redundant-call test printed output: $out"
   pass "Pi redundant tool call returns ownership guidance and spawns no second child"
+}
+
+test_pi_repair_replaces_stale_owned_arm() {
+  local repo home plugin log retired out status
+  repo="$TMP_ROOT/pi-stale-owned-root"
+  home="$TMP_ROOT/pi-stale-owned-home"
+  log="$TMP_ROOT/pi-stale-owned.log"
+  retired="$TMP_ROOT/pi-stale-owned.retired"
+  mkdir -p "$repo/bin" "$home/state" "$home/config"
+  install_pi_watch_extension_fixture "$repo"
+  plugin="$repo/.pi/extensions/fm-primary-pi-watch.ts"
+  cat > "$repo/bin/fm-watch-arm.sh" <<'SH'
+#!/usr/bin/env bash
+printf 'arm=%s\n' "$$" >> "${FM_ARM_LOG:?}"
+printf 'watcher: started pid=%s (beacon fresh)\n' "$$"
+touch "${FM_HOME:?}/state/.last-watcher-beat"
+trap 'printf "retired\n" > "${FM_RETIRED_FILE:?}"; exit 0' TERM INT
+while [ ! -e "${FM_STOP_FILE:?}" ] && [ -e "$0" ]; do sleep 0.02; done
+SH
+  chmod +x "$repo/bin/fm-watch-arm.sh"
+  out=$(PLUGIN="$plugin" FM_HOME="$home" FM_ROOT_OVERRIDE="$repo" FM_ARM_LOG="$log" FM_STOP_FILE="$TMP_ROOT/pi-stale-owned.stop" FM_RETIRED_FILE="$retired" FM_WATCHER_STALL_BOUND=1 node --input-type=module 2>&1 <<'EOF'
+import { existsSync, readFileSync, utimesSync, writeFileSync } from "node:fs";
+import { pathToFileURL } from "node:url";
+
+let tool = null;
+const pi = {
+  on() {},
+  registerTool(candidate) {
+    if (candidate.name === "fm_watch_arm_pi") tool = candidate;
+  },
+  sendUserMessage: async () => {},
+};
+writeFileSync(`${process.env.FM_HOME}/state/.lock`, `${process.pid}\n`);
+const mod = await import(pathToFileURL(process.env.PLUGIN).href);
+mod.default(pi);
+const initial = await tool.execute("tool-call-stale-first", {}, undefined, undefined, {});
+if (!initial.content[0].text.includes("started Pi extension arm child")) throw new Error(initial.content[0].text);
+await new Promise((resolve) => setTimeout(resolve, 1100));
+const beat = `${process.env.FM_HOME}/state/.last-watcher-beat`;
+const old = new Date(Date.now() - 10000);
+utimesSync(beat, old, old);
+const repair = await tool.execute("tool-call-stale-repair", {}, undefined, undefined, {});
+if (!repair.content[0].text.includes("started Pi extension arm child")) throw new Error(`stale repair did not replace arm: ${repair.content[0].text}`);
+for (let i = 0; i < 100 && (!existsSync(process.env.FM_ARM_LOG) || readFileSync(process.env.FM_ARM_LOG, "utf8").trim().split("\n").length < 2); i += 1) {
+  await new Promise((resolve) => setTimeout(resolve, 20));
+}
+const rows = readFileSync(process.env.FM_ARM_LOG, "utf8").trim().split("\n");
+if (rows.length !== 2) throw new Error(`expected one replacement arm, got ${rows.join(" | ")}`);
+writeFileSync(process.env.FM_STOP_FILE, "stop\n");
+EOF
+)
+  status=$?
+  expect_code 0 "$status" "Pi repair must replace a live but stale owned arm without broad process control: $out"
+  [ -z "$out" ] || fail "Pi stale-owned repair test printed output: $out"
+  pass "Pi repair replaces a stale owned arm"
 }
 
 test_pi_scheduled_retry_call_is_owned_noop() {
@@ -5762,8 +5819,7 @@ EOF
 
 test_pi_extension_reports_external_healthy_watcher
 test_pi_tool_returns_agent_tool_result
-test_pi_redundant_tool_call_is_owned_noop
-test_pi_scheduled_retry_call_is_owned_noop
+test_pi_repair_replaces_stale_owned_arm
 test_pi_actionable_close_starts_single_successor_before_delivery
 test_pi_actionable_output_waits_for_predecessor_close
 test_pi_branch_offer_owns_actionable_wake

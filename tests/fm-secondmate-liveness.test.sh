@@ -772,6 +772,7 @@ EOF
   cat > "$fakebin/ssh" <<'SH'
 #!/usr/bin/env bash
 printf '%s\n' "$*" >> "${FM_FAKE_SSH_LOG:?}"
+[ -z "${FM_FAKE_SLEEP:-}" ] || sleep "$FM_FAKE_SLEEP"
 [ -z "${FM_FAKE_REMOTE_REPLY:-}" ] || printf '%s\n' "$FM_FAKE_REMOTE_REPLY"
 exit "${FM_FAKE_REMOTE_RC:-0}"
 SH
@@ -826,6 +827,18 @@ test_remote_poll_probe_maps_states() {
   pass "poll probe: remote states map to the same contract as local, one call each"
 }
 
+test_remote_poll_probe_timeout_preserves_route() {
+  local w out started elapsed
+  w=$(make_remote_probe_world probe-timeout)
+  started=$(date +%s)
+  out=$(probe_remote "$w" poll FM_SECONDMATE_PROBE_TIMEOUT=1 FM_FAKE_SLEEP=5)
+  elapsed=$(( $(date +%s) - started ))
+  [ "$out" = 'skipped|unknown|0|||remote endpoint probe timed out after 1s on lab-host; route preserved' ] \
+    || fail "a bounded remote probe must preserve the route after timeout, got: $out"
+  [ "$elapsed" -lt 4 ] || fail "a timed-out remote probe exceeded its bound: ${elapsed}s"
+  pass "poll probe: a silent remote peer is bounded and never relaunchable"
+}
+
 test_remote_poll_probe_unreachable_preserves_route() {
   local w out
   w=$(make_remote_probe_world probe-unreachable)
@@ -862,6 +875,7 @@ test_sweep_skips_mate_whose_liveness_lock_is_held
 test_relaunch_waits_for_other_mates_relaunch_lock
 test_sweep_refuses_relaunch_on_ledger_errors
 test_remote_poll_probe_maps_states
+test_remote_poll_probe_timeout_preserves_route
 test_remote_poll_probe_unreachable_preserves_route
 
 echo "# all fm-secondmate-liveness tests passed"

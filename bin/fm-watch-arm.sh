@@ -472,11 +472,6 @@ attached_holder_live() {
 # to a verified successor. With no successor, report the wake that cycle durably
 # delivered, or fail loudly - never a clean empty completion that an adapter could
 # mistake for a no-op.
-# A stale beacon alone does not end the followed cycle: while the holder is alive
-# and the lock still names it under the same identity, it is a slow cycle, which
-# a started arm tolerates by waiting on its child, so this arm keeps following it.
-# Only at the stall bound, where the watcher's own re-arm evicts a live holder,
-# does it fail with the typed stalled-holder line so its owner's retry replaces it.
 attach_and_wait() {
   local attached_pid=$1 age
   while :; do
@@ -522,6 +517,33 @@ attach_and_wait() {
     cycle_log_append unknown unknown attached-cycle-ended none
     return 1
   done
+}
+
+# A started arm owns the watcher child and must wait for that child to report its
+# wake normally, but it must not wait forever when the child's beacon stops. This
+# is the started-child counterpart to attach_and_wait's stale-holder check.
+wait_started_child() {
+  local started_pid=$1 age process_state
+  while fm_pid_alive "$started_pid"; do
+    process_state=$(ps -o stat= -p "$started_pid" 2>/dev/null | tr -d ' ' | cut -c1)
+    [ "$process_state" = Z ] && break
+    if arm_ground_gone; then
+      fail_arm_ground_gone
+      return 1
+    fi
+    if ! healthy_watcher && attached_holder_live "$started_pid"; then
+      age=$(fm_path_age "$BEAT")
+      if [ "$age" -ge "$STALL_BOUND" ]; then
+        cycle_log_append 1 none attached-holder-stalled none
+        echo "watcher: FAILED - started watcher pid=$started_pid stalled (beacon ${age}s at or past hard bound ${STALL_BOUND}s)"
+        kill -TERM "$started_pid" 2>/dev/null || true
+        wait "$started_pid" 2>/dev/null || true
+        return 1
+      fi
+    fi
+    sleep "$ATTACH_POLL"
+  done
+  wait "$started_pid"
 }
 
 # shellcheck disable=SC2329 # Invoked indirectly by the signal traps below.
@@ -930,6 +952,10 @@ wait_owned_child() {
   stalled_pid=$child
   age=
   while watch_child_running; do
+    if arm_ground_gone; then
+      fail_arm_ground_gone
+      return 1
+    fi
     if owned_child_has_stale_beacon; then
       age=$(fm_path_age "$BEAT")
       break
@@ -990,6 +1016,10 @@ while :; do
         echo "watcher: started pid=$child (beacon fresh)"
       fi
       wait_owned_child
+      rc=$?
+      if [ "$rc" -ne 0 ]; then
+        exit "$rc"
+      fi
       exit $?
     fi
     # Another watcher won the singleton; our child stood down. Give it a

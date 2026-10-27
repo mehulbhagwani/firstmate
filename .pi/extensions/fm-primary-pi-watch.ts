@@ -219,6 +219,7 @@ const retiringGenerations = new Set<SessionGeneration>();
 const armRetired = new WeakSet<ChildProcess>();
 const armRecovery = new WeakMap<ChildProcess, { generation: string; watcherPid: string }>();
 const armPendingActionable = new WeakMap<ChildProcess, PendingActionableClose>();
+const armStartedAt = new WeakMap<ChildProcess, number>();
 
 function positiveInteger(name: string, fallback: number): number {
   const value = Number(process.env[name]);
@@ -296,6 +297,25 @@ function liveArmChild(owner: SessionGeneration): ChildProcess | null {
   const pid = child.pid;
   if (pid === undefined || !pidAlive(String(pid))) return null;
   return child;
+}
+
+function watcherStallBoundMs(): number {
+  const raw = Number(process.env.FM_WATCHER_STALL_BOUND);
+  return Number.isFinite(raw) && raw > 0 ? Math.floor(raw * 1000) : 300000;
+}
+
+function ownedArmChildIsStalled(owner: SessionGeneration): ChildProcess | null {
+  const child = liveArmChild(owner);
+  if (!child) return null;
+  const startedAt = armStartedAt.get(child);
+  if (startedAt === undefined || Date.now() - startedAt < watcherStallBoundMs()) return null;
+  try {
+    if (!existsSync(`${state}/.last-watcher-beat`)) return null;
+    const ageMs = Date.now() - statSync(`${state}/.last-watcher-beat`).mtimeMs;
+    return ageMs >= watcherStallBoundMs() ? child : null;
+  } catch {
+    return null;
+  }
 }
 
 // The session lock names a local pid or, on Windows, a tagged `win:<pid>`
@@ -1217,6 +1237,17 @@ export default function (pi: ExtensionAPI) {
       };
     }
     publishGenerationOwner(owner, "active");
+    const stalledChild = ownedArmChildIsStalled(owner);
+    if (stalledChild) {
+      // This is the exact arm child this generation started, and its watcher
+      // beacon is past the same hard bound used by fm-watch-arm.sh. Retire
+      // only that child before replacing it; never search for or kill a pid
+      // named by an external lock.
+      armRetired.add(stalledChild);
+      stalledChild.kill("SIGTERM");
+      if (owner.child === stalledChild) owner.child = null;
+      appendExtensionLog(`repair stale-owned-arm pid=${stalledChild.pid ?? "unknown"}`);
+    }
     if (liveArmChild(owner)) {
       return {
         ok: true,
@@ -1250,6 +1281,7 @@ export default function (pi: ExtensionAPI) {
       stdio: ["ignore", "pipe", "pipe"],
     });
     owner.child = armChild;
+    armStartedAt.set(armChild, Date.now());
     let stdout = "";
     let stderr = "";
     let settled = false;

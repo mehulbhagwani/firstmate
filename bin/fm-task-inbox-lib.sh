@@ -170,7 +170,8 @@ fm_task_inbox_user_stop_path() {  # <state-dir> <task-id>
 }
 
 fm_task_inbox_mark_user_stop() {  # <state-dir> <task-id> <spawn-gen> <endpoint>
-  local path=$(_fm_task_inbox_user_stop_path "$1" "$2") tmp expected
+  local path tmp expected
+  path=$(_fm_task_inbox_user_stop_path "$1" "$2")
   mkdir -p "${path%/*}" || return 1
   if [ -L "$path" ] || { [ -e "$path" ] && [ ! -f "$path" ]; }; then
     return 1

@@ -390,6 +390,36 @@ test_attached_arm_hands_a_stalled_holder_to_its_replacement() {
   pass "watch-arm: an attached arm hands a holder stalled past the bound to its owner's replacement"
 }
 
+test_started_arm_stops_following_a_stale_watcher() {
+  local dir state fakebin armout status
+  dir=$(make_case started-stale-holder)
+  state="$dir/state"
+  fakebin="$dir/fakebin"
+  armout="$dir/arm.out"
+  PATH="$fakebin:$PATH" FM_HOME="$dir" FM_STATE_OVERRIDE="$state" \
+    FM_POLL=5 FM_SIGNAL_GRACE=0 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 \
+    FM_ARM_CONFIRM_TIMEOUT=5 FM_GUARD_GRACE=1 FM_WATCHER_STALL_BOUND=1 \
+    "$WATCH_ARM" > "$armout" 2>&1 &
+  ARM_PID=$!
+  i=0
+  while [ "$i" -lt 80 ]; do
+    grep -qF 'watcher: started pid=' "$armout" 2>/dev/null && break
+    sleep 0.1
+    i=$((i + 1))
+  done
+  grep -qF 'watcher: started pid=' "$armout" \
+    || fail "started arm did not confirm its watcher: $(cat "$armout")"
+  wait_for_exit "$ARM_PID" 150
+  status=$?
+  grep -E '^watcher: FAILED - started watcher pid=[0-9]+ stalled \(beacon [0-9]+s at or past hard bound 1s\)$' "$armout" >/dev/null \
+    || fail "started arm kept waiting on a stale watcher: $(cat "$armout")"
+  [ "$status" -ne 0 ] && [ "$status" -ne 124 ] \
+    || fail "started arm did not fail after stale containment (status $status)"
+  grep -q 'reason=attached-holder-stalled' "$state/.watch-cycle-exits.log" \
+    || fail "started stale watcher was not classified in the lifecycle ledger"
+  pass "watch-arm: a started arm applies stale containment instead of waiting forever"
+}
+
 test_rearm_resurfaces_durable_queue_and_remote_open_decision() {
   local dir home state fakebin result armout drainout status watcher_pid sequence generation decision_recovery_arm decision_successor
   dir=$(make_case rearm-resurface)
@@ -1966,6 +1996,7 @@ test_reaper_stops_a_tracked_watcher
 test_attached_arm_still_fails_on_a_wake_it_did_not_deliver
 test_attached_arm_follows_a_slow_live_holder
 test_attached_arm_hands_a_stalled_holder_to_its_replacement
+test_started_arm_stops_following_a_stale_watcher
 test_rearm_resurfaces_durable_queue_and_remote_open_decision
 test_slow_rearm_recovery_is_still_surfaced
 test_marker_publish_failure_retains_recovery_evidence
