@@ -1,0 +1,33 @@
+== arm
+registered: remote-reply-ios (remote-reply)
+armed: remote-reply-ios offset=0
+== start runner while transport emits Windows diagnostic bytes + exit 255
+-- polls so far:        1
+-- inbox:
+total 16
+drwx------@ 4 rac  wheel  128 Oct 28 03:39 .
+drwxr-xr-x@ 7 rac  wheel  224 Oct 28 03:39 ..
+-rw-------@ 1 rac  wheel   13 Oct 28 03:39 remote-reply-ios.1.adapter
+-rw-------@ 1 rac  wheel  122 Oct 28 03:39 remote-reply-ios.1.result
+-- captured /private/tmp/fmscn/run.OfIgH5/parent/state/procevent-inbox/remote-reply-ios.1.result:
+0000000    A  \0       c   o   n   n   e   c   t   i   o   n       a   t
+0000020    t   e   m   p   t       f   a   i   l   e   d       b   e   c
+0000040    a   u   s   e       t   h   e       c   o   n   n   e   c   t
+0000060    e   d       p   a   r   t   y       d   i   d       n   o   t
+0000100        p   r   o   p   e   r   l   y       r   e   s   p   o   n
+-- cursor:
+-- registration present: no
+-- runner list:
+no sources registered
+-- runner output:
+not-autohandled: remote-reply-ios (left for the handler; still unacknowledged)
+retired: remote-reply-ios (adapter classified the captured result terminal)
+captured: /private/tmp/fmscn/run.OfIgH5/parent/state/procevent-inbox/remote-reply-ios.1.result
+== transport recovered; append a reply line
+-- parent ios.status:
+(missing)
+-- inbox:
+remote-reply-ios.1.adapter
+remote-reply-ios.1.result
+-- cursor:
+-- registration present: no

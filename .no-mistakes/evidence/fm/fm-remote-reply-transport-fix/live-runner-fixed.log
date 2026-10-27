@@ -1,0 +1,27 @@
+== arm
+registered: remote-reply-ios (remote-reply)
+armed: remote-reply-ios offset=0
+== start runner while transport emits Windows diagnostic bytes + exit 255
+-- polls so far:        1
+-- inbox:
+(no inbox)
+-- cursor:
+-- registration present: yes
+-- runner list:
+SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-ios             remote-reply none       0
+-- runner output:
+no-result: remote-reply-ios (exit 255)
+== transport recovered; append a reply line
+-- parent ios.status:
+done [corr=0123456789abcdef] [at=1700000000]: build verified
+-- inbox:
+remote-reply-ios.1.adapter
+remote-reply-ios.1.handled
+remote-reply-ios.1.result
+-- cursor:
+result_sha256=49f3b42976b432a9fc0f0fda55101d19bd0bac2e14c0799721ba47901104179e
+schema=fm-remote-reply-cursor.v1
+offset=61
+prefix_sha256=1d73e5530828f8b56ed9dba8affd57b9a6af7221fb40c21a481517d34b2b96b2
+-- registration present: yes
