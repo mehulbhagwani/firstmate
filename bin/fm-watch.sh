@@ -1132,7 +1132,15 @@ secondmate_liveness_tick() {
     id=${id%.meta}
     case "$id" in ''|*[!A-Za-z0-9._-]*) continue ;; esac
     fm_secondmate_liveness_lock "$id" || continue
+    watcher_beacon_refresh || {
+      fm_secondmate_liveness_unlock "$id"
+      return 1
+    }
     fm_secondmate_liveness_probe "$meta" "$id" poll
+    watcher_beacon_refresh || {
+      fm_secondmate_liveness_unlock "$id"
+      return 1
+    }
     bound_marker="$STATE/.secondmate-relaunch-bound-$id"
     reason='' notify_key='' err=''
     case "$FM_SM_LIVE_STATUS" in
@@ -3466,6 +3474,14 @@ FM_WATCH_DELIVERY_PID=$WATCHER_PID
 FM_WATCH_DELIVERY_IDENTITY=$(fm_pid_identity "$WATCHER_PID" 2>/dev/null || true)
 printf '%s\n' "$FM_WATCH_DELIVERY_IDENTITY" > "$WATCH_LOCK/pid-identity" 2>/dev/null || true
 
+# Refresh the beacon only while this process still owns this home's current
+# lock record. A replaced watcher must not make its successor look healthy.
+watcher_beacon_refresh() {
+  [ "$(cat "$WATCH_LOCK/pid" 2>/dev/null || true)" = "$WATCHER_PID" ] || return 1
+  fm_watcher_lock_matches_pid "$STATE" "$WATCH_PATH" "$WATCHER_PID" "$FM_HOME" || return 1
+  touch "$STATE/.last-watcher-beat"
+}
+
 [ -e "$STATE/.last-heartbeat" ] || touch "$STATE/.last-heartbeat"
 
 # A merged poll may have queued its terminal wake and then lost the process
@@ -3539,10 +3555,10 @@ resurface_after_downtime() {
 }
 
 if [ "${FM_WATCH_HANDLING_SUCCESSOR:-0}" = 1 ]; then
-  touch "$STATE/.last-watcher-beat"
+  watcher_beacon_refresh || exit 0
   handling_wait=0
   while [ "$handling_wait" -lt 600 ]; do
-    touch "$STATE/.last-watcher-beat"
+    watcher_beacon_refresh || exit 0
     fm_recovery_marker_snapshot "$WATCHER_DOWNTIME_MARKER" || true
     case "$FM_RECOVERY_MARKER_TOKEN" in
       pending:downtime:*) ;;
@@ -3590,7 +3606,7 @@ while :; do
 
   # Liveness beacon for fm-guard.sh: a fresh mtime here means a watcher is
   # alive. Supervision scripts warn when this goes stale with tasks in flight.
-  touch "$STATE/.last-watcher-beat"
+  watcher_beacon_refresh || exit 0
 
   # Opt-in fleet activity ledger (docs/fleet-ledger.md): pick up newly appended
   # status lines before this cycle can exit on a wake. Off costs one file test.
