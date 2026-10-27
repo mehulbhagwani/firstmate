@@ -2039,7 +2039,7 @@ test_same_kind_escalation_reopens_after_operator_close() {
     home=$(setup_parent same-kind)
     state="$home/state"
     fm_write_secondmate_meta "$state/mate.meta" "$home/sm" "sess:fm-mate"
-    export FM_PENDING_REPLY_NOW=10000
+    printf -v FM_PENDING_REPLY_NOW '%s' 10000
     corr=$(fm_pending_reply_create "$home" "$state" mate "wake after lost transport")
     status="$state/mate.status"
     fm_pending_reply_prepare_delivery "$state" "$corr" \
@@ -2055,7 +2055,7 @@ test_same_kind_escalation_reopens_after_operator_close() {
       || fail "reset before close failed"
     fm_pending_reply_prepare_delivery "$state" "$corr" \
       || fail "retry prepare failed"
-    export FM_PENDING_REPLY_NOW=15000
+    printf -v FM_PENDING_REPLY_NOW '%s' 15000
     fm_pending_reply_tick_one "$state" "$corr" unknown \
       || fail "retry tick failed"
     [ "$(phase_of "$state" "$corr")" = escalated ] \
@@ -2075,7 +2075,7 @@ test_same_kind_escalation_reopens_after_operator_close() {
       || fail "reset after close failed"
     fm_pending_reply_prepare_delivery "$state" "$corr" \
       || fail "second-episode prepare failed"
-    export FM_PENDING_REPLY_NOW=20000
+    printf -v FM_PENDING_REPLY_NOW '%s' 20000
     fm_pending_reply_tick_one "$state" "$corr" unknown \
       || fail "second episode tick failed"
     [ "$(phase_of "$state" "$corr")" = escalated ] \
@@ -2090,7 +2090,7 @@ test_same_kind_escalation_reopens_after_operator_close() {
       || fail "reset of the reopened decision failed"
     fm_pending_reply_prepare_delivery "$state" "$corr" \
       || fail "reopened retry prepare failed"
-    export FM_PENDING_REPLY_NOW=25000
+    printf -v FM_PENDING_REPLY_NOW '%s' 25000
     fm_pending_reply_tick_one "$state" "$corr" unknown \
       || fail "reopened retry tick failed"
     blocked=$(grep -cF "blocked [key=pending-reply-$corr]" "$status")
@@ -2159,7 +2159,6 @@ SH
   chmod +x "$fb/ssh"
   printf -- '- ios - iOS delivery (host: remote-mac; root: /remote/root; home: /remote/ios-home; scope: iOS work; projects: alpha; added 2026-08-02)\n' \
     > "$home/data/secondmates.md"
-  export FM_PENDING_REPLY_NOW=7000
   # Invoked indirectly through FM_PENDING_REPLY_SEND_HOOK.
   # shellcheck disable=SC2329
   observe_bound_hook() {
@@ -2171,6 +2170,7 @@ SH
   fm_write_meta "$state/ios.meta" \
     "window=fm-remote:w1:p1" "harness=claude" "kind=secondmate" "mode=secondmate" \
     "remote_host=remote-mac" "remote_root=/remote/root" "remote_backend=herdr"
+  printf -v FM_PENDING_REPLY_NOW '%s' 7000
   corr=$(fm_pending_reply_create "$home" "$state" "ios" "is the build green")
   fm_pending_reply_mark_delivered "$state" "$corr"
   fm_pending_reply_observe_busy "$state" "$corr" busy
