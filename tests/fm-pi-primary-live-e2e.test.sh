@@ -324,6 +324,9 @@ while [ "$i" -lt 120 ]; do
 done
 printf '%s\n' "$pane" | grep -Eq 'watcher: started Pi extension arm child|Pi extension already owns an arm child' \
   || fail "Pi did not render the initial watcher ownership result"
+arm_tool_result_count=$(printf '%s\n' "$pane" | grep -Ec 'watcher: (started|unchanged|not armed|read-only)' || true)
+[ "$arm_tool_result_count" -eq 1 ] || fail "Pi did not render exactly one initial watcher tool result (count $arm_tool_result_count)"
+max_arm_tool_result_count=$arm_tool_result_count
 
 wake_number=1
 while [ "$wake_number" -le 3 ]; do
@@ -342,6 +345,10 @@ while [ "$wake_number" -le 3 ]; do
     || fail "Pi extension did not ledger-link successor $wake_number after its actionable close"
   wait_for_exact_line "HANDLED_$wake_number" 120 \
     || fail "Pi did not drain and settle notification $wake_number after its extension-owned successor started"
+  arm_tool_result_count=$(capture | grep -Ec 'watcher: (started|unchanged|not armed|read-only)' || true)
+  [ "$arm_tool_result_count" -le "$max_arm_tool_result_count" ] || max_arm_tool_result_count=$arm_tool_result_count
+  [ "$max_arm_tool_result_count" -eq 1 ] \
+    || fail "Pi model re-armed from memory instead of the extension (tool-result count $max_arm_tool_result_count)"
   wake_number=$((wake_number + 1))
 done
 
@@ -352,8 +359,7 @@ foreground_arm='$ bin/fm-watch-arm.sh'
 if printf '%s\n' "$pane" | grep -Fq "$foreground_arm"; then
   fail "Pi used a foreground bash watcher arm"
 fi
-arm_tool_result_count=$(printf '%s\n' "$pane" | grep -Ec 'watcher: (started|unchanged|not armed|read-only)' || true)
-[ "$arm_tool_result_count" -eq 1 ] || fail "Pi model re-armed from memory instead of the extension (tool-result count $arm_tool_result_count)"
+[ "$max_arm_tool_result_count" -eq 1 ] || fail "Pi model re-armed from memory instead of the extension (tool-result count $max_arm_tool_result_count)"
 
 pid_file=$(find "$HOME_DIR/state" -maxdepth 3 -type f -name pid | head -1)
 [ -n "$pid_file" ] || fail "re-armed watcher pid was not recorded"
