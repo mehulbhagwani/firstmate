@@ -31,9 +31,11 @@ Keep the instructions as one positional argument.
 Multiple positional arguments become separate queued messages; the spawn template already preserves the one-argument shape.
 
 A project trust dialog can appear on the first Pi run in any not-yet-trusted directory that holds a trust-requiring resource such as `.pi/extensions/`, including a clean worktree and a freshly seeded secondmate home.
-Accept it with Enter and verify the instructions begin processing.
+For an interactive or unmanaged session, accept it with Enter and verify the instructions begin processing.
 The decision persists per path in `~/.pi/agent/trust.json`, or in the pinned root's `trust.json` under a worker account pin, so later spawns in the same pooled slot under that root skip it.
 For unattended seeded-secondmate launches, `../../../bin/fm-spawn.sh --help` owns the capability-gated project-trust approval mechanics; [runtime verification](../../../../../docs/verification/runtime-backends.md#pi-seeded-secondmate-project-trust) owns the regression evidence.
+For ship and scout workers, `fm-spawn.sh` passes `--no-approve` when the selected Pi executable advertises it, so a worker copy of the Firstmate repository ignores project-local primary `.pi` extensions instead of discovering them.
+The worker's explicit `state/<task-id>.pi-ext.ts` extension remains loaded because it is outside the project and is named with `-e`.
 
 ## Worker turn-end extension
 
@@ -51,6 +53,7 @@ On native Windows, the extension runs its session-start, both PreToolUse, turn-e
 
 The primary watcher protocol also requires `.pi/extensions/fm-primary-pi-watch.ts`.
 The Pi engine auto-discovers both tracked project-local extensions once the project is trusted.
+That discovery is intended for a genuine primary or secondmate session, not a ship or scout worker.
 The model arms through the `fm_watch_arm_pi` tool, never through a foreground shell arm.
 Native-harness adapters can discover the same guarded FirstMate tools and operational message allowlist through the public Pi event-bus contract in `.pi/extensions/lib/fm-native-contract.ts`; no Pi built-in tools cross that contract.
 The tool result and clean-exit fallback are owned by `../../../docs/supervision-protocols/pi.md`.

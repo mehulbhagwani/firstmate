@@ -497,6 +497,9 @@
 #     __PIAPPROVE__ optional --approve on a seeded Pi/pi-signed secondmate when
 #                  that executable advertises the flag (empty otherwise; session
 #                  trust for the launch cwd only, never a trust.json rewrite)
+#     __PINOAPPROVE__ optional --no-approve on a Pi/pi-signed ship or scout when
+#                  that executable advertises the flag (empty otherwise; worker
+#                  project-local .pi resources stay out of the launch)
 #     __PIEXCLUDE__ optional ` --exclude-tools '<comma-joined names>'` from
 #                  config/crew-exclude-tools on Pi/pi-signed ship and scout
 #                  launches (supplies its own leading space, empty otherwise)
@@ -2480,16 +2483,20 @@ pi_supports_tui_mode() {
   printf '%s\n' "$help" | grep -Eq -- '(^|[[:space:]])--tui-mode([[:space:]=]|$)'
 }
 
-# Same help-probe shape as pi_supports_tui_mode for the session-scoped project
-# trust flag. A seeded secondmate home carries tracked .pi/extensions that gate
-# Pi behind "Trust project folder?" on first launch; --approve trusts that
-# launch cwd for the run without rewriting ~/.pi/agent/trust.json.
-pi_supports_approve() {
-  local executable=$1 help
+# Same help-probe shape as pi_supports_tui_mode for Pi's trust flags. A seeded
+# secondmate home carries tracked .pi/extensions that gate Pi behind "Trust
+# project folder?" on first launch; --approve trusts that launch cwd for the run
+# without rewriting ~/.pi/agent/trust.json. A ship or scout worker must instead
+# use --no-approve when available, so a firstmate repository copy cannot load its
+# primary project extensions in the worker session.
+pi_supports_flag() {
+  local executable=$1 flag=$2 help
   help=$("$executable" --help 2>&1) || return 1
-  # Pi prints "--approve, -a"; allow comma (and any non-token char) after the name.
-  printf '%s\n' "$help" | grep -Eq -- '(^|[[:space:]])--approve([^[:alnum:]_-]|$)'
+  printf '%s\n' "$help" | grep -Eq -- "(^|[[:space:]])${flag}([^[:alnum:]_-]|$)"
 }
+
+pi_supports_approve() { pi_supports_flag "$1" --approve; }
+pi_supports_no_approve() { pi_supports_flag "$1" --no-approve; }
 
 # omp pre-launch model validation. `omp models --json` (omp 18.1.11) prints
 # {"models":[{"provider","id","selector":"<provider>/<id>",...}]} for built-in and
@@ -2668,7 +2675,7 @@ launch_template() {
     ;;
   opencode) printf '%s' 'OPENCODE_CONFIG_CONTENT='\''{"permission":{"*":"allow"}__EFFORTFLAG__}'\'' __OPENCODEBIN__ __MODELFLAG__--prompt "$(__OPINPUT__ encode launch-brief < __BRIEF__)"' ;;
   pi | pi-signed)
-    printf '%s' '__PIBIN____PITUIMODE____PIAPPROVE____PIEXCLUDE____PIRESUME__'
+    printf '%s' '__PIBIN____PITUIMODE____PIAPPROVE____PINOAPPROVE____PIEXCLUDE____PIRESUME__'
     if [ "$kind" = secondmate ]; then
       # The two primary extensions supervise the mate's own home. __PIEXT__ is
       # the parent-home busy contract, loaded from outside the home so Pi's
@@ -3027,6 +3034,11 @@ pi | pi-signed)
     PI_APPROVE=' --approve'
   fi
   LAUNCH=${LAUNCH//__PIAPPROVE__/$PI_APPROVE}
+  PI_NO_APPROVE=
+  if [ "$KIND" != secondmate ] && pi_supports_no_approve "$PI_BIN"; then
+    PI_NO_APPROVE=' --no-approve'
+  fi
+  LAUNCH=${LAUNCH//__PINOAPPROVE__/$PI_NO_APPROVE}
   PI_EXCLUDE=
   [ -z "$EXCLUDE_TOOLS" ] || PI_EXCLUDE=" --exclude-tools $(shell_quote "$EXCLUDE_TOOLS")"
   LAUNCH=${LAUNCH//__PIEXCLUDE__/$PI_EXCLUDE}

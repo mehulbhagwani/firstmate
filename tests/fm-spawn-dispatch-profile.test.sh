@@ -26,7 +26,7 @@ if [ "${1:-}" = --help ]; then
   case "${FM_FAKE_PI_VERSION:-0.84.0}" in
   0.50.0) printf '%s\n' 'Pi 0.50.0' 'Options: --help' ;;
   0.82.0) printf '%s\n' 'Pi 0.82.0' 'Options: --help --approve' ;;
-  *) printf '%s\n' "Pi ${FM_FAKE_PI_VERSION:-0.84.0}" 'Options: --help --tui-mode <mode> --approve' ;;
+  *) printf '%s\n' "Pi ${FM_FAKE_PI_VERSION:-0.84.0}" 'Options: --help --tui-mode <mode> --approve --no-approve' ;;
   esac
 fi
 exit 0
@@ -1307,8 +1307,8 @@ test_pi_threads_model_and_max_effort() {
   expect_code 0 "$status" "pi spawn with max effort should succeed"
   assert_meta_profile "$HOME_DIR/state/$id.meta" pi openai-codex/gpt-5.6-sol max
   launch=$(cat "$LAUNCH_LOG")
-  assert_contains "$launch" "FM_PI_HARNESS=pi '$FAKEBIN_DIR/pi' --tui-mode regular --model 'openai-codex/gpt-5.6-sol' --thinking 'max' -e" \
-    "pi launch did not force the regular TUI while threading the requested model and max thinking level"
+  assert_contains "$launch" "FM_PI_HARNESS=pi '$FAKEBIN_DIR/pi' --tui-mode regular --no-approve --model 'openai-codex/gpt-5.6-sol' --thinking 'max' -e" \
+    "pi launch did not force the regular TUI, worker trust posture, and requested model and max thinking level"
   assert_not_contains "$launch" "FM_FIRSTMATE_PI_LAUNCH_BRIEF=" \
     "pi launch still exports the removed Calm input-reroute binding"
   assert_contains "$launch" "fm-operational-input.sh' encode launch-brief" \
@@ -1329,8 +1329,8 @@ test_pi_signed_threads_shared_pi_profile_and_preserves_identity() {
   assert_contains "$out" "spawned $id harness=pi-signed" "pi-signed spawn did not preserve its visible identity"
   assert_meta_profile "$HOME_DIR/state/$id.meta" pi-signed openai-codex/gpt-5.6-sol max
   launch=$(cat "$LAUNCH_LOG")
-  assert_contains "$launch" "FM_PI_HARNESS=pi-signed '$FAKEBIN_DIR/pi-signed' --tui-mode regular --model 'openai-codex/gpt-5.6-sol' --thinking 'max' -e" \
-    "pi-signed launch did not force the regular TUI with Pi's model, thinking, and extension semantics"
+  assert_contains "$launch" "FM_PI_HARNESS=pi-signed '$FAKEBIN_DIR/pi-signed' --tui-mode regular --no-approve --model 'openai-codex/gpt-5.6-sol' --thinking 'max' -e" \
+    "pi-signed launch did not force the regular TUI, worker trust posture, model, thinking, and extension semantics"
   assert_contains "$launch" "fm-operational-input.sh' encode launch-brief" \
     "pi-signed launch lost the canonical typed launch-brief envelope"
   assert_present "$HOME_DIR/state/$id.pi-ext.ts" "pi-signed launch did not install Pi's turn-end extension"
@@ -1464,9 +1464,24 @@ test_pi_worker_launch_omits_seeded_home_approve() {
   launch=$(cat "$LAUNCH_LOG")
   assert_contains "$launch" "FM_PI_HARNESS=pi '$FAKEBIN_DIR/pi' --tui-mode regular" \
     "pi worker launch lost its regular TUI probe"
+  assert_contains "$launch" "--no-approve" \
+    "ordinary Pi worker launches must ignore project-local extensions when advertised"
   assert_not_contains "$launch" "--approve" \
     "ordinary Pi worker launches must not receive secondmate seeded-home --approve"
-  pass "ordinary Pi worker launches omit --approve"
+
+  id=profile-pi-worker-old-no-approve-z8f
+  rec=$(make_spawn_case profile-pi-worker-old-no-approve pi "$id")
+  read_case_record "$rec"
+  out=$(FM_TEST_PI_VERSION=0.82.0 \
+    run_ship_spawn "$HOME_DIR" "$WT_DIR" "$FAKEBIN_DIR" "$LAUNCH_LOG" "$id" "$PROJ_DIR")
+  status=$?
+  expect_code 0 "$status" "older Pi worker spawn should still succeed"
+  launch=$(cat "$LAUNCH_LOG")
+  assert_not_contains "$launch" "--no-approve" \
+    "older Pi worker launches must omit an unsupported --no-approve flag"
+  assert_not_contains "$launch" "--approve" \
+    "older Pi worker launches must never fall back to --approve"
+  pass "ordinary Pi workers ignore project-local extensions without trusting them"
 }
 
 test_pi_approve_probe_omits_unsupported_flag() {

@@ -855,9 +855,8 @@ _fm_decision_fold_line() {  # <open-set> <status-line> <resolve-verb> <held-verb
     *) printf '%s' "$open"; return 0 ;;
   esac
   status_line_verb "$line" verb
-  case "$unstamped" in
-    *:*) case "$verb:$kind" in done:ship|done:scout|failed:ship|failed:scout) return 0 ;; esac ;;
-  esac
+  # Generic done/failed milestones are deliberately not handled here. An open
+  # keyed decision remains open until its own resolution or verified transfer.
   case "$verb" in
     needs-decision|blocked|"$resolve"|"$held") ;;
     *) printf '%s' "$open"; return 0 ;;
@@ -1230,10 +1229,12 @@ _fm_open_decisions_cursor_path() {  # <status-file>
 # malformed worker stamp whose colons used to pose as the head/note separator
 # no longer opens or closes anything; cursors folded under that reading are
 # discarded.
+# 10: generic done/failed milestones never retire an open keyed decision; only
+# its matching resolution or verified captain-held transfer may close it.
 # Version 4 was already spent on the bracketed-tag parser change above, and a
 # cursor persisted under that reading predates this one, so it must still be
 # discarded and rebuilt from byte 0 under the new reading.
-FM_OPEN_DECISIONS_FOLD_VERSION=9
+FM_OPEN_DECISIONS_FOLD_VERSION=10
 
 # Portable device:inode identity for the rotation/recreation check below.
 _fm_open_decisions_file_ident() {  # <file> -> strongest available identity

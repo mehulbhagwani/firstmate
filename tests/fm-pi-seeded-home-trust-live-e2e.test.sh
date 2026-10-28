@@ -135,5 +135,31 @@ fi
 CHECKED=$((CHECKED + 1))
 pass "unseeded path without --approve still prompts on Trust project folder?"
 
-[ "$CHECKED" -ge 3 ] || fail "guard checked nothing useful (checked=$CHECKED)"
+# --- 4. Worker copies ignore primary project extensions with --no-approve ---
+WORKER="$LAB/worker-copy"
+WORKER_MARK="$LAB/worker-project-extension-ran"
+mkdir -p "$WORKER/.pi/extensions"
+printf 'import { writeFileSync } from "node:fs";\nexport default function () { writeFileSync(%s, "ran"); }\n' \
+  "'$WORKER_MARK'" > "$WORKER/.pi/extensions/fm-primary-pi-watch.ts"
+printf '{}\n' > "$PI_DIR/trust.json"
+"$REAL_TMUX" -L "$SOCKET" new-session -d -s worker -n w -c "$WORKER" -- \
+  env HOME="$LAB/home-worker" PI_CODING_AGENT_DIR="$PI_DIR" PI_OFFLINE=1 \
+  "$PI_BIN" --no-approve --no-session --no-skills --no-prompt-templates \
+  || fail "could not launch Pi worker with --no-approve"
+if ! capture_until worker 'No models available|escape interrupt|This project is not trusted' 15 \
+  "$LAB/pane-worker.txt"; then
+  fail "worker with --no-approve never reached a post-trust TUI within 15s:
+$(cat "$LAB/pane-worker.txt")"
+fi
+if grep -qi 'Trust project folder' "$LAB/pane-worker.txt"; then
+  fail "worker with --no-approve still showed Trust project folder?:
+$(cat "$LAB/pane-worker.txt")"
+fi
+[ ! -e "$WORKER_MARK" ] || fail "worker executed the project primary extension"
+[ "$(cat "$PI_DIR/trust.json")" = '{}' ] || fail "worker rewrote the Pi trust store"
+"$REAL_TMUX" -L "$SOCKET" kill-session -t worker >/dev/null 2>&1 || true
+CHECKED=$((CHECKED + 1))
+pass "Pi worker copies ignore project primary extensions with --no-approve"
+
+[ "$CHECKED" -ge 4 ] || fail "guard checked nothing useful (checked=$CHECKED)"
 echo "# all fm-pi-seeded-home-trust-live-e2e checks passed ($CHECKED)"

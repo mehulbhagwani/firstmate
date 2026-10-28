@@ -413,15 +413,16 @@ test_closing_verb_filter_preserves_terminal_chronology() {
           failed) printf 'failed corr=0123456789abcdef [key=other]: task failed\n' >> "$f" ;;
         esac
         printf 'note: cleanup complete\n' >> "$f"
-        expected=$terminal
-        [ "$kind" != secondmate ] || expected=blocked
-        [ "$(status_key_closing_verb "$f" "$want")" = "$expected" ] || fail "$kind/$want lost $terminal chronology"
+        [ "$(status_key_closing_verb "$f" "$want")" = blocked ] \
+          || fail "$kind/$want was closed by unrelated $terminal"
+        [ "$(status_open_decisions "$f")" = "$(printf '%s\tblocked\twaiting\n' "$want")" ] \
+          || fail "$kind/$want disappeared after unrelated $terminal"
         printf 'needs-decision: [key=%s] reopened\nnote: more cleanup\n' "$want" >> "$f"
         [ "$(status_key_closing_verb "$f" "$want")" = needs-decision ] || fail "$kind/$want lost a post-terminal reopening"
       done
     done
   done
-  pass "per-key filtering retains ship/scout terminals, reopenings, and secondmate blockers"
+  pass "generic terminal milestones retain keyed decisions across ship, scout, and secondmate logs"
 }
 
 test_closing_verb_filters_unrelated_history_without_subshell_growth
@@ -444,9 +445,9 @@ test_bare_prose_cannot_impersonate_a_terminal_declaration() {
       f="$dir/$kind-$word-real.status"
       printf 'kind=%s\n' "$kind" > "$dir/$kind-$word-real.meta"
       printf 'needs-decision [key=route]: A or B?\n%s: real outcome\n' "$word" > "$f"
-      assert_fold "$f" '' "$kind: genuine $word supersedes"
-      [ "$(status_key_closing_verb "$f" route)" = "$word" ] \
-        || fail "$kind: genuine $word no longer supersedes the open key"
+      assert_fold "$f" "$open" "$kind: genuine $word preserves the decision"
+      [ "$(status_key_closing_verb "$f" route)" = needs-decision ] \
+        || fail "$kind: genuine $word incorrectly closed the open key"
     done
   done
   pass "prose without a colon cannot impersonate a ship or scout terminal declaration"
