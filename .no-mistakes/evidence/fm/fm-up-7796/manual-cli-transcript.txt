@@ -1,0 +1,19 @@
+== A: no hook env, stale partial generation present -> normal commit
+exit=0
+inbox
+manifest.v1.json
+meta
+status
+inbox/001.msg now: pending
+== B: hook set, source mutated while paused -> refuse
+paused: /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/nm-rev-man.FvmV9Y/b/release.waiting exists; exporter alive: yes
+stale file at pause: removed
+still paused after 1s: yes
+exit=1
+stderr: error: record export source changed during archive capture
+manifest: absent
+live meta kept: yes
+== C: hook set, no mutation while paused -> commit
+paused
+exit=0
+manifest: PRESENT

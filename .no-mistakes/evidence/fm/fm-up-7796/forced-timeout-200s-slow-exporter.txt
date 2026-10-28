@@ -1,0 +1,5 @@
+not ok - archive did not pause before final source revalidation
+rc=1 elapsed=201s
+no leftover exporter
+
+[exited with code 0]

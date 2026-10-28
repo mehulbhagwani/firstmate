@@ -1,0 +1,10 @@
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 
+ok - teardown archive revalidates sources immediately before publication SELECTED TESTS PASSED 

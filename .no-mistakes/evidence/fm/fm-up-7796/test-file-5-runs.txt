@@ -1,0 +1,5 @@
+real 6.29
+real 6.11
+real 6.12
+real 6.08
+real 6.30
