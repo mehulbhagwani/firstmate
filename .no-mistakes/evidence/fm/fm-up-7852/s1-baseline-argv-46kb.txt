@@ -1,0 +1,5 @@
+## S1 baseline: pre-fix argv contract (send <id> <message>) with a 46 KB body over a real OpenSSH sshd
+$ fm-on.sh rsm fm-remote-secondmate-control.sh send rsm "<46022-byte body>"
+notice: doorbell not typed because the agent in fm-remote:p1 has exited; the steer is durably recorded at /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/rhome/state/parent-route/rsm.inbox/001.msg for recovery
+exit=0
+remote inbox records: 1

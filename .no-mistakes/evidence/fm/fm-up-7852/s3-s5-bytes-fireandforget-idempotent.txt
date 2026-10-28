@@ -1,0 +1,31 @@
+## S3 multiline steer with shell metacharacters, a literal 'fire-and-forget' line, and a trailing newline
+notice: doorbell not typed because the agent in fm-remote:p1 has exited; the steer is durably recorded at /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/rhome/state/parent-route/rsm.inbox/003.msg for recovery
+exit=0
+record: 003.msg
+--- record ---
+schema=fm-task-inbox.v1
+at=2026-10-28T11:47:18Z
+--
+[fm-from-firstmate]⁣corr=3e6ce6809eeadf97 line one with $HOME `uname` "quotes" 'single' & | ; * ?
+	indented line
+unicode: café ✓ 日本
+fire-and-forget
+-- send rsm
+--- end ---
+message bytes present verbatim in record: True
+
+## S4 fire-and-forget delivery id rides as the mode argument; body still on stdin
+notice: doorbell not typed because the agent in fm-remote:p1 has exited; the steer is durably recorded at /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/rhome/state/parent-route/rsm.inbox/004.msg for recovery
+exit=0
+record: 004.msg (60164 bytes)
+schema=fm-task-inbox.v1
+at=2026-10-28T11:47:22Z
+body-terminator=1
+delivery=fire-and-forget
+--
+[fm-from-firstmate]⁣delivery=0123456789abcdef fire-and-forget body fffffffffffffffffffffffffffffffffffffffffffffffffff
+
+## S5 idempotent rerun: same fire-and-forget id re-sent lands on the same record
+notice: doorbell not typed because the agent in fm-remote:p1 has exited; the steer is durably recorded at /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/rhome/state/parent-route/rsm.inbox/004.msg for recovery
+exit=0
+inbox record count before=4 after=4

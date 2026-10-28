@@ -1,0 +1,16 @@
+## S7 remote send-stdin guards (fixed remote, real sshd transport)
+$ printf "  
+	" | fm-on.sh --stdin rsm fm-remote-secondmate-control.sh send-stdin rsm
+error: remote steer message must be nonempty
+exit=1
+$ printf "body" | fm-on.sh --stdin rsm fm-remote-secondmate-control.sh send-stdin rsm bogus-mode
+error: invalid send delivery mode
+exit=1
+$ printf "body" | fm-on.sh --stdin rsm fm-remote-secondmate-control.sh send-stdin rsm fire-and-forget extra
+exit=2 (usage)
+remote inbox records before=4 after=4
+
+## S8 legacy argv 'send <id> <message>' still accepted by the fixed remote (older parents keep working)
+notice: doorbell not typed because the agent in fm-remote:p1 has exited; the steer is durably recorded at /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/rhome/state/parent-route/rsm.inbox/005.msg for recovery
+exit=0
+remote inbox records now=5

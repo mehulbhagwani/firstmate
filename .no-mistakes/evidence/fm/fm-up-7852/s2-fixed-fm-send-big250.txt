@@ -1,0 +1,10 @@
+## S2 fixed parent (a686f13e bin/fm-send.sh) sends the big250 steer (250026 bytes) to remote secondmate rsm over a real OpenSSH sshd
+$ bin/fm-send.sh rsm "<big250 body>"
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/parent
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+notice: doorbell not typed because the agent in fm-remote:p1 has exited; the steer is durably recorded at /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/rhome/state/parent-route/rsm.inbox/001.msg for recovery
+exit=0 elapsed=15s
+new remote inbox record: /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/rhome/state/parent-route/rsm.inbox/001.msg (250140 bytes)
+full body present in remote record: True
+record header lines: ['schema=fm-task-inbox.v1', 'at=2026-10-28T11:46:53Z', 'body-terminator=1', '--']
+parent pending-reply records: f21b43b3c334f9a3 

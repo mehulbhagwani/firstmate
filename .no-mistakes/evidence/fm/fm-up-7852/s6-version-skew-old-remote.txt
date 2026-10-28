@@ -1,0 +1,15 @@
+## S6 version skew: fixed parent (a686f13e) steers a remote whose code root is pre-fix (417cec2f)
+$ bin/fm-send.sh rsm "skew plain ask"
+error: unknown command: send-stdin
+error: steer not sent to remote secondmate rsm (the remote steering-inbox record could not be written; the remote leg's stderr above has the reason)
+exit=1
+remote inbox records before=4 after=4
+/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/rhome/state/parent-route/rsm.inbox/003.msg
+
+$ bin/fm-send.sh rsm --fire-and-forget fedcba9876543210 "skew reconcile ask"
+error: unknown command: send-stdin
+error: steer not sent to remote secondmate rsm (the remote steering-inbox record could not be written; the remote leg's stderr above has the reason)
+exit=1
+remote inbox records before=4 after=4
+/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-ssh.isWdXG/rhome/state/parent-route/rsm.inbox/003.msg
+
