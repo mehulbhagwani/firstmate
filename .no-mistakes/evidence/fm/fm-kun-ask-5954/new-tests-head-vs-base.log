@@ -1,0 +1,28 @@
+== target head c11c1dce ==
+ok - active current run beats a stale overview row
+ok - active current run beats a stale failed overview row
+ok - same-head active run beats a stale failed overview row
+ok - same-head run with an unverified ULID timestamp reports unknown
+ok - older live status does not hide a newer completed run
+ok - failed selected-run detail read is not attributed
+ok - newer failed run remains failed beside an older live run
+== base 3fbace9f (bin reverted, tests from head) ==
+not ok - the active current run remains authoritative (missing: 'state: working')
+--- output ---
+state: done · source: run-step · run passed: PR merged · run: 01OLD
+FAILED: test_current_active_run_beats_stale_overview_row
+not ok - the active current run remains authoritative (missing: 'state: working')
+--- output ---
+state: failed · source: run-step · run failed · run: 01OLD
+FAILED: test_current_active_run_beats_stale_failed_overview_row
+not ok - same-head active run remains authoritative (missing: 'state: working')
+--- output ---
+state: failed · source: run-step · run failed · run: 01M00000000000000000000000
+FAILED: test_current_active_run_beats_same_head_stale_failed_overview_row
+not ok - same-head ordering within one ULID millisecond is unverified (missing: 'state: unknown')
+--- output ---
+state: failed · source: run-step · run failed · run: 01M00000000000000000000001
+FAILED: test_same_head_run_with_unverifiable_timestamp_reports_unknown
+ok - older live status does not hide a newer completed run
+ok - failed selected-run detail read is not attributed
+ok - newer failed run remains failed beside an older live run
