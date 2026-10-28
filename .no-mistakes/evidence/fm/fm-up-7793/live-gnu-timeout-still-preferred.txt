@@ -1,0 +1,12 @@
+=== gnu-timeout
+exit=124 output: checkpoint: no actionable wake within 2s
+GNU stub calls:
+gnu timeout invoked: --signal=INT --kill-after=5s 2 /Users/rac/.no-mistakes/worktrees/ba74ac5033c4/01M617W3N51VGDRVBWCXQ0PQ6F/bin/fm-watch.sh
+uutils stub calls with INT: 0
+lock pid left: none
+=== uutils-timeout+gnu-gtimeout
+exit=124 output: checkpoint: no actionable wake within 2s
+GNU stub calls:
+gnu timeout invoked: --signal=INT --kill-after=5s 2 /Users/rac/.no-mistakes/worktrees/ba74ac5033c4/01M617W3N51VGDRVBWCXQ0PQ6F/bin/fm-watch.sh
+uutils stub calls with INT: 0
+lock pid left: none

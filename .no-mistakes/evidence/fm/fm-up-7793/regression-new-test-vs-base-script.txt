@@ -1,0 +1,6 @@
+ok - quiet checkpoint exits 124 with a clean checkpoint line and no live lock
+not ok - Perl fallback checkpoint exit: expected exit 124, got 137
+---
+ok - quiet checkpoint exits 124 with a clean checkpoint line and no live lock
+not ok - Perl fallback checkpoint exit: expected exit 124, got 137
+---

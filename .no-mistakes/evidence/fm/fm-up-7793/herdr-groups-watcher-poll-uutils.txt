@@ -1,0 +1,4 @@
+HEAD, uutils-like timeout first:
+ok - watcher: one poll cycle reconciles the project-group tags
+BASE, uutils-like timeout first:
+not ok - watcher checkpoint did not run: 

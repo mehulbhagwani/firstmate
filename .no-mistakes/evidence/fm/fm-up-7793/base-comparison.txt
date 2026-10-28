@@ -1,0 +1,5 @@
+base macos herdr-groups: not ok - agents view set once for the session (expected '/tmp/fm-groups-s1.sock	set', got '/private/tmp/fm-groups-s1.sock	set')
+base uutils fm-watch-checkpoint rc=1 not ok - quiet checkpoint exit: expected exit 124, got 137
+base uutils fm-fleet-ledger rc=1 not ok - watcher checkpoint did not run: 
+base uutils fm-pr-health rc=1 not ok - an unchanged conflict woke the watcher again: 
+not ok - 1 PR health regressions

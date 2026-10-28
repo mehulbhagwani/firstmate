@@ -1,0 +1,12 @@
+=== BASE 417cec2f: PATH has uutils-like timeout first; /tmp/fmbase.HNDLBx/wt/bin/fm-watch-checkpoint.sh --seconds 2
+exit=137
+output: 
+timeout stub calls: 3
+lock pid left: 24881
+
+=== HEAD 6347e9ed: PATH has uutils-like timeout first; /Users/rac/.no-mistakes/worktrees/ba74ac5033c4/01M617W3N51VGDRVBWCXQ0PQ6F/bin/fm-watch-checkpoint.sh --seconds 2
+exit=124
+output: checkpoint: no actionable wake within 2s
+timeout stub calls: 2
+lock pid left: none
+
