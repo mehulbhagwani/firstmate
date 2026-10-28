@@ -367,6 +367,26 @@ test_gnu_timeout_kills_a_term_ignoring_command_after_the_grace() {
   pass "fm_exec_timed's GNU timeout fallback kills a TERM-ignoring command once the grace has passed"
 }
 
+test_nm_bounded_uses_the_shared_timeout_mechanism() {
+  local dir out rc=0
+  dir="$TMP_ROOT/nm-shared"
+  mkdir -p "$dir/bin"
+  cat > "$dir/bin/timeout" <<'SH'
+#!/bin/sh
+: > "$FM_TEST_NM_EXTERNAL_USED"
+exit 99
+SH
+  chmod +x "$dir/bin/timeout"
+  out=$(FM_TEST_NM_EXTERNAL_USED="$dir/external-used" \
+    FM_TIMEOUT_MECHANISM_OVERRIDE=bash PATH="$dir/bin:$PATH" \
+    /opt/homebrew/bin/bash -c '. "$1/bin/fm-nm-run-lib.sh"; fm_nm_bounded "$2" 5 bash -c "printf nm-ok"' \
+    _ "$ROOT" "$dir" 2>&1) || rc=$?
+  [ "$rc" -eq 0 ] || fail "the no-mistakes bound did not use the shared mechanism (rc=$rc out=$out)"
+  [ "$out" = nm-ok ] || fail "the no-mistakes bound returned unexpected output: $out"
+  [ ! -e "$dir/external-used" ] || fail "the no-mistakes bound bypassed FM_TIMEOUT_MECHANISM_OVERRIDE"
+  pass "fm_nm_bounded uses the shared timeout mechanism"
+}
+
 test_timed_out_names_exactly_the_bound_statuses() {
   local status verdict
   for status in 124 137 0 1 125 127 143 ''; do
@@ -433,4 +453,5 @@ test_perl_is_preferred_over_timeout
 test_refuses_rather_than_running_unbounded
 test_rejects_malformed_bounds_before_running_anything
 test_gnu_timeout_kills_a_term_ignoring_command_after_the_grace
+test_nm_bounded_uses_the_shared_timeout_mechanism
 test_timed_out_names_exactly_the_bound_statuses
