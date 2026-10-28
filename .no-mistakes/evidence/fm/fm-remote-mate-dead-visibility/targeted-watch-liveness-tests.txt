@@ -1,0 +1,5 @@
+ok - watch liveness: alive and ambiguous endpoints are probed, logged, and never touched
+ok - watch liveness: persistent inconclusive endpoints alert once and rearm after recovery
+ok - watch liveness: a dead secondmate is relaunched once, ledgered, and quiet afterwards
+ok - watch liveness: an unreachable remote secondmate is probed, preserved, and never failed over
+ok - watch liveness: persistent unavailable or unreadable remote probes alert once and never fail over
