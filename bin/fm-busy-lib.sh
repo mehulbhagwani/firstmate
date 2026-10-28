@@ -932,8 +932,9 @@ fm_busy_agy_tail_busy() {
 # fm_busy_claude_launch_prompt_tail: Claude's workspace-trust dialog
 # ("Quick safety check: Is this a project you created or one you trust?",
 # re-verified live on Claude Code 2.1.278, docs/verification/runtime-backends.md
-# "Launch-prompt backstop signatures") and its separate external-CLAUDE.md-
-# imports dialog ("Allow external CLAUDE.md file imports?", verified by
+# "Launch-prompt backstop signatures"), its first-run theme picker, and its
+# separate external-CLAUDE.md-imports dialog ("Allow external CLAUDE.md file
+# imports?", verified by
 # disassembly, .agents/skills/harness-adapters/references/harness/claude.md
 # "Hook trust" sibling section). fm-claude-trust.sh pre-registers both before
 # launch; this is the backstop for when that registration did not take effect.
@@ -949,8 +950,13 @@ fm_busy_claude_launch_prompt_tail() {
     && printf '%s' "$buf" | grep -qiE 'No, exit|Enter to confirm'; then
     return 0
   fi
-  printf '%s' "$buf" | grep -qiE "${FM_BUSY_CLAUDE_IMPORTS_PROMPT_REGEX:-Allow external CLAUDE\\.md file imports\\?}" \
-    && printf '%s' "$buf" | grep -qiE 'No, disable external imports|Yes, allow external imports'
+  if printf '%s' "$buf" | grep -qiE "${FM_BUSY_CLAUDE_IMPORTS_PROMPT_REGEX:-Allow external CLAUDE\\.md file imports\\?}" \
+    && printf '%s' "$buf" | grep -qiE 'No, disable external imports|Yes, allow external imports'; then
+    return 0
+  fi
+  printf '%s' "$buf" | grep -qiE \
+    "${FM_BUSY_CLAUDE_ONBOARDING_PROMPT_REGEX:-Choose the text style that looks best with your terminal}" \
+    && printf '%s' "$buf" | grep -qiE 'Dark mode|Light mode'
 }
 
 # fm_busy_pi_launch_prompt_tail: Pi's project-trust dialog. Live-verified on

@@ -310,7 +310,12 @@ This project'"'"'s CLAUDE.md imports files outside the current working directory
   Yes, allow external imports')
   [ "$out" = "unknown launch-prompt" ] \
     || fail "a launch pinned at fm-spawn parked on Claude's external-imports dialog must classify unknown launch-prompt, got '$out'"
-  pass "a Claude launch parked on its trust or external-imports dialog classifies unknown launch-prompt"
+  out=$(fm_busy_classify tmux w1 claude t1 "$state" 'Choose the text style that looks best with your terminal
+❯ ✔ Dark mode
+  Light mode')
+  [ "$out" = "unknown launch-prompt" ] \
+    || fail "a launch pinned at fm-spawn parked on Claude's onboarding theme picker must classify unknown launch-prompt, got '$out'"
+  pass "a Claude launch parked on its trust, external-imports, or onboarding dialog classifies unknown launch-prompt"
 }
 
 test_launch_prompt_pi_trust_dialog() {

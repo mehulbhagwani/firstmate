@@ -818,6 +818,20 @@ test_worktree_mode_still_refuses_a_secondmate_home() {
 # The fail-closed half for secondmates: when the home's trust genuinely cannot be
 # recorded, the spawn must refuse rather than launch a pane that would wedge on
 # the dialog. This is the guard that never fired while the step was skipped.
+test_secondmate_spawn_fails_closed_when_claude_onboarding_is_incomplete() {
+  local case_dir home out
+  case_dir="$TMP_ROOT/sm-onboarding"
+  home="$case_dir/fm-homes/onboarding-n1"
+  seed_secondmate_home "$home" onboarding-n1 clone
+  set +e
+  out=$(FM_FAKE_CLAUDE_ONBOARDING=1 spawn_secondmate_claude "$case_dir" "$home" onboarding-n1)
+  local rc=$?
+  expect_code 1 "$rc" "a secondmate launch parked on Claude onboarding must fail instead of reporting success: $out"
+  assert_contains "$out" "onboarding" "the failed launch did not name the Claude onboarding blocker"
+  assert_absent "$home/state/onboarding-n1.busy-gen" "a refused onboarding launch left its busy incarnation armed"
+  pass "fm-spawn.sh: a claude secondmate launch reports incomplete onboarding instead of success"
+}
+
 test_secondmate_spawn_fails_closed_when_home_trust_cannot_be_recorded() {
   local case_dir home out
   case_dir="$TMP_ROOT/sm-failclosed"
@@ -868,4 +882,5 @@ test_secondmate_standalone_clone_home_is_trusted
 test_secondmate_leased_worktree_home_is_trusted
 test_secondmate_home_trust_refuses_everything_unseeded
 test_worktree_mode_still_refuses_a_secondmate_home
+test_secondmate_spawn_fails_closed_when_claude_onboarding_is_incomplete
 test_secondmate_spawn_fails_closed_when_home_trust_cannot_be_recorded

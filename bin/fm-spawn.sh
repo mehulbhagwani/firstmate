@@ -5355,6 +5355,45 @@ opencode2_wait_for_delivery() {
   opencode2_turn_started
 }
 
+# Claude's launch command carries the brief as its first turn, so a successful
+# shell command is not enough evidence that Claude read it. UserPromptSubmit
+# advances the busy record from the fm-spawn seed to claude-hook; a fresh host
+# parked on Claude's theme picker never emits that event. Capture the pane while
+# waiting so the existing launch-prompt signatures can name an onboarding or
+# setup blocker without answering it.
+CLAUDE_READY_FAILURE_DETAIL=
+claude_capture() {
+  fm_backend_capture "$BACKEND" "$T" 120 "$W" 2>/dev/null || true
+}
+
+claude_wait_for_ready() {
+  local record pane i=0 max=${FM_CLAUDE_READY_POLLS:-60} interval=${FM_CLAUDE_POLL_INTERVAL:-0.5}
+  CLAUDE_READY_FAILURE_DETAIL='Claude Code did not start processing its launch instructions'
+  while [ "$i" -lt "$max" ]; do
+    record=$(fm_busy_record_read "$STATE_REAL" "$ID" 2>/dev/null || true)
+    case "$record" in
+      *' claude-hook '*) return 0 ;;
+    esac
+    pane=$(claude_capture)
+    if printf '%s' "$pane" | fm_busy_launch_prompt_parked claude; then
+      CLAUDE_READY_FAILURE_DETAIL='Claude Code is blocked on first-run onboarding or another interactive setup prompt; complete onboarding on the host, then relaunch'
+      return 1
+    fi
+    i=$((i + 1))
+    [ "$i" -ge "$max" ] || sleep "$interval"
+  done
+  return 1
+}
+
+claude_spawn_fail() {
+  printf '%s\n' "$(status_stamp_line "failed: $1")" >>"$STATE/$ID.status"
+  echo "error: $1; inspect window $T" >&2
+  if [ -e "$STATE_REAL/$ID.busy-gen" ]; then
+    "$FM_ROOT/bin/fm-busy-event.sh" retire "$STATE_REAL" "$ID" --current-gen >/dev/null 2>&1 || true
+  fi
+  rovo_endpoint_cleanup
+}
+
 # agy carries its brief on the launch command, so it needs no delivery gate,
 # but a worktree agy does not trust parks the TUI on the folder-trust dialog
 # and an unanswered dialog sends the turn into agy's scratch directory instead
@@ -7310,6 +7349,12 @@ else
   if [ "$ORCA_LAUNCH_ENV_ENABLED" = 1 ]; then
     spawn_orca_wait_launch_consumed
     trap - HUP INT TERM
+  fi
+fi
+if [ "$HARNESS" = claude ] && [ "$RAW_LAUNCH" -eq 0 ] && [ "$BACKEND" != t3code ]; then
+  if ! claude_wait_for_ready; then
+    claude_spawn_fail "$CLAUDE_READY_FAILURE_DETAIL"
+    exit 1
   fi
 fi
 if [ "$HARNESS" = kimi ]; then

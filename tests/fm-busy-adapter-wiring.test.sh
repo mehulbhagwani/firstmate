@@ -358,7 +358,7 @@ test_claude_hooks_semantic_lifecycle() {
   done
 
   out=$(classify claude "$id" "$state")
-  [ "$out" = "busy fm-spawn" ] || fail "seed after spawn must be 'busy fm-spawn', got '$out'"
+  [ "$out" = "busy claude-hook" ] || fail "seed after Claude accepted the brief must be 'busy claude-hook', got '$out'"
 
   rm -f "$state/$id.turn-ended"
   run_claude_hook "$settings" Stop || fail "Stop hook command failed"
@@ -620,9 +620,9 @@ test_secondmate_claude_spawn_arms_busy_for_the_stall_gate() {
   [ ! -e "$sm/.claude/settings.local.json" ] \
     || fail "claude secondmate spawn wrote the home's settings.local.json"
   out=$(classify claude "$id" "$state")
-  [ "$out" = "busy fm-spawn" ] || fail "seeded secondmate must classify busy fm-spawn, got '$out'"
+  [ "$out" = "busy claude-hook" ] || fail "seeded secondmate must classify busy claude-hook after launch, got '$out'"
   out=$(fm_busy_classify tmux "firstmate:fm-$id" claude "$id" "$state" 'working on the charter')
-  [ "$out" = "busy fm-spawn" ] || fail "a non-empty tail without a record used to stay unknown; got '$out'"
+  [ "$out" = "busy claude-hook" ] || fail "a non-empty tail after Claude accepted the brief must stay busy; got '$out'"
 
   printf '%s\t7\tcheck\trouted\tcheck: routed row\n' "$(( $(date +%s) - 10 ))" \
     > "$sm/state/.wake-queue"

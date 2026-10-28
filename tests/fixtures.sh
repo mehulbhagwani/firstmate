@@ -142,6 +142,33 @@ fake_opencode_launched() {
       ;;
   esac
 }
+fake_claude_turn_starts() {
+  [ "${FM_FAKE_CLAUDE_ONBOARDING:-0}" != 1 ] || return 0
+  [ "${FM_FAKE_CLAUDE_HOOK:-0}" = 1 ] || return 0
+  local staged settings file state id gen
+  staged=$1
+  settings=$(sed -n "s/.*--settings '\\([^']*\\)'.*/\\1/p" "$staged" | head -1)
+  if [ -n "$settings" ]; then
+    file=${settings##*/}
+    case "$file" in
+      *.claude-settings.json)
+        state=${settings%/*}
+        id=${file%.claude-settings.json}
+        ;;
+      *) settings= ;;
+    esac
+  fi
+  if [ -z "$settings" ]; then
+    settings=$(grep -oE "'[^']+\\.inbox'" "$staged" | head -1 | tr -d "'")
+    [ -n "$settings" ] || return 0
+    state=${settings%/*}
+    id=${settings##*/}
+    id=${id%.inbox}
+  fi
+  gen=$(cat "$state/$id.busy-gen" 2>/dev/null) || return 0
+  [ -n "${FM_FAKE_CLAUDE_HOOK_EVENT:-}" ] || return 0
+  "$FM_FAKE_CLAUDE_HOOK_EVENT" apply "$state" "$id" busy --gen "$gen" --source claude-hook --event user-prompt-submit >/dev/null 2>&1 || true
+}
 case "$*" in
   *"#{pane_current_path}"*) printf '%s\n' "${FM_FAKE_PANE_PATH:-}"; exit 0 ;;
 esac
@@ -167,6 +194,10 @@ case "${1:-}" in
     exit 0
     ;;
   capture-pane)
+    if [ "${FM_FAKE_CLAUDE_ONBOARDING:-0}" = 1 ]; then
+      printf '%s\n' 'Choose the text style that looks best with your terminal' '❯ ✔ Dark mode' '  Light mode'
+      exit 0
+    fi
     if ! fake_opencode_composer_drawn; then
       :
     elif [ -f "$(fake_opencode_plugin).fake-pending" ]; then
@@ -208,6 +239,9 @@ case "${1:-}" in
             staged=${staged%"'"}
             if [ -f "$staged" ] && grep -q -- 'opencode.* --standalone --prompt' "$staged"; then
               fake_opencode_launched
+            fi
+            if [ -f "$staged" ] && grep -q -- 'claude ' "$staged"; then
+              fake_claude_turn_starts "$staged"
             fi
             ;;
         esac
@@ -438,6 +472,7 @@ fm_test_run_spawn() {
     FM_STATE_OVERRIDE="$home/state" FM_DATA_OVERRIDE="$home/data" \
     FM_PROJECTS_OVERRIDE="$home/projects" FM_CONFIG_OVERRIDE="$home/config" \
     FM_SPAWN_NO_GUARD=1 FM_FAKE_PANE_PATH="$pane" TMUX="${TMUX:-fake,1,0}" \
+    FM_FAKE_CLAUDE_HOOK=1 FM_FAKE_CLAUDE_HOOK_EVENT="$ROOT/bin/fm-busy-event.sh" \
     PATH="$fakebin:$PATH" \
     "$ROOT/bin/fm-spawn.sh" "$@" 2>&1
 }

@@ -83,6 +83,15 @@ case "${1:-}" in
           ;;
         *'encode launch-brief'* | *'Firstmate operational input waiting: read'*)
           cat "$D/becomes" > "$D/command"
+          if [[ "$payload" == *' claude '* ]] && [ "${FM_FAKE_CLAUDE_HOOK:-0}" = 1 ] && [ -n "${FM_FAKE_CLAUDE_HOOK_EVENT:-}" ]; then
+            for gen_file in "$FM_HOME"/state/*.busy-gen; do
+              [ -f "$gen_file" ] || continue
+              id=${gen_file##*/}
+              id=${id%.busy-gen}
+              gen=$(cat "$gen_file")
+              "$FM_FAKE_CLAUDE_HOOK_EVENT" apply "$FM_HOME/state" "$id" busy --gen "$gen" --source claude-hook --event user-prompt-submit >/dev/null 2>&1 || true
+            done
+          fi
           [ -z "${FM_FAKE_LAUNCH_TRANSPORT_FAIL_AFTER_START:-}" ] || exit 1
           ;;
       esac
@@ -239,6 +248,7 @@ run_control() {  # <case-dir> <args...>
     -u HERDR_TAB_ID -u HERDR_WORKSPACE_ID \
     PATH="$dir/fakebin:$PATH" FM_HOME="$dir/home" FM_FAKE_DIR="$dir/fake" \
     HOME="$dir/user-home" CLAUDE_CONFIG_DIR='' \
+    FM_FAKE_CLAUDE_HOOK=1 FM_FAKE_CLAUDE_HOOK_EVENT="$ROOT/bin/fm-busy-event.sh" \
     FM_SPAWN_NO_GUARD=1 GROK_HOME="$dir/grokhome" \
     FM_CONTROL_POLL=0.01 FM_CONTROL_EXIT_WAIT=0.05 FM_CONTROL_LAUNCH_WAIT=0.05 \
     FM_REAL_GIT="${FM_REAL_GIT:-}" FM_FAKE_GIT_FAILURE="${FM_FAKE_GIT_FAILURE:-}" \
@@ -261,6 +271,7 @@ run_spawn() {  # <case-dir> <args...>
     -u HERDR_TAB_ID -u HERDR_WORKSPACE_ID \
     PATH="$dir/fakebin:$PATH" FM_HOME="$dir/home" FM_FAKE_DIR="$dir/fake" \
     HOME="$dir/user-home" CLAUDE_CONFIG_DIR='' \
+    FM_FAKE_CLAUDE_HOOK=1 FM_FAKE_CLAUDE_HOOK_EVENT="$ROOT/bin/fm-busy-event.sh" \
     FM_SPAWN_NO_GUARD=1 GROK_HOME="$dir/grokhome" \
     "$SPAWN" "$@" 2>&1
 }
@@ -2515,6 +2526,15 @@ case "${1:-} ${2:-}" in
     case "$payload" in
       *'encode launch-brief'* | *'Firstmate operational input waiting: read'*)
         printf '%s\n' "$payload" > "$D/launched-command"
+        if [[ "$payload" == *' claude '* ]] && [ "${FM_FAKE_CLAUDE_HOOK:-0}" = 1 ] && [ -n "${FM_FAKE_CLAUDE_HOOK_EVENT:-}" ]; then
+          for gen_file in "$FM_HOME"/state/*.busy-gen; do
+            [ -f "$gen_file" ] || continue
+            id=${gen_file##*/}
+            id=${id%.busy-gen}
+            gen=$(cat "$gen_file")
+            "$FM_FAKE_CLAUDE_HOOK_EVENT" apply "$FM_HOME/state" "$id" busy --gen "$gen" --source claude-hook --event user-prompt-submit >/dev/null 2>&1 || true
+          done
+        fi
         : > "$D/herdr-agent-live" ;;
     esac
     exit 0 ;;
