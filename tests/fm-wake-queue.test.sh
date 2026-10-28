@@ -3647,7 +3647,7 @@ SH
   chmod +x "$dir/fakebin/ssh"
   : > "$dir/ssh.log"
 
-  run_liveness_leg "$dir" unreachable FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log"; pid=$LIVENESS_PID
+  run_liveness_leg "$dir" unreachable FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log" FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=999999; pid=$LIVENESS_PID
   sleep 4
   is_live_non_zombie "$pid" \
     || fail "the watcher exited against an unreachable remote secondmate: $(cat "$dir/watch-unreachable.out" "$dir/watch-unreachable.err")"
@@ -3661,6 +3661,67 @@ SH
     || fail "an unreachable remote probe ledgered a relaunch attempt"
   [ ! -s "$dir/tmux.log" ] || fail "an unreachable remote probe touched a local endpoint"
   pass "watch liveness: an unreachable remote secondmate is probed, preserved, and never failed over"
+}
+
+test_secondmate_liveness_tick_alerts_persistent_remote_probe_failure_once() {
+  local shape rc expected dir state pid out
+  for shape in unavailable:255 unreadable:1; do
+    expected=${shape%%:*}
+    rc=${shape##*:}
+    dir=$(make_secondmate_liveness_case "liveness-remote-$expected")
+    state="$dir/state"
+    rm -f "$state/sm1.meta"
+    cat > "$state/rsm1.meta" <<EOF
+window=remote:rsm1
+kind=secondmate
+harness=claude
+remote_host=lab-host
+remote_backend=herdr
+remote_herdr_session=fm-remote
+remote_target=fm-remote:w1:p1
+home=/remote/rsm1-home
+EOF
+    cat > "$dir/data/secondmates.md" <<EOF
+- rsm1 - Remote mate (host: lab-host; root: /remote/root; home: /remote/rsm1-home; scope: remote work; projects: alpha; added 2026-01-01)
+EOF
+    cp "$state/rsm1.meta" "$dir/rsm1.meta.before"
+    cat > "$dir/fakebin/ssh" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "${FM_FAKE_SSH_LOG:?}"
+exit "${FM_FAKE_SSH_RC:?}"
+SH
+    chmod +x "$dir/fakebin/ssh"
+    : > "$dir/ssh.log"
+
+    # A remote probe that keeps failing in transport is never evidence of
+    # death, but three consecutive failures must wake the parent once.
+    run_liveness_leg "$dir" "$expected" FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log" \
+      FM_FAKE_SSH_RC="$rc" FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; pid=$LIVENESS_PID
+    wait_for_exit "$pid" 500 || fail "the watcher did not wake after a persistent $expected remote probe"
+    out="$dir/watch-$expected.out"
+    grep -F "check: secondmate rsm1 liveness remains $expected after 3 consecutive probes; endpoint was not changed" "$out" >/dev/null \
+      || fail "a persistent $expected remote probe did not wake with its evidence: $(cat "$out" "$dir/watch-$expected.err")"
+    [ "$(grep -c 'secondmate-liveness-uncertain-rsm1' "$state/.wake-queue")" -eq 1 ] \
+      || fail "a persistent $expected remote probe did not queue exactly one wake: $(cat "$state/.wake-queue")"
+    cmp -s "$dir/rsm1.meta.before" "$state/rsm1.meta" \
+      || fail "a $expected remote probe changed the route metadata"
+    assert_grep '- rsm1 ' "$dir/data/secondmates.md" "a $expected remote probe changed the registry route"
+    [ ! -e "$state/.secondmate-relaunch-rsm1" ] \
+      || fail "a $expected remote probe ledgered a relaunch attempt"
+    [ ! -s "$dir/tmux.log" ] || fail "a $expected remote probe touched a local endpoint"
+
+    drain_liveness_wakes "$dir"
+    rm -f "$state/.secondmate-liveness-tick"
+    run_liveness_leg "$dir" "$expected-repeat" FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log" \
+      FM_FAKE_SSH_RC="$rc" FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; pid=$LIVENESS_PID
+    sleep 4
+    is_live_non_zombie "$pid" \
+      || fail "the watcher repeated a $expected remote alert for the same episode: $(cat "$dir/watch-$expected-repeat.out" "$dir/watch-$expected-repeat.err")"
+    kill_liveness_leg "$pid"
+    [ "$(grep -c 'secondmate-liveness-uncertain-rsm1' "$state/.wake-queue" 2>/dev/null || true)" -eq 0 ] \
+      || fail "the same $expected remote episode queued a second wake: $(cat "$state/.wake-queue")"
+  done
+  pass "watch liveness: persistent unavailable or unreadable remote probes alert once and never fail over"
 }
 
 test_self_held_lock_reclaims_instead_of_deadlocking
@@ -3734,3 +3795,4 @@ test_secondmate_liveness_tick_error_keeps_scanning_and_wakes
 test_secondmate_liveness_tick_unqueued_outcome_is_an_error_not_a_wake
 test_secondmate_liveness_tick_skips_mate_whose_lock_is_held
 test_secondmate_liveness_tick_preserves_unreachable_remote
+test_secondmate_liveness_tick_alerts_persistent_remote_probe_failure_once
