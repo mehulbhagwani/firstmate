@@ -1,0 +1,66 @@
+source: remote-reply-ios
+registered: remote-reply-ios (remote-reply)
+armed: remote-reply-ios offset=0
+runner pid=78376 claim pid=78430
+direct real reader, missing state/: exit 1
+direct real reader, bad args: exit 2
+direct real ssh, closed port: exit 255
+ssh255  polls=9 owner=live claim_pid=78430 runner_alive=yes inbox_results=0
+exit1   polls=4 owner=live claim_pid=78430 runner_alive=yes inbox_results=0
+exit2   polls=9 owner=live claim_pid=78430 runner_alive=yes inbox_results=0
+--- parent state/ios.status after recovery:
+done [corr=fedcba9876543210] [at=1700000000]: recovered report=data/remote-secondmates/ios/data/reply/report.md
+after delivery: owner=live claim_pid=78430 (initial 78430)
+--- runner output:
+--- poll log (time mode per SSH launch):
+12:21:25 ssh255
+12:21:25   -> ssh rc=255
+12:21:26 ssh255
+12:21:26   -> ssh rc=255
+12:21:27 ssh255
+12:21:27   -> ssh rc=255
+12:21:29 ssh255
+12:21:29   -> ssh rc=255
+12:21:30 ssh255
+12:21:30   -> ssh rc=255
+12:21:31 ssh255
+12:21:31   -> ssh rc=255
+12:21:32 ssh255
+12:21:32   -> ssh rc=255
+12:21:34 ssh255
+12:21:34   -> ssh rc=255
+12:21:35 ssh255
+12:21:35   -> ssh rc=255
+12:21:36 ssh255
+12:21:36   -> ssh rc=255
+12:21:37 exit1
+12:21:39   -> remote leg rc=1
+12:21:40 exit1
+12:21:42   -> remote leg rc=1
+12:21:42 exit1
+12:21:44   -> remote leg rc=1
+12:21:44 exit1
+12:21:47   -> remote leg rc=1
+12:21:47 exit2
+12:21:47   -> remote reader rc=2
+12:21:48 exit2
+12:21:48   -> remote reader rc=2
+12:21:49 exit2
+12:21:49   -> remote reader rc=2
+12:21:50 exit2
+12:21:50   -> remote reader rc=2
+12:21:52 exit2
+12:21:52   -> remote reader rc=2
+12:21:53 exit2
+12:21:53   -> remote reader rc=2
+12:21:54 exit2
+12:21:54   -> remote reader rc=2
+12:21:55 exit2
+12:21:55   -> remote reader rc=2
+12:21:56 exit2
+12:21:56   -> remote reader rc=2
+12:21:58 healthy
+12:22:00   -> remote leg rc=0
+12:22:01 healthy
+12:22:03   -> remote leg rc=0
+LIVE RESULT: PASS
