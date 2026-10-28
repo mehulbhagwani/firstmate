@@ -2,6 +2,7 @@ ok - default delta reader waits 0.5 seconds then delivers a non-destructive comp
 ok - override delta reader waits 0.07 seconds then delivers a non-destructive complete-line delta
 ok - transport failures and remote read failures become transient empty windows
 ok - other failed or non-schema remote legs stay failed reads
+ok - a terminated source removes its staged output
 ok - a blocking non-destructive remote delta reaches durable process-event capture
 ok - a captured delta is applied, acknowledged, and re-armed without a handler
 ok - ingest appends one validated line, fetches its document, and advances the cursor
@@ -43,4 +44,4 @@ ok - a continuity break after retirement and an identical restore opens the deci
 ok - a failed cursor removal does not increase the retirement count
 ok - a retirement that stops after removing the cursor leaves the old count
 ALL TESTS PASSED
-bash tests/fm-remote-reply.test.sh  59.23s user 100.24s system 48% cpu 5:25.69 total
+bash tests/fm-remote-reply.test.sh  62.29s user 108.09s system 50% cpu 5:34.37 total

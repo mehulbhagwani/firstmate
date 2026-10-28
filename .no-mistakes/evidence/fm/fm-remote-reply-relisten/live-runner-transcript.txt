@@ -1,0 +1,30 @@
+source id: remote-reply-ios
+registered: remote-reply-ios (remote-reply)
+armed: remote-reply-ios offset=0
+### Scenario 1: genuine SSH transport failure via the real /usr/bin/ssh (unresolvable host)
+== ssh255-real: connections=3 runner_alive=yes owner=live staged_files=0 remote_leg_exits=[ 3 remote-leg-exit=255 ]
+   real ssh stderr sample:
+     ssh: Could not resolve hostname fm-lab-nohost.invalid: nodename nor servname provided, or not known
+     (exit 255)
+   after stop: owner=none staged_files=0 runner_output=[] cursor=
+### Scenario 2: real remote reader exit 1 (remote home has no state/ directory)
+== reader-exit1-real: connections=3 runner_alive=yes owner=live staged_files=1 remote_leg_exits=[ 2 remote-leg-exit=1 ]
+   after stop: owner=none staged_files=0 runner_output=[] cursor=
+### Scenario 3: remote leg exit 2 (forced at transport shim)
+== exit2: connections=3 runner_alive=yes owner=live staged_files=0 remote_leg_exits=[]
+   after stop: owner=none staged_files=0 runner_output=[] cursor=
+### Scenario 4: other failures stay on failed-read path
+== exit127: runner exited rc=0 connections=1 owner=none staged_files=0 runner_output=[no-result: remote-reply-ios (exit 127) ]
+== exit126: runner exited rc=0 connections=1 owner=none staged_files=0 runner_output=[no-result: remote-reply-ios (exit 126) ]
+== rc0-banner: runner exited rc=0 connections=1 owner=none staged_files=0 runner_output=[no-result: remote-reply-ios (exit 1) ]
+### Scenario 5: normal delivery and staged-file cleanup
+== delivery: parent mirror line: done [corr=0123456789abcdef] [at=1700000000]: live gate check delivered
+   cursor=schema=fm-remote-reply-cursor.v1 offset=72 prefix_sha256=66155fa1a13e5aa81d977f1af2b17547825404dc5b485f7402f823f746b6e805  owner=live staged_after_delivery_and_relisten=0
+   staged files observed while listener blocked in a wait window: 1 (1 = the in-flight read)
+   after sweep-home shutdown: owner= staged_files=0 sweep=[retired: remote-reply-ios swept: attempted=1 ]
+### Scenario 6: listener shutdown (process-group TERM, as fm-procevent stop does) while blocked in remote read
+   staged while blocked: 1
+   source exit=143 staged after group TERM: 0
+### Scenario 6b: TERM to only the top adapter pid (edge case)
+   source exit=143 staged right after: 1
+   staged after the 8s remote wait window ends: 0
