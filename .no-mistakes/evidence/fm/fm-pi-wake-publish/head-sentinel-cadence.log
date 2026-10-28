@@ -1,0 +1,2 @@
+ok - a window silenced by the rollback-failure sentinel keeps the probe on its escalation cadence, not once per poll
+FAILS=? PASSES=?
