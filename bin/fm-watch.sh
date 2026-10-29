@@ -1129,9 +1129,11 @@ EOF
 # bounded recovery before it wakes once on the first outcome; the drain
 # surfaces every queued row. Ambiguous and unreadable endpoint states remain
 # untouched, but after SECONDMATE_LIVENESS_UNCERTAIN_TICKS consecutive probes
-# they queue one inspection wake until a live, dead, or missing probe clears the
-# episode; an unreachable remote host stays triage-only and never counts. A mate
-# that keeps dying is parked after SECONDMATE_LIVENESS_MAX_ATTEMPTS ledgered attempts
+# they queue one inspection wake, keyed to that episode so a later episode never
+# collapses into a row still waiting for acknowledgement, until a live, dead, or
+# missing probe clears the episode; an unreachable remote host stays triage-only
+# and never counts. A mate that keeps dying is parked after
+# SECONDMATE_LIVENESS_MAX_ATTEMPTS ledgered attempts
 # inside SECONDMATE_LIVENESS_WINDOW_SECS: the bound marker wakes once, further
 # probes stay silent, and a later live probe ledgers a `rearmed` row and clears
 # the marker so a manually recovered mate rejoins the guarantee with a full
@@ -1143,7 +1145,7 @@ secondmate_liveness_tick() {
   [ "$(age_of "$tick_marker")" -ge "$SECONDMATE_LIVENESS_SECS" ] || return 0
   touch "$tick_marker" || return 1
   local now=$(( $(date +%s) )) meta id kind
-  local bound_marker attempts notify_key reason queued err first_reason='' failed=0 uncertain_rc
+  local bound_marker attempts notify_key reason queued err first_reason='' failed=0 uncertain_rc uncertain_alert
   for meta in "$STATE"/*.meta; do
     [ -e "$meta" ] || continue
     kind=$(fm_meta_get "$meta" kind 2>/dev/null || true)
@@ -1154,7 +1156,7 @@ secondmate_liveness_tick() {
     fm_secondmate_liveness_lock "$id" || continue
     fm_secondmate_liveness_probe "$meta" "$id" poll
     bound_marker="$STATE/.secondmate-relaunch-bound-$id"
-    reason='' notify_key='' err=''
+    reason='' notify_key='' err='' uncertain_alert=0
     case "$FM_SM_LIVE_STATUS" in
       relaunchable)
         if ! fm_secondmate_liveness_uncertain_clear "$id"; then
@@ -1198,11 +1200,14 @@ secondmate_liveness_tick() {
           ambiguous|unreadable)
             uncertain_rc=0
             fm_secondmate_liveness_uncertain_record "$id" "$FM_SM_LIVE_STATE" \
-              "$SECONDMATE_LIVENESS_UNCERTAIN_TICKS" || uncertain_rc=$?
+              "$SECONDMATE_LIVENESS_UNCERTAIN_TICKS" "$now" || uncertain_rc=$?
             case "$uncertain_rc" in
               0)
                 reason="check: secondmate $id liveness remains $FM_SM_LIVE_STATE after $FM_SM_LIVE_UNCERTAIN_COUNT consecutive probes; endpoint was not changed"
-                notify_key="secondmate-liveness-uncertain-$id"
+                # One row per episode: an earlier row still queued but not yet
+                # acknowledged must never swallow a later episode's alert.
+                notify_key="secondmate-liveness-uncertain-$id-$FM_SM_LIVE_UNCERTAIN_EPISODE"
+                uncertain_alert=1
                 ;;
               1)
                 triage_log "secondmate $id liveness: $FM_SM_LIVE_REASON"
@@ -1222,7 +1227,7 @@ secondmate_liveness_tick() {
       queued=$(fm_wake_queued_keys check)
       if printf '%s\n' "$queued" | grep -Fx "$notify_key" >/dev/null 2>&1 \
         || fm_wake_append check "$notify_key" "$reason"; then
-        if [ "$notify_key" = "secondmate-liveness-uncertain-$id" ] && \
+        if [ "$uncertain_alert" -eq 1 ] && \
            ! fm_secondmate_liveness_uncertain_mark_alert "$id"; then
           err="uncertain liveness alert marker could not be written; wake was queued"
         fi

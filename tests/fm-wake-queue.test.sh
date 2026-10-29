@@ -3198,9 +3198,9 @@ test_drain_rotates_orphaned_scratch() {
 # (through the same guarded fm-spawn.sh --secondmate path the session-start
 # sweep uses), every relaunch emits exactly one `check` wake plus a durable
 # ledger line, inconclusive verdicts are triage-only until a persistent
-# ambiguous or unreadable episode alerts once, an unreachable remote route is
-# preserved and stays silent, and the attempt bound parks a mate that keeps
-# dying.
+# ambiguous or unreadable episode alerts once under its own wake key, an
+# unreachable remote route is preserved and stays silent, and the attempt bound
+# parks a mate that keeps dying.
 
 # make_secondmate_liveness_case <name>: a watcher case dir carrying one local
 # secondmate whose tmux fixture answers the backend's agent-state probe AND the
@@ -3317,6 +3317,15 @@ drain_liveness_wakes() {
   [ -n "$seq" ] && [ -n "$gen" ] || return 0
   FM_HOME="$dir" FM_STATE_OVERRIDE="$state" "$DRAIN" --ack-through "$seq" --recovery-generation "$gen" \
     > /dev/null 2>&1 || true
+}
+
+# present_liveness_wakes <dir>: drain the queue without acknowledging it - the
+# parent has read its rows but not yet closed them. Presentation also parks the
+# watcher-downtime episode in handling, so the next watcher ticks instead of
+# re-announcing the rows it finds queued.
+present_liveness_wakes() {
+  local dir=$1
+  FM_HOME="$dir" FM_STATE_OVERRIDE="$dir/state" "$DRAIN" > /dev/null 2> "$dir/drain-present.err" || true
 }
 
 test_secondmate_liveness_tick_relaunches_dead_endpoint_once() {
@@ -3483,6 +3492,71 @@ test_secondmate_liveness_tick_alerts_persistent_inconclusive_endpoint_once() {
   [ ! -e "$state/.secondmate-liveness-uncertain-alert-sm1" ] \
     || fail "a live probe did not clear the inconclusive alert marker"
   pass "watch liveness: persistent inconclusive endpoints alert once and rearm after recovery"
+}
+
+test_secondmate_liveness_tick_keys_each_uncertain_episode_wake() {
+  local dir state pid i keys first_seq second_key gen
+  dir=$(make_secondmate_liveness_case liveness-episode-keys)
+  state="$dir/state"
+
+  # Episode one reaches the threshold and queues its inspection row.
+  run_liveness_leg "$dir" episode-one FM_FAKE_TMUX_CURRENT_COMMAND=node FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; pid=$LIVENESS_PID
+  wait_for_exit "$pid" 500 \
+    || fail "the watcher did not wake on the first uncertain episode: $(cat "$dir/watch-episode-one.out" "$dir/watch-episode-one.err")"
+  [ "$(grep -c $'\tcheck\tsecondmate-liveness-uncertain-sm1' "$state/.wake-queue")" -eq 1 ] \
+    || fail "the first uncertain episode did not queue exactly one keyed row: $(cat "$state/.wake-queue")"
+
+  # The parent reads that row but does not acknowledge it. A live probe then
+  # closes the episode while the row is still queued.
+  present_liveness_wakes "$dir"
+  rm -f "$state/.secondmate-liveness-tick"
+  run_liveness_leg "$dir" episode-clear FM_FAKE_TMUX_CURRENT_COMMAND=claude FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; pid=$LIVENESS_PID
+  i=0
+  while [ "$i" -lt 100 ] && [ -e "$state/.secondmate-liveness-uncertain-sm1" ]; do
+    sleep 0.1
+    i=$((i + 1))
+  done
+  is_live_non_zombie "$pid" \
+    || fail "the watcher exited while a live probe cleared the first episode: $(cat "$dir/watch-episode-clear.out" "$dir/watch-episode-clear.err")"
+  kill_liveness_leg "$pid"
+  [ ! -e "$state/.secondmate-liveness-uncertain-sm1" ] && [ ! -e "$state/.secondmate-liveness-uncertain-alert-sm1" ] \
+    || fail "a live probe did not clear the first episode's markers"
+  [ "$(grep -c $'\tcheck\tsecondmate-liveness-uncertain-sm1' "$state/.wake-queue")" -eq 1 ] \
+    || fail "clearing the first episode changed its queued row: $(cat "$state/.wake-queue")"
+
+  # Episode two reaches the threshold while the first row is still queued and
+  # unacknowledged. It must get its own durable row rather than be folded into
+  # the old one and marked alerted.
+  present_liveness_wakes "$dir"
+  rm -f "$state/.secondmate-liveness-tick"
+  run_liveness_leg "$dir" episode-two FM_FAKE_TMUX_CURRENT_COMMAND=node FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; pid=$LIVENESS_PID
+  wait_for_exit "$pid" 500 \
+    || fail "the watcher did not wake on the second uncertain episode: $(cat "$dir/watch-episode-two.out" "$dir/watch-episode-two.err")"
+  grep -F 'check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed' "$dir/watch-episode-two.out" >/dev/null \
+    || fail "the second episode did not wake with its evidence: $(cat "$dir/watch-episode-two.out" "$dir/watch-episode-two.err")"
+  keys=$(awk -F '\t' '$3 == "check" && $4 ~ /^secondmate-liveness-uncertain-sm1/ { print $4 }' "$state/.wake-queue")
+  [ "$(printf '%s\n' "$keys" | wc -l | tr -d ' ')" -eq 2 ] \
+    || fail "the second episode did not queue its own row: $(cat "$state/.wake-queue")"
+  [ "$(printf '%s\n' "$keys" | sort -u | wc -l | tr -d ' ')" -eq 2 ] \
+    || fail "both episodes share one wake key: $keys"
+  [ -e "$state/.secondmate-liveness-uncertain-alert-sm1" ] \
+    || fail "the second episode was not marked alerted"
+
+  # Acknowledging only the first row, as a parent that had already read it
+  # would, leaves the second episode's row durable.
+  present_liveness_wakes "$dir"
+  first_seq=$(awk -F '\t' '$3 == "check" && $4 ~ /^secondmate-liveness-uncertain-sm1/ { print $2; exit }' "$state/.wake-queue")
+  second_key=$(printf '%s\n' "$keys" | sed -n '2p')
+  gen=$(sed -n 's/^WAKE_ACK_REQUIRED:.*--recovery-generation \([A-Za-z0-9._-][A-Za-z0-9._-]*\).*$/\1/p' "$dir/drain-present.err")
+  [ -n "$first_seq" ] && [ -n "$gen" ] \
+    || fail "the presented queue did not name an acknowledgeable row: $(cat "$dir/drain-present.err")"
+  FM_HOME="$dir" FM_STATE_OVERRIDE="$state" "$DRAIN" --ack-through "$first_seq" --recovery-generation "$gen" \
+    > /dev/null 2> "$dir/drain-ack.err" \
+    || fail "acknowledging the first episode's row failed: $(cat "$dir/drain-ack.err")"
+  [ "$(awk -F '\t' '$3 == "check" && $4 ~ /^secondmate-liveness-uncertain-sm1/ { print $4 }' "$state/.wake-queue")" = "$second_key" ] \
+    || fail "acknowledging the first episode did not leave exactly the second episode's row: $(cat "$state/.wake-queue")"
+  drain_liveness_wakes "$dir"
+  pass "watch liveness: each uncertain episode queues its own keyed wake, even while an earlier row is read but unacknowledged"
 }
 
 test_secondmate_liveness_tick_cadence_gates_the_probe() {
@@ -3881,6 +3955,7 @@ test_secondmate_liveness_tick_relaunches_missing_endpoint
 test_secondmate_liveness_tick_relaunches_every_dead_mate_before_waking
 test_secondmate_liveness_tick_leaves_alive_and_inconclusive_untouched
 test_secondmate_liveness_tick_alerts_persistent_inconclusive_endpoint_once
+test_secondmate_liveness_tick_keys_each_uncertain_episode_wake
 test_secondmate_liveness_tick_cadence_gates_the_probe
 test_secondmate_liveness_tick_attempt_bound_parks_then_rearm_on_alive
 test_secondmate_liveness_tick_relaunch_failure_reports_once

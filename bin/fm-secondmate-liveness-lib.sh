@@ -123,34 +123,42 @@ fm_secondmate_liveness_recent_attempts() {  # <id> <window-secs>
 # reached (`unavailable`) is deliberately left out: host loss is never evidence
 # about the endpoint, so it neither advances nor clears an episode and never
 # alerts (tests/fm-remote-secondmate-lifecycle-e2e.test.sh pins that promise).
-# The count is separate from the alert marker so a failed queue append never
+# The marker holds the latest state, the consecutive count, and the episode
+# token - the epoch second of the probe that opened it - tab-separated. The
+# watcher keys the episode's wake row on that token, so a new episode never
+# collapses into an earlier row that is still queued but unacknowledged. The
+# count is separate from the alert marker so a failed queue append never
 # suppresses a later alert.
-fm_secondmate_liveness_uncertain_record() {  # <id> <ambiguous|unreadable> <threshold>
-  local id=$1 state=$2 threshold=$3 marker tmp previous_state='' previous_count=0
+fm_secondmate_liveness_uncertain_record() {  # <id> <ambiguous|unreadable> <threshold> <epoch>
+  local id=$1 state=$2 threshold=$3 now=$4 marker tmp previous_state='' previous_count=0 episode=''
   FM_SM_LIVE_UNCERTAIN_COUNT=0
+  FM_SM_LIVE_UNCERTAIN_EPISODE=
   case "$state" in ambiguous|unreadable) ;; *) return 1 ;; esac
   case "$threshold" in ''|*[!0-9]*|0) return 2 ;; esac
+  case "$now" in ''|*[!0-9]*) return 2 ;; esac
   marker="$STATE/.secondmate-liveness-uncertain-$id"
   if [ -L "$marker" ] || { [ -e "$marker" ] && [ ! -f "$marker" ]; }; then
     return 2
   fi
   if [ -f "$marker" ]; then
-    read -r previous_state previous_count < "$marker" || return 2
-    case "$previous_state:$previous_count" in
-      ambiguous:[0-9]*|unreadable:[0-9]*) ;;
-      *) return 2 ;;
-    esac
+    read -r previous_state previous_count episode < "$marker" || return 2
+    case "$previous_state" in ambiguous|unreadable) ;; *) return 2 ;; esac
+    case "$previous_count" in ''|*[!0-9]*) return 2 ;; esac
+    case "$episode" in ''|*[!0-9]*) return 2 ;; esac
+  else
+    episode=$now
   fi
   # The episode is uncertainty itself, so uncertain probes stay consecutive
   # when the verdict alternates between those states.
   previous_count=$((previous_count + 1))
   tmp=$(mktemp "$STATE/.secondmate-liveness-uncertain-$id.XXXXXX") || return 2
-  if ! printf '%s\t%s\n' "$state" "$previous_count" > "$tmp" || \
+  if ! printf '%s\t%s\t%s\n' "$state" "$previous_count" "$episode" > "$tmp" || \
      ! mv -f -- "$tmp" "$marker"; then
     rm -f -- "$tmp"
     return 2
   fi
   FM_SM_LIVE_UNCERTAIN_COUNT=$previous_count
+  FM_SM_LIVE_UNCERTAIN_EPISODE=$episode
   [ "$previous_count" -ge "$threshold" ] || return 1
   [ ! -e "$STATE/.secondmate-liveness-uncertain-alert-$id" ] && \
     [ ! -L "$STATE/.secondmate-liveness-uncertain-alert-$id" ]
