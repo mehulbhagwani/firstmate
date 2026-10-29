@@ -1,0 +1,7 @@
+4 actionable-blocker captain rendered
+4 failure-to-start captain rendered
+4 meaningful-completion captain rendered
+4 review-finding captain rendered
+1 start-update routine rendered
+3 start-update routine silent
+4 unchanged-progress routine silent

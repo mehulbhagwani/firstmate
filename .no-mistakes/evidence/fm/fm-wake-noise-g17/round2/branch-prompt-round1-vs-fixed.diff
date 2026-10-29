@@ -1,0 +1,6 @@
+55c55
+< Report verdict captain for the finished result of work the captain requested, even when that result is healthy. This includes a meaningful completion, an actionable failure or blocker, a failure to start, or a fresh consequential review finding; these outcomes must open MAIN processing and are never routine merely because no new choice is required.
+---
+> Report verdict captain for the finished result of work the captain requested, even when that result is healthy. This includes a meaningful completion, an actionable failure or blocker, or a failure to start; these outcomes must open MAIN processing and are never routine merely because no new choice is required.
+63a64
+> - a fresh consequential review finding on requested work, even while the worker keeps fixing it;
