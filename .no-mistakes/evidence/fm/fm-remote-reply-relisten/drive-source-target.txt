@@ -1,0 +1,21 @@
+registered: remote-reply-ios (remote-reply)
+armed: remote-reply-ios offset=0
+remote leg exit 255 -> source exit 75  stdout_bytes=0 staged_left=0
+remote leg exit 1   -> source exit 75  stdout_bytes=0 staged_left=0
+remote leg exit 2   -> source exit 75  stdout_bytes=0 staged_left=0
+remote leg exit 3   -> source exit 3   stdout_bytes=0 staged_left=0
+remote leg exit 127 -> source exit 127 stdout_bytes=0 staged_left=0
+healthy delta leg     -> source exit 0   staged_left=0 first_lines:
+schema=fm-remote-delta.v1
+status=delta
+path=state/parent-replies.status
+from_offset=0
+to_offset=18
+from_prefix_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+to_prefix_sha256=7d3ac8301c1bc2c8c40e5bc16d9328df396a3175190b8372a0ecea153452b172
+payload_sha256=7d3ac8301c1bc2c8c40e5bc16d9328df396a3175190b8372a0ecea153452b172
+payload_bytes=18
+reason=
+
+hello-from-remote
+

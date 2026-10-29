@@ -1,0 +1,8 @@
+registered: remote-reply-ios (remote-reply)
+armed: remote-reply-ios offset=0
+remote leg exit 255 -> source exit 255 stdout_bytes=0 staged_left=0
+remote leg exit 1   -> source exit 1   stdout_bytes=0 staged_left=0
+remote leg exit 2   -> source exit 2   stdout_bytes=0 staged_left=0
+remote leg exit 3   -> source exit 3   stdout_bytes=0 staged_left=0
+remote leg exit 127 -> source exit 127 stdout_bytes=0 staged_left=0
+healthy delta leg     -> source exit 0   staged_left=0 first_lines:

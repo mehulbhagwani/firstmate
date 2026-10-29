@@ -44,4 +44,3 @@ ok - a continuity break after retirement and an identical restore opens the deci
 ok - a failed cursor removal does not increase the retirement count
 ok - a retirement that stops after removing the cursor leaves the old count
 ALL TESTS PASSED
-bash tests/fm-remote-reply.test.sh  62.29s user 108.09s system 50% cpu 5:34.37 total
