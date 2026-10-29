@@ -3197,8 +3197,10 @@ test_drain_rotates_orphaned_scratch() {
 # supervision: only a positively dead or missing recorded endpoint relaunches
 # (through the same guarded fm-spawn.sh --secondmate path the session-start
 # sweep uses), every relaunch emits exactly one `check` wake plus a durable
-# ledger line, inconclusive verdicts are triage-only, an unreachable remote
-# route is preserved, and the attempt bound parks a mate that keeps dying.
+# ledger line, inconclusive verdicts are triage-only until a persistent
+# ambiguous or unreadable episode alerts once, an unreachable remote route is
+# preserved and stays silent, and the attempt bound parks a mate that keeps
+# dying.
 
 # make_secondmate_liveness_case <name>: a watcher case dir carrying one local
 # secondmate whose tmux fixture answers the backend's agent-state probe AND the
@@ -3737,7 +3739,10 @@ SH
   chmod +x "$dir/fakebin/ssh"
   : > "$dir/ssh.log"
 
-  run_liveness_leg "$dir" unreachable FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log" FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=999999; pid=$LIVENESS_PID
+  # Host loss is never evidence about the endpoint: even with the uncertain
+  # alert threshold at one probe, an unreachable host neither opens an episode
+  # nor wakes the parent.
+  run_liveness_leg "$dir" unreachable FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log" FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=1; pid=$LIVENESS_PID
   sleep 4
   is_live_non_zombie "$pid" \
     || fail "the watcher exited against an unreachable remote secondmate: $(cat "$dir/watch-unreachable.out" "$dir/watch-unreachable.err")"
@@ -3747,6 +3752,8 @@ SH
     || fail "an unreachable remote probe changed the route metadata"
   assert_grep '- rsm1 ' "$dir/data/secondmates.md" "an unreachable probe changed the registry route"
   [ ! -s "$state/.wake-queue" ] || fail "an unreachable remote probe queued a wake"
+  [ ! -e "$state/.secondmate-liveness-uncertain-rsm1" ] && [ ! -e "$state/.secondmate-liveness-uncertain-alert-rsm1" ] \
+    || fail "an unreachable remote probe opened an uncertain episode"
   [ ! -e "$state/.secondmate-relaunch-rsm1" ] \
     || fail "an unreachable remote probe ledgered a relaunch attempt"
   [ ! -s "$dir/tmux.log" ] || fail "an unreachable remote probe touched a local endpoint"
@@ -3754,14 +3761,11 @@ SH
 }
 
 test_secondmate_liveness_tick_alerts_persistent_remote_probe_failure_once() {
-  local shape rc expected dir state pid out
-  for shape in unavailable:255 unreadable:1; do
-    expected=${shape%%:*}
-    rc=${shape##*:}
-    dir=$(make_secondmate_liveness_case "liveness-remote-$expected")
-    state="$dir/state"
-    rm -f "$state/sm1.meta"
-    cat > "$state/rsm1.meta" <<EOF
+  local dir state pid out
+  dir=$(make_secondmate_liveness_case liveness-remote-unreadable)
+  state="$dir/state"
+  rm -f "$state/sm1.meta"
+  cat > "$state/rsm1.meta" <<EOF
 window=remote:rsm1
 kind=secondmate
 harness=claude
@@ -3771,47 +3775,46 @@ remote_herdr_session=fm-remote
 remote_target=fm-remote:w1:p1
 home=/remote/rsm1-home
 EOF
-    cat > "$dir/data/secondmates.md" <<EOF
+  cat > "$dir/data/secondmates.md" <<EOF
 - rsm1 - Remote mate (host: lab-host; root: /remote/root; home: /remote/rsm1-home; scope: remote work; projects: alpha; added 2026-01-01)
 EOF
-    cp "$state/rsm1.meta" "$dir/rsm1.meta.before"
-    cat > "$dir/fakebin/ssh" <<'SH'
+  cp "$state/rsm1.meta" "$dir/rsm1.meta.before"
+  cat > "$dir/fakebin/ssh" <<'SH'
 #!/usr/bin/env bash
 printf '%s\n' "$*" >> "${FM_FAKE_SSH_LOG:?}"
-exit "${FM_FAKE_SSH_RC:?}"
+exit 1
 SH
-    chmod +x "$dir/fakebin/ssh"
-    : > "$dir/ssh.log"
+  chmod +x "$dir/fakebin/ssh"
+  : > "$dir/ssh.log"
 
-    # A remote probe that keeps failing in transport is never evidence of
-    # death, but three consecutive failures must wake the parent once.
-    run_liveness_leg "$dir" "$expected" FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log" \
-      FM_FAKE_SSH_RC="$rc" FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; pid=$LIVENESS_PID
-    wait_for_exit "$pid" 500 || fail "the watcher did not wake after a persistent $expected remote probe"
-    out="$dir/watch-$expected.out"
-    grep -F "check: secondmate rsm1 liveness remains $expected after 3 consecutive probes; endpoint was not changed" "$out" >/dev/null \
-      || fail "a persistent $expected remote probe did not wake with its evidence: $(cat "$out" "$dir/watch-$expected.err")"
-    [ "$(grep -c 'secondmate-liveness-uncertain-rsm1' "$state/.wake-queue")" -eq 1 ] \
-      || fail "a persistent $expected remote probe did not queue exactly one wake: $(cat "$state/.wake-queue")"
-    cmp -s "$dir/rsm1.meta.before" "$state/rsm1.meta" \
-      || fail "a $expected remote probe changed the route metadata"
-    assert_grep '- rsm1 ' "$dir/data/secondmates.md" "a $expected remote probe changed the registry route"
-    [ ! -e "$state/.secondmate-relaunch-rsm1" ] \
-      || fail "a $expected remote probe ledgered a relaunch attempt"
-    [ ! -s "$dir/tmux.log" ] || fail "a $expected remote probe touched a local endpoint"
+  # A reachable host whose state verb keeps failing reads unreadable: never
+  # evidence of death, but three consecutive failures must wake the parent once.
+  run_liveness_leg "$dir" unreadable FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log" \
+    FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; pid=$LIVENESS_PID
+  wait_for_exit "$pid" 500 || fail "the watcher did not wake after a persistent unreadable remote probe"
+  out="$dir/watch-unreadable.out"
+  grep -F 'check: secondmate rsm1 liveness remains unreadable after 3 consecutive probes; endpoint was not changed' "$out" >/dev/null \
+    || fail "a persistent unreadable remote probe did not wake with its evidence: $(cat "$out" "$dir/watch-unreadable.err")"
+  [ "$(grep -c 'secondmate-liveness-uncertain-rsm1' "$state/.wake-queue")" -eq 1 ] \
+    || fail "a persistent unreadable remote probe did not queue exactly one wake: $(cat "$state/.wake-queue")"
+  cmp -s "$dir/rsm1.meta.before" "$state/rsm1.meta" \
+    || fail "an unreadable remote probe changed the route metadata"
+  assert_grep '- rsm1 ' "$dir/data/secondmates.md" "an unreadable remote probe changed the registry route"
+  [ ! -e "$state/.secondmate-relaunch-rsm1" ] \
+    || fail "an unreadable remote probe ledgered a relaunch attempt"
+  [ ! -s "$dir/tmux.log" ] || fail "an unreadable remote probe touched a local endpoint"
 
-    drain_liveness_wakes "$dir"
-    rm -f "$state/.secondmate-liveness-tick"
-    run_liveness_leg "$dir" "$expected-repeat" FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log" \
-      FM_FAKE_SSH_RC="$rc" FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; pid=$LIVENESS_PID
-    sleep 4
-    is_live_non_zombie "$pid" \
-      || fail "the watcher repeated a $expected remote alert for the same episode: $(cat "$dir/watch-$expected-repeat.out" "$dir/watch-$expected-repeat.err")"
-    kill_liveness_leg "$pid"
-    [ "$(grep -c 'secondmate-liveness-uncertain-rsm1' "$state/.wake-queue" 2>/dev/null || true)" -eq 0 ] \
-      || fail "the same $expected remote episode queued a second wake: $(cat "$state/.wake-queue")"
-  done
-  pass "watch liveness: persistent unavailable or unreadable remote probes alert once and never fail over"
+  drain_liveness_wakes "$dir"
+  rm -f "$state/.secondmate-liveness-tick"
+  run_liveness_leg "$dir" unreadable-repeat FM_SSH_BIN="$dir/fakebin/ssh" FM_FAKE_SSH_LOG="$dir/ssh.log" \
+    FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; pid=$LIVENESS_PID
+  sleep 4
+  is_live_non_zombie "$pid" \
+    || fail "the watcher repeated an unreadable remote alert for the same episode: $(cat "$dir/watch-unreadable-repeat.out" "$dir/watch-unreadable-repeat.err")"
+  kill_liveness_leg "$pid"
+  [ "$(grep -c 'secondmate-liveness-uncertain-rsm1' "$state/.wake-queue" 2>/dev/null || true)" -eq 0 ] \
+    || fail "the same unreadable remote episode queued a second wake: $(cat "$state/.wake-queue")"
+  pass "watch liveness: a persistent unreadable remote probe alerts once and never fails over"
 }
 
 test_branch_grant_requires_lock_acquisition

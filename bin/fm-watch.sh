@@ -408,8 +408,9 @@ case "$SECONDMATE_LIVENESS_SECS" in ''|*[!0-9]*|0) SECONDMATE_LIVENESS_SECS=60 ;
 # Per-relaunch wall-clock bound, so a wedged spawn cannot stall the poll.
 SECONDMATE_LIVENESS_TIMEOUT=${FM_SECONDMATE_LIVENESS_TIMEOUT:-}
 case "$SECONDMATE_LIVENESS_TIMEOUT" in ''|*[!0-9]*|0) SECONDMATE_LIVENESS_TIMEOUT=120 ;; esac
-# Uncertain-endpoint alert bound: an ambiguous, unreadable, or unavailable probe stays
+# Uncertain-endpoint alert bound: an ambiguous or unreadable probe stays
 # non-mutating, but a persistent episode wakes the parent once for inspection.
+# An unreachable remote host (`unavailable`) stays triage-only and never counts.
 SECONDMATE_LIVENESS_UNCERTAIN_TICKS=${FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS:-}
 case "$SECONDMATE_LIVENESS_UNCERTAIN_TICKS" in ''|*[!0-9]*|0) SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3 ;; esac
 # Relaunch bound: at most this many automatic attempts per window per mate,
@@ -1126,10 +1127,11 @@ EOF
 # (success or failure) becomes exactly one durable `check` wake row, and every
 # other verdict lands only in the triage log. The tick finishes every mate's
 # bounded recovery before it wakes once on the first outcome; the drain
-# surfaces every queued row. Ambiguous, unreadable, and unavailable endpoint states remain
+# surfaces every queued row. Ambiguous and unreadable endpoint states remain
 # untouched, but after SECONDMATE_LIVENESS_UNCERTAIN_TICKS consecutive probes
 # they queue one inspection wake until a live, dead, or missing probe clears the
-# episode. A mate that keeps dying is parked after SECONDMATE_LIVENESS_MAX_ATTEMPTS ledgered attempts
+# episode; an unreachable remote host stays triage-only and never counts. A mate
+# that keeps dying is parked after SECONDMATE_LIVENESS_MAX_ATTEMPTS ledgered attempts
 # inside SECONDMATE_LIVENESS_WINDOW_SECS: the bound marker wakes once, further
 # probes stay silent, and a later live probe ledgers a `rearmed` row and clears
 # the marker so a manually recovered mate rejoins the guarantee with a full
@@ -1193,7 +1195,7 @@ secondmate_liveness_tick() {
         ;;
       skipped)
         case "$FM_SM_LIVE_STATE" in
-          ambiguous|unreadable|unavailable)
+          ambiguous|unreadable)
             uncertain_rc=0
             fm_secondmate_liveness_uncertain_record "$id" "$FM_SM_LIVE_STATE" \
               "$SECONDMATE_LIVENESS_UNCERTAIN_TICKS" || uncertain_rc=$?

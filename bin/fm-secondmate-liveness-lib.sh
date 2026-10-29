@@ -118,13 +118,17 @@ fm_secondmate_liveness_recent_attempts() {  # <id> <window-secs>
     "$ledger" 2>/dev/null
 }
 
-# The watcher keeps one bounded episode marker for remote or local endpoints
-# whose probe remains ambiguous, unreadable, or unavailable. The count is separate from
-# the alert marker so a failed queue append never suppresses a later alert.
-fm_secondmate_liveness_uncertain_record() {  # <id> <ambiguous|unreadable|unavailable> <threshold>
+# The watcher keeps one bounded episode marker for a local or remote endpoint
+# whose probe remains ambiguous or unreadable. A remote host that cannot be
+# reached (`unavailable`) is deliberately left out: host loss is never evidence
+# about the endpoint, so it neither advances nor clears an episode and never
+# alerts (tests/fm-remote-secondmate-lifecycle-e2e.test.sh pins that promise).
+# The count is separate from the alert marker so a failed queue append never
+# suppresses a later alert.
+fm_secondmate_liveness_uncertain_record() {  # <id> <ambiguous|unreadable> <threshold>
   local id=$1 state=$2 threshold=$3 marker tmp previous_state='' previous_count=0
   FM_SM_LIVE_UNCERTAIN_COUNT=0
-  case "$state" in ambiguous|unreadable|unavailable) ;; *) return 1 ;; esac
+  case "$state" in ambiguous|unreadable) ;; *) return 1 ;; esac
   case "$threshold" in ''|*[!0-9]*|0) return 2 ;; esac
   marker="$STATE/.secondmate-liveness-uncertain-$id"
   if [ -L "$marker" ] || { [ -e "$marker" ] && [ ! -f "$marker" ]; }; then
@@ -133,7 +137,7 @@ fm_secondmate_liveness_uncertain_record() {  # <id> <ambiguous|unreadable|unavai
   if [ -f "$marker" ]; then
     read -r previous_state previous_count < "$marker" || return 2
     case "$previous_state:$previous_count" in
-      ambiguous:[0-9]*|unreadable:[0-9]*|unavailable:[0-9]*) ;;
+      ambiguous:[0-9]*|unreadable:[0-9]*) ;;
       *) return 2 ;;
     esac
   fi
