@@ -1,0 +1,32 @@
+## real fm-send marked request to secondmate design
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+fm-send: doorbell not typed because the agent in firstmate:fm-design has exited; the steer is durably recorded at /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab.v0pOoB/state/design.inbox/001.msg for recovery (stuck-crewmate-recovery), and the watcher will not re-ring a dead pane
+## pending-replies before teardown (design + earlier mate records)
+-rw-r--r-- 16faf95c9ef7dd62 task=design
+-rw-r--r-- 506cfd4936494903 task=mate
+-rw-r--r-- cfaa3ff9e9cce30c task=mate
+-rw------- .16faf95c9ef7dd62.request task=
+-rw------- .cfaa3ff9e9cce30c.request task=
+## fm-teardown.sh design
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+REFUSED: secondmate design still has an unresolved routed reply
+## pending-replies after teardown
+16faf95c9ef7dd62 task=design
+506cfd4936494903 task=mate
+cfaa3ff9e9cce30c task=mate
+.16faf95c9ef7dd62.request task=
+.cfaa3ff9e9cce30c.request task=
+/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab.v0pOoB/state/pending-replies/.16faf95c9ef7dd62.request
+/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab.v0pOoB/state/pending-replies/16faf95c9ef7dd62
+## fm-teardown.sh design --force (open record 16faf95c9ef7dd62 + its .request sidecar)
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+teardown design complete (window firstmate:fm-design, worktree /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-sub.tUdNXC/home)
+rc=0
+## pending-replies after forced teardown
+total 24
+drwx------@  5 rac  staff   160 Oct 29 15:40 .
+drwxr-xr-x@ 10 rac  staff   320 Oct 29 15:40 ..
+-rw-------@  1 rac  staff    78 Oct 29 15:36 .cfaa3ff9e9cce30c.request
+-rw-r--r--@  1 rac  staff  1093 Oct 29 15:35 506cfd4936494903
+-rw-r--r--@  1 rac  staff   831 Oct 29 15:36 cfaa3ff9e9cce30c
+no file under pending-replies still holds the design request text

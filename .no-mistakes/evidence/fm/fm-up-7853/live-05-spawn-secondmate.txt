@@ -1,0 +1,21 @@
+## seed + spawn a real secondmate 'design' (home /private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-sub.tUdNXC/home)
+
+warning: You appear to have cloned an empty repository.
+home=/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-sub.tUdNXC/home
+WARNING: watcher still down (same stale episode; last beat: never, grace 300s) - full banner already printed this episode.
+warning: secondmate design sync skipped before launch: primary default-branch commit cannot be resolved
+spawned design harness=bash kind=secondmate mode=secondmate yolo=off window=firstmate:fm-design worktree=/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-sub.tUdNXC/home
+window=firstmate:fm-design
+endpoint_task_id=design
+worktree=/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-sub.tUdNXC/home
+project=/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-sub.tUdNXC/home
+harness=bash
+kind=secondmate
+mode=secondmate
+yolo=off
+tasktmp=/tmp/fm-design
+model=default
+effort=default
+spawn_gen=s1793268519.17063.30343
+home=/private/var/folders/81/55x2dv310px5drcswsjgh8qm0000gn/T/fm-lab-sub.tUdNXC/home
+projects=alpha
