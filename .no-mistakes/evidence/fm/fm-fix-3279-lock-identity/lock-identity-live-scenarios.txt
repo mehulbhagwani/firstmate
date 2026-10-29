@@ -1,0 +1,32 @@
+# Live lock-identity scenarios on Darwin 27.2.0, lab FM_HOME=<disposable lab>; base=b936f040, new=b7ef4044
+## S1 issue #3279 shape: stale .home-summary-refresh.lock naming a reused live pid, driven through bin/fm-home-summary-refresh.sh
+[base] decoy live pid=15025 (ps lstart: Thu Oct 29 19:33:51 2026    ); recorded pid-start: Mon Jan  1 00:00:00 2024
+[base] RESULT: refresh exited rc=0 after 0s
+[base] lock dir present after: no; home-summary.json written: yes
+[base] decoy pid 15025 untouched and alive
+[new] decoy live pid=15284 (ps lstart: Thu Oct 29 19:33:51 2026    ); recorded pid-start: Mon Jan  1 00:00:00 2024
+[new] RESULT: refresh exited rc=0 after 0s
+[new] lock dir present after: no; home-summary.json written: yes
+[new] decoy pid 15284 untouched and alive
+## S2 bounded acquire, reused-pid record, reclaim blocked past the deadline: must not report the unrelated pid as holder
+[base] bounded rc=124 FM_LOCK_HELD_PID=<15472> (decoy pid=15472, its real start differs from recorded)
+[new] bounded rc=1 FM_LOCK_HELD_PID=<> (decoy pid=16464, its real start differs from recorded)
+## S3 genuinely live holder keeps its lock
+[base] holder pid=17300 recorded pid-start=<Thu Oct 29 19:33:56 2026>
+[base] bounded rc=124 FM_LOCK_HELD_PID=<17300>
+[base] try_acquire rc=1 lock pid now=17300
+[new] holder pid=17927 recorded pid-start=<Thu Oct 29 19:33:58 2026>
+[new] bounded rc=124 FM_LOCK_HELD_PID=<17927>
+[new] try_acquire rc=1 lock pid now=17927
+## S4 cross-version: writer holds, reader in another process must not steal (ps path and /proc path)
+[ps: new writer -> old reader] holder=18611 recorded=<Thu Oct 29 19:34:00 2026> reader fm_pid_start_time=<Thu Oct 29 19:34:00 2026> equal=yes reader try_acquire rc=1 lock pid=18611 -> PROTECTED
+[ps: old writer -> new reader] holder=18687 recorded=<Thu Oct 29 19:34:01 2026> reader fm_pid_start_time=<Thu Oct 29 19:34:01 2026> equal=yes reader try_acquire rc=1 lock pid=18687 -> PROTECTED
+[proc: new writer -> old reader] holder=18747 recorded=<proc-starttime=19> reader fm_pid_start_time=<proc-starttime=19> equal=yes reader try_acquire rc=1 lock pid=18747 -> PROTECTED
+[proc: old writer -> new reader] holder=18815 recorded=<proc-starttime=19> reader fm_pid_start_time=<proc-starttime=19> equal=yes reader try_acquire rc=1 lock pid=18815 -> PROTECTED
+## S5 /proc host adversarial: matching legacy/keyed tokens protected, mismatched tokens reclaimed (new library)
+recorded <proc-starttime=555> vs live probe <proc-starttime=555>: try_acquire rc=1 lock pid=18876 recovered=<>
+recorded <linux-starttime=555> vs live probe <proc-starttime=555>: try_acquire rc=1 lock pid=18876 recovered=<>
+recorded <proc-starttime=111> vs live probe <proc-starttime=555>: try_acquire rc=0 lock pid=18931 recovered=<18876>
+recorded <linux-starttime=111> vs live probe <proc-starttime=555>: try_acquire rc=0 lock pid=19050 recovered=<18876>
+## S6 narrow terminal (COLUMNS=20) start token
+fm_pid_start_token=<Thu Oct 29 19:33:51 2026> ps raw=<Thu Oct 29 19:33:51 2026    >
