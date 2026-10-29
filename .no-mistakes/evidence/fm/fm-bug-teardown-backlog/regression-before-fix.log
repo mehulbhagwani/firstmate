@@ -1,0 +1,27 @@
+### teardown script from b936f040
+not ok - nm-pushed-unmerged: teardown should refuse: expected exit 1, got 0
+not ok - nm-pushed-unmerged: no REFUSED line in stderr
+not ok - nm-pushed-unmerged: teardown removed the task record
+not ok - nm-pushed-unmerged: teardown closed the backlog item
+not ok - nm-pushed-unmerged: refusal dropped the task branch
+not ok - nm-pushed-unmerged: refusal erased the durable task record
+ok - no-mistakes worktree with pushed but unmerged work is refused
+not ok - nm-pushed-closed-pr: teardown should refuse: expected exit 1, got 0
+not ok - nm-pushed-closed-pr: no REFUSED line in stderr
+not ok - nm-pushed-closed-pr: refusal dropped the task branch
+not ok - nm-pushed-closed-pr: refusal erased the durable task record
+ok - pushed work with a recorded but closed-unmerged PR is refused
+not ok - pushed-followup-after-merged-pr: teardown should refuse: expected exit 1, got 0
+not ok - pushed-followup-after-merged-pr: no REFUSED line in stderr
+ok - pushed follow-up work after a merged PR is refused
+ok - forge=external work on the personal backup remote is torn down while its review is unmerged
+ok - forge=external work missing from the personal backup remote is refused
+### teardown script from 84eb84e0^
+ok - no-mistakes worktree with pushed but unmerged work is refused
+ok - pushed work with a recorded but closed-unmerged PR is refused
+ok - pushed follow-up work after a merged PR is refused
+not ok - ext-backup-allow: teardown should proceed: expected exit 0, got 1
+not ok - ext-backup-allow: teardown printed a REFUSED line
+not ok - ext-backup-allow: teardown kept the task record
+ok - forge=external work on the personal backup remote is torn down while its review is unmerged
+ok - forge=external work missing from the personal backup remote is refused

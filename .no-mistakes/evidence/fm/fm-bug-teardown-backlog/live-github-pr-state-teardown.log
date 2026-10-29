@@ -1,0 +1,8 @@
+== live-open-pr: real PR #7965 (OPEN) -> exit 0 (expected 0)
+   meta still present: no; worktree present: yes
+   RESULT: pass
+== live-closed-unmerged-pr: real PR #7920 (CLOSED) -> exit 1 (expected 1)
+   stderr: REFUSED: worktree /private/var/folders/g5/lqsh9bhs4xg5rcnbh1gvkpb40000gn/T/fm-teardown-tests.lFXXw1/live-closed-unmerged-pr/wt has work that is not landed.
+   stderr: Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+   meta still present: yes; worktree present: yes
+   RESULT: pass
