@@ -1,0 +1,29 @@
+$ fm-codex-trust.sh <primary checkout> <project>
+error: refusing to pre-register Codex trust: target '/private/var/folders/g5/lqsh9bhs4xg5rcnbh1gvkpb40000gn/T/fm-codex-trust-lab.9bCK7R/proj' is a primary checkout, not an isolated worktree
+exit=1
+$ fm-codex-trust.sh <worktree of proj> <unrelated project>
+error: refusing to pre-register Codex trust: target '/private/var/folders/g5/lqsh9bhs4xg5rcnbh1gvkpb40000gn/T/fm-codex-trust-lab.9bCK7R/wt' is not a worktree of project '/private/var/folders/g5/lqsh9bhs4xg5rcnbh1gvkpb40000gn/T/fm-codex-trust-lab.9bCK7R/other'
+exit=1
+$ CODEX_HOME=relative fm-codex-trust.sh <wt> <proj>
+error: refusing to pre-register Codex trust: CODEX_HOME must be an absolute path
+exit=1
+$ CODEX_HOME=<malformed config.toml> fm-codex-trust.sh <wt> <proj>
+Codex config '/private/var/folders/g5/lqsh9bhs4xg5rcnbh1gvkpb40000gn/T/fm-codex-trust-lab.9bCK7R/bad/config.toml' is invalid TOML: Illegal character '\n' (at line 1, column 11)
+error: refusing to pre-register Codex trust: Codex trust registration failed
+exit=1
+malformed config.toml left byte-identical
+$ second run is idempotent
+trusted: /private/var/folders/g5/lqsh9bhs4xg5rcnbh1gvkpb40000gn/T/fm-codex-trust-lab.9bCK7R/wt (already registered)
+exit=0
+$ existing untrusted entry plus a lookalike inside a multiline string
+trusted: /private/var/folders/g5/lqsh9bhs4xg5rcnbh1gvkpb40000gn/T/fm-codex-trust-lab.9bCK7R/wt
+exit=0
+model = "gpt"
+instructions = """
+[projects."/private/var/folders/g5/lqsh9bhs4xg5rcnbh1gvkpb40000gn/T/fm-codex-trust-lab.9bCK7R/wt"]
+trust_level = "untrusted"
+"""
+[projects."/private/var/folders/g5/lqsh9bhs4xg5rcnbh1gvkpb40000gn/T/fm-codex-trust-lab.9bCK7R/wt"]
+trust_level = "trusted"
+[tui]
+x = 1
