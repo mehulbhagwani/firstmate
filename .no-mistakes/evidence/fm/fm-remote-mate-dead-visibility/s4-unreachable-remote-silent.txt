@@ -1,0 +1,14 @@
+== real ssh to the unresolvable host:
+ssh: Could not resolve hostname fm-lab-unreachable.invalid: nodename nor servname provided, or not known
+ssh rc=255
+watcher still running after 5 probes (bound is 3)
+-- triage log probes:
+[2026-10-29T11:31:57-0700] secondmate rsm1 liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-unreachable.invalid
+[2026-10-29T11:31:59-0700] secondmate rsm1 liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-unreachable.invalid
+[2026-10-29T11:32:01-0700] secondmate rsm1 liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-unreachable.invalid
+[2026-10-29T11:32:02-0700] secondmate rsm1 liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-unreachable.invalid
+[2026-10-29T11:32:04-0700] secondmate rsm1 liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-unreachable.invalid
+-- watcher stdout: []
+-- wake queue: []
+-- no uncertain episode or relaunch markers
+-- route metadata unchanged

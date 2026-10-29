@@ -1,0 +1,14 @@
+== S5: open episode (unreadable x2) survives an unreachable host
+bash: line 6: kill: (4940) - No such process
+-- episode marker after: unreadable	2	1793290000
+-- queue: []
+== S6: remote state verb keeps failing (ssh exits 1) -> one inspection wake
+watcher rc=0
+-- watcher stdout:
+check: secondmate rsm1 liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+-- remote probes:        3
+-- queue:
+1793298741	5	check	secondmate-liveness-uncertain-rsm1-1793298738	check: secondmate rsm1 liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+-- marker: unreadable	3	1793298738
+-- route metadata unchanged
+-- no relaunch ledgered

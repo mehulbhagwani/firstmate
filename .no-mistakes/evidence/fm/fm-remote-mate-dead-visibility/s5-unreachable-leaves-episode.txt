@@ -1,0 +1,10 @@
+== S5: open episode (unreadable, count 2) must survive repeated unreachable-host probes
+-- marker before: unreadable	2	1793290000
+watcher still running after 4 unreachable probes
+[2026-10-29T11:32:35-0700] secondmate rsm1 liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-unreachable.invalid
+[2026-10-29T11:32:36-0700] secondmate rsm1 liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-unreachable.invalid
+[2026-10-29T11:32:38-0700] secondmate rsm1 liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-unreachable.invalid
+[2026-10-29T11:32:39-0700] secondmate rsm1 liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-unreachable.invalid
+-- watcher stdout: []
+-- marker after: unreadable	2	1793290000
+-- queue: []

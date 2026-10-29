@@ -1,0 +1,6 @@
+== S7: local secondmate teardown in the lab home (markers seeded: .secondmate-liveness-uncertain-sm1, .secondmate-liveness-uncertain-alert-sm1)
+teardown: teardown sm1 complete (window firstmate:fm-sm1)
+-- lab state after:
+(no sm1 state left: meta and both uncertain-liveness markers removed)
+-- lab tmux windows:
+main

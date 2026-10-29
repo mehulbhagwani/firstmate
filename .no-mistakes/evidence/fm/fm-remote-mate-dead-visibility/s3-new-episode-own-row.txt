@@ -1,0 +1,24 @@
+== reset: ack everything queued, drop episode markers
+queue: []
+== Episode A: real tmux pane runs node (ambiguous)
+main sleep
+fm-sm1 node
+episode A watcher rc=0
+check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+-- parent reads row, does not ack:
+1793298693	3	check	secondmate-liveness-uncertain-sm1-1793298689	check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+keyA=secondmate-liveness-uncertain-sm1-1793298689
+== Recovery: pane becomes a claude process, then ambiguous again, under one watcher
+watcher still running after live probe
+episode A markers cleared by live probe
+episode B watcher rc=0
+check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+-- queue with both rows:
+1793298693	3	check	secondmate-liveness-uncertain-sm1-1793298689	check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+1793298701	4	check	secondmate-liveness-uncertain-sm1-1793298697	check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+-- episode marker:
+ambiguous	3	1793298697
+== Ack only row A
+ack rc=0
+-- queue after acking A:
+1793298701	4	check	secondmate-liveness-uncertain-sm1-1793298697	check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed

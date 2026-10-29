@@ -1,0 +1,16 @@
+== S1: real bin/fm-watch.sh, lab FM_HOME, private tmux server; window firstmate:fm-sm1 runs 'node' (classifier: ambiguous)
+FM_SECONDMATE_LIVENESS_SECS=1 FM_SECONDMATE_LIVENESS_UNCERTAIN_TICKS=3; watcher exited on its own in ~4s, rc=0
+-- watcher stdout:
+check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+-- .wake-queue after S1:
+1793298588	1	check	secondmate-liveness-uncertain-sm1-1793298585	check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+-- markers:
+.secondmate-liveness-uncertain-sm1: ambiguous	3	1793298585
+.secondmate-liveness-uncertain-alert-sm1: alerted
+-- pane after: fm-sm1 node pid 87561 (same pid as before: endpoint not killed or relaunched)
+
+== S2: drain + ack the row, restart watcher, same ambiguous pane
+-- drain printed the row and: WAKE_ACK_REQUIRED: ... --ack-through 1 ...; ack rc=0; queue empty
+S2: watcher still running after 6s (silent)
+-- watcher stdout: [check: secondmate sm1 liveness remains ambiguous after 3 consecutive probes; endpoint was not changed]
+-- queue: [] ; episode marker: ambiguous	7	1793298585 (count kept rising, same episode, no second alert)
