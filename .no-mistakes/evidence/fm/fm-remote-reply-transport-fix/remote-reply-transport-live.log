@@ -1,0 +1,3 @@
+case=windows rc=255 output_bytes=0 output=''
+case=ssh255 rc=255 output_bytes=0 output=''
+cursor_files=
