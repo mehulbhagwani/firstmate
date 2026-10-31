@@ -1,0 +1,19 @@
+# Live lock-identity scenarios, Darwin 27.2.0, disposable lab FM_HOME, head 61a7ec62
+## L1 reused-pid stale lock: try_acquire reclaims and reports the actual previous owner pid
+decoy pid=4087 real start=<Sat Oct 31 10:20:08 2026> recorded=<Sat Oct 31 06:56:17 2026>
+rc=0 FM_LOCK_RECOVERED_PID=<4087> FM_LOCK_HELD_PID=<> self=4121 lockpid=4121
+decoy 4087 still alive (not signalled)
+## L2 a second reused-pid lock in the same state dir right after L1 reports its own decoy, not L1's
+rc=0 FM_LOCK_RECOVERED_PID=<4340> expected=<4340>
+## L3 genuinely live holder (recorded start matches) keeps its lock
+holder pid=4675 recorded pid-start=<Sat Oct 31 10:20:08 2026> probe=<Sat Oct 31 10:20:08 2026>
+try_acquire rc=1 lockpid=4675
+bounded rc=124 FM_LOCK_HELD_PID=<4675>
+Terminated: 15             env -u NO_MISTAKES_GATE -u FM_GATE_REFUSE_BYPASS -u FM_ROOT_OVERRIDE -u FM_STATE_OVERRIDE -u FM_DATA_OVERRIDE -u FM_CONFIG_OVERRIDE -u FM_PROJECTS_OVERRIDE FM_HOME="$LAB" "$@"
+## L4 adversarial: reused-pid record and a live steal mutex block reclaim past the deadline; bounded must not name the unrelated pid
+bounded rc=1 FM_LOCK_HELD_PID=<> (decoy=6523)
+## L5 bounded acquire handoff records the caller's own start token
+bounded rc=0 lockpid=10300 self=10300 recorded=<Sat Oct 31 10:20:14 2026> probe=<Sat Oct 31 10:20:14 2026>
+## L6 real script: fm-home-summary-refresh.sh with a stale refresh lock naming a reused live pid
+refresh rc=0 in 1s; lock left: no; home-summary files: <lab>/state/home-summary.json 
+decoy 11705 untouched and alive

@@ -1,0 +1,13 @@
+## Counterfactual: live-owner test reverted to the shared 'lock-reused-pid' case name (pre-fix fixture)
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - tombstone cleanup respects a live reaper and recovers a recycled reaper pid
+ok - a live owner remains protected while a mismatched start token is reclaimed
+ok - lock whose recorded holder pid was reused by a live process is reclaimed
+rc=0
+
+## Fixed fixture (this commit)
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - tombstone cleanup respects a live reaper and recovers a recycled reaper pid
+ok - a live owner remains protected while a mismatched start token is reclaimed
+ok - lock whose recorded holder pid was reused by a live process is reclaimed
+rc=0

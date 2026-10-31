@@ -1,0 +1,9 @@
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - tombstone cleanup respects a live reaper and recovers a recycled reaper pid
+ok - dead-pid stale lock is reclaimed by a single acquirer
+ok - a live owner remains protected while a mismatched start token is reclaimed
+ok - lock whose recorded holder pid was reused by a live process is reclaimed
+ok - macOS-style ps start tokens normalize leading and trailing whitespace
+ok - recorded pid-start matches fm_pid_start_time by string equality
+ok - live holder matching its recorded start time keeps its lock
+ok - concurrent stale-lock steal yields exactly one winner
