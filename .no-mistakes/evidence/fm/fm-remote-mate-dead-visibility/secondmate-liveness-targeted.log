@@ -1,0 +1,5 @@
+ok - an abandoned same-process lock hold is reclaimed; a parent's live hold is not
+ok - watch liveness: persistent inconclusive endpoints alert once and rearm after recovery
+ok - watch liveness: a new uncertain episode queues its own row while the earlier row is read but unacked
+ok - watch liveness: an unreachable remote secondmate is probed, preserved, and never failed over
+ok - watch liveness: a persistent unreadable remote probe alerts once and never fails over
