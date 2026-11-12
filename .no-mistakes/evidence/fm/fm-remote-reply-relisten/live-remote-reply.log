@@ -1,0 +1,275 @@
+$ git -c init.defaultBranch=main init -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code
+exit=0
+stdout=
+stderr=
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code add bin AGENTS.md
+exit=0
+stdout=
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/remote
+exit=0
+stdout=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/remote
+stderr=
+$ /usr/bin/ssh-keygen -q -t ed25519 -N '' -f /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/host_key
+exit=0
+stdout=
+stderr=
+$ /usr/bin/ssh-keygen -q -t ed25519 -N '' -f /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/client_key
+exit=0
+stdout=
+stderr=
+SSH forced-command configuration: normal
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/before-fix
+exit=0
+stdout=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/before-fix
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh source before-fix
+exit=255
+stdout=
+stderr=ssh: connect to host 127.0.0.1 port 63671: Connection refused
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh arm before-fix
+exit=0
+stdout=registered: remote-reply-before-fix (remote-reply)
+armed: remote-reply-before-fix offset=0
+stderr=
+BASELINE REPRODUCED: connection refusal ended the listener after one attempt and released the claim.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh retire before-fix
+exit=0
+stdout=retired: remote-reply-before-fix
+stderr=
+Retirement stopped retries, released ownership, and left no staged output.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/transport255
+exit=0
+stdout=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/transport255
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-on.sh transport255 fm-remote-delta-read.sh state/parent-replies.status 0 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 1
+exit=255
+stdout=
+stderr=ssh: connect to host 127.0.0.1 port 63671: Connection refused
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh source transport255
+exit=75
+stdout=
+stderr=ssh: connect to host 127.0.0.1 port 63671: Connection refused
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh arm transport255
+exit=0
+stdout=registered: remote-reply-transport255 (remote-reply)
+armed: remote-reply-transport255 offset=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh list
+exit=0
+stdout=SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-transport255    remote-reply live       0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh start remote-reply-transport255
+exit=0
+stdout=already owned: remote-reply-transport255
+stderr=
+Failure 255: same owner pid=49265, attempts=['1794518492.1777642', '1794518493.241583', '1794518494.371167', '1794518495.606239']; no capture, cursor, status, or caught-up watermark.
+Real OpenSSH server started on loopback:63671, pid=57962
+Mirrored status:
+note: recovered after transport255
+Cursor:
+schema=fm-remote-reply-cursor.v1
+offset=35
+prefix_sha256=ff73194cdc577414064cb504b66172ccba5afa2313940700a25ef8e6810dd624
+
+Recovery kept owner pid=49265; remote log unchanged; reply ingested exactly once in this run.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh list
+exit=0
+stdout=SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-transport255    remote-reply live       0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh retire transport255
+exit=0
+stdout=retired: remote-reply-transport255
+stderr=
+Retirement stopped retries, released ownership, and left no staged output.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/reader1
+exit=0
+stdout=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/reader1
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-on.sh reader1 fm-remote-delta-read.sh state/parent-replies.status 0 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 1
+exit=1
+stdout=
+stderr=error: log is not a non-symlink regular file: state/parent-replies.status
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh source reader1
+exit=75
+stdout=
+stderr=error: log is not a non-symlink regular file: state/parent-replies.status
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh arm reader1
+exit=0
+stdout=registered: remote-reply-reader1 (remote-reply)
+armed: remote-reply-reader1 offset=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh list
+exit=0
+stdout=SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-reader1         remote-reply live       0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh start remote-reply-reader1
+exit=0
+stdout=already owned: remote-reply-reader1
+stderr=
+Failure 1: same owner pid=6301, attempts=['1794518524.975986', '1794518528.51105', '1794518532.333081']; no capture, cursor, status, or caught-up watermark.
+Mirrored status:
+note: recovered after reader1
+Cursor:
+schema=fm-remote-reply-cursor.v1
+offset=30
+prefix_sha256=798979280d11db3517d7605130f058912ad4875c208593312e7e752820ffe389
+
+Recovery kept owner pid=6301; remote log unchanged; reply ingested exactly once in this run.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh list
+exit=0
+stdout=SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-reader1         remote-reply live       0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh retire reader1
+exit=0
+stdout=retired: remote-reply-reader1
+stderr=
+Retirement stopped retries, released ownership, and left no staged output.
+SSH forced-command configuration: usage2
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/reader2
+exit=0
+stdout=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/reader2
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-on.sh reader2 fm-remote-delta-read.sh state/parent-replies.status 0 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 1
+exit=2
+stdout=Blocking, non-destructive delta read for a remote secondmate append-only log.
+
+Usage:
+  fm-remote-delta-read.sh <relative-log> <offset> <prefix-sha256> [wait-seconds]
+
+The reader validates continuity by hashing the exact prefix represented by the
+caller's cursor. It then blocks until at least one complete appended line is
+available, returns at most 65536 payload bytes, and never truncates or consumes
+the source. A shortened or changed prefix returns a structured continuity-break
+result instead of silently rebasing the cursor.
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh source reader2
+exit=75
+stdout=
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh arm reader2
+exit=0
+stdout=registered: remote-reply-reader2 (remote-reply)
+armed: remote-reply-reader2 offset=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh list
+exit=0
+stdout=SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-reader2         remote-reply live       0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh start remote-reply-reader2
+exit=0
+stdout=already owned: remote-reply-reader2
+stderr=
+Failure 2: same owner pid=39311, attempts=['1794518543.6463518', '1794518544.971021', '1794518546.155133', '1794518547.62127']; no capture, cursor, status, or caught-up watermark.
+SSH forced-command configuration: normal
+Mirrored status:
+note: recovered after reader2
+Cursor:
+schema=fm-remote-reply-cursor.v1
+offset=30
+prefix_sha256=4383522002b45ed36d58f773b6b81d6b49234a81be8389fe8e7b9330847c08d9
+
+Recovery kept owner pid=39311; remote log unchanged; reply ingested exactly once in this run.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh list
+exit=0
+stdout=SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-reader2         remote-reply live       0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh retire reader2
+exit=0
+stdout=retired: remote-reply-reader2
+stderr=
+Retirement stopped retries, released ownership, and left no staged output.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/missing127
+exit=0
+stdout=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/missing127
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-on.sh missing127 fm-remote-delta-read.sh state/parent-replies.status 0 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 1
+exit=127
+stdout=
+stderr=/bin/bash: fm-remote-entrypoint.sh: command not found
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh source missing127
+exit=127
+stdout=
+stderr=/bin/bash: fm-remote-entrypoint.sh: command not found
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh arm missing127
+exit=0
+stdout=registered: remote-reply-missing127 (remote-reply)
+armed: remote-reply-missing127 offset=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh list
+exit=0
+stdout=SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-missing127      remote-reply none       0
+stderr=
+Refusal: raw exit=127, adapter exit=127; one attempt, no output capture, claim released, registration retained.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh retire missing127
+exit=0
+stdout=retired: remote-reply-missing127
+stderr=
+Retirement stopped retries, released ownership, and left no staged output.
+SSH forced-command configuration: banner
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/nonschema
+exit=0
+stdout=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/nonschema
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-on.sh nonschema fm-remote-delta-read.sh state/parent-replies.status 0 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 1
+exit=0
+stdout=Welcome to the isolated SSH endpoint
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh source nonschema
+exit=1
+stdout=
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh arm nonschema
+exit=0
+stdout=registered: remote-reply-nonschema (remote-reply)
+armed: remote-reply-nonschema offset=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh list
+exit=0
+stdout=SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-nonschema       remote-reply none       0
+stderr=
+Refusal: raw exit=0, adapter exit=1; one attempt, no output capture, claim released, registration retained.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent-remote-reply.sh retire nonschema
+exit=0
+stdout=retired: remote-reply-nonschema
+stderr=
+Retirement stopped retries, released ownership, and left no staged output.
+SSH forced-command configuration: normal
+ALL LIVE SCENARIOS PASSED
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh sweep-home
+exit=0
+stdout=swept: attempted=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh sweep-home
+exit=0
+stdout=swept: attempted=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh sweep-home
+exit=0
+stdout=swept: attempted=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh sweep-home
+exit=0
+stdout=swept: attempted=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh sweep-home
+exit=0
+stdout=swept: attempted=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code/bin/fm-procevent.sh sweep-home
+exit=0
+stdout=swept: attempted=0
+stderr=
+$ /bin/bash -c '. "$1/bin/fm-remote-job-lib.sh"; fm_remote_job_stop_worker_tree "$(cat "$2/remote-jobs/worker.pid")"' cleanup /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/code /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih
+exit=0
+stdout=
+stderr=
+Disposable SSH server, worker, listeners, test keys, and lab files removed.

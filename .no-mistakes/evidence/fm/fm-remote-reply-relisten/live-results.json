@@ -1,0 +1,37 @@
+[
+  {
+    "name": "transport255",
+    "result": "pass",
+    "live": true,
+    "transport_exit": 255,
+    "owner_pid": "49265"
+  },
+  {
+    "name": "reader1",
+    "result": "pass",
+    "live": true,
+    "transport_exit": 1,
+    "owner_pid": "6301"
+  },
+  {
+    "name": "reader2",
+    "result": "pass",
+    "live": true,
+    "transport_exit": 2,
+    "owner_pid": "39311"
+  },
+  {
+    "name": "missing127",
+    "result": "pass",
+    "live": true,
+    "transport_exit": 127,
+    "source_exit": 127
+  },
+  {
+    "name": "nonschema",
+    "result": "pass",
+    "live": true,
+    "transport_exit": 0,
+    "source_exit": 1
+  }
+]

@@ -1,0 +1,297 @@
+Server listening on 127.0.0.1 port 63533.
+Connection from 127.0.0.1 port 63586 on 127.0.0.1 port 63533
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63586 ssh2 [preauth]
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63586 ssh2: ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 35481
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/ssh-command' for mehul from 127.0.0.1 port 63586 id 0
+Received disconnect from 127.0.0.1 port 63586:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63586
+Connection from 127.0.0.1 port 63601 on 127.0.0.1 port 63533
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63601 ssh2 [preauth]
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63601 ssh2: ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 52777
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/ssh-command' for mehul from 127.0.0.1 port 63601 id 0
+Received disconnect from 127.0.0.1 port 63601:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63601
+Connection from 127.0.0.1 port 63604 on 127.0.0.1 port 63533
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63604 ssh2 [preauth]
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63604 ssh2: ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 59926
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/ssh-command' for mehul from 127.0.0.1 port 63604 id 0
+Received disconnect from 127.0.0.1 port 63604:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63604
+Connection from 127.0.0.1 port 63614 on 127.0.0.1 port 63533
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63614 ssh2 [preauth]
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63614 ssh2: ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 71309
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/ssh-command' for mehul from 127.0.0.1 port 63614 id 0
+Received disconnect from 127.0.0.1 port 63614:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63614
+Connection from 127.0.0.1 port 63618 on 127.0.0.1 port 63533
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63618 ssh2 [preauth]
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63618 ssh2: ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 80111
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/ssh-command' for mehul from 127.0.0.1 port 63618 id 0
+Received disconnect from 127.0.0.1 port 63618:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63618
+Connection from 127.0.0.1 port 63623 on 127.0.0.1 port 63533
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63623 ssh2 [preauth]
+Accepted key ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63623 ssh2: ED25519 SHA256:Gt3jsPeF+Q4JifAEZZO3t6tZkED7k7YLFAc/Kqql4tM
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 91821
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-3x0xep1f/ssh-command' for mehul from 127.0.0.1 port 63623 id 0
+Received disconnect from 127.0.0.1 port 63623:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63623
+Received signal 15; terminating.
+Server listening on 127.0.0.1 port 63671.
+Connection from 127.0.0.1 port 63698 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63698 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63698 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 58985
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63698 id 0
+Received disconnect from 127.0.0.1 port 63698:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63698
+Connection from 127.0.0.1 port 63720 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63720 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63720 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 89022
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63720 id 0
+Received disconnect from 127.0.0.1 port 63720:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63720
+Connection from 127.0.0.1 port 63724 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63724 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63724 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 97957
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63724 id 0
+Received disconnect from 127.0.0.1 port 63724:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63724
+Connection from 127.0.0.1 port 63732 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63732 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63732 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 8610
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63732 id 0
+Received disconnect from 127.0.0.1 port 63732:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63732
+Connection from 127.0.0.1 port 63735 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63735 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63735 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 14702
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63735 id 0
+Received disconnect from 127.0.0.1 port 63735:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63735
+Connection from 127.0.0.1 port 63737 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63737 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63737 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 21599
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63737 id 0
+Received disconnect from 127.0.0.1 port 63737:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63737
+Connection from 127.0.0.1 port 63747 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63747 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63747 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 37206
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63747 id 0
+Received disconnect from 127.0.0.1 port 63747:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63747
+Connection from 127.0.0.1 port 63748 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63748 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63748 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 38766
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63748 id 0
+Received disconnect from 127.0.0.1 port 63748:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63748
+Connection from 127.0.0.1 port 63749 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63749 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63749 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 40413
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63749 id 0
+Received disconnect from 127.0.0.1 port 63749:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63749
+Connection from 127.0.0.1 port 63750 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63750 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63750 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 42420
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63750 id 0
+Received disconnect from 127.0.0.1 port 63750:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63750
+Connection from 127.0.0.1 port 63751 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63751 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63751 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 43851
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63751 id 0
+Received disconnect from 127.0.0.1 port 63751:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63751
+Connection from 127.0.0.1 port 63755 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63755 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63755 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 45975
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63755 id 0
+Received disconnect from 127.0.0.1 port 63755:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63755
+Connection from 127.0.0.1 port 63757 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63757 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63757 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 48170
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63757 id 0
+Received disconnect from 127.0.0.1 port 63757:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63757
+Connection from 127.0.0.1 port 63760 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63760 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63760 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 58072
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63760 id 0
+Received disconnect from 127.0.0.1 port 63760:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63760
+Connection from 127.0.0.1 port 63763 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63763 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63763 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 62024
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63763 id 0
+Received disconnect from 127.0.0.1 port 63763:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63763
+Connection from 127.0.0.1 port 63765 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63765 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63765 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 62399
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63765 id 0
+Received disconnect from 127.0.0.1 port 63765:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63765
+Connection from 127.0.0.1 port 63768 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63768 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63768 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 67414
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63768 id 0
+Close session: user mehul from 127.0.0.1 port 63768 id 0
+Received disconnect from 127.0.0.1 port 63768:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63768
+Connection from 127.0.0.1 port 63773 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63773 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63773 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 73957
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63773 id 0
+Received disconnect from 127.0.0.1 port 63773:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63773
+Connection from 127.0.0.1 port 63776 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63776 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63776 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 75700
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63776 id 0
+Received disconnect from 127.0.0.1 port 63776:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63776
+Connection from 127.0.0.1 port 63778 on 127.0.0.1 port 63671
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63778 ssh2 [preauth]
+Accepted key ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63778 ssh2: ED25519 SHA256:1MiRO5v9TEGB1Rv444MDCWQFrnVLqJWFhtBiYi4YOG8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 79166
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-1a2140ih/ssh-command' for mehul from 127.0.0.1 port 63778 id 0
+Received disconnect from 127.0.0.1 port 63778:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63778
+Received signal 15; terminating.
+Server listening on 127.0.0.1 port 63820.
+Connection from 127.0.0.1 port 63824 on 127.0.0.1 port 63820
+Accepted key ED25519 SHA256:uTKKM5nfnTahGylUioCS1Eht3+doxKf7FRuLHObwHJ4 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63824 ssh2 [preauth]
+Accepted key ED25519 SHA256:uTKKM5nfnTahGylUioCS1Eht3+doxKf7FRuLHObwHJ4 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63824 ssh2: ED25519 SHA256:uTKKM5nfnTahGylUioCS1Eht3+doxKf7FRuLHObwHJ4
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 59437
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/ssh-command' for mehul from 127.0.0.1 port 63824 id 0
+Received disconnect from 127.0.0.1 port 63824:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63824
+Connection from 127.0.0.1 port 63830 on 127.0.0.1 port 63820
+Accepted key ED25519 SHA256:uTKKM5nfnTahGylUioCS1Eht3+doxKf7FRuLHObwHJ4 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63830 ssh2 [preauth]
+Accepted key ED25519 SHA256:uTKKM5nfnTahGylUioCS1Eht3+doxKf7FRuLHObwHJ4 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63830 ssh2: ED25519 SHA256:uTKKM5nfnTahGylUioCS1Eht3+doxKf7FRuLHObwHJ4
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 63169
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/ssh-command' for mehul from 127.0.0.1 port 63830 id 0
+Received disconnect from 127.0.0.1 port 63830:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63830
+Connection from 127.0.0.1 port 63833 on 127.0.0.1 port 63820
+Accepted key ED25519 SHA256:uTKKM5nfnTahGylUioCS1Eht3+doxKf7FRuLHObwHJ4 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63833 ssh2 [preauth]
+Accepted key ED25519 SHA256:uTKKM5nfnTahGylUioCS1Eht3+doxKf7FRuLHObwHJ4 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63833 ssh2: ED25519 SHA256:uTKKM5nfnTahGylUioCS1Eht3+doxKf7FRuLHObwHJ4
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 67829
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/ssh-command' for mehul from 127.0.0.1 port 63833 id 0
+Received disconnect from 127.0.0.1 port 63833:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63833
+Received signal 15; terminating.

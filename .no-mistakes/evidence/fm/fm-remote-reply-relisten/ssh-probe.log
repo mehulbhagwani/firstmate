@@ -1,0 +1,18 @@
+SSH probe exit: 0
+stdout: fm-live-ssh-ok
+stderr: Warning: Permanently added '[127.0.0.1]:63051' (ED25519) to the list of known hosts.
+
+sshd exit: 0
+sshd diagnostics:
+Server listening on 127.0.0.1 port 63051.
+Connection from 127.0.0.1 port 63053 on 127.0.0.1 port 63051
+Accepted key ED25519 SHA256:SlO+ozweODzoeL4zVVZIh5yJnSHC1RT/4vK3qy+wMhw found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-ssh-probe-2uc0mknt/authorized_keys:1
+Postponed publickey for mehul from 127.0.0.1 port 63053 ssh2 [preauth]
+Accepted key ED25519 SHA256:SlO+ozweODzoeL4zVVZIh5yJnSHC1RT/4vK3qy+wMhw found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-ssh-probe-2uc0mknt/authorized_keys:1
+Accepted publickey for mehul from 127.0.0.1 port 63053 ssh2: ED25519 SHA256:SlO+ozweODzoeL4zVVZIh5yJnSHC1RT/4vK3qy+wMhw
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 86219
+Starting session: command for mehul from 127.0.0.1 port 63053 id 0
+Received disconnect from 127.0.0.1 port 63053:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 63053
+Received signal 15; terminating.

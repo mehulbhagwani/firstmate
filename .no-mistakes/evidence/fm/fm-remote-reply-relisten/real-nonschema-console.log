@@ -1,0 +1,58 @@
+$ git -c init.defaultBranch=main init -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code
+exit=0
+stdout=
+stderr=
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code add bin AGENTS.md
+exit=0
+stdout=
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/remote
+exit=0
+stdout=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/remote
+stderr=
+$ /usr/bin/ssh-keygen -q -t ed25519 -N '' -f /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/host_key
+exit=0
+stdout=
+stderr=
+$ /usr/bin/ssh-keygen -q -t ed25519 -N '' -f /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/client_key
+exit=0
+stdout=
+stderr=
+SSH forced-command configuration: normal
+Real OpenSSH server started on loopback:63820, pid=56469
+SSH forced-command configuration: banner
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/nonschema
+exit=0
+stdout=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/nonschema
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code/bin/fm-on.sh nonschema fm-remote-delta-read.sh state/parent-replies.status 0 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 1
+exit=0
+stdout=no sources registered
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code/bin/fm-procevent-remote-reply.sh source nonschema
+exit=1
+stdout=
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code/bin/fm-procevent-remote-reply.sh arm nonschema
+exit=0
+stdout=registered: remote-reply-nonschema (remote-reply)
+armed: remote-reply-nonschema offset=0
+stderr=
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code/bin/fm-procevent.sh list
+exit=0
+stdout=SOURCE                       ADAPTER      OWNER      PENDING
+remote-reply-nonschema       remote-reply none       0
+stderr=
+Refusal: raw exit=0, adapter exit=1; one attempt, no output capture, claim released, registration retained.
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code/bin/fm-procevent-remote-reply.sh retire nonschema
+exit=0
+stdout=retired: remote-reply-nonschema
+stderr=
+Retirement stopped retries, released ownership, and left no staged output.
+SSH forced-command configuration: normal
+ALL LIVE SCENARIOS PASSED
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SGHQ162R3KV66V39CWB86/.fm-remote-live-wltz8tmz/code/bin/fm-procevent.sh sweep-home
+exit=0
+stdout=swept: attempted=0
+stderr=
+Disposable SSH server, worker, listeners, test keys, and lab files removed.

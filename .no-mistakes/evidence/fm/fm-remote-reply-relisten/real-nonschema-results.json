@@ -1,0 +1,9 @@
+[
+  {
+    "name": "nonschema",
+    "result": "pass",
+    "live": true,
+    "transport_exit": 0,
+    "source_exit": 1
+  }
+]
