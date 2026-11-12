@@ -1,0 +1,112 @@
+Running real production drain and lock interfaces with native processes; no product function or command is stubbed. Stale identity is injected as an on-disk lock record, as left by PID reuse.
+$ bash bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/live-owner
+exit=0 elapsed=0.076s
+stdout:
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/live-owner
+stderr:
+
+$ /opt/homebrew/bin/bash -c . "$1"; fm_wake_append check "$2" "lock validation notification" _ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/bin/fm-wake-lib.sh live-owner
+exit=0 elapsed=0.673s
+stdout:
+stderr:
+
+Real holder acquired /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/live-owner/state/.wake-queue.lock: owner=34613 start=Thu Nov 12 19:12:14 2026
+$ /opt/homebrew/bin/bash bin/fm-wake-drain.sh
+exit=0 elapsed=1.676s
+stdout:
+WAKE DRAIN SKIPPED: queue lock remains held by live pid 34613 after 1s; retry on the next drain.
+stderr:
+
+Live owner and queued notification preserved at deadline.
+holder released exit=0 stdout='' stderr=''
+$ /opt/homebrew/bin/bash bin/fm-wake-drain.sh
+exit=0 elapsed=2.984s
+stdout:
+1794510734	1	check	live-owner	lock validation notification
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 34223.1794510734.FJcASY
+
+$ /opt/homebrew/bin/bash bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 34223.1794510734.FJcASY
+exit=0 elapsed=1.378s
+stdout:
+stderr:
+
+Persisted queue empty only after explicit acknowledgement.
+$ bash bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/reused-pid
+exit=0 elapsed=0.087s
+stdout:
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/reused-pid
+stderr:
+
+$ /opt/homebrew/bin/bash -c . "$1"; fm_wake_append check "$2" "lock validation notification" _ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/bin/fm-wake-lib.sh reused-pid
+exit=0 elapsed=1.223s
+stdout:
+stderr:
+
+$ /opt/homebrew/bin/bash -c . "$1"; fm_pid_start_time "$2" _ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/bin/fm-wake-lib.sh 39412
+exit=0 elapsed=0.083s
+stdout:
+Thu Nov 12 19:12:22 2026
+stderr:
+
+Injected stale start identity for live decoy pid=39412; current token='Thu Nov 12 19:12:22 2026'; stored token='Thu Nov 12 19:12:22 2026X'
+Real holder acquired /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/reused-pid/state/.wake-queue.lock.steal: owner=39474 start=Thu Nov 12 19:12:22 2026
+$ /opt/homebrew/bin/bash bin/fm-wake-drain.sh
+exit=1 elapsed=2.374s
+stdout:
+stderr:
+wake drain: queue lock could not be acquired safely
+
+$ /opt/homebrew/bin/bash -c . "$1"; FM_LOCK_HELD_PID=prior-value; rc=0; fm_lock_acquire_wait_bounded "$2" 1 || rc=$?; printf 'rc=%s held=<%s>
+' "$rc" "$FM_LOCK_HELD_PID" _ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/bin/fm-wake-lib.sh /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/reused-pid/state/.wake-queue.lock
+exit=0 elapsed=2.716s
+stdout:
+rc=1 held=<>
+stderr:
+
+Both real processes remained alive through both completed timeouts; no unrelated holder was reported; persisted notification unchanged.
+holder released exit=0 stdout='' stderr=''
+$ /opt/homebrew/bin/bash bin/fm-wake-drain.sh
+exit=0 elapsed=4.375s
+stdout:
+1794510741	1	check	reused-pid	lock validation notification
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 38781.1794510742.tebJxP
+
+$ /opt/homebrew/bin/bash bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 38781.1794510742.tebJxP
+exit=0 elapsed=2.108s
+stdout:
+stderr:
+
+Persisted queue empty only after explicit acknowledgement.
+Stale lock reclaimed after stealer release; unrelated process still alive.
+$ bash bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/handoff-path
+exit=0 elapsed=0.307s
+stdout:
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/handoff-path
+stderr:
+
+Real holder acquired /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/handoff-path/state/handoff.lock: owner=44852 start=Thu Nov 12 19:12:34 2026
+holder released exit=0 stdout='' stderr=''
+$ /opt/homebrew/bin/bash -c <bounded acquire, inspect persisted owner/token, release>
+exit=0
+rc=0 caller=45106 recorded-owner=45106
+recorded=<Thu Nov 12 19:12:35 2026>
+probed=<Thu Nov 12 19:12:35 2026>
+
+$ bash bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/handoff-system
+exit=0 elapsed=0.054s
+stdout:
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/handoff-system
+stderr:
+
+Real holder acquired /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-live-1ag77apu/handoff-system/state/handoff.lock: owner=45885 start=Thu Nov 12 19:12:36 2026
+holder released exit=0 stdout='' stderr=''
+$ /bin/bash -c <bounded acquire, inspect persisted owner/token, release>
+exit=0
+rc=0 caller=45996 recorded-owner=45996
+recorded=<Thu Nov 12 19:12:36 2026>
+probed=<Thu Nov 12 19:12:36 2026>
+
+All live assertions passed.
+All scenario-owned processes stopped and temporary lab homes removed.

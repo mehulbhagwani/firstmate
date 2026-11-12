@@ -1,0 +1,17 @@
+Unsupported ps supplementary simulation (not live platform proof)
+selector: PATH="/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.gate-lock-supplemental-9b5ayj44:$PATH" test_mac_ps_start_token_normalizes_whitespace
+exit=0 expected=0
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - real ps start-token check skipped where ps -o lstart= is unsupported
+
+Existing successor-exited failure isolated with original test
+selector: test_watch_replaced_holder_stands_down_after_successor_exits
+exit=1 expected=1
+ok - disposable watcher refuses inherited state outside its marked lab
+not ok - the replaced watcher did not stand down on its own (exit 1): watcher: exiting - state directory was torn down (singleton lock removed): /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-watcher-lock-tests.sSQerB/watch-legacy-identity-successor-exited/state
+
+Native open-directory identity diagnostic (bash)
+opened_directory=yes directory_exists=yes same_file_rc=1
+
+Native open-directory identity diagnostic (/bin/bash)
+opened_directory=yes directory_exists=yes same_file_rc=1

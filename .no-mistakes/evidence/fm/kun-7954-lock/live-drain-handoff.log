@@ -1,0 +1,19 @@
+$ bash bin/fm-wake-drain.sh
+Real holder released after drain had waited 0.6s.
+exit=0 elapsed=2.333s
+stdout:
+1794510011	1	check	handoff	notification after waiting
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 61068.1794510011.25Sntr
+
+Timed helper handed the lock to the running drain; notification delivered and lock released.
+$ /bin/bash bin/fm-wake-drain.sh
+Real holder released after drain had waited 0.6s.
+exit=0 elapsed=2.504s
+stdout:
+1794510014	2	check	handoff	notification after waiting
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 61068.1794510011.25Sntr
+
+Timed helper handed the lock to the running drain; notification delivered and lock released.
+All scenario-owned processes stopped and temporary home removed.

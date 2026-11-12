@@ -1,0 +1,27 @@
+[
+  {
+    "name": "live owner protected and drain resumes after release",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "reused PID plus live steal holder times out with return 1 and empty held PID",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "stale PID identity reclaimed and queued notification delivered after stealer releases",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "bounded waiter hands ownership and matching native start token to caller (/opt/homebrew/bin/bash)",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "bounded waiter hands ownership and matching native start token to caller (/bin/bash)",
+    "result": "pass",
+    "live": true
+  }
+]
