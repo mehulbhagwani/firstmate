@@ -1,0 +1,2 @@
+1..1
+not ok - ext-backup-unmerged: teardown should refuse: expected exit 1, got 0

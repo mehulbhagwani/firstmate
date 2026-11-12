@@ -1,0 +1,7 @@
+1..1
+Gerrit scenario merged: exit=0; backlog=done
+Gerrit scenario open: exit=0; backlog=done
+Gerrit scenario abandoned: exit=1; backlog=in_flight
+Gerrit scenario stale: exit=1; backlog=in_flight
+ok - Gerrit accepts merged/current and open/pushed reviews; refuses abandoned and stale merged reviews
+FM_TEST_COMPLETE

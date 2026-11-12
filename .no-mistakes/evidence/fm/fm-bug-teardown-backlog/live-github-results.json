@@ -1,0 +1,26 @@
+[
+  {
+    "name": "open-review",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-github.log"
+  },
+  {
+    "name": "closed-review",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-github.log"
+  },
+  {
+    "name": "merged-review",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-github.log"
+  },
+  {
+    "name": "post-merge-followup",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-github.log"
+  }
+]

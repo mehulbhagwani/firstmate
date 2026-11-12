@@ -1,0 +1,415 @@
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-remote-job-reap-orphans.sh --dry-run
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s -f /dev/null new-session -d -s firstmate -n anchor -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github 'sleep 3600'
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s display-message -p '#{pid}'
+89613
+
+SCENARIO: open-review
+$ gh-axi pr view 5953 --repo kunchenguid/firstmate --fields state,headRefOid,url
+pull_request:
+  headRefOid: 05f6b0faa0da023c9eca63766cd24996a51f7ba8
+  state: OPEN
+  url: "https://github.com/kunchenguid/firstmate/pull/5953"
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review
+$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/origin.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/origin.git symbolic-ref HEAD refs/heads/main
+$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/project
+warning: You appear to have cloned an empty repository.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/project checkout -q -b main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/project add baseline.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/project commit -qm 'Initial lab content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/project push -q origin main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/project remote set-head origin main
+$ treehouse get --lease --no-fetch --base main -b fm/open-review
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project add feature.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project commit -qm 'Reviewed content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project rev-parse HEAD
+0fce3b203f7a887dac2f3b63f56377ecf78f2d7e
+$ tasks-axi add open-review 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/data/backlog.md
+ok: added open-review (ship) -> Queued
+task:
+  id: open-review
+  title: Live retention check
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start open-review --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/data/backlog.md` to move it to in flight
+  - Run `tasks-axi block open-review --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/data/backlog.md` to record a dependency
+$ tasks-axi start open-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/data/backlog.md
+ok: start open-review -> In flight
+help[1]:
+  - Run `tasks-axi done open-review --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/data/backlog.md` when it ships
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s new-window -d -t firstmate -n fm-open-review -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project 'sleep 3600'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/origin.git config receive.shallowUpdate true
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project sparse-checkout init --no-cone
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project sparse-checkout set --no-cone /README.md
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project fetch -q --depth=2 https://github.com/kunchenguid/firstmate.git refs/pull/5953/head
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project reset --hard FETCH_HEAD
+HEAD is now at 05f6b0f no-mistakes(ci): Fixed ci-2 (Greptile P1): a pushed GitLab task with a merged merge request could not be torn down when later default-branch changes made the content check conflict. Invariant: `pr_is_merged` must read a recorded PR through the reader for its own forge. Before the fix, every address that was not Forgejo went to `gh pr view`, which cannot read GitLab or Gerrit addresses. Changes: - `bin/fm-pr-lib.sh`: `fm_pr_gitlab_read_record` now also sets `FM_PR_RECORD_HEAD` from the MR record's `sha` field (empty when missing), so existing callers accept the same records as before. - `bin/fm-teardown.sh` `pr_is_merged`: one `case` on the provider. forgejo uses `fm_pr_forgejo_read_record` (unchanged). gitlab uses `fm_pr_gitlab_read_record`. gerrit uses `fm_pr_gerrit_read_record` plus `fm_pr_gerrit_read_revision`. github and branch-resolved PR numbers still use `gh pr view`. For the provider readers, the merged state must be `true` and the head must pass `fm_pr_head_valid`. The containment proof is unchanged: `ensure_commit_object`, then HEAD is an ancestor of the merged head, or the unpushed patch-ids are in the PR head. - `tests/fm-teardown.test.sh`: new test `test_pushed_gitlab_task_with_merged_mr_allows_when_main_moved_on`, with a stubbed glab. MR merged: teardown proceeds. MR opened: teardown proceeds. MR closed without merging: teardown refuses and keeps the task state. Verification: - The new test fails without the bin changes ("REFUSED ... work that is not landed") and passes with them. - `tests/fm-teardown.test.sh` and `tests/fm-crew-state.test.sh` exited 0 with no failures. - The background test run was stopped at its time limit before it printed final exit codes for `fm-pr-merge`, `fm-project-mode` and `fm-pr-check-security`. Their logs show no failures: fm-pr-merge 123 passed, fm-project-mode 12 passed ("all assertions passed"), fm-pr-check-security 37 passed. - `bin/fm-lint.sh` on the three changed files is clean. - Not tested against a real GitLab server; the tests use a stub glab
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project rev-parse HEAD
+05f6b0faa0da023c9eca63766cd24996a51f7ba8
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project push -q origin HEAD:refs/heads/fm/open-review
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh open-review
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 15s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+teardown: reaping leaked worktree process(es) for open-review: 95163
+🌳 Worktree returned to pool.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/project: already current
+teardown open-review complete (window firstmate:fm-open-review, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project)
+Backlog: open-review is closed in /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project status --porcelain
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/project branch --list fm/open-review
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s has-session -t firstmate:fm-open-review
+can't find window: fm-open-review
+$ tasks-axi show open-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/data/backlog.md
+task:
+  id: open-review
+  title: "Live retention check https://github.com/kunchenguid/firstmate/pull/5953"
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: "pr:https://github.com/kunchenguid/firstmate/pull/5953"
+  body: ""
+$ treehouse status
+base  main  (repository default)
+1     available    ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/open-review/pool/.treehouse/project-1d110d/1/project  (detached)
+OBSERVED: task record and branch removed, worker stopped, pool copy clean, and backlog Done.
+
+SCENARIO: closed-review
+$ gh-axi pr view 8391 --repo kunchenguid/firstmate --fields state,headRefOid,url
+pull_request:
+  headRefOid: eda785230ae78ec90a6a501e5099c084121add2b
+  state: CLOSED
+  url: "https://github.com/kunchenguid/firstmate/pull/8391"
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review
+$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/origin.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/origin.git symbolic-ref HEAD refs/heads/main
+$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/project
+warning: You appear to have cloned an empty repository.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/project checkout -q -b main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/project add baseline.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/project commit -qm 'Initial lab content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/project push -q origin main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/project remote set-head origin main
+$ treehouse get --lease --no-fetch --base main -b fm/closed-review
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project add feature.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project commit -qm 'Reviewed content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project rev-parse HEAD
+62e644eb56205d3f5c6c972d7e70e2715029d226
+$ tasks-axi add closed-review 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/data/backlog.md
+ok: added closed-review (ship) -> Queued
+task:
+  id: closed-review
+  title: Live retention check
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start closed-review --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/data/backlog.md` to move it to in flight
+  - Run `tasks-axi block closed-review --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/data/backlog.md` to record a dependency
+$ tasks-axi start closed-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/data/backlog.md
+ok: start closed-review -> In flight
+help[1]:
+  - Run `tasks-axi done closed-review --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/data/backlog.md` when it ships
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s new-window -d -t firstmate -n fm-closed-review -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project 'sleep 3600'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/origin.git config receive.shallowUpdate true
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project sparse-checkout init --no-cone
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project sparse-checkout set --no-cone /README.md
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project fetch -q --depth=2 https://github.com/kunchenguid/firstmate.git refs/pull/8391/head
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project reset --hard FETCH_HEAD
+HEAD is now at eda7852 document: Record shared-origin and lapsed-deferral test coverage
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project rev-parse HEAD
+eda785230ae78ec90a6a501e5099c084121add2b
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project push -q origin HEAD:refs/heads/fm/closed-review
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh closed-review
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 10s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: content-landed proof unavailable for worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project: git merge-tree --write-tree failed (Git exit 128).
+Restore or upgrade Git and retry the content check.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project rev-parse HEAD
+eda785230ae78ec90a6a501e5099c084121add2b
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/pool/.treehouse/project-66b36d/1/project branch --show-current
+fm/closed-review
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s has-session -t firstmate:fm-closed-review
+$ tasks-axi show closed-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/closed-review/data/backlog.md
+task:
+  id: closed-review
+  title: Live retention check
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
+
+SCENARIO: merged-review
+$ gh-axi pr view 8380 --repo kunchenguid/firstmate --fields state,headRefOid,url
+pull_request:
+  headRefOid: 86bee765ff25f93ab1f95dd04612a144af66c714
+  state: MERGED
+  url: "https://github.com/kunchenguid/firstmate/pull/8380"
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review
+$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/origin.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/origin.git symbolic-ref HEAD refs/heads/main
+$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/project
+warning: You appear to have cloned an empty repository.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/project checkout -q -b main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/project add baseline.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/project commit -qm 'Initial lab content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/project push -q origin main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/project remote set-head origin main
+$ treehouse get --lease --no-fetch --base main -b fm/merged-review
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project add feature.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project commit -qm 'Reviewed content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project rev-parse HEAD
+ee9f825e7be8e3071209b6adf56a40fb09b359b8
+$ tasks-axi add merged-review 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/data/backlog.md
+ok: added merged-review (ship) -> Queued
+task:
+  id: merged-review
+  title: Live retention check
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start merged-review --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/data/backlog.md` to move it to in flight
+  - Run `tasks-axi block merged-review --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/data/backlog.md` to record a dependency
+$ tasks-axi start merged-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/data/backlog.md
+ok: start merged-review -> In flight
+help[1]:
+  - Run `tasks-axi done merged-review --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/data/backlog.md` when it ships
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s new-window -d -t firstmate -n fm-merged-review -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project 'sleep 3600'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/origin.git config receive.shallowUpdate true
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project sparse-checkout init --no-cone
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project sparse-checkout set --no-cone /README.md
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project fetch -q --depth=2 https://github.com/kunchenguid/firstmate.git refs/pull/8380/head
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project reset --hard FETCH_HEAD
+HEAD is now at 86bee76 no-mistakes(document): Clarify timeout evidence identity
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project rev-parse HEAD
+86bee765ff25f93ab1f95dd04612a144af66c714
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh merged-review
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 10s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+teardown: reaping leaked worktree process(es) for merged-review: 61333
+🌳 Worktree returned to pool.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/project: already current
+teardown merged-review complete (window firstmate:fm-merged-review, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project)
+Backlog: merged-review is closed in /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project status --porcelain
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/project branch --list fm/merged-review
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s has-session -t firstmate:fm-merged-review
+can't find window: fm-merged-review
+$ tasks-axi show merged-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/data/backlog.md
+task:
+  id: merged-review
+  title: "Live retention check https://github.com/kunchenguid/firstmate/pull/8380"
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: "pr:https://github.com/kunchenguid/firstmate/pull/8380"
+  body: ""
+$ treehouse status
+base  main  (repository default)
+1     available    ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/merged-review/pool/.treehouse/project-6f47c2/1/project  (detached)
+OBSERVED: task record and branch removed, worker stopped, pool copy clean, and backlog Done.
+
+SCENARIO: post-merge-followup
+$ gh-axi pr view 8380 --repo kunchenguid/firstmate --fields state,headRefOid,url
+pull_request:
+  headRefOid: 86bee765ff25f93ab1f95dd04612a144af66c714
+  state: MERGED
+  url: "https://github.com/kunchenguid/firstmate/pull/8380"
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup
+$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/origin.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/origin.git symbolic-ref HEAD refs/heads/main
+$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/project
+warning: You appear to have cloned an empty repository.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/project checkout -q -b main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/project add baseline.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/project commit -qm 'Initial lab content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/project push -q origin main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/project remote set-head origin main
+$ treehouse get --lease --no-fetch --base main -b fm/post-merge-followup
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project add feature.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project commit -qm 'Reviewed content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project rev-parse HEAD
+06a3fd613bdacd2a8fef1d51f0fb221bef44112e
+$ tasks-axi add post-merge-followup 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/data/backlog.md
+ok: added post-merge-followup (ship) -> Queued
+task:
+  id: post-merge-followup
+  title: Live retention check
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start post-merge-followup --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/data/backlog.md` to move it to in flight
+  - Run `tasks-axi block post-merge-followup --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/data/backlog.md` to record a dependency
+$ tasks-axi start post-merge-followup --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/data/backlog.md
+ok: start post-merge-followup -> In flight
+help[1]:
+  - Run `tasks-axi done post-merge-followup --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/data/backlog.md` when it ships
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s new-window -d -t firstmate -n fm-post-merge-followup -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project 'sleep 3600'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/origin.git config receive.shallowUpdate true
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project sparse-checkout init --no-cone
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project sparse-checkout set --no-cone /README.md
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project fetch -q --depth=2 https://github.com/kunchenguid/firstmate.git refs/pull/8380/head
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project reset --hard FETCH_HEAD
+HEAD is now at 86bee76 no-mistakes(document): Clarify timeout evidence identity
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project add README.md
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project commit -qm 'Unreviewed follow-up'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project rev-parse HEAD
+ffea1cb61c9dcfa592913b8f732cb5de3d229072
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project push -q origin HEAD:refs/heads/fm/post-merge-followup
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh post-merge-followup
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 10s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: content-landed proof unavailable for worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project: git merge-tree --write-tree failed (Git exit 128).
+Restore or upgrade Git and retry the content check.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project rev-parse HEAD
+ffea1cb61c9dcfa592913b8f732cb5de3d229072
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/pool/.treehouse/project-36cec3/1/project branch --show-current
+fm/post-merge-followup
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/s has-session -t firstmate:fm-post-merge-followup
+$ tasks-axi show post-merge-followup --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-github/post-merge-followup/data/backlog.md
+task:
+  id: post-merge-followup
+  title: Live retention check
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
+
+All GitHub live scenarios passed.

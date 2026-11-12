@@ -1,0 +1,396 @@
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-remote-job-reap-orphans.sh --dry-run
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s -f /dev/null new-session -d -s firstmate -n anchor -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary 'sleep 3600'
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s display-message -p '#{pid}'
+12790
+
+SCENARIO: local-unmerged
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged
+$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/origin.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/origin.git symbolic-ref HEAD refs/heads/main
+$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/project
+warning: You appear to have cloned an empty repository.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/project checkout -q -b main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/project add baseline.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/project commit -qm 'Initial lab content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/project push -q origin main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/project remote set-head origin main
+$ treehouse get --lease --no-fetch --base main -b fm/local-unmerged
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project add feature.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project commit -qm 'Reviewed content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project rev-parse HEAD
+ee9cecdcd4bd87b8b65751ebda38b9bccdc4c02b
+$ tasks-axi add local-unmerged 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/data/backlog.md
+ok: added local-unmerged (ship) -> Queued
+task:
+  id: local-unmerged
+  title: Live retention check
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start local-unmerged --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/data/backlog.md` to move it to in flight
+  - Run `tasks-axi block local-unmerged --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/data/backlog.md` to record a dependency
+$ tasks-axi start local-unmerged --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/data/backlog.md
+ok: start local-unmerged -> In flight
+help[1]:
+  - Run `tasks-axi done local-unmerged --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/data/backlog.md` when it ships
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s new-window -d -t firstmate -n fm-local-unmerged -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project 'sleep 3600'
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh local-unmerged
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 8s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: local-only worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project has work not yet merged into main and not on any remote.
+commits not yet on main:
+ee9cecd Reviewed content
+Merge the branch into local main first (bin/fm-merge-local.sh after the captain approves), or push to a fork/remote, or get the captain's explicit OK to discard, then --force.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project rev-parse HEAD
+ee9cecdcd4bd87b8b65751ebda38b9bccdc4c02b
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project branch --show-current
+fm/local-unmerged
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s has-session -t firstmate:fm-local-unmerged
+$ tasks-axi show local-unmerged --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/data/backlog.md
+task:
+  id: local-unmerged
+  title: Live retention check
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
+
+SCENARIO: local-only work after merge into local main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/project merge -q --ff-only fm/local-unmerged
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh local-unmerged
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged
+WARNING: watcher still down (same stale episode; last beat: 27s ago, grace 300s) - full banner already printed this episode.
+teardown: reaping leaked worktree process(es) for local-unmerged: 16946
+🌳 Worktree returned to pool.
+teardown local-unmerged complete (window firstmate:fm-local-unmerged, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project)
+Backlog: local-unmerged is closed in /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project status --porcelain
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/project branch --list fm/local-unmerged
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s has-session -t firstmate:fm-local-unmerged
+can't find window: fm-local-unmerged
+$ tasks-axi show local-unmerged --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/data/backlog.md
+task:
+  id: local-unmerged
+  title: Live retention check
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: none
+  body: local main
+$ treehouse status
+base  main  (repository default)
+1     available    ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-unmerged/pool/.treehouse/project-e0f9ad/1/project  (detached)
+OBSERVED: task record and branch removed, worker stopped, pool copy clean, and backlog Done.
+
+SCENARIO: local-published
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published
+$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/origin.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/origin.git symbolic-ref HEAD refs/heads/main
+$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/project
+warning: You appear to have cloned an empty repository.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/project checkout -q -b main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/project add baseline.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/project commit -qm 'Initial lab content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/project push -q origin main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/project remote set-head origin main
+$ treehouse get --lease --no-fetch --base main -b fm/local-published
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project add feature.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project commit -qm 'Reviewed content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project rev-parse HEAD
+42ff2bb4cd97999b63050abadc4f55f4e02b9d58
+$ tasks-axi add local-published 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/data/backlog.md
+ok: added local-published (ship) -> Queued
+task:
+  id: local-published
+  title: Live retention check
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start local-published --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/data/backlog.md` to move it to in flight
+  - Run `tasks-axi block local-published --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/data/backlog.md` to record a dependency
+$ tasks-axi start local-published --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/data/backlog.md
+ok: start local-published -> In flight
+help[1]:
+  - Run `tasks-axi done local-published --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/data/backlog.md` when it ships
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s new-window -d -t firstmate -n fm-local-published -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project 'sleep 3600'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project push -q origin HEAD:refs/heads/fm/local-published
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh local-published
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 3s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+teardown: reaping leaked worktree process(es) for local-published: 64544
+🌳 Worktree returned to pool.
+teardown local-published complete (window firstmate:fm-local-published, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project)
+Backlog: local-published is closed in /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project status --porcelain
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/project branch --list fm/local-published
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s has-session -t firstmate:fm-local-published
+can't find window: fm-local-published
+$ tasks-axi show local-published --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/data/backlog.md
+task:
+  id: local-published
+  title: Live retention check
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: none
+  body: local main
+$ treehouse status
+base  main  (repository default)
+1     available    ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/local-published/pool/.treehouse/project-ca5066/1/project  (detached)
+OBSERVED: task record and branch removed, worker stopped, pool copy clean, and backlog Done.
+
+SCENARIO: mirror-only
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only
+$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/origin.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/origin.git symbolic-ref HEAD refs/heads/main
+$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/project
+warning: You appear to have cloned an empty repository.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/project checkout -q -b main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/project add baseline.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/project commit -qm 'Initial lab content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/project push -q origin main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/project remote set-head origin main
+$ treehouse get --lease --no-fetch --base main -b fm/mirror-only
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project add feature.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project commit -qm 'Reviewed content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project rev-parse HEAD
+f4d04542c9c5296c88731f508e20e3d296703f8e
+$ tasks-axi add mirror-only 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/data/backlog.md
+ok: added mirror-only (ship) -> Queued
+task:
+  id: mirror-only
+  title: Live retention check
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start mirror-only --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/data/backlog.md` to move it to in flight
+  - Run `tasks-axi block mirror-only --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/data/backlog.md` to record a dependency
+$ tasks-axi start mirror-only --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/data/backlog.md
+ok: start mirror-only -> In flight
+help[1]:
+  - Run `tasks-axi done mirror-only --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/data/backlog.md` when it ships
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s new-window -d -t firstmate -n fm-mirror-only -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project 'sleep 3600'
+$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/mirror.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/project remote add no-mistakes /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/mirror.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project push -q no-mistakes HEAD:refs/heads/fm/mirror-only
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh mirror-only
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 7s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project has work that is not landed.
+unpushed commits:
+f4d0454 Reviewed content
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project rev-parse HEAD
+f4d04542c9c5296c88731f508e20e3d296703f8e
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/pool/.treehouse/project-2086d2/1/project branch --show-current
+fm/mirror-only
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s has-session -t firstmate:fm-mirror-only
+$ tasks-axi show mirror-only --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/mirror-only/data/backlog.md
+task:
+  id: mirror-only
+  title: Live retention check
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
+
+SCENARIO: unreadable-review
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review
+$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/origin.git
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/origin.git symbolic-ref HEAD refs/heads/main
+$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/project
+warning: You appear to have cloned an empty repository.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/project checkout -q -b main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/project add baseline.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/project commit -qm 'Initial lab content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/project push -q origin main
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/project remote set-head origin main
+$ treehouse get --lease --no-fetch --base main -b fm/unreadable-review
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project add feature.txt
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project commit -qm 'Reviewed content'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project rev-parse HEAD
+3f4c30bd6dd86e65216bb96829c5a09e39484d1d
+$ tasks-axi add unreadable-review 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/data/backlog.md
+ok: added unreadable-review (ship) -> Queued
+task:
+  id: unreadable-review
+  title: Live retention check
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start unreadable-review --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/data/backlog.md` to move it to in flight
+  - Run `tasks-axi block unreadable-review --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/data/backlog.md` to record a dependency
+$ tasks-axi start unreadable-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/data/backlog.md
+ok: start unreadable-review -> In flight
+help[1]:
+  - Run `tasks-axi done unreadable-review --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/data/backlog.md` when it ships
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s new-window -d -t firstmate -n fm-unreadable-review -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project 'sleep 3600'
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project push -q origin HEAD:refs/heads/fm/unreadable-review
+$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh unreadable-review
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 4s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project rev-parse HEAD
+3f4c30bd6dd86e65216bb96829c5a09e39484d1d
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/pool/.treehouse/project-717397/1/project branch --show-current
+fm/unreadable-review
+$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/s has-session -t firstmate:fm-unreadable-review
+$ tasks-axi show unreadable-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-boundary/unreadable-review/data/backlog.md
+task:
+  id: unreadable-review
+  title: Live retention check
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
+
+All boundary live scenarios passed.

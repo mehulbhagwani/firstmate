@@ -1,0 +1,38 @@
+[
+  {
+    "name": "unpublished",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-teardown.log"
+  },
+  {
+    "name": "pushed-no-review",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-teardown.log"
+  },
+  {
+    "name": "external-no-backup",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-teardown.log"
+  },
+  {
+    "name": "external-backup",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-teardown.log"
+  },
+  {
+    "name": "dirty-after-landing",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-teardown.log"
+  },
+  {
+    "name": "external-backup-after-squash-landing",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-teardown.log"
+  }
+]

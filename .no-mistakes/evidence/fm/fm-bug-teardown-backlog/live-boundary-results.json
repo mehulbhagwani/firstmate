@@ -1,0 +1,32 @@
+[
+  {
+    "name": "local-unmerged",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-boundary.log"
+  },
+  {
+    "name": "local-merged",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-boundary.log"
+  },
+  {
+    "name": "local-published",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-boundary.log"
+  },
+  {
+    "name": "mirror-only",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-boundary.log"
+  },
+  {
+    "name": "unreadable-review",
+    "result": "pass",
+    "live": true,
+    "evidence": "live-boundary.log"
+  }
+]

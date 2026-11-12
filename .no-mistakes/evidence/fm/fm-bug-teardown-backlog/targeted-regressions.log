@@ -1,0 +1,23 @@
+ok - teardown leaves opencode's busy plugin in the returned pool worktree as on main
+1..20
+ok - no-mistakes worktree with pushed but unmerged work is refused
+ok - forge=external work on the personal backup remote is retained while its review is unmerged
+ok - forge=external work missing from the personal backup remote is refused
+ok - pushed work with a recorded open PR is not refused
+ok - pushed work with a recorded but closed-unmerged PR is refused
+ok - pushed follow-up work after a merged PR is refused
+ok - pushed work with a recorded open Forgejo PR is not refused
+ok - pushed work with a closed-unmerged Forgejo PR is refused and retained
+ok - teardown proves a Forgejo task landed from the merged pull request when the content check is inconclusive
+ok - teardown proves a pushed GitLab task landed from the merged merge request when the content check conflicts
+ok - teardown proves a squash- or train-merged GitLab MR landed from the MR head with or without an opt-in flag, and refuses an unpushed open one
+ok - branch pushed only to the no-mistakes mirror is refused as unlanded
+ok - merged PR does not allow teardown after a later local commit
+ok - merged PR patch matching preserves indentation, allows exact replays, and refuses unsupported Git
+ok - worktree whose content already landed in the default branch is torn down (content fallback)
+ok - content fallback refreshes origin default before comparing trees
+ok - dirty worktree is refused even when its committed work has landed (dirty always wins)
+ok - local-only worktree with HEAD on a fork remote is torn down and the home summary is refreshed
+ok - local-only worktree with truly unpushed work is refused (safety preserved)
+ok - local-only worktree with work merged into local main is torn down (no regression)
+FM_TEST_COMPLETE
