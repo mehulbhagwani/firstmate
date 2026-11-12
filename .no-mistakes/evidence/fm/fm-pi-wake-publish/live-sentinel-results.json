@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Baseline reproduces invisible suppression below endpoint-check threshold",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Every suppressed poll shows the operator notice without publishing wedge alerts",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Endpoint checks remain rate-limited while notices repeat",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Missing timer repairs itself without suppressing diagnostics or flooding alerts",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Exited worker is reported once despite active suppression",
+    "result": "pass",
+    "live": true
+  }
+]

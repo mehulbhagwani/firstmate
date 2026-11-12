@@ -1,0 +1,13 @@
+{
+  "url": "https://github.com/kunchenguid/firstmate/pull/7871",
+  "tested_target": "7625251967d51aa0d70b7bbbbd0c4c9d78c27f9f",
+  "published_head": "954a1180c4fca35c431b5eb180d8fed4c7ac3f1a",
+  "attestation_head": "954a1180c4fca35c431b5eb180d8fed4c7ac3f1a",
+  "attestation_matches_published_head": true,
+  "serial_1": {
+    "conclusion": "SUCCESS",
+    "url": "https://github.com/kunchenguid/firstmate/actions/runs/40658004997/job/122713671034",
+    "completed_at": "2026-10-28T08:52:14Z"
+  },
+  "target_delivery": "Not yet verified: the outer executor owns publishing this target, refreshing its attestation, and CI."
+}

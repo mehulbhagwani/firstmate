@@ -1,0 +1,12 @@
+2026-11-12T21:14:25Z Real tools: tmux 3.8; Pi 1.5.2
+2026-11-12T21:14:31Z Real Pi endpoint before failure: alive
+2026-11-12T21:14:35Z Refused escalation-count write: watcher exit=1; sentinel=1794518075 rollback-failed
+2026-11-12T21:14:47Z before-fix: actual watcher iterations=6, suppression notices=0, queued wedge alerts=0, timer_before=1794518070, timer_after=1794518070
+2026-11-12T21:14:58Z after-fix: actual watcher iterations=6, suppression notices=6, queued wedge alerts=0, timer_before=1794518082, timer_after=1794518082
+2026-11-12T21:15:11Z at-threshold: actual watcher iterations=6, suppression notices=6, queued wedge alerts=0, timer_before=1794517598, timer_after=1794518099
+2026-11-12T21:15:11Z Due probe refreshed the timer once; following sub-threshold polls kept it stable.
+2026-11-12T21:15:17Z Missing timer repaired under active sentinel; repeated notices continued and no alert was queued.
+2026-11-12T21:15:19Z Endpoint after exiting real Pi: dead
+2026-11-12T21:15:21Z Suppression still reported exited worker exactly once: 1794518121	1	stale	fm-lab-sentinel:worker	stale: fm-lab-sentinel:worker (idle 502s, agent dead - the endpoint is still there with no agent running in it, so this is not a wedge; reported once and not re-escalated while it stays that way - reconcile this record, and check for unlanded work before any cleanup)
+2026-11-12T21:15:33Z dead-worker-repeat: actual watcher iterations=6, suppression notices=6, queued wedge alerts=0, timer_before=1794517621, timer_after=1794518123
+2026-11-12T21:15:33Z All live scenarios passed.

@@ -1,0 +1,3 @@
+[2026-11-13T02:45:12+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-13T02:45:14+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-13T02:45:16+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
