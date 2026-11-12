@@ -1,0 +1,2 @@
+{"ok":false,"error":{"code":"no_credential","message":"no T3 credential at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/north home/config/t3code-token; the captain signs in with: bin/fm-t3-mcp.mjs login --access full-access"}}
+fm-t3-mcp: no T3 credential at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/north home/config/t3code-token; the captain signs in with: bin/fm-t3-mcp.mjs login --access full-access

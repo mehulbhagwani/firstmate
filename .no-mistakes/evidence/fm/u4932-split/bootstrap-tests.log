@@ -1,0 +1,4 @@
+ok - bootstrap archives an old orphan status log and reports interleaved duplicates
+ok - bootstrap skips archiving while the task metadata lock is held
+ok - record hygiene keeps a status log whose metadata is published before the move
+not ok - watcher failed during hygiene check (exit=127)

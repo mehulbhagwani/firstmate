@@ -1,0 +1,72 @@
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/north home
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/south'home
+
+Installed provider: v3.1.8
+Home A root: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b
+Home B root: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/south-home-a38e97bc0752
+Symlink alias root: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b
+🌳 Setting up worktree...
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/1/project' to release it.
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/south-home-a38e97bc0752/.treehouse/project-d8332a/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/south-home-a38e97bc0752/.treehouse/project-d8332a/1/project' to release it.
+
+Concurrent acquisitions with an ambient shared TREEHOUSE_ROOT:
+A=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/1/project
+B=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/south-home-a38e97bc0752/.treehouse/project-d8332a/1/project
+worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/north home/projects/project
+HEAD ac616b2e00f22a7b8161c59ad8b3119c626a49b8
+branch refs/heads/main
+
+worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/1/project
+HEAD ac616b2e00f22a7b8161c59ad8b3119c626a49b8
+detached
+
+worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/south'home/projects/project
+HEAD ac616b2e00f22a7b8161c59ad8b3119c626a49b8
+branch refs/heads/main
+
+worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/south-home-a38e97bc0752/.treehouse/project-d8332a/1/project
+HEAD ac616b2e00f22a7b8161c59ad8b3119c626a49b8
+detached
+
+[{"name":"1","path":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/1/project","status":"leased","branch":"","detached":true,"flavor":"git","lease_id":"13e76227b41a6d1cee1bacefe9767289","lease_holder":"north","leased_at":"2026-11-13T03:11:19.636192+05:30","processes":[]}]
+[{"name":"1","path":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/south-home-a38e97bc0752/.treehouse/project-d8332a/1/project","status":"leased","branch":"","detached":true,"flavor":"git","lease_id":"0358338037dbd56e79c5e6083ab9d4d6","lease_holder":"south","leased_at":"2026-11-13T03:11:19.651255+05:30","processes":[]}]
+
+Interactive acquisition through the canonical alias root:
+🌳 Setting up worktree...
+🌳 Entered worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/2/project. Type 'exit' to return.
+%   [1;36mproject[0m on [1;35m HEAD[0m 
+[35m❯[0m %   [1;36mproject[0m on [1;35m HEAD[0m 
+[35m❯[0m 🌳 Worktree returned to pool.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/2/project
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/2/project
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse/project-d8332a/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse/project-d8332a/1/project' to release it.
+
+Return a legacy lease after switching the allocation root:
+Legacy path: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse/project-d8332a/1/project
+🌳 Worktree returned to pool.
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse/project-d8332a/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse/project-d8332a/1/project' to release it.
+Reacquired the same legacy slot: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse/project-d8332a/1/project
+🌳 Worktree returned to pool.
+🌳 Worktree returned to pool.
+
+Startup diagnostics without the pool-report opt-in:
+
+Startup diagnostics with pool reporting enabled and a zero-day age threshold:
+TREEHOUSE_POOL_REPORT: unowned slot older than 0d: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/1/project (age 0d)
+TREEHOUSE_POOL_REPORT: unowned slot older than 0d: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/2/project (age 0d)
+TREEHOUSE_POOL_REPORT: test-leftover pool /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a
+TREEHOUSE_POOL_REPORT: scanned 1 pools under /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse
+TREEHOUSE_POOL_REPORT: unowned slot older than 0d: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse/project-d8332a/1/project (age 0d)
+TREEHOUSE_POOL_REPORT: test-leftover pool /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse/project-d8332a
+TREEHOUSE_POOL_REPORT: scanned 1 pools under /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse
+TREEHOUSE_POOL_REPORT: unowned slot older than 0d: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/.firstmate-worktrees/north-home-d37f5f63127b/.treehouse/project-d8332a/1/project (age 0d)
+TREEHOUSE_POOL_REPORT: unowned slot older than 0d: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/live/legacy/.treehouse/project-d8332a/1/project (age 0d)
+Pool state digests are unchanged by diagnostics.
+
+Malformed parent binding refuses root resolution:
+No allocation root was returned.
+
+Live evidence collection complete.

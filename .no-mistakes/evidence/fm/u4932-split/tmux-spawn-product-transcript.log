@@ -1,0 +1,67 @@
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/home-a
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/home-b
+scaffolded: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/home-a/data/pool-live-a-30980/brief.md (scout; replace {TASK} and {FIRSTMATE_SPEC})
+
+Dispatch from home a through real tmux and real Treehouse, with the installed Codex version command:
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/home-a
+spawned pool-live-a-30980 harness=codex kind=scout window=primary:fm-pool-live-a-30980 worktree=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-a-5764e2741833/.treehouse/project-d8332a/1/project
+Recorded allocated directory: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-a-5764e2741833/.treehouse/project-d8332a/1/project
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/home-a/projects/project/.git
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ treehouse --root '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M
+78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-a-57
+64e2741833' get
+🌳 Setting up worktree...
+🌳 Entered worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0W
+SA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-a-5764e2741833/.tree
+house/project-d8332a/1/project. Type 'exit' to return.
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ cd -- '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4
+JXA0WSA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-a-5764e2741833/
+.treehouse/project-d8332a/1/project'
+bash-3.2$ export GOTMPDIR=/tmp/fm-pool-live-a-30980/gotmp
+bash-3.2$ export COMPACT_ADVISER_DISABLE=1
+bash-3.2$ export FM_TASK_ID=pool-live-a-30980
+bash-3.2$ . '/tmp/fm-pool-live-a-30980+57998895d4478546400b2085fb056034e9b94d9e3
+d83af2e10fc794851cdedea/launch.s1794520025.31276.28745.sh'
+
+scaffolded: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/home-b/data/pool-live-b-30980/brief.md (scout; replace {TASK} and {FIRSTMATE_SPEC})
+
+Dispatch from home b through real tmux and real Treehouse, with the installed Codex version command:
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/home-b
+spawned pool-live-b-30980 harness=codex kind=scout window=primary:fm-pool-live-b-30980 worktree=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-b-c8aff3e4f0c7/.treehouse/project-d8332a/1/project
+Recorded allocated directory: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-b-c8aff3e4f0c7/.treehouse/project-d8332a/1/project
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/home-b/projects/project/.git
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ treehouse --root '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M
+78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-b-c8
+aff3e4f0c7' get
+🌳 Setting up worktree...
+🌳 Entered worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0W
+SA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-b-c8aff3e4f0c7/.tree
+house/project-d8332a/1/project. Type 'exit' to return.
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ cd -- '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4
+JXA0WSA7XZG3/.test-treehouse/tmux-live/.firstmate-worktrees/home-b-c8aff3e4f0c7/
+.treehouse/project-d8332a/1/project'
+bash-3.2$ export GOTMPDIR=/tmp/fm-pool-live-b-30980/gotmp
+bash-3.2$ export COMPACT_ADVISER_DISABLE=1
+bash-3.2$ export FM_TASK_ID=pool-live-b-30980
+bash-3.2$ . '/tmp/fm-pool-live-b-30980+58612872781e90e6081c999f9c54fe334aeef83ac
+9051a4cfda799c973058ac2/launch.s1794520031.33752.13869.sh'
+codex-cli 0.167.2
+bash-3.2$
+
+Both real dispatches allocated from distinct home roots and correct clone ownership.

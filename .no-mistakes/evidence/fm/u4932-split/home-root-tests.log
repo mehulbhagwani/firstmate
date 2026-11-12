@@ -1,0 +1,6 @@
+ok - the worktree root is per home and independent of how the home or base is spelled
+ok - each home's spawn acquires its worktree from that home's own root
+not ok - seed failed for a treehouse-acquired home
+leased worktree for dash
+error: secondmate home cannot be inside the firstmate repo: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmp/fm-treehouse-home-root.YeioK8/seed/acquired
+REFUSED: unsafe treehouse-acquired home rollback target /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/tmp/fm-treehouse-home-root.YeioK8/seed/acquired is inside the firstmate repo

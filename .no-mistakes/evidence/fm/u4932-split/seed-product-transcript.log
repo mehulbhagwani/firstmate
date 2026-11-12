@@ -1,0 +1,34 @@
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/north
+
+Seed a leased secondmate from north:
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/north-0d7e0217b3ef/.treehouse/seed-code-77931d/1/seed-code. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/north-0d7e0217b3ef/.treehouse/seed-code-77931d/1/seed-code' to release it.
+scaffolded: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/north/data/north-child/brief.md (secondmate charter)
+home=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/north-0d7e0217b3ef/.treehouse/seed-code-77931d/1/seed-code
+Persisted parent binding:
+schema=fm-secondmate-parent.v1
+route=local
+parent_home=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/north
+Persisted registry:
+- north-child - Disposable pool-validation home with no assigned work. (home: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/north-0d7e0217b3ef/.treehouse/seed-code-77931d/1/seed-code; scope: Pool validation only; projects: ; added 2026-11-13)
+Parent pool root: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/north-0d7e0217b3ef
+Child pool root: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/seed-code-446f4b559f5b
+[{"name":"1","path":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/north-0d7e0217b3ef/.treehouse/seed-code-77931d/1/seed-code","status":"leased","branch":"","detached":true,"flavor":"git","lease_id":"a663a95b2539a775f6fb0a8105c0dfed","lease_holder":"north-child","leased_at":"2026-11-13T03:13:10.399362+05:30","processes":[]}]
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/south
+
+Seed a leased secondmate from south:
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/south-855d300f580f/.treehouse/seed-code-77931d/1/seed-code. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/south-855d300f580f/.treehouse/seed-code-77931d/1/seed-code' to release it.
+scaffolded: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/south/data/south-child/brief.md (secondmate charter)
+home=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/south-855d300f580f/.treehouse/seed-code-77931d/1/seed-code
+Persisted parent binding:
+schema=fm-secondmate-parent.v1
+route=local
+parent_home=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/south
+Persisted registry:
+- south-child - Disposable pool-validation home with no assigned work. (home: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/south-855d300f580f/.treehouse/seed-code-77931d/1/seed-code; scope: Pool validation only; projects: ; added 2026-11-13)
+Parent pool root: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/south-855d300f580f
+Child pool root: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/seed-code-9b37123eb531
+[{"name":"1","path":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SEHPJYET4JXA0WSA7XZG3/.test-treehouse/seed-live/.firstmate-worktrees/south-855d300f580f/.treehouse/seed-code-77931d/1/seed-code","status":"leased","branch":"","detached":true,"flavor":"git","lease_id":"b02cdee29e027c4d845153141f049125","lease_holder":"south-child","leased_at":"2026-11-13T03:13:12.226549+05:30","processes":[]}]
+
+Both parent homes seeded separate, durable leased homes from one source repository.

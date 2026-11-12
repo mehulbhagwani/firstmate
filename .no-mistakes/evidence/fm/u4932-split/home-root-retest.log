@@ -1,0 +1,4 @@
+ok - the worktree root is per home and independent of how the home or base is spelled
+ok - each home's spawn acquires its worktree from that home's own root
+ok - a leased secondmate home comes from the seeding home's own worktree root
+ok - a rollback return names the worktree path, so worktrees leased under any root stay returnable

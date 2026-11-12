@@ -1,0 +1,5 @@
+ok - two clones of one origin still share a single pool under a single root (v2.3.0)
+ok - under a shared root a free slot is still a worktree of the other clone (v2.3.0)
+ok - the interactive acquire the worker's shell runs enters a worktree below the root it is given
+ok - two homes cloning one origin acquire concurrently from their own roots with no contention
+ok - a worktree leased under a different root still returns to its own pool, so nothing in flight has to be migrated
