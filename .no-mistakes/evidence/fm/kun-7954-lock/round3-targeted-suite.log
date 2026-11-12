@@ -1,0 +1,18 @@
+$ bash tests/fm-watcher-lock.test.sh test_lock_reclaims_reused_pid_but_not_a_live_owner test_lock_bounded_acquire_reused_pid_under_live_stealer test_mac_ps_start_token_normalizes_whitespace test_lock_start_record_matches_probe test_lock_respects_live_holder_matching_its_start_time test_lock_reclaims_reused_pid_lock test_lock_bounded_wait_earns_one_grace_window_for_unpublished_pid test_bounded_deadline_unpublished_holder test_bounded_deadline_exited_holder test_bounded_deadline_released_lock test_bounded_deadline_live_holder test_bounded_deadline_malformed_lock test_watch_replaced_holder_stands_down_after_successor_exits test_watcher_exits_on_state_teardown_during_startup
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - a live owner remains protected while a mismatched start token is reclaimed
+ok - bounded acquire with reused PID and live stealer returns 1 and empty holder
+ok - macOS-style ps start tokens normalize leading and trailing whitespace
+ok - recorded pid-start matches fm_pid_start_time by string equality
+ok - live holder matching its recorded start time keeps its lock
+ok - lock whose recorded holder pid was reused by a live process is reclaimed
+ok - bounded wait earns one grace window for an unpublished-pid lock, still bounds a live holder
+ok - bounded deadline with an unpublished holder is retriable
+ok - bounded deadline with an exited holder is retriable
+ok - bounded deadline with a released lock is retriable
+ok - bounded deadline preserves the live holder advisory
+ok - bounded deadline rejects malformed pid data and non-directory locks
+ok - a replaced holder stands down cleanly even when its successor has already exited and released the lock
+ok - watcher exits 1 with its reason when its state directory is torn down and recreated during startup
+
+exit=0

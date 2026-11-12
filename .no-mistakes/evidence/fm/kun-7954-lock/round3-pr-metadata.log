@@ -1,0 +1,15 @@
+$ gh-axi pr view 8024 --repo kunchenguid/firstmate --fields number,url,state,body,headRefName,headRefOid
+pull_request:
+  body issue-closing line: Closes #3279
+  headRefName: fm/kun-7954-lock
+  headRefOid: 7fbf38541a872026b437b3ec885ac22278c812ef
+  number: 8024
+  state: OPEN
+  url: "https://github.com/kunchenguid/firstmate/pull/8024"
+$ gh-axi pr view 7954 --repo kunchenguid/firstmate --fields number,url,state,closedAt
+pull_request:
+  closedAt: "2026-11-12T11:21:24Z"
+  number: 7954
+  state: CLOSED
+  url: "https://github.com/kunchenguid/firstmate/pull/7954"
+Read-only inspection; publication remains owned by the outer executor.

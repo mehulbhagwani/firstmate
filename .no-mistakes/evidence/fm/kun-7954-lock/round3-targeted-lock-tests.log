@@ -1,0 +1,22 @@
+Stock macOS Bash changed tests
+command: /bin/bash <original suite setup/functions + named selector>
+selectors:
+test_lock_reclaims_reused_pid_but_not_a_live_owner
+test_lock_bounded_acquire_reused_pid_under_live_stealer
+test_mac_ps_start_token_normalizes_whitespace
+test_lock_start_record_matches_probe
+exit=0 expected=0
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - a live owner remains protected while a mismatched start token is reclaimed
+ok - bounded acquire with reused PID and live stealer returns 1 and empty holder
+ok - macOS-style ps start tokens normalize leading and trailing whitespace
+ok - recorded pid-start matches fm_pid_start_time by string equality
+
+Regression counterfactual with base production lock libraries
+command: bash <original suite setup/functions + named selector>
+selectors:
+LIB="/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.gate-lock-tests-8iuk9clg/base/bin/fm-wake-lib.sh"
+test_lock_bounded_acquire_reused_pid_under_live_stealer
+exit=1 expected=1
+ok - disposable watcher refuses inherited state outside its marked lab
+not ok - bounded acquire on reused-PID lock returned 124 instead of 1: rc=124 held=86008

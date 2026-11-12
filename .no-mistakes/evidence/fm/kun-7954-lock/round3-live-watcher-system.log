@@ -1,0 +1,8 @@
+$ bash bin/fm-lab-home.sh create <disposable home>
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-takeover-lc0kd0og
+
+Native old watcher pid=46581
+current identity=Thu Nov 12 19:40:37 2026     /bin/bash bin/fm-watch.sh
+legacy local-time identity=Thu Nov 12 11:40:37 2026     /bin/bash bin/fm-watch.sh
+Stopped only scenario-owned processes and removed the disposable home.
+Initial driver attempt timed out after 25s waiting for the successor. The driver paused the predecessor during startup without proving it had reached a lock-free poll. Diagnostic rerun passed; the final driver synchronizes on the real poll sleep before pausing. See round3-synchronized-watcher-system.log for fresh synchronized evidence.

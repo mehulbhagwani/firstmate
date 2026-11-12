@@ -1,0 +1,20 @@
+$ bash bin/fm-lab-home.sh create <disposable home>
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-takeover-2h4_49z3
+
+Native old watcher pid=96429
+current identity=Thu Nov 12 19:42:33 2026     /bin/bash bin/fm-watch.sh
+legacy local-time identity=Thu Nov 12 11:42:33 2026     /bin/bash bin/fm-watch.sh
+Observed native poll sleep: pid=98016 parent=96429 command=sleep 7
+Successor exit=0; recovery output:
+check: rearm-resurface
+Successor released its lock before old watcher resumes.
+Old watcher exit=0; output:
+
+state_directory_exists=True
+same_state_device_and_inode=True
+PASS: replaced watcher stood down with exit 0 after successor released the lock; original directory remained intact.
+Observed native poll sleep: pid=3104 parent=1696 command=sleep 7
+Recreated directory adversarial check: old_inode=86708007 new_inode=86708135 exit=1
+watcher: exiting - state directory was torn down (singleton lock removed): /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78H3P9H4KQ49C0BCY980QK2/.fm-lock-takeover-2h4_49z3/directory-case/state
+PASS: replacing the directory still stops the watcher with its concrete teardown diagnostic.
+Stopped only scenario-owned processes and removed the disposable home.

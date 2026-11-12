@@ -1,0 +1,9 @@
+Supplementary unsupported-ps capability simulation; not live platform proof.
+Setup corrected: apply PATH shim only after native test initialization.
+Selectors: test_mac_ps_start_token_normalizes_whitespace; test_lock_start_record_matches_probe
+exit=0
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - real ps start-token check skipped where ps -o lstart= is unsupported
+ok - recorded pid-start matches fm_pid_start_time by string equality
+
+ps lstart request contexts: ['capability-preflight', '/proc', '/proc', 'capability-preflight']
