@@ -1,0 +1,9 @@
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/bin/fm-codex-trust.sh --secondmate-home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/secondmate wrong-id
+error: refusing to pre-register Codex trust: target '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/secondmate' is marked for another secondmate
+exit=1
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/bin/fm-codex-trust.sh --secondmate-home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/secondmate mate
+trusted: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/secondmate
+exit=0
+
+projects = { "/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/secondmate" = { "trust_level" = "trusted" } }

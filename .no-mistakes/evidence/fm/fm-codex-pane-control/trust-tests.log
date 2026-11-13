@@ -1,0 +1,18 @@
+ok - fm-codex-trust: raw Codex registers trust without matching unrelated executables
+ok - fm-codex-trust: updates parsed project tables across TOML representations
+ok - fm-codex-trust: general helpers preserve Codex homes and secondmate fixtures isolate them
+ok - fm-codex-trust: scout and secondmate launches use the registered store over pane inheritance
+ok - fm-codex-trust: registers a fresh linked worktree
+ok - fm-codex-trust: preserves and updates an existing project entry
+ok - fm-codex-trust: inserts trust before a following table
+ok - fm-codex-trust: ignores table-like text inside multiline strings
+ok - fm-codex-trust: keeps a multiline basic string open across an escaped delimiter
+ok - fm-codex-trust: ignores table-like text inside a multiline literal string opened mid-line
+ok - fm-codex-trust: adds trust under a final header that has no newline
+ok - fm-codex-trust: updates a whitespace header and a quoted trust_level key in place
+ok - fm-codex-trust: concurrent registrations into one store keep every entry
+ok - fm-codex-trust: selects a Python with tomllib when python3 lacks it
+ok - fm-codex-trust: refuses when neither CODEX_HOME nor HOME is set
+ok - fm-codex-trust: refuses malformed TOML without replacement
+ok - fm-codex-trust: rejects a primary checkout
+all fm-codex-trust tests passed

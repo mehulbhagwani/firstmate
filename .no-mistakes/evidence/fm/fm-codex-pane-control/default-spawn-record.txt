@@ -1,0 +1,11 @@
+window=primary:fm-default-trust
+endpoint_task_id=default-trust
+worktree=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/pool-default/.treehouse/project-42c04b/1/project
+project=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/project
+harness=codex
+approval_mode=bypass
+kind=scout
+tasktmp=/tmp/fm-default-trust
+model=gpt-6.1-sol
+effort=low
+spawn_gen=s1794522579.91798.21309

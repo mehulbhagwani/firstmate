@@ -1,0 +1,18 @@
+[
+  {
+    "scenario": "live-trust",
+    "registered_store": "/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/codex",
+    "exact_worker_directory": "/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/pool/.treehouse/project-42c04b/1/project",
+    "trust_level": "trusted",
+    "project_root_trusted": false,
+    "inherited_stale_store_modified": false
+  },
+  {
+    "scenario": "default-trust",
+    "registered_store": "/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/user/.codex",
+    "exact_worker_directory": "/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78SYZKXCHR1QDWS71DT90X2/.test-phase-lab/pool-default/.treehouse/project-42c04b/1/project",
+    "trust_level": "trusted",
+    "project_root_trusted": false,
+    "inherited_stale_store_modified": false
+  }
+]
