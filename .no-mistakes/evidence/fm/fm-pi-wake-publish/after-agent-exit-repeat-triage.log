@@ -1,0 +1,6 @@
+[2026-11-14T01:43:56+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:56+0530] absorbed non-terminal stale (agent dead, already reported once, idle 502s): fm-lab-sentinel:worker
+[2026-11-14T01:43:58+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:44:00+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:44:02+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:44:04+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement

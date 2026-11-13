@@ -1,0 +1,64 @@
+Real Pi endpoint classification before scenarios: alive
+Live pane:
+▀▀█  v1.5.2
+ █▀ █ escape interrupt · ctrl+c/ctrl+d clear/exit · / commands · ! bash · ctrl+o more
+ Press ctrl+o to show full startup help and loaded resources.
+
+ Pi can explain its own features and look up its docs. Ask it how to use or extend Pi.
+
+ This project is not trusted. Project .pi resources and packages are ignored. Use /trust to save a trust decision, then
+ restart pi.
+
+ Warning: No models available. Use /login to log into a provider via OAuth or API key. See:
+
+ /opt/homebrew/Cellar/pi-coding-agent/1.5.2/libexec/lib/node_modules/@earendil-works/pi-coding-agent/docs/providers.md
+   /opt/homebrew/Cellar/pi-coding-agent/1.5.2/libexec/lib/node_modules/@earendil-works/pi-coding-agent/docs/models.md
+
+ Warning: tmux extended-keys is off. Modified Enter keys may not work. Add `set -g extended-keys on` to ~/.tmux.conf
+ and restart tmux.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+~/.no-mistakes/worktrees/3ffccef5245c/01M7B88AVW9XJ2GHN1A5MBXR2Z (detached)
+0.0%/0 (auto)                                                                                                    unknown
+{"label": "storage-write-failure", "polls": 1, "probes": 1, "suppression_lines": 0, "wedge_notifications": 0, "death_notifications": 0, "sentinel_exists": true, "watcher_exit": 1, "output": ""}
+[2026-11-14T01:43:07+0530] wedge escalation counter write FAILED on fm-lab-sentinel:worker - cap state rolled back and the wedge path silenced (TTL 3600), since a ceiling whose count cannot be recorded cannot stop the next poll's escalation; operator can rm the sentinel for immediate re-engagement
+{"label": "before-below-threshold", "polls": 5, "probes": 0, "suppression_lines": 0, "wedge_notifications": 0, "death_notifications": 0, "sentinel_exists": true, "watcher_exit": null, "output": ""}
+{"label": "after-below-threshold", "polls": 5, "probes": 0, "suppression_lines": 5, "wedge_notifications": 0, "death_notifications": 0, "sentinel_exists": true, "watcher_exit": null, "output": ""}
+[2026-11-14T01:43:18+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:20+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:22+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:23+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:25+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+{"label": "after-probe-due", "polls": 5, "probes": 1, "suppression_lines": 5, "wedge_notifications": 0, "death_notifications": 0, "sentinel_exists": true, "watcher_exit": null, "output": ""}
+[2026-11-14T01:43:27+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:29+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:31+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:33+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:34+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+{"label": "after-missing-timer", "polls": 5, "probes": 1, "suppression_lines": 5, "wedge_notifications": 0, "death_notifications": 0, "sentinel_exists": true, "watcher_exit": null, "output": ""}
+[2026-11-14T01:43:37+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:39+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:40+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:42+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:44+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+{"label": "after-operator-recovery", "polls": 1, "probes": 1, "suppression_lines": 0, "wedge_notifications": 1, "death_notifications": 0, "sentinel_exists": false, "watcher_exit": 0, "output": "stale: fm-lab-sentinel:worker (idle 502s, possible wedge, escalation 1)\n"}
+Persisted notification queue:
+1794600827	1	stale	fm-lab-sentinel:worker	stale: fm-lab-sentinel:worker (idle 502s, possible wedge, escalation 1)
+Real endpoint classification after stopping lab Pi: dead
+{"label": "after-agent-exit", "polls": 1, "probes": 1, "suppression_lines": 1, "wedge_notifications": 0, "death_notifications": 1, "sentinel_exists": true, "watcher_exit": 0, "output": "stale: fm-lab-sentinel:worker (idle 501s, agent dead - the endpoint is still there with no agent running in it, so this is not a wedge; reported once and not re-escalated while it stays that way - reconcile this record, and check for unlanded work before any cleanup)\n"}
+[2026-11-14T01:43:53+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+Persisted notification queue:
+1794600833	2	stale	fm-lab-sentinel:worker	stale: fm-lab-sentinel:worker (idle 501s, agent dead - the endpoint is still there with no agent running in it, so this is not a wedge; reported once and not re-escalated while it stays that way - reconcile this record, and check for unlanded work before any cleanup)
+{"label": "after-agent-exit-repeat", "polls": 5, "probes": 1, "suppression_lines": 5, "wedge_notifications": 0, "death_notifications": 1, "sentinel_exists": true, "watcher_exit": null, "output": ""}
+[2026-11-14T01:43:56+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:43:56+0530] absorbed non-terminal stale (agent dead, already reported once, idle 502s): fm-lab-sentinel:worker
+[2026-11-14T01:43:58+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:44:00+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:44:02+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+[2026-11-14T01:44:04+0530] wedge_timer_check: rollback-failed sentinel active for fm-lab-sentinel:worker (TTL 3600); escalations silenced to prevent queue-flood under persistent fs failure; operator can rm the sentinel for immediate re-engagement
+Persisted notification queue:
+1794600833	2	stale	fm-lab-sentinel:worker	stale: fm-lab-sentinel:worker (idle 501s, agent dead - the endpoint is still there with no agent running in it, so this is not a wedge; reported once and not re-escalated while it stays that way - reconcile this record, and check for unlanded work before any cleanup)
+PASS: reproduced missing diagnostics on the base, then verified per-poll diagnostics, bounded real endpoint probes, no wedge flood, operator recovery, and one-time agent-death notification on the target.
+Cleanup: lab monitor stopped, private tmux server stopped, disposable home and temporary baseline script removed.

@@ -1,0 +1,1 @@
+[2026-11-14T01:43:07+0530] wedge escalation counter write FAILED on fm-lab-sentinel:worker - cap state rolled back and the wedge path silenced (TTL 3600), since a ceiling whose count cannot be recorded cannot stop the next poll's escalation; operator can rm the sentinel for immediate re-engagement

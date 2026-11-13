@@ -1,0 +1,20 @@
+Actual monitor runs with real tmux and installed Pi. No CLI, backend, or crew-state replacement was used.
+The lab starts Pi offline at its composer; no model call or provider login is required for these diagnostic-log scenarios.
+A mode-0444 escalation counter caused the real filesystem write failure and production sentinel creation.
+Bash execution traces count actual wedge checks and death probes. The baseline script comes from the supplied base commit; all other product files are the target.
+
+phase | wedge polls | suppression log lines | death probes | queued wedge notices | queued death notices
+storage-write-failure | 1 | 0 | 1 | 0 | 0
+before-below-threshold | 5 | 0 | 0 | 0 | 0
+after-below-threshold | 5 | 5 | 0 | 0 | 0
+after-probe-due | 5 | 5 | 1 | 0 | 0
+after-missing-timer | 5 | 5 | 1 | 0 | 0
+after-operator-recovery | 1 | 0 | 1 | 1 | 0
+after-agent-exit | 1 | 1 | 1 | 0 | 1
+after-agent-exit-repeat | 5 | 5 | 1 | 0 | 1
+
+Expected baseline reproduction: five suppressed polls, no notice.
+Target: one notice on each suppressed poll, no added wedge notices, and probes paced by the existing threshold.
+After removing suppression: ordinary escalation 1.
+After stopping lab Pi: one death notification, still one after five further polls.
+Cleanup completed: temporary baseline script and disposable home removed; isolated monitor and private tmux server stopped.

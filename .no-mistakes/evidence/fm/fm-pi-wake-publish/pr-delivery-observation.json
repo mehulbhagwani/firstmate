@@ -1,13 +1,9 @@
 {
   "url": "https://github.com/kunchenguid/firstmate/pull/7871",
-  "tested_target": "7625251967d51aa0d70b7bbbbd0c4c9d78c27f9f",
-  "published_head": "954a1180c4fca35c431b5eb180d8fed4c7ac3f1a",
-  "attestation_head": "954a1180c4fca35c431b5eb180d8fed4c7ac3f1a",
+  "tested_target": "98e6424622c5fa645e854c5b727748185d6905fd",
+  "published_head": "d9d6387f72ca5fa6a0d662924770c4e19016baca",
+  "attestation_head": "d9d6387f72ca5fa6a0d662924770c4e19016baca",
   "attestation_matches_published_head": true,
-  "serial_1": {
-    "conclusion": "SUCCESS",
-    "url": "https://github.com/kunchenguid/firstmate/actions/runs/40658004997/job/122713671034",
-    "completed_at": "2026-10-28T08:52:14Z"
-  },
-  "target_delivery": "Not yet verified: the outer executor owns publishing this target, refreshing its attestation, and CI."
+  "mergeable": "MERGEABLE",
+  "target_delivery": "Untested: the outer executor owns publishing the target, updating its attestation, and confirming serial-1 CI."
 }

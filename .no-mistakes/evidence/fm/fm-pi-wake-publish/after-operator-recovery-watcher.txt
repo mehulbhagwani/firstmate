@@ -1,0 +1,1 @@
+stale: fm-lab-sentinel:worker (idle 502s, possible wedge, escalation 1)

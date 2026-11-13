@@ -1,0 +1,90 @@
+[
+  {
+    "label": "storage-write-failure",
+    "polls": 1,
+    "probes": 1,
+    "suppression_lines": 0,
+    "wedge_notifications": 0,
+    "death_notifications": 0,
+    "sentinel_exists": true,
+    "watcher_exit": 1,
+    "output": ""
+  },
+  {
+    "label": "before-below-threshold",
+    "polls": 5,
+    "probes": 0,
+    "suppression_lines": 0,
+    "wedge_notifications": 0,
+    "death_notifications": 0,
+    "sentinel_exists": true,
+    "watcher_exit": null,
+    "output": ""
+  },
+  {
+    "label": "after-below-threshold",
+    "polls": 5,
+    "probes": 0,
+    "suppression_lines": 5,
+    "wedge_notifications": 0,
+    "death_notifications": 0,
+    "sentinel_exists": true,
+    "watcher_exit": null,
+    "output": ""
+  },
+  {
+    "label": "after-probe-due",
+    "polls": 5,
+    "probes": 1,
+    "suppression_lines": 5,
+    "wedge_notifications": 0,
+    "death_notifications": 0,
+    "sentinel_exists": true,
+    "watcher_exit": null,
+    "output": ""
+  },
+  {
+    "label": "after-missing-timer",
+    "polls": 5,
+    "probes": 1,
+    "suppression_lines": 5,
+    "wedge_notifications": 0,
+    "death_notifications": 0,
+    "sentinel_exists": true,
+    "watcher_exit": null,
+    "output": ""
+  },
+  {
+    "label": "after-operator-recovery",
+    "polls": 1,
+    "probes": 1,
+    "suppression_lines": 0,
+    "wedge_notifications": 1,
+    "death_notifications": 0,
+    "sentinel_exists": false,
+    "watcher_exit": 0,
+    "output": "stale: fm-lab-sentinel:worker (idle 502s, possible wedge, escalation 1)\n"
+  },
+  {
+    "label": "after-agent-exit",
+    "polls": 1,
+    "probes": 1,
+    "suppression_lines": 1,
+    "wedge_notifications": 0,
+    "death_notifications": 1,
+    "sentinel_exists": true,
+    "watcher_exit": 0,
+    "output": "stale: fm-lab-sentinel:worker (idle 501s, agent dead - the endpoint is still there with no agent running in it, so this is not a wedge; reported once and not re-escalated while it stays that way - reconcile this record, and check for unlanded work before any cleanup)\n"
+  },
+  {
+    "label": "after-agent-exit-repeat",
+    "polls": 5,
+    "probes": 1,
+    "suppression_lines": 5,
+    "wedge_notifications": 0,
+    "death_notifications": 1,
+    "sentinel_exists": true,
+    "watcher_exit": null,
+    "output": ""
+  }
+]
