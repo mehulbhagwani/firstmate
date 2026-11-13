@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Startup clears an alerted episode after confirming a real live endpoint",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Startup dead confirmation rearms uncertainty even when recovery fails",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Startup missing confirmation rearms uncertainty even when recovery fails",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Persistent real remote control errors alert as unreadable without failing over locally",
+    "result": "pass",
+    "live": true
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Persistent ambiguous real endpoint alerts at three probes without replacing the process",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Restarting monitoring does not repeat an alert during the same uncertain episode",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "A real live agent clears the previous episode and rearms notification",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "An unreadable recorded endpoint alerts without changing the running agent",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Acknowledging an older alert preserves the new episode notification",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Repeated real SSH transport failures stay silent and preserve the existing episode and remote route",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "A healthy ops agent cannot clear alert-ops uncertainty or prevent its alert; both pane IDs and PIDs remain unchanged",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Startup clears an alerted episode after confirming a real live endpoint",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Startup dead confirmation rearms uncertainty even when recovery fails",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Startup missing confirmation rearms uncertainty even when recovery fails",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Persistent real remote control errors alert as unreadable without failing over locally",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "Retiring an absent local mate removes its markers while preserving the prefixed mate and process",
+    "result": "pass",
+    "live": true
+  }
+]

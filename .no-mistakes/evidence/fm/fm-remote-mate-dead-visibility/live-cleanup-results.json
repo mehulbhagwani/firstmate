@@ -1,0 +1,7 @@
+[
+  {
+    "name": "Retiring an absent local mate removes its markers while preserving the prefixed mate and process",
+    "result": "pass",
+    "live": true
+  }
+]

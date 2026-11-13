@@ -1,0 +1,36 @@
+RUN bin/fm-watch.sh [startup-seed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572218	1	check	secondmate-liveness-uncertain-ops-GUItoC	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT STARTUP (alive): SECONDMATE_SYNC: secondmate ops: skipped: primary default-branch commit cannot be resolved
+SCENARIO PASS: Startup clears an alerted episode after confirming a real live endpoint
+RUN bin/fm-watch.sh [startup-dead-seed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572223	2	check	secondmate-liveness-uncertain-ops-UKx9Ap	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT STARTUP (dead, deliberately missing recovery instructions): SECONDMATE_LIVENESS: secondmate ops: respawn failed after confirmed agent absence on existing endpoint: fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.58fopd59
+SECONDMATE_SYNC: secondmate ops: skipped: primary default-branch commit cannot be resolved
+RELAUNCH LEDGER: 1794572232	attempt
+1794572236	failed
+RUN bin/fm-watch.sh [startup-dead-rearmed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572242	3	check	secondmate-liveness-uncertain-ops-otzmDV	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+SCENARIO PASS: Startup dead confirmation rearms uncertainty even when recovery fails
+RUN bin/fm-watch.sh [startup-missing-seed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572293	4	check	secondmate-liveness-uncertain-ops-jeMfCy	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT STARTUP (missing, deliberately missing recovery instructions): SECONDMATE_LIVENESS: secondmate ops: respawn failed after recorded endpoint confidently missing: fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.58fopd59
+SECONDMATE_SYNC: secondmate ops: skipped: primary default-branch commit cannot be resolved
+RELAUNCH LEDGER: 1794572232	attempt
+1794572236	failed
+1794572303	attempt
+1794572308	failed
+RUN bin/fm-watch.sh [startup-missing-rearmed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572310	5	check	secondmate-liveness-uncertain-ops-4aQPCY	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+SCENARIO PASS: Startup missing confirmation rearms uncertainty even when recovery fails
+REAL REMOTE CONTROL ERROR rc=1: error: no remote secondmate or SSH alias matches 'ops'
+RUN bin/fm-watch.sh [remote-preflight-clear] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572323	6	check	secondmate-liveness-uncertain-ops-3MfNda	check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+SCENARIO PASS: Persistent real remote control errors alert as unreadable without failing over locally
+ALL ADDITIONAL LIVE SCENARIOS PASSED
+Removed disposable lab and stopped its private tmux server.

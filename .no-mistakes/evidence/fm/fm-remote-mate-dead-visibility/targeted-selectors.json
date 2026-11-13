@@ -1,0 +1,23 @@
+{
+  "fm-wake-queue.test.sh": [
+    "test_secondmate_liveness_tick_relaunches_dead_endpoint_once",
+    "test_secondmate_liveness_tick_relaunches_missing_endpoint",
+    "test_secondmate_liveness_tick_relaunches_every_dead_mate_before_waking",
+    "test_secondmate_liveness_tick_leaves_alive_and_inconclusive_untouched",
+    "test_secondmate_liveness_tick_isolates_prefixed_ids",
+    "test_secondmate_liveness_tick_alerts_persistent_inconclusive_endpoint_once",
+    "test_secondmate_liveness_tick_new_episode_queues_its_own_row_while_old_row_is_unacked",
+    "test_secondmate_liveness_tick_cadence_gates_the_probe",
+    "test_secondmate_liveness_tick_attempt_bound_parks_then_rearm_on_alive",
+    "test_secondmate_liveness_tick_relaunch_failure_reports_once",
+    "test_secondmate_liveness_tick_fails_closed_on_ledger_errors",
+    "test_secondmate_liveness_tick_error_keeps_scanning_and_wakes",
+    "test_secondmate_liveness_tick_unqueued_outcome_is_an_error_not_a_wake",
+    "test_secondmate_liveness_tick_skips_mate_whose_lock_is_held",
+    "test_secondmate_liveness_tick_preserves_unreachable_remote",
+    "test_secondmate_liveness_tick_alerts_persistent_remote_probe_failure_once"
+  ],
+  "fm-teardown.test.sh": [
+    "test_teardown_retires_task_watcher_markers_and_orphan_journal"
+  ]
+}

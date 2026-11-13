@@ -1,0 +1,16 @@
+ok - watch liveness: a dead secondmate is relaunched once, ledgered, and quiet afterwards
+ok - watch liveness: a missing secondmate endpoint is relaunched without a pre-kill
+ok - watch liveness: one tick relaunches every dead mate, queues a row each, and wakes once
+ok - watch liveness: alive and ambiguous endpoints are probed, logged, and never touched
+ok - watch liveness: a healthy secondmate cannot reset a prefixed secondmate's uncertainty
+ok - watch liveness: persistent inconclusive endpoints alert once and rearm after recovery
+ok - watch liveness: a new uncertain episode queues its own row while the earlier row is read but unacked
+ok - watch liveness: the cadence marker gates probing and survives across legs
+ok - watch liveness: the attempt bound parks a flapping mate once and a live probe rearms a full budget
+ok - watch liveness: a failed auto-relaunch wakes once with its cause and is ledgered
+ok - watch liveness: an unwritable or unreadable relaunch ledger refuses to kill or spawn
+ok - watch liveness: a per-mate error keeps scanning, recovers later mates, and still wakes
+ok - watch liveness: an outcome that could not be queued surfaces as an error, not a wake
+ok - watch liveness: a mate mid-episode under the shared liveness lock is skipped entirely
+ok - watch liveness: an unreachable remote secondmate is probed, preserved, and never failed over
+ok - watch liveness: a persistent unreadable remote probe alerts once and never fails over

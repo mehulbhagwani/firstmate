@@ -1,0 +1,1 @@
+check: secondmate alert-ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed

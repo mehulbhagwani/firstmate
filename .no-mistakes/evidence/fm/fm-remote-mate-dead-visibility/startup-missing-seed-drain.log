@@ -1,0 +1,4 @@
+1794572293	4	check	secondmate-liveness-uncertain-ops-jeMfCy	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 34929.1794572293.ltFIB6
+WARNING: watcher still down (same stale episode; last beat: 2s ago, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.

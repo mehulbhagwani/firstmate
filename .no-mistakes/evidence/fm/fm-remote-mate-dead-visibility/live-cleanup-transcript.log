@@ -1,0 +1,11 @@
+RUN bin/fm-watch.sh [cleanup-seed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate alert-ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572411	1	check	secondmate-liveness-uncertain-alert-ops-n65Tx3	check: secondmate alert-ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+1794572411	2	check	secondmate-liveness-uncertain-ops-ooQqSb	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT TEARDOWN rc=0: teardown ops complete (window firstmate:fm-ops, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.gou40pxe/missing-ops-home)
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.gou40pxe
+WARNING: watcher still down (same stale episode; last beat: 5s ago, grace 300s) - full banner already printed this episode.
+Remaining other-mate episode: ambiguous	1	n65Tx3
+Remaining registry: - alert-ops - Local lab mate (home: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.gou40pxe/missing-alert-ops-home; scope: lab; projects: none; added 2026-11-13)
+SCENARIO PASS: Retiring an absent local mate removes its markers while preserving the prefixed mate and process
+Removed disposable lab and stopped its private tmux server.

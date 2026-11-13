@@ -1,0 +1,40 @@
+REAL ENDPOINT BEFORE: %0	52720	sleep
+REAL CLASSIFIER: ambiguous
+RUN bin/fm-watch.sh [ambiguous-first] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+DURABLE QUEUE: 1794572033	1	check	secondmate-liveness-uncertain-ops-oxkAYf	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+SCENARIO PASS: Persistent ambiguous real endpoint alerts at three probes without replacing the process
+PRODUCT DRAIN: 1794572033	1	check	secondmate-liveness-uncertain-ops-oxkAYf	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+RUN bin/fm-watch.sh [ambiguous-repeat] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+Same endpoint preserved; repeated probes=ambiguous	6	oxkAYf; notification queue remains empty
+PRODUCT DRAIN: 
+SCENARIO PASS: Restarting monitoring does not repeat an alert during the same uncertain episode
+REAL CLI PANE: 
+RUN bin/fm-watch.sh [alive-clears] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT DRAIN: 
+Real Codex endpoint classified alive; episode and alert cleared; no liveness alert emitted
+SCENARIO PASS: A real live agent clears the previous episode and rearms notification
+RUN bin/fm-watch.sh [unreadable-first] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572057	2	check	secondmate-liveness-uncertain-ops-nlQfYy	check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+SCENARIO PASS: An unreadable recorded endpoint alerts without changing the running agent
+RUN bin/fm-watch.sh [new-episode] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+TWO DISTINCT EPISODES: [["1794572057", "2", "check", "secondmate-liveness-uncertain-ops-nlQfYy", "check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed"], ["1794572069", "3", "check", "secondmate-liveness-uncertain-ops-kBUykJ", "check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed"]]
+PRODUCT DRAIN: 1794572057	2	check	secondmate-liveness-uncertain-ops-nlQfYy	check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+1794572069	3	check	secondmate-liveness-uncertain-ops-kBUykJ	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+AFTER ACK OF OLD EPISODE: 1794572069	3	check	secondmate-liveness-uncertain-ops-kBUykJ	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572069	3	check	secondmate-liveness-uncertain-ops-kBUykJ	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+SCENARIO PASS: Acknowledging an older alert preserves the new episode notification
+REAL SSH FAILURE rc=255: ssh: Could not resolve hostname fm-lab-no-such-host.invalid: nodename nor servname provided, or not known
+RUN bin/fm-watch.sh [unavailable] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT TRIAGE: [2026-11-13T17:44:37+0530] secondmate ops liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-no-such-host.invalid
+[2026-11-13T17:44:40+0530] secondmate ops liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-no-such-host.invalid
+[2026-11-13T17:44:43+0530] secondmate ops liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-no-such-host.invalid
+[2026-11-13T17:44:50+0530] secondmate ops liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-no-such-host.invalid
+PRODUCT DRAIN: 
+SCENARIO PASS: Repeated real SSH transport failures stay silent and preserve the existing episode and remote route
+RUN bin/fm-watch.sh [prefixed-ids] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate alert-ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+ERROR: AssertionError()
+Removed disposable lab and stopped its private tmux server.

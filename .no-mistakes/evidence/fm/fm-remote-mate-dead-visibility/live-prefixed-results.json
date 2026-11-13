@@ -1,0 +1,7 @@
+[
+  {
+    "name": "A healthy ops agent cannot clear alert-ops uncertainty or prevent its alert; both pane IDs and PIDs remain unchanged",
+    "result": "pass",
+    "live": true
+  }
+]

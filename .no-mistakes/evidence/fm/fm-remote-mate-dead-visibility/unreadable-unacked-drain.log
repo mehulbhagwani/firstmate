@@ -1,0 +1,4 @@
+1794572057	2	check	secondmate-liveness-uncertain-ops-nlQfYy	check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 81919.1794572057.aAHPj2
+WARNING: watcher still down (same stale episode; last beat: 3s ago, grace 300s) - full banner already printed this episode.
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.

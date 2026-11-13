@@ -1,0 +1,120 @@
+PRODUCT-LEVEL LIVE EVIDENCE
+
+Real Firstmate commands, tmux panes, installed Codex CLI, and OpenSSH were exercised. No backend responses were mocked in these live scenarios.
+
+The first prefixed-name attempt hit a test assertion comparing a volatile command-label field. Its raw transcript is retained in live-liveness-transcript.log. The corrected isolated rerun below verifies stable pane IDs/PIDs and absence of relaunch. Other corrected setup issues and the remote-only limitations are recorded in test-setup-notes.txt.
+
+CORE MONITORING AND NOTIFICATION SCENARIOS
+REAL ENDPOINT BEFORE: %0	52720	sleep
+REAL CLASSIFIER: ambiguous
+RUN bin/fm-watch.sh [ambiguous-first] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+DURABLE QUEUE: 1794572033	1	check	secondmate-liveness-uncertain-ops-oxkAYf	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+SCENARIO PASS: Persistent ambiguous real endpoint alerts at three probes without replacing the process
+PRODUCT DRAIN: 1794572033	1	check	secondmate-liveness-uncertain-ops-oxkAYf	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+RUN bin/fm-watch.sh [ambiguous-repeat] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+Same endpoint preserved; repeated probes=ambiguous	6	oxkAYf; notification queue remains empty
+PRODUCT DRAIN: 
+SCENARIO PASS: Restarting monitoring does not repeat an alert during the same uncertain episode
+REAL CLI PANE: 
+RUN bin/fm-watch.sh [alive-clears] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT DRAIN: 
+Real Codex endpoint classified alive; episode and alert cleared; no liveness alert emitted
+SCENARIO PASS: A real live agent clears the previous episode and rearms notification
+RUN bin/fm-watch.sh [unreadable-first] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572057	2	check	secondmate-liveness-uncertain-ops-nlQfYy	check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+SCENARIO PASS: An unreadable recorded endpoint alerts without changing the running agent
+RUN bin/fm-watch.sh [new-episode] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+TWO DISTINCT EPISODES: [["1794572057", "2", "check", "secondmate-liveness-uncertain-ops-nlQfYy", "check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed"], ["1794572069", "3", "check", "secondmate-liveness-uncertain-ops-kBUykJ", "check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed"]]
+PRODUCT DRAIN: 1794572057	2	check	secondmate-liveness-uncertain-ops-nlQfYy	check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+1794572069	3	check	secondmate-liveness-uncertain-ops-kBUykJ	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+AFTER ACK OF OLD EPISODE: 1794572069	3	check	secondmate-liveness-uncertain-ops-kBUykJ	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572069	3	check	secondmate-liveness-uncertain-ops-kBUykJ	check: secondmate ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+SCENARIO PASS: Acknowledging an older alert preserves the new episode notification
+REAL SSH FAILURE rc=255: ssh: Could not resolve hostname fm-lab-no-such-host.invalid: nodename nor servname provided, or not known
+RUN bin/fm-watch.sh [unavailable] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT TRIAGE: [2026-11-13T17:44:37+0530] secondmate ops liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-no-such-host.invalid
+[2026-11-13T17:44:40+0530] secondmate ops liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-no-such-host.invalid
+[2026-11-13T17:44:43+0530] secondmate ops liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-no-such-host.invalid
+[2026-11-13T17:44:50+0530] secondmate ops liveness: remote host unavailable or endpoint state unknown; route preserved on fm-lab-no-such-host.invalid
+PRODUCT DRAIN: 
+SCENARIO PASS: Repeated real SSH transport failures stay silent and preserve the existing episode and remote route
+
+PREFIXED IDENTIFIER ISOLATION
+SNAPSHOT BEFORE: '%0\t8890\tcodex\n%1\t8952\tsleep\n'
+RUN bin/fm-watch.sh [prefixed-isolation] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate alert-ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+SNAPSHOT AFTER: '%0\t8890\tcodex\n%1\t8952\tsleep\n'
+REAL CODEX PANE: Update available · 0.167.2 → 0.169.0
+  Release notes: https://github.com/openai/codex/releases/latest
+
+› 1. Update now (runs `brew upgrade --cask codex`)
+  2. Skip
+  3. Skip until next version
+
+  enter continue · esc skip
+PRODUCT DRAIN: 1794572221	1	check	secondmate-liveness-uncertain-alert-ops-PK43j4	check: secondmate alert-ops liveness remains ambiguous after 3 consecutive probes; endpoint was not changed
+SCENARIO PASS: A healthy ops agent cannot clear alert-ops uncertainty or prevent its alert; both pane IDs and PIDs remain unchanged
+Removed disposable lab and stopped its private tmux server.
+
+STARTUP EPISDE RESETS AND REMOTE CONTROL ERRORS
+RUN bin/fm-watch.sh [startup-seed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572218	1	check	secondmate-liveness-uncertain-ops-GUItoC	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT STARTUP (alive): SECONDMATE_SYNC: secondmate ops: skipped: primary default-branch commit cannot be resolved
+SCENARIO PASS: Startup clears an alerted episode after confirming a real live endpoint
+RUN bin/fm-watch.sh [startup-dead-seed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572223	2	check	secondmate-liveness-uncertain-ops-UKx9Ap	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT STARTUP (dead, deliberately missing recovery instructions): SECONDMATE_LIVENESS: secondmate ops: respawn failed after confirmed agent absence on existing endpoint: fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.58fopd59
+SECONDMATE_SYNC: secondmate ops: skipped: primary default-branch commit cannot be resolved
+RELAUNCH LEDGER: 1794572232	attempt
+1794572236	failed
+RUN bin/fm-watch.sh [startup-dead-rearmed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572242	3	check	secondmate-liveness-uncertain-ops-otzmDV	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+SCENARIO PASS: Startup dead confirmation rearms uncertainty even when recovery fails
+RUN bin/fm-watch.sh [startup-missing-seed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572293	4	check	secondmate-liveness-uncertain-ops-jeMfCy	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT STARTUP (missing, deliberately missing recovery instructions): SECONDMATE_LIVENESS: secondmate ops: respawn failed after recorded endpoint confidently missing: fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.58fopd59
+SECONDMATE_SYNC: secondmate ops: skipped: primary default-branch commit cannot be resolved
+RELAUNCH LEDGER: 1794572232	attempt
+1794572236	failed
+1794572303	attempt
+1794572308	failed
+RUN bin/fm-watch.sh [startup-missing-rearmed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572310	5	check	secondmate-liveness-uncertain-ops-4aQPCY	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+SCENARIO PASS: Startup missing confirmation rearms uncertainty even when recovery fails
+REAL REMOTE CONTROL ERROR rc=1: error: no remote secondmate or SSH alias matches 'ops'
+RUN bin/fm-watch.sh [remote-preflight-clear] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=3
+PRODUCT STDOUT: check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572323	6	check	secondmate-liveness-uncertain-ops-3MfNda	check: secondmate ops liveness remains unreadable after 3 consecutive probes; endpoint was not changed
+SCENARIO PASS: Persistent real remote control errors alert as unreadable without failing over locally
+ALL ADDITIONAL LIVE SCENARIOS PASSED
+Removed disposable lab and stopped its private tmux server.
+
+LOCAL RETIREMENT
+RUN bin/fm-watch.sh [cleanup-seed] with real tmux, FM_POLL=1, FM_SECONDMATE_LIVENESS_SECS=1, threshold=1
+PRODUCT STDOUT: check: secondmate alert-ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT DRAIN: 1794572411	1	check	secondmate-liveness-uncertain-alert-ops-n65Tx3	check: secondmate alert-ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+1794572411	2	check	secondmate-liveness-uncertain-ops-ooQqSb	check: secondmate ops liveness remains ambiguous after 1 consecutive probes; endpoint was not changed
+PRODUCT TEARDOWN rc=0: teardown ops complete (window firstmate:fm-ops, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.gou40pxe/missing-ops-home)
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.gou40pxe
+WARNING: watcher still down (same stale episode; last beat: 5s ago, grace 300s) - full banner already printed this episode.
+Remaining other-mate episode: ambiguous	1	n65Tx3
+Remaining registry: - alert-ops - Local lab mate (home: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A36HCSM6FJF09SQX85QWDY/fm-lab.gou40pxe/missing-alert-ops-home; scope: lab; projects: none; added 2026-11-13)
+SCENARIO PASS: Retiring an absent local mate removes its markers while preserving the prefixed mate and process
+Removed disposable lab and stopped its private tmux server.
+
+SETUP AND LIVE-COVERAGE LIMITS
+Live checks use the real tmux executable, installed Codex CLI, OpenSSH, and unmodified Firstmate commands. No model prompt was submitted. Backend simulations in the existing shell tests are supplemental, not live evidence.
+
+Resolved test setup issues: explicitly created the private tmux socket parent; used a canonical lab directory inside the worktree to satisfy the existing lifecycle guard; corrected the expected startup diagnostic from relaunch to respawn; added a healthy-probe reset between independent startup cases; completed the disposable retirement record with worktree/project identity fields.
+
+The initial prefixed-ID check compared the whole pane snapshot including the current-command label and failed after the expected alert. That comparison is too strong for a starting CLI or shell transition. The isolated rerun records unchanged pane IDs and PIDs, confirms no relaunch ledger, and confirms ops remains alive while alert-ops alerts. See live-prefixed-transcript.log. No product failure was reproduced. The saved driver uses these stable identity assertions.
+
+Remote startup after an alive state followed by a route failure and authenticated remote retirement were not exercised against a remote host. The former passed the existing targeted regression with simulated SSH responses. A dedicated disposable SSH-accessible Herdr/Rex secondmate is required for both live checks.

@@ -1,0 +1,7 @@
+Live checks use the real tmux executable, installed Codex CLI, OpenSSH, and unmodified Firstmate commands. No model prompt was submitted. Backend simulations in the existing shell tests are supplemental, not live evidence.
+
+Resolved test setup issues: explicitly created the private tmux socket parent; used a canonical lab directory inside the worktree to satisfy the existing lifecycle guard; corrected the expected startup diagnostic from relaunch to respawn; added a healthy-probe reset between independent startup cases; completed the disposable retirement record with worktree/project identity fields.
+
+The initial prefixed-ID check compared the whole pane snapshot including the current-command label and failed after the expected alert. That comparison is too strong for a starting CLI or shell transition. The isolated rerun records unchanged pane IDs and PIDs, confirms no relaunch ledger, and confirms ops remains alive while alert-ops alerts. See live-prefixed-transcript.log. No product failure was reproduced. The saved driver uses these stable identity assertions.
+
+Remote startup after an alive state followed by a route failure and authenticated remote retirement were not exercised against a remote host. The former passed the existing targeted regression with simulated SSH responses. A dedicated disposable SSH-accessible Herdr/Rex secondmate is required for both live checks.
