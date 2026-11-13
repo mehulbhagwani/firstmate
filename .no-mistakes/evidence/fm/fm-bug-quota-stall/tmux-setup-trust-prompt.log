@@ -1,0 +1,8 @@
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7WG3BCHA3HSBDJ3M5GQZ2/.quota-lab.UIrvSN
+Launching installed Pi, offline and without a model prompt; isolated config and no tools.
+Real process classification: alive
+Live foreground command: node
+Live Pi retains busy activity
+state: unknown · source: pane · harness state unavailable (unknown launch-prompt)
+FAILED expected: state: working
+Lab cleanup completed; exit=1

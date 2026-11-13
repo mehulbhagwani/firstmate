@@ -1,0 +1,1 @@
+{"id":"cli:pane:process_info","result":{"process_info":{"foreground_process_group_id":29267,"foreground_processes":[{"argv0":"pi","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7WG3BCHA3HSBDJ3M5GQZ2/.quota-herdr.xJk715/project","name":"node","pid":29267}],"pane_id":"w1:p1","shell_pid":27952},"type":"pane_process_info"}}

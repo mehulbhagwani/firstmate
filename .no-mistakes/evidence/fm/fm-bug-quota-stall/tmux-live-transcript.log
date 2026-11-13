@@ -1,0 +1,48 @@
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7WG3BCHA3HSBDJ3M5GQZ2/.quota-lab.x5g6fX
+Launching installed Pi, offline and without a model prompt; isolated config and no tools.
+Real process classification: alive
+Live foreground command: node
+Live Pi retains busy activity
+state: working · source: pane · harness busy (pi-ext)
+Live idle Pi retains its open decision
+state: parked · source: status-log · waiting for a user answer
+Real process classification: alive
+Real process classification: dead
+Live sibling stays working after the other agent exits
+state: working · source: pane · harness busy (pi-ext)
+Before the fix: exited Pi with stale idle record and working event
+state: working · source: status-log · started before the agent exited
+After the fix: exited Pi with stale idle record and working event
+state: unknown · source: none · backend target gone: primary:worker (agent gone, pane shell remains)
+Before the fix: exited Pi with stale busy record
+state: working · source: pane · harness busy (pi-ext)
+After the fix: exited Pi with stale busy record
+state: unknown · source: none · backend target gone: primary:worker (agent gone, pane shell remains)
+Stopped Pi cannot hide behind needs-decision
+state: unknown · source: none · backend target gone: primary:worker (agent gone, pane shell remains)
+Stopped Pi cannot hide behind blocked
+state: unknown · source: none · backend target gone: primary:worker (agent gone, pane shell remains)
+Stopped Pi cannot hide behind paused
+state: unknown · source: none · backend target gone: primary:worker (agent gone, pane shell remains)
+Exited scout preserves done
+state: done · source: status-log · recorded terminal outcome before exit
+Exited scout preserves failed
+state: failed · source: status-log · recorded terminal outcome before exit
+Exited ship preserves done
+state: done · source: status-log · recorded terminal outcome before exit
+Exited ship preserves failed
+state: failed · source: status-log · recorded terminal outcome before exit
+Stopped ship cannot falsely declare an unpublished commit finished
+state: blocked · source: status-log · named head eed8218f4763748c030b1d5d37f75458259db34a is unreachable outside the worker copy
+Stopped ship preserves done after the commit reaches the disposable remote
+state: done · source: status-log · implementation ready
+Secondmate idle-shell handling remains unchanged
+state: paused · source: status-log · waiting for the next delegated task
+Real process classification: ambiguous
+An unrelated foreground process is not positive evidence of agent death
+state: working · source: pane · harness busy (pi-ext)
+Real process classification: dead
+A missing endpoint cannot reuse stale working activity
+state: unknown · source: none · backend target gone: primary:worker
+All live tmux scenarios passed.
+Lab cleanup completed; exit=0

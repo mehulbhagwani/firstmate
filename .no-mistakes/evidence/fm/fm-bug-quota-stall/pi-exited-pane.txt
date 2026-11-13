@@ -1,0 +1,40 @@
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ PI_CODING_AGENT_DIR=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7WG3BCHA3HSBDJ3M5GQZ2/.quota-lab.x5g
+6fX/pi PI_TELEMETRY=0 pi --offline --no-approve --no-extensions --no-mcp --no-skills --no-context-files --no-prompt-temp
+lates --no-themes --no-session --no-tools --tui-mode regular
+
+ ▀▀█  v1.5.2
+ █▀ █ escape interrupt · ctrl+c/ctrl+d clear/exit · / commands · ! bash · ctrl+o more
+ Press ctrl+o to show full startup help and loaded resources.
+
+ Pi can explain its own features and look up its docs. Ask it how to use or extend Pi.
+
+ This project is not trusted. Project .pi resources and packages are ignored. Use /trust to save a trust decision, then
+ restart pi.
+
+ Warning: No models available. Use /login to log into a provider via OAuth or API key. See:
+
+ /opt/homebrew/Cellar/pi-coding-agent/1.5.2/libexec/lib/node_modules/@earendil-works/pi-coding-agent/docs/providers.md
+   /opt/homebrew/Cellar/pi-coding-agent/1.5.2/libexec/lib/node_modules/@earendil-works/pi-coding-agent/docs/models.md
+
+ Warning: tmux extended-keys is off. Modified Enter keys may not work. Add `set -g extended-keys on` to ~/.tmux.conf
+ and restart tmux.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+~/.no-mistakes/worktrees/3ffccef5245c/01M7B7WG3BCHA3HSBDJ3M5GQZ2 (detached)
+0.0%/0 (auto)                                                                                                    unknown
+
+bash-3.2$
+
+
+
+
+
+
+
+

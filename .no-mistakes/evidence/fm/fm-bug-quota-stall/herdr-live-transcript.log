@@ -1,0 +1,22 @@
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7WG3BCHA3HSBDJ3M5GQZ2/.quota-herdr.xJk715
+w1:p1 process classification: alive
+w1:p2 process classification: alive
+Pi before exit is working
+state: working · source: pane · harness busy (pi-ext)
+Sibling Pi is working
+state: working · source: pane · harness busy (pi-ext)
+w1:p1 process classification: dead
+Herdr registration after exit:
+{"id":"cli:agent:get","result":{"agent":{"agent":"pi","agent_status":"idle","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7WG3BCHA3HSBDJ3M5GQZ2/.quota-herdr.xJk715/project","focused":true,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7WG3BCHA3HSBDJ3M5GQZ2/.quota-herdr.xJk715/project","pane_id":"w1:p1","revision":1,"state_change_seq":1,"tab_id":"w1:t1","terminal_id":"term_6602dfc94fd031","terminal_title":"π - project","terminal_title_stripped":"π - project","workspace_id":"w1"},"type":"agent_info"}}
+Exited Pi with stale busy record is agent gone
+state: unknown · source: none · backend target gone: fm-lab-quota-stall-27444-1220:w1:p1 (agent gone, pane shell remains)
+Exited Pi with stale idle record and working event is agent gone
+state: unknown · source: none · backend target gone: fm-lab-quota-stall-27444-1220:w1:p1 (agent gone, pane shell remains)
+The sibling remains working after the other Pi exits
+state: working · source: pane · harness busy (pi-ext)
+Exited Herdr worker preserves done
+state: done · source: status-log · terminal result before exit
+Exited Herdr worker preserves failed
+state: failed · source: status-log · terminal result before exit
+All live Herdr scenarios passed.
+Herdr lab removed; default-session tripwire unchanged.
