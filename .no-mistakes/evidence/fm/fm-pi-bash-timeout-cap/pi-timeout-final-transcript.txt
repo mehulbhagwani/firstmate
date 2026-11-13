@@ -1,0 +1,112 @@
+PI BASH TIMEOUT LIVE VALIDATION
+Runtime: Pi 1.5.2, real openai-codex/gpt-6.1-sol, stock Bash tool, tracked extension, private tmux sessions
+Base: 427056c4181c41074ad24f051f79919330df0fa5
+Target: b1427298bba2108b39b081330f0c23b788d02f19
+
+All final probes below ran against the real Pi CLI. No model, extension, or Bash tool was mocked. Harmless sleep commands replace expensive home-wide discovery.
+
+SETUP CORRECTIONS
+Initial exact-JSON comparison incorrectly rejected provider nulls for omitted optional timeout. The installed Pi validator normalizes null to absence; affected cases were re-driven using that validator. One initial invalid-setting probe had model-modified arguments and was discarded, then re-driven successfully with exact normalized inputs.
+
+PRE-FIX REPRODUCTION
+FM_PI_BASH_TIMEOUT_MAX_MS=5000; base-commit extension ran a timeout-omitting shell for 6.269 seconds and printed its completion marker. The configured bound was not applied.
+Evidence: pi-timeout-baseline-transcript.txt
+
+SCENARIO uncapped-omitted
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS=None
+Requested Bash input: {"command": "printf 'START_uncapped-omitted\\n'; sleep 6; printf 'COMPLETE_uncapped-omitted\\n'"}
+Measured real tool duration: 6.146 seconds
+Result: pass
+Raw product protocol: default-off-verified-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_ba10421c64a24a8b8354b7531db539bf|fc_0e966e6bc0481ee5016af72904e67087d08ae50cb1551eb2ad", "toolName": "bash", "args": {"command": "printf 'START_uncapped-omitted\\n'; sleep 6; printf 'COMPLETE_uncapped-omitted\\n'", "timeout": null}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_ba10421c64a24a8b8354b7531db539bf|fc_0e966e6bc0481ee5016af72904e67087d08ae50cb1551eb2ad", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_uncapped-omitted\nCOMPLETE_uncapped-omitted\n"}], "structuredContent": {"output": "START_uncapped-omitted\nCOMPLETE_uncapped-omitted\n", "truncated": false, "exit_code": 0, "wall_time_seconds": 6.1}}, "isError": false, "durationMs": 6146}
+
+SCENARIO omitted-queued-steering
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS='5000'
+Requested Bash input: {"command": "printf 'START_omitted-queued-steering\\n'; sleep 12; printf 'COMPLETE_omitted-queued-steering\\n'"}
+Measured real tool duration: 5.016 seconds
+Result: pass
+Raw product protocol: cap-5000ms-verified-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_3f86c6b0a18846618b7252b4e2378834|fc_0c7069179af6e92d016af72916e8d887d0971a65c9ac9fb98f", "toolName": "bash", "args": {"command": "printf 'START_omitted-queued-steering\\n'; sleep 12; printf 'COMPLETE_omitted-queued-steering\\n'", "timeout": null}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_3f86c6b0a18846618b7252b4e2378834|fc_0c7069179af6e92d016af72916e8d887d0971a65c9ac9fb98f", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_omitted-queued-steering\n\n\nCommand timed out after 5 seconds"}], "details": {}}, "isError": true, "durationMs": 5016}
+Pi pending steering while shell was running: {"type": "queue_update", "steering": ["After the current shell ends, say STEERING_ONE_ACK. Do not retry or run more commands.", "Also say STEERING_TWO_ACK when you can respond. Do not retry or run more commands."], "followUp": []}
+Pi response after timeout: 
+The tool printed `START_omitted-queued-steering`, then timed out after 5 seconds. No completion marker appeared. No retries or additional commands were run.
+
+STEERING_ONE_ACK
+STEERING_TWO_ACK
+
+SCENARIO explicit-60-seconds
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS='5000'
+Requested Bash input: {"command": "printf 'START_explicit-60-seconds\\n'; sleep 12; printf 'COMPLETE_explicit-60-seconds\\n'", "timeout": 60}
+Measured real tool duration: 5.009 seconds
+Result: pass
+Raw product protocol: cap-5000ms-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_3be96ee012c8453cb9913f05c59d858a|fc_0198aaa586b348d2016af7289b90f487d08ca4f14b7ed75f7d", "toolName": "bash", "args": {"command": "printf 'START_explicit-60-seconds\\n'; sleep 12; printf 'COMPLETE_explicit-60-seconds\\n'", "timeout": 60}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_3be96ee012c8453cb9913f05c59d858a|fc_0198aaa586b348d2016af7289b90f487d08ca4f14b7ed75f7d", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_explicit-60-seconds\n\n\nCommand timed out after 5 seconds"}], "details": {}}, "isError": true, "durationMs": 5009}
+
+SCENARIO shorter-timeout
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS='5000'
+Requested Bash input: {"command": "printf 'START_shorter-timeout\\n'; sleep 2; printf 'COMPLETE_shorter-timeout\\n'", "timeout": 0.25}
+Measured real tool duration: 0.256 seconds
+Result: pass
+Raw product protocol: cap-5000ms-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_95fea3b827cb42a6beddd68376253c89|fc_0198aaa586b348d2016af728a64a6487d09207477f7da54f7d", "toolName": "bash", "args": {"command": "printf 'START_shorter-timeout\\n'; sleep 2; printf 'COMPLETE_shorter-timeout\\n'", "timeout": 0.25}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_95fea3b827cb42a6beddd68376253c89|fc_0198aaa586b348d2016af728a64a6487d09207477f7da54f7d", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_shorter-timeout\n\n\nCommand timed out after 0.25 seconds"}], "details": {}}, "isError": true, "durationMs": 256}
+
+SCENARIO equal-timeout
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS='5000'
+Requested Bash input: {"command": "printf 'START_equal-timeout\\n'; sleep 8; printf 'COMPLETE_equal-timeout\\n'", "timeout": 5}
+Measured real tool duration: 5.007 seconds
+Result: pass
+Raw product protocol: cap-5000ms-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_70dc50edaa43419a8fcc85f5991c6e4e|fc_0198aaa586b348d2016af728acfc5487d09e99b8bee003b6a7", "toolName": "bash", "args": {"command": "printf 'START_equal-timeout\\n'; sleep 8; printf 'COMPLETE_equal-timeout\\n'", "timeout": 5}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_70dc50edaa43419a8fcc85f5991c6e4e|fc_0198aaa586b348d2016af728acfc5487d09e99b8bee003b6a7", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_equal-timeout\n\n\nCommand timed out after 5 seconds"}], "details": {}}, "isError": true, "durationMs": 5007}
+
+SCENARIO fractional-omitted
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS='500'
+Requested Bash input: {"command": "printf 'START_fractional-omitted\\n'; sleep 2; printf 'COMPLETE_fractional-omitted\\n'"}
+Measured real tool duration: 0.511 seconds
+Result: pass
+Raw product protocol: cap-500ms-verified-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_c9058cc24b434433a4f2e26ef5707ae5|fc_01764b6de2e96d3f016af72924cb7887d0aded9520c968e1da", "toolName": "bash", "args": {"command": "printf 'START_fractional-omitted\\n'; sleep 2; printf 'COMPLETE_fractional-omitted\\n'", "timeout": null}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_c9058cc24b434433a4f2e26ef5707ae5|fc_01764b6de2e96d3f016af72924cb7887d0aded9520c968e1da", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_fractional-omitted\n\n\nCommand timed out after 0.5 seconds"}], "details": {}}, "isError": true, "durationMs": 511}
+
+SCENARIO fractional-explicit
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS='500'
+Requested Bash input: {"command": "printf 'START_fractional-explicit\\n'; sleep 2; printf 'COMPLETE_fractional-explicit\\n'", "timeout": 1}
+Measured real tool duration: 0.505 seconds
+Result: pass
+Raw product protocol: cap-500ms-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_20c2d4e9896142299b2fb22cf62225f2|fc_09441c01be218bf5016af728c1b8a087d0a08c0c652ea80409", "toolName": "bash", "args": {"command": "printf 'START_fractional-explicit\\n'; sleep 2; printf 'COMPLETE_fractional-explicit\\n'", "timeout": 1}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_20c2d4e9896142299b2fb22cf62225f2|fc_09441c01be218bf5016af728c1b8a087d0a08c0c652ea80409", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_fractional-explicit\n\n\nCommand timed out after 0.5 seconds"}], "details": {}}, "isError": true, "durationMs": 505}
+
+SCENARIO fractional-shorter
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS='500'
+Requested Bash input: {"command": "printf 'START_fractional-shorter\\n'; sleep 2; printf 'COMPLETE_fractional-shorter\\n'", "timeout": 0.25}
+Measured real tool duration: 0.254 seconds
+Result: pass
+Raw product protocol: cap-500ms-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_36c22ccc43ea4b70ab21bfd7b9139347|fc_09441c01be218bf5016af728ca44e487d0af1c78fca0d5c16a", "toolName": "bash", "args": {"command": "printf 'START_fractional-shorter\\n'; sleep 2; printf 'COMPLETE_fractional-shorter\\n'", "timeout": 0.25}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_36c22ccc43ea4b70ab21bfd7b9139347|fc_09441c01be218bf5016af728ca44e487d0af1c78fca0d5c16a", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_fractional-shorter\n\n\nCommand timed out after 0.25 seconds"}], "details": {}}, "isError": true, "durationMs": 254}
+
+SCENARIO invalid-unchanged
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS='invalid'
+Requested Bash input: {"command": "printf 'START_invalid-unchanged\\n'; sleep 6; printf 'COMPLETE_invalid-unchanged\\n'"}
+Measured real tool duration: 6.158 seconds
+Result: pass
+Raw product protocol: invalid-boundary-verified-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_c035d3f224ca4c88a799a882e3dda054|fc_087c0310dcfb8cbc016af7297d8fc487d09f8b86d30e90357f", "toolName": "bash", "args": {"command": "printf 'START_invalid-unchanged\\n'; sleep 6; printf 'COMPLETE_invalid-unchanged\\n'", "timeout": null}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_c035d3f224ca4c88a799a882e3dda054|fc_087c0310dcfb8cbc016af7297d8fc487d09f8b86d30e90357f", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_invalid-unchanged\nCOMPLETE_invalid-unchanged\n"}], "structuredContent": {"output": "START_invalid-unchanged\nCOMPLETE_invalid-unchanged\n", "truncated": false, "exit_code": 0, "wall_time_seconds": 6.2}}, "isError": false, "durationMs": 6158}
+
+SCENARIO invalid-explicit-preserved
+Configuration: FM_PI_BASH_TIMEOUT_MAX_MS='invalid'
+Requested Bash input: {"command": "printf 'START_invalid-explicit-preserved\\n'; sleep 2; printf 'COMPLETE_invalid-explicit-preserved\\n'", "timeout": 0.25}
+Measured real tool duration: 0.255 seconds
+Result: pass
+Raw product protocol: invalid-boundary-verified-rpc.jsonl
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_2be9b75fad4242a0be6e0a325c453b5e|fc_087c0310dcfb8cbc016af729893c6887d0a9c6aaee7f3f0e52", "toolName": "bash", "args": {"command": "printf 'START_invalid-explicit-preserved\\n'; sleep 2; printf 'COMPLETE_invalid-explicit-preserved\\n'", "timeout": 0.25}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_2be9b75fad4242a0be6e0a325c453b5e|fc_087c0310dcfb8cbc016af729893c6887d0a9c6aaee7f3f0e52", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_invalid-explicit-preserved\n\n\nCommand timed out after 0.25 seconds"}], "details": {}}, "isError": true, "durationMs": 255}
+
+CLEANUP
+All lab sessions, private sockets, temporary lab homes and temporary baseline extension removed. No source changes.

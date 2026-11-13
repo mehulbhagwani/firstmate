@@ -1,0 +1,116 @@
+[
+  {
+    "name": "uncapped-omitted",
+    "setting": null,
+    "requested": {
+      "command": "printf 'START_uncapped-omitted\\n'; sleep 6; printf 'COMPLETE_uncapped-omitted\\n'"
+    },
+    "durationSeconds": 6.113,
+    "result": "fail",
+    "errors": [
+      "model did not execute exact requested input"
+    ],
+    "rpc": "default-off-rpc.jsonl"
+  },
+  {
+    "name": "omitted-queued-steering",
+    "setting": "5000",
+    "requested": {
+      "command": "printf 'START_omitted-queued-steering\\n'; sleep 12; printf 'COMPLETE_omitted-queued-steering\\n'"
+    },
+    "durationSeconds": 5.012,
+    "result": "fail",
+    "errors": [
+      "model did not execute exact requested input"
+    ],
+    "rpc": "cap-5000ms-rpc.jsonl"
+  },
+  {
+    "name": "explicit-60-seconds",
+    "setting": "5000",
+    "requested": {
+      "command": "printf 'START_explicit-60-seconds\\n'; sleep 12; printf 'COMPLETE_explicit-60-seconds\\n'",
+      "timeout": 60
+    },
+    "durationSeconds": 5.009,
+    "result": "pass",
+    "errors": [],
+    "rpc": "cap-5000ms-rpc.jsonl"
+  },
+  {
+    "name": "shorter-timeout",
+    "setting": "5000",
+    "requested": {
+      "command": "printf 'START_shorter-timeout\\n'; sleep 2; printf 'COMPLETE_shorter-timeout\\n'",
+      "timeout": 0.25
+    },
+    "durationSeconds": 0.256,
+    "result": "pass",
+    "errors": [],
+    "rpc": "cap-5000ms-rpc.jsonl"
+  },
+  {
+    "name": "equal-timeout",
+    "setting": "5000",
+    "requested": {
+      "command": "printf 'START_equal-timeout\\n'; sleep 8; printf 'COMPLETE_equal-timeout\\n'",
+      "timeout": 5
+    },
+    "durationSeconds": 5.007,
+    "result": "pass",
+    "errors": [],
+    "rpc": "cap-5000ms-rpc.jsonl"
+  },
+  {
+    "name": "fractional-omitted",
+    "setting": "500",
+    "requested": {
+      "command": "printf 'START_fractional-omitted\\n'; sleep 2; printf 'COMPLETE_fractional-omitted\\n'"
+    },
+    "durationSeconds": 0.505,
+    "result": "fail",
+    "errors": [
+      "model did not execute exact requested input"
+    ],
+    "rpc": "cap-500ms-rpc.jsonl"
+  },
+  {
+    "name": "fractional-explicit",
+    "setting": "500",
+    "requested": {
+      "command": "printf 'START_fractional-explicit\\n'; sleep 2; printf 'COMPLETE_fractional-explicit\\n'",
+      "timeout": 1
+    },
+    "durationSeconds": 0.505,
+    "result": "pass",
+    "errors": [],
+    "rpc": "cap-500ms-rpc.jsonl"
+  },
+  {
+    "name": "fractional-shorter",
+    "setting": "500",
+    "requested": {
+      "command": "printf 'START_fractional-shorter\\n'; sleep 2; printf 'COMPLETE_fractional-shorter\\n'",
+      "timeout": 0.25
+    },
+    "durationSeconds": 0.254,
+    "result": "pass",
+    "errors": [],
+    "rpc": "cap-500ms-rpc.jsonl"
+  },
+  {
+    "name": "invalid-unchanged",
+    "setting": "invalid",
+    "requested": {
+      "command": "printf 'START_invalid-unchanged\\n'; sleep 1; printf 'COMPLETE_invalid-unchanged\\n'"
+    },
+    "durationSeconds": 0.505,
+    "result": "fail",
+    "errors": [
+      "model did not execute exact requested input",
+      "uncapped command did not complete",
+      "uncapped duration too short"
+    ],
+    "rpc": "invalid-setting-rpc.jsonl"
+  }
+]

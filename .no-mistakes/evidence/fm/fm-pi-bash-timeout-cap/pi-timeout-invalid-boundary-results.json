@@ -1,0 +1,25 @@
+[
+  {
+    "name": "invalid-unchanged",
+    "setting": "invalid",
+    "requested": {
+      "command": "printf 'START_invalid-unchanged\\n'; sleep 6; printf 'COMPLETE_invalid-unchanged\\n'"
+    },
+    "durationSeconds": 6.158,
+    "result": "pass",
+    "errors": [],
+    "rpc": "invalid-boundary-verified-rpc.jsonl"
+  },
+  {
+    "name": "invalid-explicit-preserved",
+    "setting": "invalid",
+    "requested": {
+      "command": "printf 'START_invalid-explicit-preserved\\n'; sleep 2; printf 'COMPLETE_invalid-explicit-preserved\\n'",
+      "timeout": 0.25
+    },
+    "durationSeconds": 0.255,
+    "result": "pass",
+    "errors": [],
+    "rpc": "invalid-boundary-verified-rpc.jsonl"
+  }
+]

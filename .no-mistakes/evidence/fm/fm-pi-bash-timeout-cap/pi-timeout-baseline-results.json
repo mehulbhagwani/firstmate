@@ -1,0 +1,13 @@
+[
+  {
+    "name": "baseline-unbounded",
+    "setting": "5000",
+    "requested": {
+      "command": "printf 'START_baseline-unbounded\\n'; sleep 6; printf 'COMPLETE_baseline-unbounded\\n'"
+    },
+    "durationSeconds": 6.269,
+    "result": "pass",
+    "errors": [],
+    "rpc": "base-commit-cap-5000ms-verified-rpc.jsonl"
+  }
+]

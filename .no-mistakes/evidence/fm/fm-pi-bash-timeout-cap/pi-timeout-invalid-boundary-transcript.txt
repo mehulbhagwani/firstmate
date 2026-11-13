@@ -1,0 +1,27 @@
+Real Pi 1.5.2 CLI, private tmux socket, stock Bash tool, tracked Firstmate extension.
+Commands use harmless sleeps rather than scanning private files. No model or tool mocks.
+
+Launched invalid-boundary: FM_PI_BASH_TIMEOUT_MAX_MS='invalid'; real Pi RPC ready.
+
+CASE invalid-unchanged
+Requested tool arguments: {"command": "printf 'START_invalid-unchanged\\n'; sleep 6; printf 'COMPLETE_invalid-unchanged\\n'"}
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_c035d3f224ca4c88a799a882e3dda054|fc_087c0310dcfb8cbc016af7297d8fc487d09f8b86d30e90357f", "toolName": "bash", "args": {"command": "printf 'START_invalid-unchanged\\n'; sleep 6; printf 'COMPLETE_invalid-unchanged\\n'", "timeout": null}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_c035d3f224ca4c88a799a882e3dda054|fc_087c0310dcfb8cbc016af7297d8fc487d09f8b86d30e90357f", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_invalid-unchanged\nCOMPLETE_invalid-unchanged\n"}], "structuredContent": {"output": "START_invalid-unchanged\nCOMPLETE_invalid-unchanged\n", "truncated": false, "exit_code": 0, "wall_time_seconds": 6.2}}, "isError": false, "durationMs": 6158}
+Pi response: The tool ran successfully and returned:
+```text
+START_invalid-unchanged
+COMPLETE_invalid-unchanged
+```
+Observed result: {"name": "invalid-unchanged", "setting": "invalid", "requested": {"command": "printf 'START_invalid-unchanged\\n'; sleep 6; printf 'COMPLETE_invalid-unchanged\\n'"}, "durationSeconds": 6.158, "result": "pass", "errors": [], "rpc": "invalid-boundary-verified-rpc.jsonl"}
+
+CASE invalid-explicit-preserved
+Requested tool arguments: {"command": "printf 'START_invalid-explicit-preserved\\n'; sleep 2; printf 'COMPLETE_invalid-explicit-preserved\\n'", "timeout": 0.25}
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_2be9b75fad4242a0be6e0a325c453b5e|fc_087c0310dcfb8cbc016af729893c6887d0a9c6aaee7f3f0e52", "toolName": "bash", "args": {"command": "printf 'START_invalid-explicit-preserved\\n'; sleep 2; printf 'COMPLETE_invalid-explicit-preserved\\n'", "timeout": 0.25}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_2be9b75fad4242a0be6e0a325c453b5e|fc_087c0310dcfb8cbc016af729893c6887d0a9c6aaee7f3f0e52", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_invalid-explicit-preserved\n\n\nCommand timed out after 0.25 seconds"}], "details": {}}, "isError": true, "durationMs": 255}
+Pi response: The command timed out after 0.25 seconds. Output:
+```text
+START_invalid-explicit-preserved
+```
+No completion marker was returned.
+Observed result: {"name": "invalid-explicit-preserved", "setting": "invalid", "requested": {"command": "printf 'START_invalid-explicit-preserved\\n'; sleep 2; printf 'COMPLETE_invalid-explicit-preserved\\n'", "timeout": 0.25}, "durationSeconds": 0.255, "result": "pass", "errors": [], "rpc": "invalid-boundary-verified-rpc.jsonl"}
+Removed isolated invalid-boundary session and lab.

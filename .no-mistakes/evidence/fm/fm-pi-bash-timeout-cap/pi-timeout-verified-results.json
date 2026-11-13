@@ -1,0 +1,46 @@
+[
+  {
+    "name": "uncapped-omitted",
+    "setting": null,
+    "requested": {
+      "command": "printf 'START_uncapped-omitted\\n'; sleep 6; printf 'COMPLETE_uncapped-omitted\\n'"
+    },
+    "durationSeconds": 6.146,
+    "result": "pass",
+    "errors": [],
+    "rpc": "default-off-verified-rpc.jsonl"
+  },
+  {
+    "name": "omitted-queued-steering",
+    "setting": "5000",
+    "requested": {
+      "command": "printf 'START_omitted-queued-steering\\n'; sleep 12; printf 'COMPLETE_omitted-queued-steering\\n'"
+    },
+    "durationSeconds": 5.016,
+    "result": "pass",
+    "errors": [],
+    "rpc": "cap-5000ms-verified-rpc.jsonl"
+  },
+  {
+    "name": "fractional-omitted",
+    "setting": "500",
+    "requested": {
+      "command": "printf 'START_fractional-omitted\\n'; sleep 2; printf 'COMPLETE_fractional-omitted\\n'"
+    },
+    "durationSeconds": 0.511,
+    "result": "pass",
+    "errors": [],
+    "rpc": "cap-500ms-verified-rpc.jsonl"
+  },
+  {
+    "name": "invalid-unchanged",
+    "setting": "invalid",
+    "requested": {
+      "command": "printf 'START_invalid-unchanged\\n'; sleep 1; printf 'COMPLETE_invalid-unchanged\\n'"
+    },
+    "durationSeconds": 1.047,
+    "result": "pass",
+    "errors": [],
+    "rpc": "invalid-setting-verified-rpc.jsonl"
+  }
+]

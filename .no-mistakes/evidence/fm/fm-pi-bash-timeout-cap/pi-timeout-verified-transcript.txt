@@ -1,0 +1,60 @@
+Real Pi 1.5.2 CLI, private tmux socket, stock Bash tool, tracked Firstmate extension.
+Commands use harmless sleeps rather than scanning private files. No model or tool mocks.
+
+Launched default-off: FM_PI_BASH_TIMEOUT_MAX_MS=None; real Pi RPC ready.
+
+CASE uncapped-omitted
+Requested tool arguments: {"command": "printf 'START_uncapped-omitted\\n'; sleep 6; printf 'COMPLETE_uncapped-omitted\\n'"}
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_ba10421c64a24a8b8354b7531db539bf|fc_0e966e6bc0481ee5016af72904e67087d08ae50cb1551eb2ad", "toolName": "bash", "args": {"command": "printf 'START_uncapped-omitted\\n'; sleep 6; printf 'COMPLETE_uncapped-omitted\\n'", "timeout": null}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_ba10421c64a24a8b8354b7531db539bf|fc_0e966e6bc0481ee5016af72904e67087d08ae50cb1551eb2ad", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_uncapped-omitted\nCOMPLETE_uncapped-omitted\n"}], "structuredContent": {"output": "START_uncapped-omitted\nCOMPLETE_uncapped-omitted\n", "truncated": false, "exit_code": 0, "wall_time_seconds": 6.1}}, "isError": false, "durationMs": 6146}
+Pi response: The tool completed successfully and printed:
+```text
+START_uncapped-omitted
+COMPLETE_uncapped-omitted
+```
+Observed result: {"name": "uncapped-omitted", "setting": null, "requested": {"command": "printf 'START_uncapped-omitted\\n'; sleep 6; printf 'COMPLETE_uncapped-omitted\\n'"}, "durationSeconds": 6.146, "result": "pass", "errors": [], "rpc": "default-off-verified-rpc.jsonl"}
+Removed isolated default-off session and lab.
+Launched cap-5000ms: FM_PI_BASH_TIMEOUT_MAX_MS='5000'; real Pi RPC ready.
+
+CASE omitted-queued-steering
+Requested tool arguments: {"command": "printf 'START_omitted-queued-steering\\n'; sleep 12; printf 'COMPLETE_omitted-queued-steering\\n'"}
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_3f86c6b0a18846618b7252b4e2378834|fc_0c7069179af6e92d016af72916e8d887d0971a65c9ac9fb98f", "toolName": "bash", "args": {"command": "printf 'START_omitted-queued-steering\\n'; sleep 12; printf 'COMPLETE_omitted-queued-steering\\n'", "timeout": null}}
+Sent two steering messages while the shell was still running.
+Pi queued steering: {"type": "queue_update", "steering": ["After the current shell ends, say STEERING_ONE_ACK. Do not retry or run more commands."], "followUp": []}
+Pi queued steering: {"type": "queue_update", "steering": ["After the current shell ends, say STEERING_ONE_ACK. Do not retry or run more commands.", "Also say STEERING_TWO_ACK when you can respond. Do not retry or run more commands."], "followUp": []}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_3f86c6b0a18846618b7252b4e2378834|fc_0c7069179af6e92d016af72916e8d887d0971a65c9ac9fb98f", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_omitted-queued-steering\n\n\nCommand timed out after 5 seconds"}], "details": {}}, "isError": true, "durationMs": 5016}
+Pi queued steering: {"type": "queue_update", "steering": ["Also say STEERING_TWO_ACK when you can respond. Do not retry or run more commands."], "followUp": []}
+Pi response: The tool printed `START_omitted-queued-steering`, then timed out after 5 seconds. No completion marker appeared. No retries or additional commands were run.
+
+STEERING_ONE_ACK
+STEERING_TWO_ACK
+Observed result: {"name": "omitted-queued-steering", "setting": "5000", "requested": {"command": "printf 'START_omitted-queued-steering\\n'; sleep 12; printf 'COMPLETE_omitted-queued-steering\\n'"}, "durationSeconds": 5.016, "result": "pass", "errors": [], "rpc": "cap-5000ms-verified-rpc.jsonl"}
+Removed isolated cap-5000ms session and lab.
+Launched cap-500ms: FM_PI_BASH_TIMEOUT_MAX_MS='500'; real Pi RPC ready.
+
+CASE fractional-omitted
+Requested tool arguments: {"command": "printf 'START_fractional-omitted\\n'; sleep 2; printf 'COMPLETE_fractional-omitted\\n'"}
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_c9058cc24b434433a4f2e26ef5707ae5|fc_01764b6de2e96d3f016af72924cb7887d0aded9520c968e1da", "toolName": "bash", "args": {"command": "printf 'START_fractional-omitted\\n'; sleep 2; printf 'COMPLETE_fractional-omitted\\n'", "timeout": null}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_c9058cc24b434433a4f2e26ef5707ae5|fc_01764b6de2e96d3f016af72924cb7887d0aded9520c968e1da", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_fractional-omitted\n\n\nCommand timed out after 0.5 seconds"}], "details": {}}, "isError": true, "durationMs": 511}
+Pi response: The command timed out after 0.5 seconds. Output:
+```text
+START_fractional-omitted
+```
+No completion marker was returned.
+Observed result: {"name": "fractional-omitted", "setting": "500", "requested": {"command": "printf 'START_fractional-omitted\\n'; sleep 2; printf 'COMPLETE_fractional-omitted\\n'"}, "durationSeconds": 0.511, "result": "pass", "errors": [], "rpc": "cap-500ms-verified-rpc.jsonl"}
+Removed isolated cap-500ms session and lab.
+Launched invalid-setting: FM_PI_BASH_TIMEOUT_MAX_MS='invalid'; real Pi RPC ready.
+
+CASE invalid-unchanged
+Requested tool arguments: {"command": "printf 'START_invalid-unchanged\\n'; sleep 1; printf 'COMPLETE_invalid-unchanged\\n'"}
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_c8fb64e06bb648f5abd33e0d5351a7ed|fc_0dc8e14479956e0e016af7292de61487d0b07b5272ffaa233a", "toolName": "bash", "args": {"command": "printf 'START_invalid-unchanged\\n'; sleep 1; printf 'COMPLETE_invalid-unchanged\\n'", "timeout": null}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_c8fb64e06bb648f5abd33e0d5351a7ed|fc_0dc8e14479956e0e016af7292de61487d0b07b5272ffaa233a", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_invalid-unchanged\nCOMPLETE_invalid-unchanged\n"}], "structuredContent": {"output": "START_invalid-unchanged\nCOMPLETE_invalid-unchanged\n", "truncated": false, "exit_code": 0, "wall_time_seconds": 1}}, "isError": false, "durationMs": 1047}
+Pi response: The tool ran successfully and printed:
+```text
+START_invalid-unchanged
+COMPLETE_invalid-unchanged
+```
+Observed result: {"name": "invalid-unchanged", "setting": "invalid", "requested": {"command": "printf 'START_invalid-unchanged\\n'; sleep 1; printf 'COMPLETE_invalid-unchanged\\n'"}, "durationSeconds": 1.047, "result": "pass", "errors": [], "rpc": "invalid-setting-verified-rpc.jsonl"}
+Removed isolated invalid-setting session and lab.
+
+Live cases completed: 4

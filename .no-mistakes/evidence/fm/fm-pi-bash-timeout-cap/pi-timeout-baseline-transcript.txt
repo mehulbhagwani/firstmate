@@ -1,0 +1,17 @@
+Real Pi 1.5.2 CLI, private tmux socket, stock Bash tool, tracked Firstmate extension.
+Commands use harmless sleeps rather than scanning private files. No model or tool mocks.
+
+Launched base-commit-cap-5000ms: FM_PI_BASH_TIMEOUT_MAX_MS='5000'; real Pi RPC ready.
+
+CASE baseline-unbounded
+Requested tool arguments: {"command": "printf 'START_baseline-unbounded\\n'; sleep 6; printf 'COMPLETE_baseline-unbounded\\n'"}
+Pi tool start: {"type": "tool_execution_start", "toolCallId": "call_da0c1c2a26b6426e9f86058816505f34|fc_0869e48b61e157e3016af72939671087d0a5a7d6e467e17916", "toolName": "bash", "args": {"command": "printf 'START_baseline-unbounded\\n'; sleep 6; printf 'COMPLETE_baseline-unbounded\\n'", "timeout": null}}
+Pi tool result: {"type": "tool_execution_end", "toolCallId": "call_da0c1c2a26b6426e9f86058816505f34|fc_0869e48b61e157e3016af72939671087d0a5a7d6e467e17916", "toolName": "bash", "result": {"content": [{"type": "text", "text": "START_baseline-unbounded\nCOMPLETE_baseline-unbounded\n"}], "structuredContent": {"output": "START_baseline-unbounded\nCOMPLETE_baseline-unbounded\n", "truncated": false, "exit_code": 0, "wall_time_seconds": 6.3}}, "isError": false, "durationMs": 6269}
+Pi response: The tool completed successfully, outputting:
+```text
+START_baseline-unbounded
+COMPLETE_baseline-unbounded
+```
+Observed result: {"name": "baseline-unbounded", "setting": "5000", "requested": {"command": "printf 'START_baseline-unbounded\\n'; sleep 6; printf 'COMPLETE_baseline-unbounded\\n'"}, "durationSeconds": 6.269, "result": "pass", "errors": [], "rpc": "base-commit-cap-5000ms-verified-rpc.jsonl"}
+PRE-FIX REPRODUCTION: cap configured to 5 seconds but shell completed after 6 seconds. Current target stops the same class of timeout-omitting call at 5 seconds.
+Removed isolated base-commit-cap-5000ms session and lab.
