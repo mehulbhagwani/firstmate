@@ -1,0 +1,8 @@
+["pr", "view", "https://github.com/github/docs/pull/46933", "--json", "headRefOid", "-q", ".headRefOid"]
+["pr", "view", "https://github.com/github/docs/pull/46933", "--json", "state,isDraft,mergeable,mergeStateStatus,headRefOid,baseRefName,statusCheckRollup"]
+["api", "repos/github/docs/branches/main"]
+["api", "--paginate", "repos/github/docs/rules/branches/main"]
+["api", "--paginate", "repos/github/docs/commits/445fd6708ca04e23079e9788960380ccbe18afb9/check-runs"]
+["pr", "merge", "46933", "--repo", "github/docs", "--match-head-commit", "445fd6708ca04e23079e9788960380ccbe18afb9", "--squash"]
+["api", "graphql", "-f", "query=query($owner:String!,$repo:String!,$number:Int!){repository(owner:$owner,name:$repo){pullRequest(number:$number){state merged isInMergeQueue baseRefName}}}", "-F", "owner=github", "-F", "repo=docs", "-F", "number=46933", "--jq", ".data.repository.pullRequest | \"state=\" + (.state // \"\"), \"merged=\" + (.merged | tostring), \"queued=\" + (.isInMergeQueue | tostring), \"base=\" + (.baseRefName // \"\")"]
+["api", "--paginate", "repos/github/docs/rules/branches/main", "--jq", ".[] | select(.type == \"merge_queue\") | \"merge_method=\" + (.parameters.merge_method // \"\")"]

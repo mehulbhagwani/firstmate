@@ -1,0 +1,3 @@
+["pr", "merge", "14846", "--repo", "cli/cli"]
+["api", "--method", "PUT", "repos/cli/cli/branches/trunk"]
+["api", "graphql", "-f", "query=mutation { test }"]

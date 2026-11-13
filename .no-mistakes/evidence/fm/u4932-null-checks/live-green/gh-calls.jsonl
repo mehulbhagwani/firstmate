@@ -1,0 +1,7 @@
+["pr", "view", "https://github.com/cli/cli/pull/14846", "--json", "headRefOid", "-q", ".headRefOid"]
+["pr", "view", "https://github.com/cli/cli/pull/14846", "--json", "state,isDraft,mergeable,mergeStateStatus,headRefOid,baseRefName,statusCheckRollup"]
+["api", "repos/cli/cli/branches/trunk"]
+["api", "--paginate", "repos/cli/cli/rules/branches/trunk"]
+["pr", "merge", "14846", "--repo", "cli/cli", "--match-head-commit", "aaf296326df06cbafd523c12efa0112cdc53c10c", "--squash"]
+["api", "graphql", "-f", "query=query($owner:String!,$repo:String!,$number:Int!){repository(owner:$owner,name:$repo){pullRequest(number:$number){state merged isInMergeQueue baseRefName}}}", "-F", "owner=cli", "-F", "repo=cli", "-F", "number=14846", "--jq", ".data.repository.pullRequest | \"state=\" + (.state // \"\"), \"merged=\" + (.merged | tostring), \"queued=\" + (.isInMergeQueue | tostring), \"base=\" + (.baseRefName // \"\")"]
+["api", "--paginate", "repos/cli/cli/rules/branches/trunk", "--jq", ".[] | select(.type == \"merge_queue\") | \"merge_method=\" + (.parameters.merge_method // \"\")"]

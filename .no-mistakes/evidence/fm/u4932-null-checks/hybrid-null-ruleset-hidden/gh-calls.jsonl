@@ -1,0 +1,5 @@
+["pr", "view", "https://github.com/github/docs/pull/46933", "--json", "headRefOid", "-q", ".headRefOid"]
+["pr", "view", "https://github.com/github/docs/pull/46933", "--json", "state,isDraft,mergeable,mergeStateStatus,headRefOid,baseRefName,statusCheckRollup"]
+["api", "repos/github/docs/branches/main"]
+["api", "--paginate", "repos/github/docs/rules/branches/main"]
+["api", "--paginate", "repos/github/docs/commits/445fd6708ca04e23079e9788960380ccbe18afb9/check-runs"]

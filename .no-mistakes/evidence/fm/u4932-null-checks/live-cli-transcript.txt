@@ -1,0 +1,99 @@
+Real product CLI commands and unmodified live GitHub reads. Successful merge preflights stop at the local write guard (exit 97); no merge is sent. Refused PRs never reach that guard. Review-readiness commands are read-only.
+
+SCENARIO live-green
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/cli/cli/pull/14846 
+branch shape: live
+exit=97
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+verified: https://github.com/cli/cli/pull/14846 is open and mergeable, with every unwaived required check reported and every unwaived check green at head aaf296326df06cbafd523c12efa0112cdc53c10c
+VALIDATION GUARD: refused external write or unsupported command
+error: GitHub merge outcome was not successful: state=OPEN, merged=false, isInMergeQueue=false
+
+SCENARIO live-missing
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/cli/cli/pull/15046 
+branch shape: live
+exit=1
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: refusing to merge https://github.com/cli/cli/pull/15046
+  - required check 'build (macos-latest)' has not reported at head 67fe495be19820cd0d9db86623c7b41a146de3c4
+  - required check 'build (ubuntu-latest)' has not reported at head 67fe495be19820cd0d9db86623c7b41a146de3c4
+  - required check 'build (windows-latest)' has not reported at head 67fe495be19820cd0d9db86623c7b41a146de3c4
+error: these required checks have not reported: build (macos-latest), build (ubuntu-latest), build (windows-latest)
+
+SCENARIO live-red
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/cli/cli/pull/13788 
+branch shape: live
+exit=1
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: refusing to merge https://github.com/cli/cli/pull/13788
+  - check 'build (macos-latest)' is not green
+  - check 'build (ubuntu-latest)' is not green
+  - check 'build (windows-latest)' is not green
+error: these checks are not green: build (macos-latest), build (ubuntu-latest), build (windows-latest)
+
+SCENARIO live-ruleset-green
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46933 
+branch shape: live
+exit=97
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+verified: https://github.com/github/docs/pull/46933 is open and mergeable, with every unwaived required check reported and every unwaived check green at head 445fd6708ca04e23079e9788960380ccbe18afb9
+VALIDATION GUARD: refused external write or unsupported command
+error: GitHub merge outcome was not successful: state=OPEN, merged=false, isInMergeQueue=false
+error: base branch main requires the merge queue; retry with: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46933 --attended-override -- --auto --squash
+
+SCENARIO live-ruleset-green-46300
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46300 
+branch shape: live
+exit=97
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+verified: https://github.com/github/docs/pull/46300 is open and mergeable, with every unwaived required check reported and every unwaived check green at head dd0cfd2a8e30de5f87df162aa70534f34b6a19ff
+VALIDATION GUARD: refused external write or unsupported command
+error: GitHub merge outcome was not successful: state=OPEN, merged=false, isInMergeQueue=false
+error: base branch main requires the merge queue; retry with: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46300 --attended-override -- --auto --squash
+
+SCENARIO live-park-green
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-park.sh gate live-x1 
+branch shape: live
+exit=0
+clean head=aaf296326df06cbafd523c12efa0112cdc53c10c
+
+SCENARIO live-park-missing
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-park.sh gate live-x1 
+branch shape: live
+exit=3
+unclean: required check(s) build (macos-latest), build (ubuntu-latest), build (windows-latest) have not reported on head 67fe495be198

@@ -1,0 +1,12 @@
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: refusing to merge https://github.com/cli/cli/pull/15046
+  - required check 'build (macos-latest)' has not reported at head 67fe495be19820cd0d9db86623c7b41a146de3c4
+  - required check 'build (ubuntu-latest)' has not reported at head 67fe495be19820cd0d9db86623c7b41a146de3c4
+  - required check 'build (windows-latest)' has not reported at head 67fe495be19820cd0d9db86623c7b41a146de3c4
+error: these required checks have not reported: build (macos-latest), build (ubuntu-latest), build (windows-latest)

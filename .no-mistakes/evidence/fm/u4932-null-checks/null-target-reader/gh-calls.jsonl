@@ -1,0 +1,2 @@
+["api", "repos/cli/cli/branches/trunk"]
+["api", "--paginate", "repos/cli/cli/rules/branches/trunk"]

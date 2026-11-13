@@ -1,0 +1,11 @@
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+verified: https://github.com/github/docs/pull/46933 is open and mergeable, with every unwaived required check reported and every unwaived check green at head 445fd6708ca04e23079e9788960380ccbe18afb9
+VALIDATION GUARD: refused external write or unsupported command
+error: GitHub merge outcome was not successful: state=OPEN, merged=false, isInMergeQueue=false
+error: base branch main requires the merge queue; retry with: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46933 --attended-override -- --auto --squash

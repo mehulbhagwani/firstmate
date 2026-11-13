@@ -1,0 +1,165 @@
+Supplemental simulations, NOT live scenarios. GitHub reads are real except for the branch protection shape named in each command; the ruleset-hidden case also removes content-linter from the reported check rollup. Forge writes are blocked. These checks cannot prove the forge itself returns the altered shapes.
+
+SCENARIO hybrid-null
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/cli/cli/pull/14846 
+branch shape: null
+exit=97
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+verified: https://github.com/cli/cli/pull/14846 is open and mergeable, with every unwaived required check reported and every unwaived check green at head aaf296326df06cbafd523c12efa0112cdc53c10c
+VALIDATION GUARD: refused external write or unsupported command
+error: GitHub merge outcome was not successful: state=OPEN, merged=false, isInMergeQueue=false
+
+SCENARIO hybrid-missing-protection
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/cli/cli/pull/14846 
+branch shape: missing-protection
+exit=1
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: refusing to merge https://github.com/cli/cli/pull/14846
+  - the branch protection summary for base branch trunk could not be read, so a required check that has not reported cannot be ruled out
+
+SCENARIO hybrid-missing-key
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/cli/cli/pull/14846 
+branch shape: missing-key
+exit=1
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: refusing to merge https://github.com/cli/cli/pull/14846
+  - the branch protection summary for base branch trunk could not be read, so a required check that has not reported cannot be ruled out
+
+SCENARIO hybrid-malformed
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/cli/cli/pull/14846 
+branch shape: malformed
+exit=1
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: refusing to merge https://github.com/cli/cli/pull/14846
+  - the branch protection summary for base branch trunk could not be read, so a required check that has not reported cannot be ruled out
+
+SCENARIO hybrid-null-red
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/cli/cli/pull/13788 
+branch shape: null
+exit=1
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: refusing to merge https://github.com/cli/cli/pull/13788
+  - check 'build (macos-latest)' is not green
+  - check 'build (ubuntu-latest)' is not green
+  - check 'build (windows-latest)' is not green
+error: these checks are not green: build (macos-latest), build (ubuntu-latest), build (windows-latest)
+
+SCENARIO hybrid-null-ruleset-green
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46933 
+branch shape: null
+exit=97
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+verified: https://github.com/github/docs/pull/46933 is open and mergeable, with every unwaived required check reported and every unwaived check green at head 445fd6708ca04e23079e9788960380ccbe18afb9
+VALIDATION GUARD: refused external write or unsupported command
+error: GitHub merge outcome was not successful: state=OPEN, merged=false, isInMergeQueue=false
+error: base branch main requires the merge queue; retry with: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46933 --attended-override -- --auto --squash
+
+SCENARIO hybrid-null-ruleset-green-46300
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46300 
+branch shape: null
+exit=97
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+verified: https://github.com/github/docs/pull/46300 is open and mergeable, with every unwaived required check reported and every unwaived check green at head dd0cfd2a8e30de5f87df162aa70534f34b6a19ff
+VALIDATION GUARD: refused external write or unsupported command
+error: GitHub merge outcome was not successful: state=OPEN, merged=false, isInMergeQueue=false
+error: base branch main requires the merge queue; retry with: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46300 --attended-override -- --auto --squash
+
+SCENARIO hybrid-null-ruleset-hidden
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-pr-merge.sh live-x1 https://github.com/github/docs/pull/46933 
+branch shape: null
+hidden reported check: content-linter
+exit=1
+armed: state/live-x1.check.sh
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no watcher has a fresh beacon (last beat: never, grace 300s).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision according to the session-start block for this harness; do not use shell &.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+error: refusing to merge https://github.com/github/docs/pull/46933
+  - required check 'content-linter' has not reported at head 445fd6708ca04e23079e9788960380ccbe18afb9
+error: these required checks have not reported: content-linter
+
+SCENARIO hybrid-park-null
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-park.sh gate live-x1 
+branch shape: null
+exit=0
+clean head=aaf296326df06cbafd523c12efa0112cdc53c10c
+
+SCENARIO hybrid-park-missing-protection
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-park.sh gate live-x1 
+branch shape: missing-protection
+exit=3
+unclean: the required checks of the base branch could not be read
+
+SCENARIO hybrid-park-missing-key
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-park.sh gate live-x1 
+branch shape: missing-key
+exit=3
+unclean: the required checks of the base branch could not be read
+
+SCENARIO hybrid-park-malformed
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A895Z36VFYNP8QE8AJ4HHF/bin/fm-park.sh gate live-x1 
+branch shape: malformed
+exit=3
+unclean: the required checks of the base branch could not be read
+
+BASELINE COMPARISON null-base-reader
+reader exit=1
+required=[]
+error=the branch protection summary for base branch trunk could not be read
+
+BASELINE COMPARISON null-target-reader
+reader exit=0
+required=[]
+error=

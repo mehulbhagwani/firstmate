@@ -1,30 +1,46 @@
-#!/usr/bin/env bash
-# Read-only guard: passes GitHub reads to the real gh, refuses every mutation locally.
-printf 'gh %s\n' "$*" >> "$FM_GUARD_LOG"
-case "${1:-} ${2:-}" in
-  "pr view") exec /opt/homebrew/bin/gh "$@" ;;
-  "api graphql")
-    case "$*" in *mutation*) printf 'GUARD-REFUSED gh %s\n' "$*" >> "$FM_GUARD_LOG"; exit 97 ;; esac
-    exec /opt/homebrew/bin/gh "$@" ;;
-  "api "*)
-    for a in "$@"; do
-      case "$a" in -X|--method|-X*|--method=*|-f|-F|--field|--raw-field|--input|-f*|-F*) 
-        printf 'GUARD: refused mutating gh api call (never sent)\n' >&2; printf 'GUARD-REFUSED gh %s\n' "$*" >> "$FM_GUARD_LOG"; exit 97 ;;
-      esac
-    done
-    case "${2:-}" in
-      repos/*/branches/*)
-        if [ -n "${FM_GUARD_BRANCH_TRANSFORM:-}" ]; then
-          # Hybrid only: fetch the REAL branch payload, then apply a declared jq
-          # transform so a shape absent from the live forge can be exercised.
-          real=$(/opt/homebrew/bin/gh "$@") || exit $?
-          printf 'TRANSFORMED branch payload with: %s\n' "$FM_GUARD_BRANCH_TRANSFORM" >> "$FM_GUARD_LOG"
-          printf '%s' "$real" | jq -c "$FM_GUARD_BRANCH_TRANSFORM"
-          exit $?
-        fi ;;
-    esac
-    exec /opt/homebrew/bin/gh "$@" ;;
-esac
-printf 'GUARD: refused gh %s (never sent to GitHub)\n' "$1 ${2:-}" >&2
-printf 'GUARD-REFUSED gh %s\n' "$*" >> "$FM_GUARD_LOG"
-exit 97
+#!/usr/bin/env python3
+import json, os, re, subprocess, sys
+from pathlib import Path
+args = sys.argv[1:]
+out = Path(os.environ["FM_VALIDATION_OUTPUT"])
+with (out / "gh-calls.jsonl").open("a") as f:
+    f.write(json.dumps(args) + "\n")
+allowed = len(args) >= 2 and args[:2] == ["pr", "view"]
+branch = False
+if args and args[0] == "api":
+    rest = args[1:]
+    branch = any(re.fullmatch(r"repos/[^/]+/[^/]+/branches/[^/]+", x) for x in rest)
+    endpoint = branch or any(re.fullmatch(r"repos/[^/]+/[^/]+/(rules/branches/[^/]+|commits/[^/]+/check-runs)", x) for x in rest)
+    forbidden = any(x.startswith(("-X", "--method", "--input", "--field", "--raw-field")) or x in ("-f", "-F") for x in rest)
+    allowed = endpoint and not forbidden
+    if rest and rest[0] == "graphql":
+        queries = [x[6:] for x in rest if x.startswith("query=")]
+        allowed = len(queries) == 1 and not re.search(r"\bmutation\b", queries[0]) and queries[0].lstrip().startswith(("query", "{"))
+if not allowed:
+    print("VALIDATION GUARD: refused external write or unsupported command", file=sys.stderr)
+    sys.exit(97)
+result = subprocess.run([os.environ["FM_VALIDATION_REAL_GH"], *args], capture_output=True)
+if branch and result.returncode == 0:
+    (out / "branch-live.json").write_bytes(result.stdout)
+    shape = os.environ.get("FM_VALIDATION_BRANCH_SHAPE", "live")
+    data = json.loads(result.stdout)
+    if shape == "null": data["protection"]["required_status_checks"] = None
+    elif shape == "missing-protection": data.pop("protection", None)
+    elif shape == "missing-key": data["protection"].pop("required_status_checks", None)
+    elif shape == "malformed": data["protection"]["required_status_checks"] = "bogus"
+    elif shape != "live": raise ValueError(shape)
+    payload = result.stdout if shape == "live" else (json.dumps(data) + "\n").encode()
+    (out / "branch-consumed.json").write_bytes(payload)
+    sys.stdout.buffer.write(payload)
+elif args[:2] == ["pr", "view"] and result.returncode == 0 and os.environ.get("FM_VALIDATION_HIDE_CHECK") and "statusCheckRollup" in " ".join(args):
+    (out / "pr-live.json").write_bytes(result.stdout)
+    data = json.loads(result.stdout)
+    hidden = os.environ["FM_VALIDATION_HIDE_CHECK"]
+    data["statusCheckRollup"] = [c for c in data["statusCheckRollup"] if c.get("name", c.get("context")) != hidden]
+    payload = (json.dumps(data) + "\n").encode()
+    (out / "pr-consumed.json").write_bytes(payload)
+    sys.stdout.buffer.write(payload)
+else:
+    sys.stdout.buffer.write(result.stdout)
+sys.stderr.buffer.write(result.stderr)
+sys.exit(result.returncode)

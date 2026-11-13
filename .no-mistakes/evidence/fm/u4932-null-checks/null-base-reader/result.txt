@@ -1,0 +1,3 @@
+reader exit=1
+required=[]
+error=the branch protection summary for base branch trunk could not be read

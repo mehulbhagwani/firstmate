@@ -1,0 +1,4 @@
+["pr", "view", "https://github.com/cli/cli/pull/13788", "--json", "headRefOid", "-q", ".headRefOid"]
+["pr", "view", "https://github.com/cli/cli/pull/13788", "--json", "state,isDraft,mergeable,mergeStateStatus,headRefOid,baseRefName,statusCheckRollup"]
+["api", "repos/cli/cli/branches/trunk"]
+["api", "--paginate", "repos/cli/cli/rules/branches/trunk"]
