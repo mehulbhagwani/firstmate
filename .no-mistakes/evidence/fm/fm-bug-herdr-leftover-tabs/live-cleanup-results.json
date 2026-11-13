@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Exact v2 stale-shell cleanup and repeat",
+    "result": "pass",
+    "live": true,
+    "detail": {
+      "removed_tab": "w2:t1",
+      "journal_exists": false,
+      "focus": [
+        "w1",
+        "w1:t1"
+      ]
+    }
+  },
+  {
+    "name": "Cleanup preserves a focused task with and without a viewer",
+    "result": "pass",
+    "live": true,
+    "detail": {
+      "tab": "w3:t1",
+      "focus": [
+        "w3",
+        "w3:t1"
+      ],
+      "journal_exists": true
+    }
+  },
+  {
+    "name": "Current task metadata protects the task",
+    "result": "pass",
+    "live": true,
+    "detail": {
+      "tab": "w3:t1",
+      "journal_exists": true,
+      "focus": [
+        "w1",
+        "w1:t1"
+      ]
+    }
+  },
+  {
+    "name": "Mismatched v2 endpoint binding protects the task",
+    "result": "pass",
+    "live": true,
+    "detail": {
+      "tab": "w3:t1",
+      "bound_workspace": "w99999",
+      "journal_exists": true
+    }
+  },
+  {
+    "name": "A real foreground command protects the pane",
+    "result": "pass",
+    "live": true,
+    "detail": {
+      "pane": "w3:p1",
+      "journal_exists": true,
+      "focus": [
+        "w1",
+        "w1:t1"
+      ]
+    }
+  },
+  {
+    "name": "Zero-pane reproduction by last-pane close",
+    "live": true,
+    "tab_read": "{\"error\":{\"code\":\"tab_not_found\",\"message\":\"tab w4:t1 not found\"},\"id\":\"cli:tab:get\"}\n",
+    "tab_exit": 1
+  },
+  {
+    "name": "Zero-pane reproduction by last-pane move",
+    "live": true,
+    "tab_read": "{\"error\":{\"code\":\"tab_not_found\",\"message\":\"tab w5:t1 not found\"},\"id\":\"cli:tab:get\"}\n",
+    "tab_exit": 1
+  },
+  {
+    "name": "Named lab teardown and fleet tripwire",
+    "result": "pass"
+  }
+]

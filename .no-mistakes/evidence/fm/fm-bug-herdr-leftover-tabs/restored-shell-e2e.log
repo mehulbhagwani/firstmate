@@ -1,4 +1,183 @@
++ set -u
++++ dirname tests/fm-herdr-session-cleanup-e2e.test.sh
+++ cd tests/..
+++ pwd
++ ROOT=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ
++ HERDR_LAB_HELPER=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh
++ command -v herdr
++ command -v jq
++ command -v python3
++ '[' -x /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh ']'
+++ command -v herdr
++ REAL_HERDR=/opt/homebrew/bin/herdr
++ HERDR_ORIGINAL_PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin
++++ cd /var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/
++++ pwd -P
+++ mktemp -d /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.XXXXXX
++ TMP_ROOT=/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm
++ FAKEBIN=/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/fakebin
++ HOME_DIR=/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/home
++ mkdir -p /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/fakebin /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/home/state /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/home/config
++ touch /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/home/config/herdr-presentation-spaces
++ printf '%s\n' herdr
+++ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh name fm-herdr-session-start-stale-projection-cleanup-r1
++ HERDR_LAB_SESSION=fm-lab-fm-herdr-session-99276-5315
++ export HERDR_LAB_HELPER HERDR_LAB_SESSION REAL_HERDR HERDR_ORIGINAL_PATH
++ trap cleanup EXIT
++ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh provision fm-lab-fm-herdr-session-99276-5315
++ cat
++ chmod +x /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/fakebin/herdr
+++ lab workspace create --cwd /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ --label captain-anchor --focus
+++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 workspace create --cwd /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ --label captain-anchor --focus
++ ANCHOR='{"id":"cli:workspace:create","result":{"root_pane":{"agent_status":"unknown","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","focused":true,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","pane_id":"w1:p1","revision":0,"scroll":{"max_offset_from_bottom":0,"offset_from_bottom":0,"viewport_rows":40},"tab_id":"w1:t1","terminal_id":"term_66025456a44e51","workspace_id":"w1"},"tab":{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"},"type":"workspace_created","workspace":{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}}}'
+++ printf %s '{"id":"cli:workspace:create","result":{"root_pane":{"agent_status":"unknown","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","focused":true,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","pane_id":"w1:p1","revision":0,"scroll":{"max_offset_from_bottom":0,"offset_from_bottom":0,"viewport_rows":40},"tab_id":"w1:t1","terminal_id":"term_66025456a44e51","workspace_id":"w1"},"tab":{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"},"type":"workspace_created","workspace":{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}}}'
+++ jq -r .result.tab.tab_id
++ ANCHOR_TAB=w1:t1
++ TOKEN=AbCdEfGhIjKlMnOpQrStUv
++ ID=restored-idle-shell
++ TITLE='└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv'
+++ lab workspace create --cwd /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ --label '└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv' --no-focus
+++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 workspace create --cwd /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ --label '└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv' --no-focus
++ CANDIDATE='{"id":"cli:workspace:create","result":{"root_pane":{"agent_status":"unknown","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","focused":false,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","pane_id":"w2:p1","revision":0,"scroll":{"max_offset_from_bottom":0,"offset_from_bottom":0,"viewport_rows":40},"tab_id":"w2:t1","terminal_id":"term_66025456b25de2","workspace_id":"w2"},"tab":{"agent_status":"unknown","focused":false,"label":"1","number":1,"pane_count":1,"tab_id":"w2:t1","workspace_id":"w2"},"type":"workspace_created","workspace":{"active_tab_id":"w2:t1","agent_status":"unknown","focused":false,"label":"└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv","number":2,"pane_count":1,"tab_count":1,"workspace_id":"w2"}}}'
+++ printf %s '{"id":"cli:workspace:create","result":{"root_pane":{"agent_status":"unknown","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","focused":false,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","pane_id":"w2:p1","revision":0,"scroll":{"max_offset_from_bottom":0,"offset_from_bottom":0,"viewport_rows":40},"tab_id":"w2:t1","terminal_id":"term_66025456b25de2","workspace_id":"w2"},"tab":{"agent_status":"unknown","focused":false,"label":"1","number":1,"pane_count":1,"tab_id":"w2:t1","workspace_id":"w2"},"type":"workspace_created","workspace":{"active_tab_id":"w2:t1","agent_status":"unknown","focused":false,"label":"└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv","number":2,"pane_count":1,"tab_count":1,"workspace_id":"w2"}}}'
+++ jq -r .result.workspace.workspace_id
++ WS=w2
+++ jq -r .result.root_pane.pane_id
+++ printf %s '{"id":"cli:workspace:create","result":{"root_pane":{"agent_status":"unknown","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","focused":false,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","pane_id":"w2:p1","revision":0,"scroll":{"max_offset_from_bottom":0,"offset_from_bottom":0,"viewport_rows":40},"tab_id":"w2:t1","terminal_id":"term_66025456b25de2","workspace_id":"w2"},"tab":{"agent_status":"unknown","focused":false,"label":"1","number":1,"pane_count":1,"tab_id":"w2:t1","workspace_id":"w2"},"type":"workspace_created","workspace":{"active_tab_id":"w2:t1","agent_status":"unknown","focused":false,"label":"└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv","number":2,"pane_count":1,"tab_count":1,"workspace_id":"w2"}}}'
++ PANE=w2:p1
++ printf 'version=1\n'
++ printf 'task_id=%s\n' restored-idle-shell
++ printf 'projection_id=%s\n' AbCdEfGhIjKlMnOpQrStUv
++ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh stop fm-lab-fm-herdr-session-99276-5315
++ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh provision fm-lab-fm-herdr-session-99276-5315
++ lab tab focus w1:t1
++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 tab focus w1:t1
+++ focus_snapshot
+++ local list workspace tab tabs
++++ lab workspace list
++++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 workspace list
+++ list='{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"},{"active_tab_id":"w2:t1","agent_status":"unknown","focused":false,"label":"└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv","number":2,"pane_count":1,"tab_count":1,"workspace_id":"w2"}]}}'
++++ printf %s '{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"},{"active_tab_id":"w2:t1","agent_status":"unknown","focused":false,"label":"└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv","number":2,"pane_count":1,"tab_count":1,"workspace_id":"w2"}]}}'
++++ jq -er '[.result.workspaces[] | select(.focused == true)] | select(length == 1) | .[0].workspace_id'
+++ workspace=w1
++++ printf %s '{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"},{"active_tab_id":"w2:t1","agent_status":"unknown","focused":false,"label":"└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv","number":2,"pane_count":1,"tab_count":1,"workspace_id":"w2"}]}}'
++++ jq -er --arg workspace w1 '[.result.workspaces[] | select(.workspace_id == $workspace)] | select(length == 1) | .[0].active_tab_id'
+++ tab=w1:t1
++++ lab tab list --workspace w1
++++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 tab list --workspace w1
+++ tabs='{"id":"cli:tab:list","result":{"tabs":[{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"}],"type":"tab_list"}}'
+++ printf %s '{"id":"cli:tab:list","result":{"tabs":[{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"}],"type":"tab_list"}}'
+++ jq -e --arg tab w1:t1 '([.result.tabs[] | select(.focused == true)] | length) == 1 and ([.result.tabs[] | select(.focused == true)][0].tab_id == $tab)'
+++ printf '%s\t%s' w1 w1:t1
++ BEFORE_FOCUS=$'w1\tw1:t1'
++++ printf %s '{"id":"cli:workspace:create","result":{"root_pane":{"agent_status":"unknown","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","focused":true,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","pane_id":"w1:p1","revision":0,"scroll":{"max_offset_from_bottom":0,"offset_from_bottom":0,"viewport_rows":40},"tab_id":"w1:t1","terminal_id":"term_66025456a44e51","workspace_id":"w1"},"tab":{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"},"type":"workspace_created","workspace":{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}}}'
++++ jq -r .result.workspace.workspace_id
+++ printf '%s\t%s' w1 w1:t1
++ '[' $'w1\tw1:t1' = $'w1\tw1:t1' ']'
+++ lab workspace list
+++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 workspace list
++ WORKSPACES='{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"},{"active_tab_id":"w2:t1","agent_status":"unknown","focused":false,"label":"└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv","number":2,"pane_count":1,"tab_count":1,"workspace_id":"w2"}]}}'
+++ lab tab list --workspace w2
+++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 tab list --workspace w2
++ TABS='{"id":"cli:tab:list","result":{"tabs":[{"agent_status":"unknown","focused":false,"label":"1","number":1,"pane_count":1,"tab_id":"w2:t1","workspace_id":"w2"}],"type":"tab_list"}}'
+++ lab pane list --workspace w2
+++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 pane list --workspace w2
++ PANES='{"id":"cli:pane:list","result":{"panes":[{"agent_status":"unknown","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","focused":false,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","pane_id":"w2:p1","revision":0,"scroll":{"max_offset_from_bottom":0,"offset_from_bottom":0,"viewport_rows":24},"tab_id":"w2:t1","terminal_id":"term_66025457710132","workspace_id":"w2"}],"type":"pane_list"}}'
+++ printf %s '{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"},{"active_tab_id":"w2:t1","agent_status":"unknown","focused":false,"label":"└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv","number":2,"pane_count":1,"tab_count":1,"workspace_id":"w2"}]}}'
+++ jq --arg title '└ restored-idle-shell · p:AbCdEfGhIjKlMnOpQrStUv' '[.result.workspaces[] | select(.label == $title)] | length'
++ '[' 1 = 1 ']'
+++ jq '.result.tabs | length'
+++ printf %s '{"id":"cli:tab:list","result":{"tabs":[{"agent_status":"unknown","focused":false,"label":"1","number":1,"pane_count":1,"tab_id":"w2:t1","workspace_id":"w2"}],"type":"tab_list"}}'
++ '[' 1 = 1 ']'
+++ jq '.result.panes | length'
+++ printf %s '{"id":"cli:pane:list","result":{"panes":[{"agent_status":"unknown","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","focused":false,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","pane_id":"w2:p1","revision":0,"scroll":{"max_offset_from_bottom":0,"offset_from_bottom":0,"viewport_rows":24},"tab_id":"w2:t1","terminal_id":"term_66025457710132","workspace_id":"w2"}],"type":"pane_list"}}'
++ '[' 1 = 1 ']'
++ lab agent get w2:p1
++ attempt=0
++ '[' 0 -lt 50 ']'
++ production_process_proof
++ FM_HOME=/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/home
++ FM_BACKEND=herdr
++ HERDR_SESSION=fm-lab-fm-herdr-session-99276-5315
++ FM_HERDR_SESSION_CLEANUP_SOURCE_ONLY=1
++ PATH=/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/fakebin:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin
++ bash -c '. "$1"; fm_backend_herdr_pane_idle_shell_pid "$2" "$3" >/dev/null' _ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-session-cleanup.sh fm-lab-fm-herdr-session-99276-5315 w2:p1
++ break
++ '[' 0 -lt 50 ']'
++ pass 'real named lab reproduced the exact restored one-tab one-pane childless no-agent shell shape'
++ printf 'ok - %s\n' 'real named lab reproduced the exact restored one-tab one-pane childless no-agent shell shape'
 ok - real named lab reproduced the exact restored one-tab one-pane childless no-agent shell shape
++ FM_HOME=/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/home
++ FM_BACKEND=herdr
++ HERDR_SESSION=fm-lab-fm-herdr-session-99276-5315
++ PATH=/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/fakebin:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin
++ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-session-cleanup.sh
+++ focus_snapshot
+++ local list workspace tab tabs
++++ lab workspace list
++++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 workspace list
+++ list='{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}]}}'
++++ jq -er '[.result.workspaces[] | select(.focused == true)] | select(length == 1) | .[0].workspace_id'
++++ printf %s '{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}]}}'
+++ workspace=w1
++++ printf %s '{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}]}}'
++++ jq -er --arg workspace w1 '[.result.workspaces[] | select(.workspace_id == $workspace)] | select(length == 1) | .[0].active_tab_id'
+++ tab=w1:t1
++++ lab tab list --workspace w1
++++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 tab list --workspace w1
+++ tabs='{"id":"cli:tab:list","result":{"tabs":[{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"}],"type":"tab_list"}}'
+++ printf %s '{"id":"cli:tab:list","result":{"tabs":[{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"}],"type":"tab_list"}}'
+++ jq -e --arg tab w1:t1 '([.result.tabs[] | select(.focused == true)] | length) == 1 and ([.result.tabs[] | select(.focused == true)][0].tab_id == $tab)'
+++ printf '%s\t%s' w1 w1:t1
++ AFTER_FOCUS=$'w1\tw1:t1'
++ '[' $'w1\tw1:t1' = $'w1\tw1:t1' ']'
++ lab pane get w2:p1
++ lab workspace get w2
++ '[' '!' -e /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/home/state/restored-idle-shell.herdr-presentation ']'
++ pass 'real named lab cleanup closes only the exact stale pane and preserves exact focus'
++ printf 'ok - %s\n' 'real named lab cleanup closes only the exact stale pane and preserves exact focus'
 ok - real named lab cleanup closes only the exact stale pane and preserves exact focus
++ FM_HOME=/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/home
++ FM_BACKEND=herdr
++ HERDR_SESSION=fm-lab-fm-herdr-session-99276-5315
++ PATH=/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm/fakebin:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin
++ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-session-cleanup.sh
+++ focus_snapshot
+++ local list workspace tab tabs
++++ lab workspace list
++++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 workspace list
+++ list='{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}]}}'
++++ printf %s '{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}]}}'
++++ jq -er '[.result.workspaces[] | select(.focused == true)] | select(length == 1) | .[0].workspace_id'
+++ workspace=w1
++++ jq -er --arg workspace w1 '[.result.workspaces[] | select(.workspace_id == $workspace)] | select(length == 1) | .[0].active_tab_id'
++++ printf %s '{"id":"cli:workspace:list","result":{"type":"workspace_list","workspaces":[{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}]}}'
+++ tab=w1:t1
++++ lab tab list --workspace w1
++++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 tab list --workspace w1
+++ tabs='{"id":"cli:tab:list","result":{"tabs":[{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"}],"type":"tab_list"}}'
+++ printf %s '{"id":"cli:tab:list","result":{"tabs":[{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"}],"type":"tab_list"}}'
+++ jq -e --arg tab w1:t1 '([.result.tabs[] | select(.focused == true)] | length) == 1 and ([.result.tabs[] | select(.focused == true)][0].tab_id == $tab)'
+++ printf '%s\t%s' w1 w1:t1
++ '[' $'w1\tw1:t1' = $'w1\tw1:t1' ']'
+++ printf %s '{"id":"cli:workspace:create","result":{"root_pane":{"agent_status":"unknown","cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","focused":true,"foreground_cwd":"/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ","pane_id":"w1:p1","revision":0,"scroll":{"max_offset_from_bottom":0,"offset_from_bottom":0,"viewport_rows":40},"tab_id":"w1:t1","terminal_id":"term_66025456a44e51","workspace_id":"w1"},"tab":{"agent_status":"unknown","focused":true,"label":"1","number":1,"pane_count":1,"tab_id":"w1:t1","workspace_id":"w1"},"type":"workspace_created","workspace":{"active_tab_id":"w1:t1","agent_status":"unknown","focused":true,"label":"captain-anchor","number":1,"pane_count":1,"tab_count":1,"workspace_id":"w1"}}}'
+++ jq -r .result.root_pane.pane_id
++ lab pane get w1:p1
++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 pane get w1:p1
+++ lab status --json
+++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh run fm-lab-fm-herdr-session-99276-5315 status --json
++ STATUS='{"client":{"version":"0.9.5","channel":"stable","protocol":22,"endpoint_protocol_generation":1,"endpoint_capabilities":["surface_interest","presentation_effects_fence","health_check"],"remote_host_bridge":true,"remote_bridge_idle_timeout":true,"binary":"/opt/homebrew/bin/herdr","session":"fm-lab-fm-herdr-session-99276-5315"},"server":{"status":"running","running":true,"version":"0.9.5","protocol":22,"capabilities":{"live_handoff":true,"detached_server_daemon":false,"endpoint_protocol_generation":1,"surface_interest":true,"health_check":true,"ssh_agent_registration":true},"compatible":true,"endpoint_compatible":true,"socket":"/Users/mehul/.config/herdr/sessions/fm-lab-fm-herdr-session-99276-5315/herdr.sock","session":"fm-lab-fm-herdr-session-99276-5315","restart_needed":false,"server_binary_stale":false},"update":{"restart_needed":false,"server_binary_stale":false}}'
++ pass 'real named lab cleanup is idempotent and leaves the configured fleet session to the teardown tripwire'
++ printf 'ok - %s\n' 'real named lab cleanup is idempotent and leaves the configured fleet session to the teardown tripwire'
 ok - real named lab cleanup is idempotent and leaves the configured fleet session to the teardown tripwire
+++ printf %s '{"client":{"version":"0.9.5","channel":"stable","protocol":22,"endpoint_protocol_generation":1,"endpoint_capabilities":["surface_interest","presentation_effects_fence","health_check"],"remote_host_bridge":true,"remote_bridge_idle_timeout":true,"binary":"/opt/homebrew/bin/herdr","session":"fm-lab-fm-herdr-session-99276-5315"},"server":{"status":"running","running":true,"version":"0.9.5","protocol":22,"capabilities":{"live_handoff":true,"detached_server_daemon":false,"endpoint_protocol_generation":1,"surface_interest":true,"health_check":true,"ssh_agent_registration":true},"compatible":true,"endpoint_compatible":true,"socket":"/Users/mehul/.config/herdr/sessions/fm-lab-fm-herdr-session-99276-5315/herdr.sock","session":"fm-lab-fm-herdr-session-99276-5315","restart_needed":false,"server_binary_stale":false},"update":{"restart_needed":false,"server_binary_stale":false}}'
+++ jq -r .client.version
+++ printf %s '{"client":{"version":"0.9.5","channel":"stable","protocol":22,"endpoint_protocol_generation":1,"endpoint_capabilities":["surface_interest","presentation_effects_fence","health_check"],"remote_host_bridge":true,"remote_bridge_idle_timeout":true,"binary":"/opt/homebrew/bin/herdr","session":"fm-lab-fm-herdr-session-99276-5315"},"server":{"status":"running","running":true,"version":"0.9.5","protocol":22,"capabilities":{"live_handoff":true,"detached_server_daemon":false,"endpoint_protocol_generation":1,"surface_interest":true,"health_check":true,"ssh_agent_registration":true},"compatible":true,"endpoint_compatible":true,"socket":"/Users/mehul/.config/herdr/sessions/fm-lab-fm-herdr-session-99276-5315/herdr.sock","session":"fm-lab-fm-herdr-session-99276-5315","restart_needed":false,"server_binary_stale":false},"update":{"restart_needed":false,"server_binary_stale":false}}'
+++ jq -r .server.protocol
++ printf 'evidence: herdr=%s protocol=%s fleet-session-tripwire=armed\n' 0.9.5 22
 evidence: herdr=0.9.5 protocol=22 fleet-session-tripwire=armed
++ cleanup
++ local status=0
++ env PATH=/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mehul/.codex/tmp/arg0-macos/codex-arg0WAT4eb:/opt/homebrew/Caskroom/codex/0.167.2/codex-path:/Users/mehul/.local/bin:/Users/mehul/.nix-profile/bin:/etc/profiles/per-user/mehul/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mehul/go/bin:/Users/mehul/.cargo/bin:/Users/mehul/bin:/usr/local/sbin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A38YPG1BM3MH9YEZC0FDGJ/bin/fm-herdr-lab.sh teardown fm-lab-fm-herdr-session-99276-5315
++ rm -rf /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-herdr-session-cleanup-e2e.zEl7hm
++ exit 0
