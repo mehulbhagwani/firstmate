@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Before fix: one-second override leaves TCP connection blocked",
+    "passed": true,
+    "elapsed_seconds": 4.007,
+    "exit": -9,
+    "externally_stopped": true,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "Default: TCP connection fails within fifteen seconds plus scheduling margin",
+    "passed": true,
+    "elapsed_seconds": 7.915,
+    "exit": 255,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "ssh: connect to host 127.0.0.1 port 51361: Operation timed out\n"
+  },
+  {
+    "name": "Override: TCP connection stops at one second",
+    "passed": true,
+    "elapsed_seconds": 1.127,
+    "exit": 255,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "ssh: connect to host 127.0.0.1 port 51372: Operation timed out\n"
+  },
+  {
+    "name": "Default: silent SSH banner stops at fifteen seconds",
+    "passed": true,
+    "elapsed_seconds": 15.18,
+    "exit": 255,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "Connection timed out during banner exchange\nConnection to 127.0.0.1 port 51376 timed out\n"
+  },
+  {
+    "name": "Override: silent SSH banner stops at two seconds",
+    "passed": true,
+    "elapsed_seconds": 2.108,
+    "exit": 255,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "Connection timed out during banner exchange\nConnection to 127.0.0.1 port 51391 timed out\n"
+  },
+  {
+    "name": "Invalid timeout '0' is rejected before connecting",
+    "passed": true,
+    "elapsed_seconds": 0.061,
+    "exit": 1,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: 0\n"
+  },
+  {
+    "name": "Invalid timeout '-1' is rejected before connecting",
+    "passed": true,
+    "elapsed_seconds": 0.065,
+    "exit": 1,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: -1\n"
+  },
+  {
+    "name": "Invalid timeout '1.5' is rejected before connecting",
+    "passed": true,
+    "elapsed_seconds": 0.057,
+    "exit": 1,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: 1.5\n"
+  },
+  {
+    "name": "Invalid timeout 'not-a-number' is rejected before connecting",
+    "passed": true,
+    "elapsed_seconds": 0.07,
+    "exit": 1,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: not-a-number\n"
+  },
+  {
+    "name": "Invalid timeout '1s' is rejected before connecting",
+    "passed": true,
+    "elapsed_seconds": 0.067,
+    "exit": 1,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: 1s\n"
+  },
+  {
+    "name": "Invalid timeout ' 2 ' is rejected before connecting",
+    "passed": true,
+    "elapsed_seconds": 0.065,
+    "exit": 1,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "error: FM_SSH_CONNECT_TIMEOUT must be a positive integer:  2 \n"
+  },
+  {
+    "name": "Invalid timeout '999999999999999999999999999999999' is rejected before connecting",
+    "passed": true,
+    "elapsed_seconds": 0.059,
+    "exit": 1,
+    "externally_stopped": false,
+    "stdout": "",
+    "stderr": "/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh: line 115: [: 999999999999999999999999999999999: integer expected\nerror: FM_SSH_CONNECT_TIMEOUT must be a positive integer: 999999999999999999999999999999999\n"
+  }
+]

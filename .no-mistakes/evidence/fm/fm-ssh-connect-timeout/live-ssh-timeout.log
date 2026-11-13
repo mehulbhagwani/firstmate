@@ -1,0 +1,97 @@
+
+CASE: Before fix: one-second override leaves TCP connection blocked
+endpoint=tcp-connect; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=1
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/.ssh-timeout-validation/fm-on-base.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=4.007; exit=-9; external_deadline=True
+stdout: <empty>
+stderr: <empty>
+baseline remained blocked until the test stopped it
+
+CASE: Default: TCP connection fails within fifteen seconds plus scheduling margin
+endpoint=tcp-connect; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=unset
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=7.915; exit=255; external_deadline=False
+stdout: <empty>
+stderr: ssh: connect to host 127.0.0.1 port 51361: Operation timed out
+
+CASE: Override: TCP connection stops at one second
+endpoint=tcp-connect; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=1
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=1.127; exit=255; external_deadline=False
+stdout: <empty>
+stderr: ssh: connect to host 127.0.0.1 port 51372: Operation timed out
+
+CASE: Default: silent SSH banner stops at fifteen seconds
+endpoint=silent-banner; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=unset
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=15.180; exit=255; external_deadline=False
+stdout: <empty>
+stderr: Connection timed out during banner exchange
+Connection to 127.0.0.1 port 51376 timed out
+received_client_banner: SSH-2.0-OpenSSH_10.2
+
+CASE: Override: silent SSH banner stops at two seconds
+endpoint=silent-banner; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=2
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=2.108; exit=255; external_deadline=False
+stdout: <empty>
+stderr: Connection timed out during banner exchange
+Connection to 127.0.0.1 port 51391 timed out
+received_client_banner: SSH-2.0-OpenSSH_10.2
+
+CASE: Invalid timeout '0' is rejected before connecting
+endpoint=invalid; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=0
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=0.061; exit=1; external_deadline=False
+stdout: <empty>
+stderr: error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: 0
+connection_received=False
+
+CASE: Invalid timeout '-1' is rejected before connecting
+endpoint=invalid; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=-1
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=0.065; exit=1; external_deadline=False
+stdout: <empty>
+stderr: error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: -1
+connection_received=False
+
+CASE: Invalid timeout '1.5' is rejected before connecting
+endpoint=invalid; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=1.5
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=0.057; exit=1; external_deadline=False
+stdout: <empty>
+stderr: error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: 1.5
+connection_received=False
+
+CASE: Invalid timeout 'not-a-number' is rejected before connecting
+endpoint=invalid; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=not-a-number
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=0.070; exit=1; external_deadline=False
+stdout: <empty>
+stderr: error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: not-a-number
+connection_received=False
+
+CASE: Invalid timeout '1s' is rejected before connecting
+endpoint=invalid; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=1s
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=0.067; exit=1; external_deadline=False
+stdout: <empty>
+stderr: error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: 1s
+connection_received=False
+
+CASE: Invalid timeout ' 2 ' is rejected before connecting
+endpoint=invalid; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT= 2 
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=0.065; exit=1; external_deadline=False
+stdout: <empty>
+stderr: error: FM_SSH_CONNECT_TIMEOUT must be a positive integer:  2
+connection_received=False
+
+CASE: Invalid timeout '999999999999999999999999999999999' is rejected before connecting
+endpoint=invalid; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=999999999999999999999999999999999
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=0.059; exit=1; external_deadline=False
+stdout: <empty>
+stderr: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh: line 115: [: 999999999999999999999999999999999: integer expected
+error: FM_SSH_CONNECT_TIMEOUT must be a positive integer: 999999999999999999999999999999999
+connection_received=False

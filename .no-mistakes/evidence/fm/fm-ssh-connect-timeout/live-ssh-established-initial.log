@@ -1,0 +1,14 @@
+Real OpenSSH server, ephemeral test keys, strict known-host verification.
+Remote entrypoint delays 3 seconds before running the real fm-remote-doctor.sh.
+FM_SSH_CONNECT_TIMEOUT=1 /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh healthy-lab fm-remote-doctor.sh --help
+elapsed_seconds=0.922; exit=255
+stdout:
+
+stderr:
+mehul@127.0.0.1: Permission denied (publickey).
+
+Traceback (most recent call last):
+  File "/Users/mehul/.no-mistakes/evidence/01M7APZEX599CWYH4GB21D3FJY/live-ssh-established.py", line 95, in <module>
+    assert elapsed >= 3 and result.returncode == 2 and 'Usage:' in result.stdout
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

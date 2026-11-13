@@ -1,0 +1,13 @@
+Real OpenSSH server, ephemeral test keys, strict known-host verification.
+Remote entrypoint delays 3 seconds before running the real fm-remote-doctor.sh.
+FM_SSH_CONNECT_TIMEOUT=1 /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh healthy-lab fm-remote-doctor.sh --help
+elapsed_seconds=5.610; exit=2
+stdout:
+Check, and optionally repair, one remote account's second-mate readiness.
+
+Usage:
+  bin/fm-on.sh <secondmate-id|ssh-alias> fm-remote-doctor.sh [--fix [--automatic]] [--backend herdr|rex|any]
+
+stderr:
+<empty>
+Established session survived the one-second connect window and returned the remote command result.

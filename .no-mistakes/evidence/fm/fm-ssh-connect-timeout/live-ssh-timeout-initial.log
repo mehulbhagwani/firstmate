@@ -1,0 +1,23 @@
+
+CASE: Before fix: one-second override leaves TCP connection blocked
+endpoint=tcp-connect; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=1
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/.ssh-timeout-validation/fm-on-base.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=4.010; exit=-9; external_deadline=True
+stdout: <empty>
+stderr: <empty>
+baseline remained blocked until the test stopped it
+
+CASE: Default: TCP connection stops at fifteen seconds
+endpoint=tcp-connect; native_ssh=/usr/bin/ssh; FM_SSH_CONNECT_TIMEOUT=unset
+command: bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/bin/fm-on.sh timeout-lab fm-remote-doctor.sh --help
+elapsed_seconds=7.939; exit=255; external_deadline=False
+stdout: <empty>
+stderr: ssh: connect to host 127.0.0.1 port 51300: Operation timed out
+Traceback (most recent call last):
+  File "/Users/mehul/.no-mistakes/evidence/01M7APZEX599CWYH4GB21D3FJY/live-ssh-timeout.py", line 113, in <module>
+    run_case('Default: TCP connection stops at fifteen seconds', 'tcp-connect', None)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mehul/.no-mistakes/evidence/01M7APZEX599CWYH4GB21D3FJY/live-ssh-timeout.py", line 109, in run_case
+    assert passed, name
+           ^^^^^^
+AssertionError: Default: TCP connection stops at fifteen seconds

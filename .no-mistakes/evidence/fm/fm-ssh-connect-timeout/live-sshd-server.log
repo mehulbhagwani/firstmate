@@ -1,0 +1,12 @@
+Server listening on 127.0.0.1 port 51456.
+Connection from 127.0.0.1 port 51460 on 127.0.0.1 port 51456
+Accepted key ED25519 SHA256:8c+YLceTTbDnK5bJQINBp1cjj0cRg+3jWQRzK0ozca8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/.ssh-timeout-validation/established/client-key.pub:1
+Postponed publickey for mehul from 127.0.0.1 port 51460 ssh2 [preauth]
+Accepted key ED25519 SHA256:8c+YLceTTbDnK5bJQINBp1cjj0cRg+3jWQRzK0ozca8 found at /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/.ssh-timeout-validation/established/client-key.pub:1
+Accepted publickey for mehul from 127.0.0.1 port 51460 ssh2: ED25519 SHA256:8c+YLceTTbDnK5bJQINBp1cjj0cRg+3jWQRzK0ozca8
+BSM audit: bsm_audit_session_setup: setaudit_addr failed: Operation not permitted
+User child is on pid 28452
+Starting session: forced-command (config) '/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7APZEX599CWYH4GB21D3FJY/.ssh-timeout-validation/established/run-entrypoint.py' for mehul from 127.0.0.1 port 51460 id 0
+Received disconnect from 127.0.0.1 port 51460:11: disconnected by user
+Disconnected from user mehul 127.0.0.1 port 51460
+Received signal 15; terminating.
