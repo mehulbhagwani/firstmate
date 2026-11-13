@@ -1,0 +1,4 @@
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - bounded acquire with reused PID and live stealer returns 1 and empty holder
+ok - macOS-style ps start tokens normalize leading and trailing whitespace
+ok - recorded pid-start matches fm_pid_start_time by string equality

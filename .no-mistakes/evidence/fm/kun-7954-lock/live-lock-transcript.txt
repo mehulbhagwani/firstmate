@@ -1,0 +1,120 @@
+Runtime: Darwin
+Target: fcb84cd7b5aa0517c4d3f7f0b06caaffa0b4be4d
+Real bash/ps and product CLI, isolated marked homes, no backend/CLI stubs. PID reuse is seeded as an older real start token beside a currently live PID; kernel PID recycling is not forced.
+
+SCENARIO: Genuine live owner is reported accurately, preserves the notification, and releases for normal acknowledgement
+ready pid=13200 token=Fri Nov 13 20:09:45 2026
+$ FM_HOME=<isolated lab> FM_STATUS_PRESENTATION_LOCK_TIMEOUT=1 bash bin/fm-wake-drain.sh
+exit=0 elapsed=1.338s
+stdout:
+WAKE DRAIN SKIPPED: queue lock remains held by live pid 13200 after 1s; retry on the next drain.
+stderr:
+
+matching owner is still alive; its PID/start token and queued notification are unchanged
+$ FM_HOME=<isolated lab> FM_STATUS_PRESENTATION_LOCK_TIMEOUT=1 bash bin/fm-wake-drain.sh
+exit=0 elapsed=2.778s
+stdout:
+1794600585	1	check	lock-validation	notification retained until acknowledgement
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 12965.1794600585.acCt6l
+
+persisted queue before acknowledgement: 1794600585	1	check	lock-validation	notification retained until acknowledgement
+acknowledgement exit=0; persisted queue is empty; notification consumed exactly once
+RESULT: pass
+
+SCENARIO: Reused queue PID under a live recovery mutex refuses without blaming the unrelated process, then recovers
+ready pid=16727 token=Fri Nov 13 20:09:50 2026
+ready pid=16861 token=Fri Nov 13 20:09:50 2026
+persisted PID reuse condition: pid=16727; recorded prior start=Wed Oct 21 17:32:20 2026; actual live start=Fri Nov 13 20:09:50 2026
+$ FM_HOME=<isolated lab> FM_STATUS_PRESENTATION_LOCK_TIMEOUT=1 bash bin/fm-wake-drain.sh
+exit=1 elapsed=1.477s
+stdout:
+stderr:
+wake drain: queue lock could not be acquired safely
+
+both unrelated live process and recovery-mutex owner survived; queue retained; no false live-holder advisory
+direct executable contract: rc=1 held=<>
+pre-change executable counterfactual: rc=124 held=<16727>
+$ FM_HOME=<isolated lab> FM_STATUS_PRESENTATION_LOCK_TIMEOUT=1 bash bin/fm-wake-drain.sh
+exit=0 elapsed=1.507s
+stdout:
+1794600590	1	check	lock-validation	notification retained until acknowledgement
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 16529.1794600590.aenogz
+
+persisted queue before acknowledgement: 1794600590	1	check	lock-validation	notification retained until acknowledgement
+acknowledgement exit=0; persisted queue is empty; notification consumed exactly once
+stale-lock recovery did not signal the unrelated live process
+RESULT: pass
+
+SCENARIO: Reused presentation PID refuses without false live-holder text and preserves queued work
+ready pid=23476 token=Fri Nov 13 20:09:57 2026
+ready pid=23670 token=Fri Nov 13 20:09:57 2026
+persisted PID reuse condition: pid=23476; recorded prior start=Wed Oct 21 17:32:20 2026; actual live start=Fri Nov 13 20:09:57 2026
+$ FM_HOME=<isolated lab> FM_STATUS_PRESENTATION_LOCK_TIMEOUT=1 bash bin/fm-wake-drain.sh
+exit=0 elapsed=5.043s
+stdout:
+1794600597	1	check	lock-validation	notification retained until acknowledgement
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 23152.1794600597.Fuu13w
+wake drain: status presentation lock could not be acquired safely
+
+both unrelated live process and recovery-mutex owner survived; queue retained; no false live-holder advisory
+$ FM_HOME=<isolated lab> FM_STATUS_PRESENTATION_LOCK_TIMEOUT=1 bash bin/fm-wake-drain.sh
+exit=0 elapsed=6.587s
+stdout:
+1794600597	1	check	lock-validation	notification retained until acknowledgement
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 23152.1794600597.Fuu13w
+
+persisted queue before acknowledgement: 1794600597	1	check	lock-validation	notification retained until acknowledgement
+acknowledgement exit=0; persisted queue is empty; notification consumed exactly once
+stale-lock recovery did not signal the unrelated live process
+RESULT: pass
+
+SCENARIO: A waiting notification drain resumes after a genuine owner releases
+ready pid=39627 token=Fri Nov 13 20:10:11 2026
+$ bash bin/fm-wake-drain.sh (5s budget; genuine owner releases while drain waits)
+exit=0
+stdout:
+1794600611	1	check	lock-validation	notification retained until acknowledgement
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 39272.1794600611.qevHVr
+
+$ FM_HOME=<isolated lab> FM_STATUS_PRESENTATION_LOCK_TIMEOUT=1 bash bin/fm-wake-drain.sh
+exit=0 elapsed=1.246s
+stdout:
+1794600611	1	check	lock-validation	notification retained until acknowledgement
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 39272.1794600611.qevHVr
+
+persisted queue before acknowledgement: 1794600611	1	check	lock-validation	notification retained until acknowledgement
+acknowledgement exit=0; persisted queue is empty; notification consumed exactly once
+RESULT: pass
+
+SCENARIO: Stale real-directory queue and recovery locks are reclaimed in top-level and nested forms
+recovery input: top-level real directories for queue and steal mutex; former pid=45675 confirmed exited
+$ FM_HOME=<isolated lab> FM_STATUS_PRESENTATION_LOCK_TIMEOUT=1 bash bin/fm-wake-drain.sh
+exit=0 elapsed=1.493s
+stdout:
+1794600616	1	check	lock-validation	notification retained until acknowledgement
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 45279.1794600616.mV6TLJ
+
+persisted queue before acknowledgement: 1794600616	1	check	lock-validation	notification retained until acknowledgement
+acknowledgement exit=0; persisted queue is empty; notification consumed exactly once
+no queue lock, nested directory, or staged-owner residue remains
+recovery input: nested real directories for queue and steal mutex; former pid=48957 confirmed exited
+$ FM_HOME=<isolated lab> FM_STATUS_PRESENTATION_LOCK_TIMEOUT=1 bash bin/fm-wake-drain.sh
+exit=0 elapsed=1.741s
+stdout:
+1794600619	1	check	lock-validation	notification retained until acknowledgement
+stderr:
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 48607.1794600619.qUVwQd
+
+persisted queue before acknowledgement: 1794600619	1	check	lock-validation	notification retained until acknowledgement
+acknowledgement exit=0; persisted queue is empty; notification consumed exactly once
+no queue lock, nested directory, or staged-owner residue remains
+RESULT: pass
+
+Cleanup: all owned processes stopped and isolated homes removed

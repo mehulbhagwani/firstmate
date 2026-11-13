@@ -1,26 +1,26 @@
 [
   {
-    "name": "live owner protected and drain resumes after release",
+    "name": "Genuine live owner is reported accurately, preserves the notification, and releases for normal acknowledgement",
     "result": "pass",
     "live": true
   },
   {
-    "name": "reused PID plus live steal holder times out with return 1 and empty held PID",
+    "name": "Reused queue PID under a live recovery mutex refuses without blaming the unrelated process, then recovers",
     "result": "pass",
     "live": true
   },
   {
-    "name": "stale PID identity reclaimed and queued notification delivered after stealer releases",
+    "name": "Reused presentation PID refuses without false live-holder text and preserves queued work",
     "result": "pass",
     "live": true
   },
   {
-    "name": "bounded waiter hands ownership and matching native start token to caller (/opt/homebrew/bin/bash)",
+    "name": "A waiting notification drain resumes after a genuine owner releases",
     "result": "pass",
     "live": true
   },
   {
-    "name": "bounded waiter hands ownership and matching native start token to caller (/bin/bash)",
+    "name": "Stale real-directory queue and recovery locks are reclaimed in top-level and nested forms",
     "result": "pass",
     "live": true
   }
