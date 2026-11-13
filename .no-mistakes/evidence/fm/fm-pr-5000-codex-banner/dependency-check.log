@@ -1,0 +1,40 @@
+missing adapter / tmux: status=1
+
+missing adapter / herdr: status=1
+
+missing adapter / zellij: status=1
+
+missing adapter / orca: status=1
+
+missing adapter / cmux: status=1
+
+missing adapter / paseo: status=1
+
+missing adapter / rex: status=1
+
+missing adapter / t3code: status=1
+
+missing adapter / tern: status=1
+
+missing adapter / hc: status=1
+
+unreadable adapter / tmux: status=1
+
+unreadable adapter / herdr: status=1
+
+unreadable adapter / zellij: status=1
+
+unreadable adapter / orca: status=1
+
+unreadable adapter / cmux: status=1
+
+unreadable adapter / paseo: status=1
+
+unreadable adapter / rex: status=1
+
+unreadable adapter / t3code: status=1
+
+unreadable adapter / tern: status=1
+
+unreadable adapter / hc: status=1
+

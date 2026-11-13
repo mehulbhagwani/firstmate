@@ -1,0 +1,21 @@
+Installed Pi: 1.5.2
+Configured pins: 0.85.1 0.87.1 0.99.2 1.0.0 1.3.0
+Installed-version adapter result: refused (exit status 1)
+Live idle composer: empty
+Live composer with typed input: pending
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ/.nm-pi-lab.RWFpQJ
+error: task banner's composer visibly holds pending text; refusing to type the /quit exit command because it would concatenate onto that text. Clear or submit the pending text, then retry 'exit'
+Exit with unsubmitted input: status=1
+error: task banner's composer visibly holds pending text; refusing to type the /quit exit command because it would concatenate onto that text. Clear or submit the pending text, then retry 'exit'
+UNSUBMITTED verification input
+Unsubmitted input preserved.
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ/.nm-pi-lab.RWFpQJ
+error: task banner's endpoint reads 'unverified' rather than a positively classified state; refusing to send a lifecycle command into an unattributed endpoint
+Exit with missing adapter: status=1; foreground=zsh
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ/.nm-pi-lab.RWFpQJ
+error: task banner's endpoint reads 'unverified' rather than a positively classified state; refusing to send a lifecycle command into an unattributed endpoint
+Exit with unreadable adapter: status=1; foreground=zsh
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ/.nm-pi-lab.RWFpQJ
+stopped banner harness=pi backend=tmux endpoint=primary:fm-banner worktree=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ
+After exit foreground process: bash
+Exit preserved task record and disposable working directory.

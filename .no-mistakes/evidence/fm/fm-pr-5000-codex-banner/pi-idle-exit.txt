@@ -1,0 +1,2 @@
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ/.nm-pi-lab.RWFpQJ
+stopped banner harness=pi backend=tmux endpoint=primary:fm-banner worktree=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ

@@ -1,0 +1,2 @@
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ/.nm-pi-lab.RWFpQJ
+error: task banner's composer visibly holds pending text; refusing to type the /quit exit command because it would concatenate onto that text. Clear or submit the pending text, then retry 'exit'

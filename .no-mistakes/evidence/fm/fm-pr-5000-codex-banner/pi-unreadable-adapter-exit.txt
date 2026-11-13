@@ -1,0 +1,2 @@
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ/.nm-pi-lab.RWFpQJ
+error: task banner's endpoint reads 'unverified' rather than a positively classified state; refusing to send a lifecycle command into an unattributed endpoint
