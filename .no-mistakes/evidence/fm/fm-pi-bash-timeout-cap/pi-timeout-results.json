@@ -1,0 +1,1191 @@
+[
+  {
+    "case": "omitted-timeout-and-steering",
+    "setting_ms": "5000",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 10; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_16cac82c9e5d48cea6ee633d147eedbc|fc_0f3a9b0b7831485e016af7677b8a4487d08a528a1aa78fbd3c",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 10; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598780.167849,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_16cac82c9e5d48cea6ee633d147eedbc|fc_0f3a9b0b7831485e016af7677b8a4487d08a528a1aa78fbd3c",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 10; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598786.206843,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_16cac82c9e5d48cea6ee633d147eedbc|fc_0f3a9b0b7831485e016af7677b8a4487d08a528a1aa78fbd3c",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\n\n\nCommand timed out after 5 seconds"
+              }
+            ],
+            "details": {}
+          },
+          "isError": true,
+          "durationMs": 5009
+        }
+      }
+    ],
+    "assistant_text": "The command printed `SHELL_STARTED`, then timed out after 5 seconds. `SHELL_FINISHED` was not printed.\n\nSTEERING_ONE_RECEIVED\nSTEERING_TWO_RECEIVED",
+    "steering_responses": [
+      {
+        "observed_at": 1794598780.350958,
+        "event": {
+          "id": "omitted-timeout-and-steering-steer1",
+          "type": "response",
+          "command": "steer",
+          "success": true,
+          "data": {
+            "disposition": "queued"
+          }
+        }
+      },
+      {
+        "observed_at": 1794598780.350987,
+        "event": {
+          "id": "omitted-timeout-and-steering-steer2",
+          "type": "response",
+          "command": "steer",
+          "success": true,
+          "data": {
+            "disposition": "queued"
+          }
+        }
+      }
+    ],
+    "settled": true,
+    "elapsed_seconds": 6.039
+  },
+  {
+    "case": "explicit-60-capped",
+    "setting_ms": "5000",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 10; printf 'SHELL_FINISHED\n'",
+      "timeout": 60
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_03c70e80e0f24a6ab93cecc53cbd7876|fc_0f3a9b0b7831485e016af76787c3b087d09bc641f3956d9467",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 10; printf 'SHELL_FINISHED\n'",
+          "timeout": 60
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598792.4081862,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_03c70e80e0f24a6ab93cecc53cbd7876|fc_0f3a9b0b7831485e016af76787c3b087d09bc641f3956d9467",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 10; printf 'SHELL_FINISHED\n'",
+            "timeout": 60
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598797.378479,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_03c70e80e0f24a6ab93cecc53cbd7876|fc_0f3a9b0b7831485e016af76787c3b087d09bc641f3956d9467",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\n\n\nCommand timed out after 5 seconds"
+              }
+            ],
+            "details": {}
+          },
+          "isError": true,
+          "durationMs": 5003
+        }
+      }
+    ],
+    "assistant_text": "The command printed `SHELL_STARTED`, then timed out after 5 seconds despite the requested 60-second timeout. `SHELL_FINISHED` was not printed. No retry was attempted.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 4.97
+  },
+  {
+    "case": "explicit-1-preserved",
+    "setting_ms": "5000",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 4; printf 'SHELL_FINISHED\n'",
+      "timeout": 1
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_4bf89b90ce594f7481e7bbae0cf86afd|fc_0f3a9b0b7831485e016af76792503487d090a6ebddc60ad72b",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 4; printf 'SHELL_FINISHED\n'",
+          "timeout": 1
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598802.862422,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_4bf89b90ce594f7481e7bbae0cf86afd|fc_0f3a9b0b7831485e016af76792503487d090a6ebddc60ad72b",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 4; printf 'SHELL_FINISHED\n'",
+            "timeout": 1
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598803.918845,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_4bf89b90ce594f7481e7bbae0cf86afd|fc_0f3a9b0b7831485e016af76792503487d090a6ebddc60ad72b",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\n\n\nCommand timed out after 1 seconds"
+              }
+            ],
+            "details": {}
+          },
+          "isError": true,
+          "durationMs": 1005
+        }
+      }
+    ],
+    "assistant_text": "The command printed `SHELL_STARTED`, then timed out after 1 second. `SHELL_FINISHED` was not printed. No retry was attempted.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 1.056
+  },
+  {
+    "case": "explicit-5-preserved",
+    "setting_ms": "5000",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 7; printf 'SHELL_FINISHED\n'",
+      "timeout": 5
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_9fecbc0d92324f2cb3df6c13e4b9b3fb|fc_0f3a9b0b7831485e016af767986b7487d0934d6996cc2ef61c",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 7; printf 'SHELL_FINISHED\n'",
+          "timeout": 5
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598809.067272,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_9fecbc0d92324f2cb3df6c13e4b9b3fb|fc_0f3a9b0b7831485e016af767986b7487d0934d6996cc2ef61c",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 7; printf 'SHELL_FINISHED\n'",
+            "timeout": 5
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598814.071118,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_9fecbc0d92324f2cb3df6c13e4b9b3fb|fc_0f3a9b0b7831485e016af767986b7487d0934d6996cc2ef61c",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\n\n\nCommand timed out after 5 seconds"
+              }
+            ],
+            "details": {}
+          },
+          "isError": true,
+          "durationMs": 5005
+        }
+      }
+    ],
+    "assistant_text": "The command printed `SHELL_STARTED`, then timed out after 5 seconds. `SHELL_FINISHED` was not printed. No retry was attempted.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 5.004
+  },
+  {
+    "case": "quick-command-completes",
+    "setting_ms": "5000",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 0.1; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_537d97e2eb6340a3b7341c627ea87978|fc_0f3a9b0b7831485e016af767a318e487d0809657980b525147",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 0.1; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598819.783935,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_537d97e2eb6340a3b7341c627ea87978|fc_0f3a9b0b7831485e016af767a318e487d0809657980b525147",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 0.1; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598819.997267,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_537d97e2eb6340a3b7341c627ea87978|fc_0f3a9b0b7831485e016af767a318e487d0809657980b525147",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\nSHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_STARTED\nSHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 0.2
+            }
+          },
+          "isError": false,
+          "durationMs": 178
+        }
+      }
+    ],
+    "assistant_text": "The command printed:\n```text\nSHELL_STARTED\nSHELL_FINISHED\n```\nNo retry was attempted.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 0.213
+  },
+  {
+    "case": "subsecond-omitted",
+    "setting_ms": "500",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_c398a6b287764f0d99207cb90657ad67|fc_081e084659f87b65016af767aa360487d0bbb54812dc4108cd",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598826.861218,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_c398a6b287764f0d99207cb90657ad67|fc_081e084659f87b65016af767aa360487d0bbb54812dc4108cd",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598827.422739,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_c398a6b287764f0d99207cb90657ad67|fc_081e084659f87b65016af767aa360487d0bbb54812dc4108cd",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\n\n\nCommand timed out after 0.5 seconds"
+              }
+            ],
+            "details": {}
+          },
+          "isError": true,
+          "durationMs": 507
+        }
+      }
+    ],
+    "assistant_text": "The tool output was:\n```text\nSHELL_STARTED\n\nCommand timed out after 0.5 seconds\n```\nNo retry was attempted.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 0.562
+  },
+  {
+    "case": "subsecond-explicit-capped",
+    "setting_ms": "500",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+      "timeout": 1
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_dd5669f1d377451da3bac734299599ec|fc_081e084659f87b65016af767afaf0087d095f2ce6ea5df13c9",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+          "timeout": 1
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598832.2709289,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_dd5669f1d377451da3bac734299599ec|fc_081e084659f87b65016af767afaf0087d095f2ce6ea5df13c9",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+            "timeout": 1
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598832.800649,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_dd5669f1d377451da3bac734299599ec|fc_081e084659f87b65016af767afaf0087d095f2ce6ea5df13c9",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\n\n\nCommand timed out after 0.5 seconds"
+              }
+            ],
+            "details": {}
+          },
+          "isError": true,
+          "durationMs": 509
+        }
+      }
+    ],
+    "assistant_text": "```text\nSHELL_STARTED\n\nCommand timed out after 0.5 seconds\n```\nNo retry was attempted.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 0.53
+  },
+  {
+    "case": "subsecond-shorter-preserved",
+    "setting_ms": "500",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+      "timeout": 0.2
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_238b65bd90b947ec864a8d1e303a46ee|fc_081e084659f87b65016af767b5b87c87d0b7a793d7d62429b3",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+          "timeout": 0.2
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598838.4048278,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_238b65bd90b947ec864a8d1e303a46ee|fc_081e084659f87b65016af767b5b87c87d0b7a793d7d62429b3",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+            "timeout": 0.2
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598838.581965,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_238b65bd90b947ec864a8d1e303a46ee|fc_081e084659f87b65016af767b5b87c87d0b7a793d7d62429b3",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\n\n\nCommand timed out after 0.2 seconds"
+              }
+            ],
+            "details": {}
+          },
+          "isError": true,
+          "durationMs": 204
+        }
+      }
+    ],
+    "assistant_text": "```text\nSHELL_STARTED\n\nCommand timed out after 0.2 seconds\n```\nNo retry was attempted.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 0.177
+  },
+  {
+    "case": "unset-no-timeout",
+    "setting_ms": null,
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_84c47acd065540b58f6e8f5336cb2596|fc_09f14d7e9737484c016af767bd037887d09747d80d38a37f48",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n' writer?",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598845.726023,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_84c47acd065540b58f6e8f5336cb2596|fc_09f14d7e9737484c016af767bd037887d09747d80d38a37f48",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n' writer?",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598846.7352982,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_84c47acd065540b58f6e8f5336cb2596|fc_09f14d7e9737484c016af767bd037887d09747d80d38a37f48",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\nSHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_STARTED\nSHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 1
+            }
+          },
+          "isError": false,
+          "durationMs": 1025
+        }
+      }
+    ],
+    "assistant_text": "Output:\n```text\nSHELL_STARTED\nSHELL_FINISHED\n```\n\nI did not retry. However, I mistakenly added `writer?` to the command and supplied `timeout: null`, so the call did not match your exact arguments.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 1.009
+  },
+  {
+    "case": "unset-explicit-preserved",
+    "setting_ms": null,
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+      "timeout": 0.2
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_9674262b17b0456f835c265f6174da1d|fc_09f14d7e9737484c016af767c97ae087d08f44b3ad533b2075",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+          "timeout": 0.2
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598858.182538,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_9674262b17b0456f835c265f6174da1d|fc_09f14d7e9737484c016af767c97ae087d08f44b3ad533b2075",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 2; printf 'SHELL_FINISHED\n'",
+            "timeout": 0.2
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598858.5414112,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_9674262b17b0456f835c265f6174da1d|fc_09f14d7e9737484c016af767c97ae087d08f44b3ad533b2075",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\n\n\nCommand timed out after 0.2 seconds"
+              }
+            ],
+            "details": {}
+          },
+          "isError": true,
+          "durationMs": 204
+        }
+      }
+    ],
+    "assistant_text": "Output:\n```text\nSHELL_STARTED\n```\nCommand timed out after 0.2 seconds. No retry.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 0.359
+  },
+  {
+    "case": "invalid-zero",
+    "setting_ms": "0",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_9d0fce368eff44e99e1b24fa83647711|fc_0edcff62982f07a0016af767d2b99487d09a8e57386f1cb5a8",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598867.33392,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_9d0fce368eff44e99e1b24fa83647711|fc_0edcff62982f07a0016af767d2b99487d09a8e57386f1cb5a8",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598868.431932,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_9d0fce368eff44e99e1b24fa83647711|fc_0edcff62982f07a0016af767d2b99487d09a8e57386f1cb5a8",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\nSHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_STARTED\nSHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 1
+            }
+          },
+          "isError": false,
+          "durationMs": 1031
+        }
+      }
+    ],
+    "assistant_text": "```text\nSHELL_STARTED\nSHELL_FINISHED\n```",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 1.098
+  },
+  {
+    "case": "invalid-text",
+    "setting_ms": "invalid",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_7f1475306b634a9f84ce0b6d4df74383|fc_00872d19e2cca63e016af767da7e1887d08057131f5fd29ed6",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598875.168732,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_7f1475306b634a9f84ce0b6d4df74383|fc_00872d19e2cca63e016af767da7e1887d08057131f5fd29ed6",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598876.306248,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_7f1475306b634a9f84ce0b6d4df74383|fc_00872d19e2cca63e016af767da7e1887d08057131f5fd29ed6",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\nSHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_STARTED\nSHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 1.1
+            }
+          },
+          "isError": false,
+          "durationMs": 1088
+        }
+      }
+    ],
+    "assistant_text": "```text\nSHELL_STARTED\nSHELL_FINISHED\n```",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 1.138
+  },
+  {
+    "case": "invalid-leading-zero",
+    "setting_ms": "0500",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_bac05971825f4cf88d3986690206eb61|fc_06a4ba4f82d583db016af767e222f087d08a4b5f8b791f9b23",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598882.7436218,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_bac05971825f4cf88d3986690206eb61|fc_06a4ba4f82d583db016af767e222f087d08a4b5f8b791f9b23",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598883.899832,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_bac05971825f4cf88d3986690206eb61|fc_06a4ba4f82d583db016af767e222f087d08a4b5f8b791f9b23",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\nSHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_STARTED\nSHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 1.1
+            }
+          },
+          "isError": false,
+          "durationMs": 1080
+        }
+      }
+    ],
+    "assistant_text": "```text\nSHELL_STARTED\nSHELL_FINISHED\n```",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 1.156
+  },
+  {
+    "case": "invalid-unsafe-integer",
+    "setting_ms": "9007199254740992",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_a8538d7147a7474da1280bdf1deed49e|fc_03b68865aa76a8a2016af767e9ad4487d08a5e8fb7f17348c4",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598890.2765272,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_a8538d7147a7474da1280bdf1deed49e|fc_03b68865aa76a8a2016af767e9ad4487d08a5e8fb7f17348c4",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598891.46086,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_a8538d7147a7474da1280bdf1deed49e|fc_03b68865aa76a8a2016af767e9ad4487d08a5e8fb7f17348c4",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\nSHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_STARTED\nSHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 1
+            }
+          },
+          "isError": false,
+          "durationMs": 1036
+        }
+      }
+    ],
+    "assistant_text": "```text\nSHELL_STARTED\nSHELL_FINISHED\n```",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 1.184
+  },
+  {
+    "case": "unset-exact-command",
+    "setting_ms": null,
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_32fce286e8c04bdba5da5ba47fe6838a|fc_075e6ad97d87a620016af7681372a887d0bd59d108b392f2d2",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598932.092693,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_32fce286e8c04bdba5da5ba47fe6838a|fc_075e6ad97d87a620016af7681372a887d0bd59d108b392f2d2",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598933.159198,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_32fce286e8c04bdba5da5ba47fe6838a|fc_075e6ad97d87a620016af7681372a887d0bd59d108b392f2d2",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\nSHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_STARTED\nSHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 1
+            }
+          },
+          "isError": false,
+          "durationMs": 1020
+        }
+      }
+    ],
+    "assistant_text": "```text\nSHELL_STARTED\nSHELL_FINISHED\n```",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 1.067
+  },
+  {
+    "case": "worker-without-extension-unchanged",
+    "setting_ms": "500",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_a62509fbaf2a4c338798040cbb014613|fc_03bfb8b1403e0673016af7681b8f2c87d0abb94812577c2064",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598940.180657,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_a62509fbaf2a4c338798040cbb014613|fc_03bfb8b1403e0673016af7681b8f2c87d0abb94812577c2064",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 1; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598941.262211,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_a62509fbaf2a4c338798040cbb014613|fc_03bfb8b1403e0673016af7681b8f2c87d0abb94812577c2064",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\nSHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_STARTED\nSHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 1.1
+            }
+          },
+          "isError": false,
+          "durationMs": 1086
+        }
+      }
+    ],
+    "assistant_text": "```text\nSHELL_STARTED\nSHELL_FINISHED\n```",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 1.082
+  },
+  {
+    "case": "pre-fix-omitted-outlives-cap",
+    "setting_ms": "5000",
+    "requested_arguments": {
+      "command": "printf 'SHELL_STARTED\n'; sleep 7; printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_686c4b729c994f00aa9e851967a68024|fc_0d3157d019ffe5c7016af76822ed8c87d096511b44f0212300",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_STARTED\n'; sleep 7; printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598947.603422,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_686c4b729c994f00aa9e851967a68024|fc_0d3157d019ffe5c7016af76822ed8c87d096511b44f0212300",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_STARTED\n'; sleep 7; printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598954.654691,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_686c4b729c994f00aa9e851967a68024|fc_0d3157d019ffe5c7016af76822ed8c87d096511b44f0212300",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_STARTED\nSHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_STARTED\nSHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 7
+            }
+          },
+          "isError": false,
+          "durationMs": 7018
+        }
+      }
+    ],
+    "assistant_text": "Tool output:\n```text\nSHELL_STARTED\nSHELL_FINISHED\n```\n\nSTEERING_ONE_RECEIVED\nSTEERING_TWO_RECEIVED",
+    "steering_responses": [
+      {
+        "observed_at": 1794598947.689327,
+        "event": {
+          "id": "pre-fix-omitted-outlives-cap-steer1",
+          "type": "response",
+          "command": "steer",
+          "success": true,
+          "data": {
+            "disposition": "queued"
+          }
+        }
+      },
+      {
+        "observed_at": 1794598947.689335,
+        "event": {
+          "id": "pre-fix-omitted-outlives-cap-steer2",
+          "type": "response",
+          "command": "steer",
+          "success": true,
+          "data": {
+            "disposition": "queued"
+          }
+        }
+      }
+    ],
+    "settled": true,
+    "elapsed_seconds": 7.051
+  },
+  {
+    "case": "native-maximum-accepted",
+    "setting_ms": "2147483647",
+    "requested_arguments": {
+      "command": "printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598961.3656268,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598961.4784179,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "SHELL_FINISHED\n"
+              }
+            ],
+            "structuredContent": {
+              "output": "SHELL_FINISHED\n",
+              "truncated": false,
+              "exit_code": 0,
+              "wall_time_seconds": 0
+            }
+          },
+          "isError": false,
+          "durationMs": 5
+        }
+      }
+    ],
+    "assistant_text": "The tool returned:\n```text\nSHELL_FINISHED\n```",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 0.113
+  },
+  {
+    "case": "documented-valid-cap-above-native-limit",
+    "setting_ms": "2147483648",
+    "requested_arguments": {
+      "command": "printf 'SHELL_FINISHED\n'"
+    },
+    "model_tool_calls": [
+      {
+        "type": "toolCall",
+        "id": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+        "name": "bash",
+        "arguments": {
+          "command": "printf 'SHELL_FINISHED\n'",
+          "timeout": null
+        }
+      }
+    ],
+    "tool_starts": [
+      {
+        "observed_at": 1794598967.9276302,
+        "event": {
+          "type": "tool_execution_start",
+          "toolCallId": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+          "toolName": "bash",
+          "args": {
+            "command": "printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    ],
+    "tool_ends": [
+      {
+        "observed_at": 1794598967.927638,
+        "event": {
+          "type": "tool_execution_end",
+          "toolCallId": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+          "toolName": "bash",
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "Invalid timeout: maximum is 2147483.647 seconds"
+              }
+            ],
+            "details": {}
+          },
+          "isError": true,
+          "durationMs": 2
+        }
+      }
+    ],
+    "assistant_text": "The tool returned an error: `Invalid timeout: maximum is 2147483.647 seconds`. No retry was made.",
+    "steering_responses": [],
+    "settled": true,
+    "elapsed_seconds": 0.0
+  }
+]

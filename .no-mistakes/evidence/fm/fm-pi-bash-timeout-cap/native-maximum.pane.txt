@@ -1,0 +1,137 @@
+{"id": "ready", "type": "get_state"}
+{"id":"ready","type":"response","command":"get_state","success":true,"data":{"model":{"id":"gpt-6.1-sol","name":"GPT-6.1 Sol","api":"openai-codex-responses","provider":"openai-codex","baseUrl":"https://chatgpt.com/backend-api","reasoning":t
+rue,"input":["text","image"],"cost":{"input":2,"output":10,"cacheRead":0.1,"cacheWrite":2.5,"tiers":[{"inputTokensAbove":272000,"input":4,"output":15,"cacheRead":0.2,"cacheWrite":5}]},"contextWindow":500000,"maxTokens":128000,"thinkingLevel
+Map":{"off":null,"minimal":"low","low":"low","medium":"medium","high":"high","xhigh":"xhigh","max":"max"},"compat":{"supportsOpenAIGrammarTools":true,"supportsAdditionalTools":true,"supportsToolSearch":true,"supportsMidConvoSystemMessages":
+true},"inputLimits":{"images":{"resize":{"maxWidth":2000,"maxHeight":2000,"maxBytes":4718592,"jpegQuality":80}}},"type":"chat"},"thinkingLevel":"low","isStreaming":false,"isCompacting":false,"steeringMode":"all","followUpMode":"all","sessio
+nId":"01a1d66e-f1bb-7023-bcc0-5457868a23a4","autoCompactionEnabled":true,"messageCount":0,"pendingMessageCount":0}}
+{"id": "native-maximum-accepted", "type": "prompt", "message": "Call the bash tool exactly once with these exact JSON arguments: {\"command\": \"printf 'SHELL_FINISHED\\n'\"}. Do not add a timeout if omitted. Then report the result without
+retrying."}
+{"id":"native-maximum-accepted","type":"response","command":"prompt","success":true,"data":{"disposition":"started"}}
+{"type":"agent_start"}
+{"type":"turn_start"}
+{"type":"message_start","message":{"role":"system","content":"","sections":{"preamble":"Execute the exact requested Bash tool calls for a bounded integration test. Do not change any file, inspect files, run other commands, retry commands, o
+r alter requested arguments. Report the real tool result. Obey steering messages after the tool returns.","cwd":"<cwd>\n/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B6EEDS5Y9FD8BQFR9QDJ38\n</cwd>"},"timestamp":1794598958444,"toolsAd
+ded":[{"name":"bash","description":"Execute a bash command in the current working directory. Returns stdout and stderr. Output is truncated to last 2000 lines or 50KB (whichever is hit first). If truncated, full output is saved to a temp fi
+le. Optionally provide a timeout in seconds.","parameters":{"type":"object","required":["command"],"properties":{"command":{"type":"string","description":"Shell command to execute"},"timeout":{"type":"number","description":"Timeout in secon
+ds (optional, no default timeout)"}}},"constrainedSampling":{"type":"json_schema","strict":"prefer"}}]}}
+{"type":"message_end","message":{"role":"system","content":"","sections":{"preamble":"Execute the exact requested Bash tool calls for a bounded integration test. Do not change any file, inspect files, run other commands, retry commands, or
+alter requested arguments. Report the real tool result. Obey steering messages after the tool returns.","cwd":"<cwd>\n/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B6EEDS5Y9FD8BQFR9QDJ38\n</cwd>"},"timestamp":1794598958444,"toolsAdde
+d":[{"name":"bash","description":"Execute a bash command in the current working directory. Returns stdout and stderr. Output is truncated to last 2000 lines or 50KB (whichever is hit first). If truncated, full output is saved to a temp file
+. Optionally provide a timeout in seconds.","parameters":{"type":"object","required":["command"],"properties":{"command":{"type":"string","description":"Shell command to execute"},"timeout":{"type":"number","description":"Timeout in seconds
+ (optional, no default timeout)"}}},"constrainedSampling":{"type":"json_schema","strict":"prefer"}}]}}
+{"type":"message_start","message":{"role":"user","content":[{"type":"text","text":"Call the bash tool exactly once with these exact JSON arguments: {\"command\": \"printf 'SHELL_FINISHED\\n'\"}. Do not add a timeout if omitted. Then report
+the result without retrying."}],"timestamp":1794598958444}}
+{"type":"message_end","message":{"role":"user","content":[{"type":"text","text":"Call the bash tool exactly once with these exact JSON arguments: {\"command\": \"printf 'SHELL_FINISHED\\n'\"}. Do not add a timeout if omitted. Then report th
+e result without retrying."}],"timestamp":1794598958444}}
+{"type":"message_start","message":{"role":"assistant","content":[],"api":"openai-codex-responses","provider":"openai-codex","model":"gpt-6.1-sol","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"
+output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"pending","timestamp":1794598958467}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_start","contentIndex":0,"id"
+:"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","toolName":"bash"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"{\""}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"command"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"\":\""}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"printf"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":" '"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"S"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"HELL"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"_FIN"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"ISHED"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"\\n"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"'"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"\",\""}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"timeout"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"\":"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"null"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_delta","contentIndex":0,"del
+ta":"}"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"toolcall_end","contentIndex":0,"toolC
+all":{"type":"toolCall","id":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","name":"bash","arguments":{"command":"printf 'SHELL_FINISHED\n'","timeout":null}}}}
+{"type":"message_end","message":{"role":"assistant","content":[{"type":"toolCall","id":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","name":"bash","arguments":{"command":"printf 'SHELL_FINISHE
+D\n'","timeout":null}}],"api":"openai-codex-responses","provider":"openai-codex","model":"gpt-6.1-sol","usage":{"input":335,"output":29,"cacheRead":0,"cacheWrite":0,"reasoning":0,"totalTokens":364,"cost":{"input":0.00067,"output":0.00029,"c
+acheRead":0,"cacheWrite":0,"total":0.00096,"totalFromProvider":false}},"stopReason":"toolUse","timestamp":1794598958467,"responseId":"resp_0c07f0824b909dc2016af7682f8bc887d0a8850a77868c4627","rawStopReason":"completed","durationMs":2891,"th
+inkingLevel":"low"}}
+{"type":"tool_execution_start","toolCallId":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","toolName":"bash","args":{"command":"printf 'SHELL_FINISHED\n'","timeout":null}}
+{"type":"tool_execution_update","toolCallId":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","toolName":"bash","args":{"command":"printf 'SHELL_FINISHED\n'","timeout":null},"partialResult":{"con
+tent":[]}}
+{"type":"tool_execution_update","toolCallId":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","toolName":"bash","args":{"command":"printf 'SHELL_FINISHED\n'","timeout":null},"partialResult":{"con
+tent":[{"type":"text","text":"SHELL_FINISHED\n"}],"details":{}}}
+{"type":"tool_execution_end","toolCallId":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","toolName":"bash","result":{"content":[{"type":"text","text":"SHELL_FINISHED\n"}],"structuredContent":{"
+output":"SHELL_FINISHED\n","truncated":false,"exit_code":0,"wall_time_seconds":0}},"isError":false,"durationMs":5}
+{"type":"message_start","message":{"role":"toolResult","toolCallId":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","toolName":"bash","content":[{"type":"text","text":"SHELL_FINISHED\n"}],"isErr
+or":false,"durationMs":5,"timestamp":1794598961398}}
+{"type":"message_end","message":{"role":"toolResult","toolCallId":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","toolName":"bash","content":[{"type":"text","text":"SHELL_FINISHED\n"}],"isError
+":false,"durationMs":5,"timestamp":1794598961398}}
+{"type":"turn_end","message":{"role":"assistant","content":[{"type":"toolCall","id":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","name":"bash","arguments":{"command":"printf 'SHELL_FINISHED\n
+'","timeout":null}}],"api":"openai-codex-responses","provider":"openai-codex","model":"gpt-6.1-sol","usage":{"input":335,"output":29,"cacheRead":0,"cacheWrite":0,"reasoning":0,"totalTokens":364,"cost":{"input":0.00067,"output":0.00029,"cach
+eRead":0,"cacheWrite":0,"total":0.00096,"totalFromProvider":false}},"stopReason":"toolUse","timestamp":1794598958467,"responseId":"resp_0c07f0824b909dc2016af7682f8bc887d0a8850a77868c4627","rawStopReason":"completed","durationMs":2891,"think
+ingLevel":"low"},"toolResults":[{"role":"toolResult","toolCallId":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78c","toolName":"bash","content":[{"type":"text","text":"SHELL_FINISHED\n"}],"isError
+":false,"durationMs":5,"timestamp":1794598961398}]}
+{"type":"turn_start"}
+{"type":"message_start","message":{"role":"assistant","content":[],"api":"openai-codex-responses","provider":"openai-codex","model":"gpt-6.1-sol","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"
+output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"pending","timestamp":1794598961399}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_start","contentIndex":0}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"The"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+" tool"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+" returned"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+":\n"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"```"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"text"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"\n"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"S"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"HELL"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"_FIN"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"ISHED"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"\n"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_delta","contentIndex":0,"delta":
+"```"}}
+{"type":"message_update","usage":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"totalTokens":0,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"assistantMessageEvent":{"type":"text_end","contentIndex":0,"content":
+"The tool returned:\n```text\nSHELL_FINISHED\n```"}}
+{"type":"message_end","message":{"role":"assistant","content":[{"type":"text","text":"The tool returned:\n```text\nSHELL_FINISHED\n```","textSignature":"{\"v\":1,\"id\":\"msg_0c07f0824b909dc2016af76832e6d087d0a58ebb47ab75089e\",\"phase\":\"
+final_answer\"}"}],"api":"openai-codex-responses","provider":"openai-codex","model":"gpt-6.1-sol","usage":{"input":380,"output":17,"cacheRead":0,"cacheWrite":0,"reasoning":0,"totalTokens":397,"cost":{"input":0.0007599999999999999,"output":0
+.00017,"cacheRead":0,"cacheWrite":0,"total":0.0009299999999999999,"totalFromProvider":false}},"stopReason":"stop","timestamp":1794598961399,"responseId":"resp_0c07f0824b909dc2016af76831d6b087d085a7e644acecc0a8","rawStopReason":"completed","
+durationMs":2086,"thinkingLevel":"low"}}
+{"type":"turn_end","message":{"role":"assistant","content":[{"type":"text","text":"The tool returned:\n```text\nSHELL_FINISHED\n```","textSignature":"{\"v\":1,\"id\":\"msg_0c07f0824b909dc2016af76832e6d087d0a58ebb47ab75089e\",\"phase\":\"fin
+al_answer\"}"}],"api":"openai-codex-responses","provider":"openai-codex","model":"gpt-6.1-sol","usage":{"input":380,"output":17,"cacheRead":0,"cacheWrite":0,"reasoning":0,"totalTokens":397,"cost":{"input":0.0007599999999999999,"output":0.00
+017,"cacheRead":0,"cacheWrite":0,"total":0.0009299999999999999,"totalFromProvider":false}},"stopReason":"stop","timestamp":1794598961399,"responseId":"resp_0c07f0824b909dc2016af76831d6b087d085a7e644acecc0a8","rawStopReason":"completed","dur
+ationMs":2086,"thinkingLevel":"low"},"toolResults":[]}
+{"type":"agent_end","messages":[{"role":"system","content":"","sections":{"preamble":"Execute the exact requested Bash tool calls for a bounded integration test. Do not change any file, inspect files, run other commands, retry commands, or
+alter requested arguments. Report the real tool result. Obey steering messages after the tool returns.","cwd":"<cwd>\n/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B6EEDS5Y9FD8BQFR9QDJ38\n</cwd>"},"timestamp":1794598958444,"toolsAdde
+d":[{"name":"bash","description":"Execute a bash command in the current working directory. Returns stdout and stderr. Output is truncated to last 2000 lines or 50KB (whichever is hit first). If truncated, full output is saved to a temp file
+. Optionally provide a timeout in seconds.","parameters":{"type":"object","required":["command"],"properties":{"command":{"type":"string","description":"Shell command to execute"},"timeout":{"type":"number","description":"Timeout in seconds
+ (optional, no default timeout)"}}},"constrainedSampling":{"type":"json_schema","strict":"prefer"}}]},{"role":"user","content":[{"type":"text","text":"Call the bash tool exactly once with these exact JSON arguments: {\"command\": \"printf '
+SHELL_FINISHED\\n'\"}. Do not add a timeout if omitted. Then report the result without retrying."}],"timestamp":1794598958444},{"role":"assistant","content":[{"type":"toolCall","id":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2
+016af76831054c87d08b7e364aafbff78c","name":"bash","arguments":{"command":"printf 'SHELL_FINISHED\n'","timeout":null}}],"api":"openai-codex-responses","provider":"openai-codex","model":"gpt-6.1-sol","usage":{"input":335,"output":29,"cacheRea
+d":0,"cacheWrite":0,"reasoning":0,"totalTokens":364,"cost":{"input":0.00067,"output":0.00029,"cacheRead":0,"cacheWrite":0,"total":0.00096,"totalFromProvider":false}},"stopReason":"toolUse","timestamp":1794598958467,"responseId":"resp_0c07f0
+824b909dc2016af7682f8bc887d0a8850a77868c4627","rawStopReason":"completed","durationMs":2891,"thinkingLevel":"low"},{"role":"toolResult","toolCallId":"call_d56425ef9baa46c0a459648552686c35|fc_0c07f0824b909dc2016af76831054c87d08b7e364aafbff78
+c","toolName":"bash","content":[{"type":"text","text":"SHELL_FINISHED\n"}],"isError":false,"durationMs":5,"timestamp":1794598961398},{"role":"assistant","content":[{"type":"text","text":"The tool returned:\n```text\nSHELL_FINISHED\n```","te
+xtSignature":"{\"v\":1,\"id\":\"msg_0c07f0824b909dc2016af76832e6d087d0a58ebb47ab75089e\",\"phase\":\"final_answer\"}"}],"api":"openai-codex-responses","provider":"openai-codex","model":"gpt-6.1-sol","usage":{"input":380,"output":17,"cacheRe
+ad":0,"cacheWrite":0,"reasoning":0,"totalTokens":397,"cost":{"input":0.0007599999999999999,"output":0.00017,"cacheRead":0,"cacheWrite":0,"total":0.0009299999999999999,"totalFromProvider":false}},"stopReason":"stop","timestamp":1794598961399
+,"responseId":"resp_0c07f0824b909dc2016af76831d6b087d085a7e644acecc0a8","rawStopReason":"completed","durationMs":2086,"thinkingLevel":"low"}],"willRetry":false}
+{"type":"agent_settled","aborted":false}

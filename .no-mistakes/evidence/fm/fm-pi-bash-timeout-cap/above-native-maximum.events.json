@@ -1,0 +1,1855 @@
+[
+  {
+    "observed_at": 1794598965.039268,
+    "event": {
+      "id": "ready",
+      "type": "get_state"
+    }
+  },
+  {
+    "observed_at": 1794598965.193509,
+    "event": {
+      "id": "ready",
+      "type": "response",
+      "command": "get_state",
+      "success": true,
+      "data": {
+        "model": {
+          "id": "gpt-6.1-sol",
+          "name": "GPT-6.1 Sol",
+          "api": "openai-codex-responses",
+          "provider": "openai-codex",
+          "baseUrl": "https://chatgpt.com/backend-api",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 2,
+            "output": 10,
+            "cacheRead": 0.1,
+            "cacheWrite": 2.5,
+            "tiers": [
+              {
+                "inputTokensAbove": 272000,
+                "input": 4,
+                "output": 15,
+                "cacheRead": 0.2,
+                "cacheWrite": 5
+              }
+            ]
+          },
+          "contextWindow": 500000,
+          "maxTokens": 128000,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "low",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh",
+            "max": "max"
+          },
+          "compat": {
+            "supportsOpenAIGrammarTools": true,
+            "supportsAdditionalTools": true,
+            "supportsToolSearch": true,
+            "supportsMidConvoSystemMessages": true
+          },
+          "inputLimits": {
+            "images": {
+              "resize": {
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "maxBytes": 4718592,
+                "jpegQuality": 80
+              }
+            }
+          },
+          "type": "chat"
+        },
+        "thinkingLevel": "low",
+        "isStreaming": false,
+        "isCompacting": false,
+        "steeringMode": "all",
+        "followUpMode": "all",
+        "sessionId": "01a1d66f-0c40-7190-9abe-09570a0da718",
+        "autoCompactionEnabled": true,
+        "messageCount": 0,
+        "pendingMessageCount": 0
+      }
+    }
+  },
+  {
+    "observed_at": 1794598965.220727,
+    "event": {
+      "id": "documented-valid-cap-above-native-limit",
+      "type": "prompt",
+      "message": "Call the bash tool exactly once with these exact JSON arguments: {\"command\": \"printf 'SHELL_FINISHED\\n'\"}. Do not add a timeout if omitted. Then report the result without retrying."
+    }
+  },
+  {
+    "observed_at": 1794598965.3036811,
+    "event": {
+      "id": "documented-valid-cap-above-native-limit",
+      "type": "response",
+      "command": "prompt",
+      "success": true,
+      "data": {
+        "disposition": "started"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598965.303684,
+    "event": {
+      "type": "agent_start"
+    }
+  },
+  {
+    "observed_at": 1794598965.303686,
+    "event": {
+      "type": "turn_start"
+    }
+  },
+  {
+    "observed_at": 1794598965.3037,
+    "event": {
+      "type": "message_start",
+      "message": {
+        "role": "system",
+        "content": "",
+        "sections": {
+          "preamble": "Execute the exact requested Bash tool calls for a bounded integration test. Do not change any file, inspect files, run other commands, retry commands, or alter requested arguments. Report the real tool result. Obey steering messages after the tool returns.",
+          "cwd": "<cwd>\n/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B6EEDS5Y9FD8BQFR9QDJ38\n</cwd>"
+        },
+        "timestamp": 1794598965221,
+        "toolsAdded": [
+          {
+            "name": "bash",
+            "description": "Execute a bash command in the current working directory. Returns stdout and stderr. Output is truncated to last 2000 lines or 50KB (whichever is hit first). If truncated, full output is saved to a temp file. Optionally provide a timeout in seconds.",
+            "parameters": {
+              "type": "object",
+              "required": [
+                "command"
+              ],
+              "properties": {
+                "command": {
+                  "type": "string",
+                  "description": "Shell command to execute"
+                },
+                "timeout": {
+                  "type": "number",
+                  "description": "Timeout in seconds (optional, no default timeout)"
+                }
+              }
+            },
+            "constrainedSampling": {
+              "type": "json_schema",
+              "strict": "prefer"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "observed_at": 1794598965.30371,
+    "event": {
+      "type": "message_end",
+      "message": {
+        "role": "system",
+        "content": "",
+        "sections": {
+          "preamble": "Execute the exact requested Bash tool calls for a bounded integration test. Do not change any file, inspect files, run other commands, retry commands, or alter requested arguments. Report the real tool result. Obey steering messages after the tool returns.",
+          "cwd": "<cwd>\n/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B6EEDS5Y9FD8BQFR9QDJ38\n</cwd>"
+        },
+        "timestamp": 1794598965221,
+        "toolsAdded": [
+          {
+            "name": "bash",
+            "description": "Execute a bash command in the current working directory. Returns stdout and stderr. Output is truncated to last 2000 lines or 50KB (whichever is hit first). If truncated, full output is saved to a temp file. Optionally provide a timeout in seconds.",
+            "parameters": {
+              "type": "object",
+              "required": [
+                "command"
+              ],
+              "properties": {
+                "command": {
+                  "type": "string",
+                  "description": "Shell command to execute"
+                },
+                "timeout": {
+                  "type": "number",
+                  "description": "Timeout in seconds (optional, no default timeout)"
+                }
+              }
+            },
+            "constrainedSampling": {
+              "type": "json_schema",
+              "strict": "prefer"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "observed_at": 1794598965.303714,
+    "event": {
+      "type": "message_start",
+      "message": {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Call the bash tool exactly once with these exact JSON arguments: {\"command\": \"printf 'SHELL_FINISHED\\n'\"}. Do not add a timeout if omitted. Then report the result without retrying."
+          }
+        ],
+        "timestamp": 1794598965221
+      }
+    }
+  },
+  {
+    "observed_at": 1794598965.3037171,
+    "event": {
+      "type": "message_end",
+      "message": {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Call the bash tool exactly once with these exact JSON arguments: {\"command\": \"printf 'SHELL_FINISHED\\n'\"}. Do not add a timeout if omitted. Then report the result without retrying."
+          }
+        ],
+        "timestamp": 1794598965221
+      }
+    }
+  },
+  {
+    "observed_at": 1794598965.9712498,
+    "event": {
+      "type": "message_start",
+      "message": {
+        "role": "assistant",
+        "content": [],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "pending",
+        "timestamp": 1794598965242
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.70557,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_start",
+        "contentIndex": 0,
+        "id": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+        "toolName": "bash"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.7055979,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "{\""
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.705618,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "command"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.705638,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "\":\""
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.705657,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "printf"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.70568,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": " '"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.705698,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "S"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.705717,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "HELL"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.705735,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "_FIN"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.705754,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "ISHED"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.705772,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "\\n"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.70579,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "'"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.8146,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "\",\""
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.927579,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "timeout"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.927588,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "\":"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.927594,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "null"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.9275992,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_delta",
+        "contentIndex": 0,
+        "delta": "}"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.927608,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "toolcall_end",
+        "contentIndex": 0,
+        "toolCall": {
+          "type": "toolCall",
+          "id": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+          "name": "bash",
+          "arguments": {
+            "command": "printf 'SHELL_FINISHED\n'",
+            "timeout": null
+          }
+        }
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.927626,
+    "event": {
+      "type": "message_end",
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "toolCall",
+            "id": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+            "name": "bash",
+            "arguments": {
+              "command": "printf 'SHELL_FINISHED\n'",
+              "timeout": null
+            }
+          }
+        ],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "usage": {
+          "input": 335,
+          "output": 29,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 364,
+          "cost": {
+            "input": 0.00067,
+            "output": 0.00029,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0.00096,
+            "totalFromProvider": false
+          }
+        },
+        "stopReason": "toolUse",
+        "timestamp": 1794598965242,
+        "responseId": "resp_0f3f66d32734a1c3016af76835e44c87d09f32d73d1aa60ab5",
+        "rawStopReason": "completed",
+        "durationMs": 2635,
+        "thinkingLevel": "low"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.9276302,
+    "event": {
+      "type": "tool_execution_start",
+      "toolCallId": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+      "toolName": "bash",
+      "args": {
+        "command": "printf 'SHELL_FINISHED\n'",
+        "timeout": null
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.927634,
+    "event": {
+      "type": "tool_execution_update",
+      "toolCallId": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+      "toolName": "bash",
+      "args": {
+        "command": "printf 'SHELL_FINISHED\n'",
+        "timeout": null
+      },
+      "partialResult": {
+        "content": []
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.927638,
+    "event": {
+      "type": "tool_execution_end",
+      "toolCallId": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+      "toolName": "bash",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Invalid timeout: maximum is 2147483.647 seconds"
+          }
+        ],
+        "details": {}
+      },
+      "isError": true,
+      "durationMs": 2
+    }
+  },
+  {
+    "observed_at": 1794598967.927644,
+    "event": {
+      "type": "message_start",
+      "message": {
+        "role": "toolResult",
+        "toolCallId": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+        "toolName": "bash",
+        "content": [
+          {
+            "type": "text",
+            "text": "Invalid timeout: maximum is 2147483.647 seconds"
+          }
+        ],
+        "details": {},
+        "isError": true,
+        "durationMs": 2,
+        "timestamp": 1794598967924
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.927648,
+    "event": {
+      "type": "message_end",
+      "message": {
+        "role": "toolResult",
+        "toolCallId": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+        "toolName": "bash",
+        "content": [
+          {
+            "type": "text",
+            "text": "Invalid timeout: maximum is 2147483.647 seconds"
+          }
+        ],
+        "details": {},
+        "isError": true,
+        "durationMs": 2,
+        "timestamp": 1794598967924
+      }
+    }
+  },
+  {
+    "observed_at": 1794598967.9276621,
+    "event": {
+      "type": "turn_end",
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "toolCall",
+            "id": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+            "name": "bash",
+            "arguments": {
+              "command": "printf 'SHELL_FINISHED\n'",
+              "timeout": null
+            }
+          }
+        ],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "usage": {
+          "input": 335,
+          "output": 29,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 364,
+          "cost": {
+            "input": 0.00067,
+            "output": 0.00029,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0.00096,
+            "totalFromProvider": false
+          }
+        },
+        "stopReason": "toolUse",
+        "timestamp": 1794598965242,
+        "responseId": "resp_0f3f66d32734a1c3016af76835e44c87d09f32d73d1aa60ab5",
+        "rawStopReason": "completed",
+        "durationMs": 2635,
+        "thinkingLevel": "low"
+      },
+      "toolResults": [
+        {
+          "role": "toolResult",
+          "toolCallId": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+          "toolName": "bash",
+          "content": [
+            {
+              "type": "text",
+              "text": "Invalid timeout: maximum is 2147483.647 seconds"
+            }
+          ],
+          "details": {},
+          "isError": true,
+          "durationMs": 2,
+          "timestamp": 1794598967924
+        }
+      ]
+    }
+  },
+  {
+    "observed_at": 1794598967.927663,
+    "event": {
+      "type": "turn_start"
+    }
+  },
+  {
+    "observed_at": 1794598968.2637708,
+    "event": {
+      "type": "message_start",
+      "message": {
+        "role": "assistant",
+        "content": [],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "totalTokens": 0,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0
+          }
+        },
+        "stopReason": "pending",
+        "timestamp": 1794598967925
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.092545,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_start",
+        "contentIndex": 0
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.09257,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": "The"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.0925891,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " tool"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.0926101,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " returned"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.09263,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " an"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386318,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " error"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386335,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": ":"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386347,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " `"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386358,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": "Invalid"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386375,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " timeout"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386386,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": ":"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.3863978,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " maximum"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386409,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " is"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386419,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " "
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.3864288,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": "214"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386441,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": "748"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386451,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": "3"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386462,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": "."
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386472,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": "647"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.386482,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " seconds"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.3864908,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": "`."
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.504937,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " No"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.504975,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " retry"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.5050051,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " was"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.505024,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": " made"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.505043,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_delta",
+        "contentIndex": 0,
+        "delta": "."
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.630112,
+    "event": {
+      "type": "message_update",
+      "usage": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 0,
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0
+        }
+      },
+      "assistantMessageEvent": {
+        "type": "text_end",
+        "contentIndex": 0,
+        "content": "The tool returned an error: `Invalid timeout: maximum is 2147483.647 seconds`. No retry was made."
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.630142,
+    "event": {
+      "type": "message_end",
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "The tool returned an error: `Invalid timeout: maximum is 2147483.647 seconds`. No retry was made.",
+            "textSignature": "{\"v\":1,\"id\":\"msg_0f3f66d32734a1c3016af76839fafc87d0a7522641405b1db9\",\"phase\":\"final_answer\"}"
+          }
+        ],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "usage": {
+          "input": 387,
+          "output": 29,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 416,
+          "cost": {
+            "input": 0.000774,
+            "output": 0.00029,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0.0010639999999999998,
+            "totalFromProvider": false
+          }
+        },
+        "stopReason": "stop",
+        "timestamp": 1794598967925,
+        "responseId": "resp_0f3f66d32734a1c3016af768383a4887d0ad0bea091dde3b7d",
+        "rawStopReason": "completed",
+        "durationMs": 2581,
+        "thinkingLevel": "low"
+      }
+    }
+  },
+  {
+    "observed_at": 1794598970.630155,
+    "event": {
+      "type": "turn_end",
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "The tool returned an error: `Invalid timeout: maximum is 2147483.647 seconds`. No retry was made.",
+            "textSignature": "{\"v\":1,\"id\":\"msg_0f3f66d32734a1c3016af76839fafc87d0a7522641405b1db9\",\"phase\":\"final_answer\"}"
+          }
+        ],
+        "api": "openai-codex-responses",
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "usage": {
+          "input": 387,
+          "output": 29,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "reasoning": 0,
+          "totalTokens": 416,
+          "cost": {
+            "input": 0.000774,
+            "output": 0.00029,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0.0010639999999999998,
+            "totalFromProvider": false
+          }
+        },
+        "stopReason": "stop",
+        "timestamp": 1794598967925,
+        "responseId": "resp_0f3f66d32734a1c3016af768383a4887d0ad0bea091dde3b7d",
+        "rawStopReason": "completed",
+        "durationMs": 2581,
+        "thinkingLevel": "low"
+      },
+      "toolResults": []
+    }
+  },
+  {
+    "observed_at": 1794598970.630199,
+    "event": {
+      "type": "agent_end",
+      "messages": [
+        {
+          "role": "system",
+          "content": "",
+          "sections": {
+            "preamble": "Execute the exact requested Bash tool calls for a bounded integration test. Do not change any file, inspect files, run other commands, retry commands, or alter requested arguments. Report the real tool result. Obey steering messages after the tool returns.",
+            "cwd": "<cwd>\n/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B6EEDS5Y9FD8BQFR9QDJ38\n</cwd>"
+          },
+          "timestamp": 1794598965221,
+          "toolsAdded": [
+            {
+              "name": "bash",
+              "description": "Execute a bash command in the current working directory. Returns stdout and stderr. Output is truncated to last 2000 lines or 50KB (whichever is hit first). If truncated, full output is saved to a temp file. Optionally provide a timeout in seconds.",
+              "parameters": {
+                "type": "object",
+                "required": [
+                  "command"
+                ],
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "Shell command to execute"
+                  },
+                  "timeout": {
+                    "type": "number",
+                    "description": "Timeout in seconds (optional, no default timeout)"
+                  }
+                }
+              },
+              "constrainedSampling": {
+                "type": "json_schema",
+                "strict": "prefer"
+              }
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Call the bash tool exactly once with these exact JSON arguments: {\"command\": \"printf 'SHELL_FINISHED\\n'\"}. Do not add a timeout if omitted. Then report the result without retrying."
+            }
+          ],
+          "timestamp": 1794598965221
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+              "name": "bash",
+              "arguments": {
+                "command": "printf 'SHELL_FINISHED\n'",
+                "timeout": null
+              }
+            }
+          ],
+          "api": "openai-codex-responses",
+          "provider": "openai-codex",
+          "model": "gpt-6.1-sol",
+          "usage": {
+            "input": 335,
+            "output": 29,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "reasoning": 0,
+            "totalTokens": 364,
+            "cost": {
+              "input": 0.00067,
+              "output": 0.00029,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0.00096,
+              "totalFromProvider": false
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1794598965242,
+          "responseId": "resp_0f3f66d32734a1c3016af76835e44c87d09f32d73d1aa60ab5",
+          "rawStopReason": "completed",
+          "durationMs": 2635,
+          "thinkingLevel": "low"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "call_5da7dc76175b4715a724d985f744b32f|fc_0f3f66d32734a1c3016af768378cb487d08beaf3068e23513f",
+          "toolName": "bash",
+          "content": [
+            {
+              "type": "text",
+              "text": "Invalid timeout: maximum is 2147483.647 seconds"
+            }
+          ],
+          "details": {},
+          "isError": true,
+          "durationMs": 2,
+          "timestamp": 1794598967924
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "The tool returned an error: `Invalid timeout: maximum is 2147483.647 seconds`. No retry was made.",
+              "textSignature": "{\"v\":1,\"id\":\"msg_0f3f66d32734a1c3016af76839fafc87d0a7522641405b1db9\",\"phase\":\"final_answer\"}"
+            }
+          ],
+          "api": "openai-codex-responses",
+          "provider": "openai-codex",
+          "model": "gpt-6.1-sol",
+          "usage": {
+            "input": 387,
+            "output": 29,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "reasoning": 0,
+            "totalTokens": 416,
+            "cost": {
+              "input": 0.000774,
+              "output": 0.00029,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "total": 0.0010639999999999998,
+              "totalFromProvider": false
+            }
+          },
+          "stopReason": "stop",
+          "timestamp": 1794598967925,
+          "responseId": "resp_0f3f66d32734a1c3016af768383a4887d0ad0bea091dde3b7d",
+          "rawStopReason": "completed",
+          "durationMs": 2581,
+          "thinkingLevel": "low"
+        }
+      ],
+      "willRetry": false
+    }
+  },
+  {
+    "observed_at": 1794598970.630201,
+    "event": {
+      "type": "agent_settled",
+      "aborted": false
+    }
+  }
+]
