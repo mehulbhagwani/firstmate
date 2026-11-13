@@ -1,0 +1,20 @@
+Target: b15c01e01d4f77c63ef3df61ba8ab5732337e08c
+Base: 427056c4181c41074ad24f051f79919330df0fa5
+
+Live product validation used a freshly marked lab home inside the worktree, real tasks-axi, real Lavish on an isolated loopback port, and a dedicated Chrome session. No mocked tools were used for the live board or CLI scenarios.
+
+The browser selected Later, queued the answer, and sent it through Lavish and the bound process-event runner. The original task stayed queued and captain-held until 2026-11-20. Its question/options, origin, and original hold timestamp were preserved. The refreshed board was composed from the real post-answer snapshot according to the bearings skill, and showed the decision under Charted Next.
+
+The live CLI driver checked exact replay, malformed/past/current dates, prohibited merge/credential deferrals, deferred release-mode cards while away, ordinary release refusal while away, unmarked Later labels, closed-task and reserved-reconcile guards, and invalidation of both prior PR close and release policies. PR-policy checks inspected real policy removal and retained task state; no real PR was merged. The targeted policy regression additionally exercised settlement against recorded merge evidence.
+
+The due-date projection used the product's FM_BEARINGS_NOW input set to 2026-11-20T12:00:00Z. The original question/options returned to Captain's Call. This was a controlled clock input, not a seven-day wall-clock wait.
+
+The concurrent-answer proof used real task locks and commands. After observing the deferral process waiting on its lock, the driver paused that process group, completed a real chat release, and resumed the deferral. It refused to re-hold the released task and left its state byte-for-byte unchanged.
+
+Browser screenshots show the selected dated option, the refreshed desktop board, and the refreshed board at a 390px emulated viewport. The actual rendered document and body both measured 390px wide, with every section heading contained. The embedded Lavish view was also captured at 390px. Chrome window resizing initially stopped at its 500px minimum, so explicit viewport emulation was used for the final phone evidence. Stale browser references were resolved by snapshotting and acting within one command.
+
+Baseline reproduction executed the base-revision answer adapter and captain-hold command against the same captured browser answer in a separate lab home. It closed the task and then refused hold --until, reproducing the reported defect. This replay is supplementary regression evidence, not a new live browser interaction on the base.
+
+Supplementary targeted checks: fm-bearings-board.test.sh passed; the five selected captain-hold lifecycle cases passed. The first fm-bearings-board-render.test.sh run, launched concurrently with the other checks, failed when a fixture listener did not start. The isolated retry of that same renderer suite passed. CONTRIBUTING.md requires the canonical runner to control admission to concurrent execution; the initial direct concurrent launches bypassed that scheduling. The renderer was therefore rechecked through bin/fm-test-run.sh with --jobs 1 and passed (exit 0, no skipped cases). All attempt logs are retained; no claim is made that the first attempt passed. No full repository suite, lint, formatter, static analysis, push, PR, or CI operation was run.
+
+No source changes were made by this test phase. Generated test homes, browser data, transient test selection, and baseline scripts are removed after validation; evidence remains here.

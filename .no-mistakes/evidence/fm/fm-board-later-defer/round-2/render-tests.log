@@ -1,0 +1,9 @@
+ok - only selecting the dated option queues a deferral marker
+ok - the complete snapshot question and options reach rendered decision text
+ok - an underway row leads with the task name and still reports its run status
+ok - an underway identifier label is not replaced by run status
+ok - charted next renders the most recently filed work first
+error: listener is not running: lavish-9b169397e171196e
+fm-bearings-board: cannot arm the board as a process-event source
+not ok - the board did not build
+not ok - undated charted rows did not keep a stable trailing order: 

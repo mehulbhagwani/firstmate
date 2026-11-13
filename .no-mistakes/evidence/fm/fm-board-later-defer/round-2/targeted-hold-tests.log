@@ -1,0 +1,5 @@
+ok - a bound board later answer keeps the original captain hold with its date
+ok - board deferrals invalidate prior PR close and release policies without changing the question
+ok - a waiting board deferral cannot re-hold work released by a concurrent chat answer
+ok - a board answer reaches the keyed-answer intake and wakes firstmate
+ok - the chat channel feeds the same keyed-answer intake a captured review does

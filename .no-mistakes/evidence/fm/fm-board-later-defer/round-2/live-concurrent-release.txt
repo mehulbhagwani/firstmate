@@ -1,0 +1,52 @@
+$ fm-captain-hold.sh hold lab-race --title Concurrent rollout decision --reason Staged rollout or direct rollout? --repo sample
+lab-race
+
+The real answers process passed its initial held-task check and waited for the task control lock. Paused its process group at that wait.
+$ fm-captain-hold.sh answer lab-race --release --decision-file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-r2/home/release.txt
+released: lab-race
+
+$ fm-tasks-axi.sh show lab-race --full
+task:
+  id: lab-race
+  title: Concurrent rollout decision
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 2bef924040fe83761a1c6047998e6f4c1c92ddf837a230a236102fbef0c5c55d\nResolution mode: released\n\nCaptain decision:\nUse the staged rollout."
+
+Resumed queued deferral:
+skipped: lab-race (task lab-race is not held for the captain)
+answers: closed=0 skipped=1
+exit=1
+$ fm-tasks-axi.sh show lab-race --full
+task:
+  id: lab-race
+  title: Concurrent rollout decision
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 2bef924040fe83761a1c6047998e6f4c1c92ddf837a230a236102fbef0c5c55d\nResolution mode: released\n\nCaptain decision:\nUse the staged rollout."
+
+The queued deferral was refused; released task remained byte-for-byte unchanged.

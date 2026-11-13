@@ -1,0 +1,89 @@
+page:
+  title: Bearings - fleet board · Lavish
+  refs: 71
+snapshot:
+uid=g8:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:4497/session/327de7cf86cf3fcd"
+  uid=g8:1_1 "Lavish"
+  uid=g8:1_2 "EDITOR"
+  uid=g8:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)" pressed
+  uid=g8:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g8:1_5 button "More" expandable haspopup="menu"
+  uid=g8:1_6 Iframe
+    uid=g8:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:4497/artifact/327de7cf86cf3fcd/index.html?artifact_revision=2&artifact_load_token=Nu8V9_swQzMN7xOu7YFbBE8r16f6xw1m"
+      uid=g8:1_8 banner
+        uid=g8:1_9 "bearings"
+      uid=g8:1_10 main
+        uid=g8:1_11 "1"
+        uid=g8:1_12 "NEED YOU"
+        uid=g8:1_13 "0"
+        uid=g8:1_14 "UNDERWAY"
+        uid=g8:1_15 "0"
+        uid=g8:1_16 "LANDED RECENTLY"
+        uid=g8:1_17 "0"
+        uid=g8:1_18 "CHARTED NEXT"
+        uid=g8:1_19 "CAPTAIN'S CALL"
+        uid=g8:1_20 "1 ITEM WAIT ON YOU, CAPTAIN"
+        uid=g8:1_21 "DECISION"
+        uid=g8:1_22 "sample"
+        uid=g8:1_23 heading "Deployment route" level="3"
+        uid=g8:1_24 "ABOUT"
+        uid=g8:1_25 "Decide how to release the deployment."
+        uid=g8:1_26 "DECIDE"
+        uid=g8:1_27 "Choose a rollout now, or revisit after the release."
+        uid=g8:1_28 form
+          uid=g8:1_29 radio "Staged rollout Release gradually and monitor"
+          uid=g8:1_30 "Staged rollout"
+          uid=g8:1_31 "Release gradually and monitor"
+          uid=g8:1_32 radio "Direct rollout Release to everyone"
+          uid=g8:1_33 "Direct rollout"
+          uid=g8:1_34 "Release to everyone"
+          uid=g8:1_35 radio "Later Revisit on 2026-11-20" checked
+          uid=g8:1_36 "Later"
+          uid=g8:1_37 "Revisit on 2026-11-20"
+          uid=g8:1_38 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g8:1_39 "Reconcile"
+          uid=g8:1_40 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g8:1_41 textbox "or answer in your own words…" value="Revisit after the release."
+          uid=g8:1_42 button "Queue answer"
+          uid=g8:7_0 "QUEUED"
+        uid=g8:7_1 "card 1 of 1 · 1 answered"
+        uid=g8:1_44 button "Previous card" disableable disabled
+        uid=g8:1_45 button "Next card" disableable disabled
+        uid=g8:1_46 "CHARTED NEXT"
+        uid=g8:1_47 "Nothing is queued."
+        uid=g8:1_48 "NOTHING PICKED"
+        uid=g8:1_49 button "Queue dispatch order"
+        uid=g8:1_50 "UNDERWAY"
+        uid=g8:1_51 "Nothing is underway."
+        uid=g8:1_52 "RECENTLY LANDED"
+        uid=g8:1_53 "No recent completions are in the current baseline."
+        uid=g8:1_54 "fm-bearings-board.v1 · 2026-11-13T16:23Z"
+  uid=g8:1_55 complementary
+    uid=g8:1_56 heading "Conversation" level="2"
+    uid=g8:8_0 "YOU"
+    uid=g8:8_1 "<choice>"
+    uid=g8:8_2 "“Deployment route -> later - Revisit after the release.”"
+    uid=g8:8_3 "Captain's Call answer - Deployment route: later - Revisit after the release.
+
+Context data:
+{
+  "schema": "fm-bearings-answer.v1",
+  "question": "lab-route",
+  "selection": "later",
+  "note": "Revisit after the release.",
+  "defer_until": "2026-11-20"
+}"
+    uid=g8:8_4 image "Seen 21:54" description="Seen 21:54"
+    uid=g8:8_5 image "Working: not yet" description="Working: not yet"
+    uid=g8:8_6 image "Done: not yet" description="Done: not yet"
+    uid=g8:8_7 "Working..."
+    uid=g8:1_57 textbox "Write a message for the agent..." multiline
+    uid=g8:1_58 button "Attach images"
+    uid=g8:1_59 status atomic live="polite" relevant="additions text"
+    uid=g8:1_60 button "Send & End"
+    uid=g8:1_61 button "Send to Agent" focusable focused
+help[4]:
+  Run `chrome-devtools-axi fill @g8:1_41 "text"` to fill the "or answer in your own words…" field
+  Run `chrome-devtools-axi click @g8:1_3` to click the "Annotate" button
+  Run `chrome-devtools-axi scroll down` to scroll down
+  Use `chrome-devtools-axi eval <expr>` for JS expressions. For multi-statement code, pass a function: `eval "() => { ...; return result }"`

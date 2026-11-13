@@ -1,0 +1,37 @@
+$ bin/.board-r2-baseline-hold.sh hold lab-route --title Deployment route --reason Staged rollout (recommended) or direct rollout? --repo sample
+lab-route
+[exit 0]
+
+$ bin/.board-r2-baseline-adapter.sh answers /Users/mehul/.no-mistakes/evidence/01M7ASNNVRDV2EF9CRZYXFJVNE/round-2/browser-captured-answer.txt
+lab-route	later	Deployment route -> later
+[exit 0]
+
+$ bin/.board-r2-baseline-hold.sh answers --source same browser answer on base revision
+closed: lab-route
+answers: closed=1 skipped=0
+[exit 0]
+
+$ bin/fm-tasks-axi.sh show lab-route --full
+task:
+  id: lab-route
+  title: Deployment route
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "Staged rollout (recommended) or direct rollout?"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 42cb73b3c7c5edff8a4db02a5447a9f5e23930e152c6b74cad40ec72c42d2649\nResolution mode: answered\n\nCaptain decision:\nCaptain answered this call through same browser answer on base revision.\nTask: lab-route\nAnswer: later\nAnswer as shown to the captain: Deployment route -> later"
+[exit 0]
+
+$ bin/.board-r2-baseline-hold.sh hold lab-route --reason Revisit later --until 2026-11-20
+fm-captain-hold: task lab-route is already closed; a new captain call needs its own task
+[exit 1]

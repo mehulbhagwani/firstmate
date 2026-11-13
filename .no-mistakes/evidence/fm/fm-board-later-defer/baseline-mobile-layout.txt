@@ -1,0 +1,3 @@
+result: "{\"width\":390,\"scrollWidth\":464,\"overflowing\":[{\"tag\":\"SPAN\",\"cls\":\"fm-sign fm-sign--muted\",\"text\":\"NOTHING NEEDS YOU, CAPTAIN\",\"right\":464.09375}]}"
+help[1]:
+  Run `chrome-devtools-axi snapshot` to see current page state

@@ -1,0 +1,578 @@
+$ fm-tasks-axi.sh show lab-route --full
+task:
+  id: lab-route
+  title: Deployment route
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Staged rollout (recommended) or direct rollout?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:40:08Z\nCaptain hold origin: lab-origin\n\nOrigin: lab-origin\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through the captured result lavish-0fca9a3a925f8c25 sequence 1.\nTask: lab-route\nAnswer: later\nAnswer as shown to the captain: Deployment route -> later"
+[exit 0]
+
+$ fm-captain-hold.sh answers --source the captured result lavish-0fca9a3a925f8c25 sequence 1
+deferred: lab-route until 2026-11-20
+answers: deferred=1
+answers: closed=0 skipped=0
+[exit 0]
+
+$ fm-tasks-axi.sh show lab-route --full
+task:
+  id: lab-route
+  title: Deployment route
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Staged rollout (recommended) or direct rollout?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:40:08Z\nCaptain hold origin: lab-origin\n\nOrigin: lab-origin\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through the captured result lavish-0fca9a3a925f8c25 sequence 1.\nTask: lab-route\nAnswer: later\nAnswer as shown to the captain: Deployment route -> later"
+[exit 0]
+
+$ fm-captain-hold.sh answers --source invalid date attempt
+skipped: lab-route (deferral must be a future YYYY-MM-DD date)
+answers: closed=0 skipped=1
+[exit 1]
+
+$ fm-tasks-axi.sh show lab-route --full
+task:
+  id: lab-route
+  title: Deployment route
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Staged rollout (recommended) or direct rollout?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:40:08Z\nCaptain hold origin: lab-origin\n\nOrigin: lab-origin\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through the captured result lavish-0fca9a3a925f8c25 sequence 1.\nTask: lab-route\nAnswer: later\nAnswer as shown to the captain: Deployment route -> later"
+[exit 0]
+
+$ fm-captain-hold.sh answers --source invalid date attempt
+skipped: lab-route (deferral must be a future YYYY-MM-DD date)
+answers: closed=0 skipped=1
+[exit 1]
+
+$ fm-tasks-axi.sh show lab-route --full
+task:
+  id: lab-route
+  title: Deployment route
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Staged rollout (recommended) or direct rollout?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:40:08Z\nCaptain hold origin: lab-origin\n\nOrigin: lab-origin\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through the captured result lavish-0fca9a3a925f8c25 sequence 1.\nTask: lab-route\nAnswer: later\nAnswer as shown to the captain: Deployment route -> later"
+[exit 0]
+
+$ fm-captain-hold.sh answers --source invalid date attempt
+skipped: lab-route (deferral must be a future YYYY-MM-DD date)
+answers: closed=0 skipped=1
+[exit 1]
+
+$ fm-tasks-axi.sh show lab-route --full
+task:
+  id: lab-route
+  title: Deployment route
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Staged rollout (recommended) or direct rollout?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:40:08Z\nCaptain hold origin: lab-origin\n\nOrigin: lab-origin\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through the captured result lavish-0fca9a3a925f8c25 sequence 1.\nTask: lab-route\nAnswer: later\nAnswer as shown to the captain: Deployment route -> later"
+[exit 0]
+
+$ fm-captain-hold.sh answers --source invalid date attempt
+skipped: lab-route (deferral must be a future YYYY-MM-DD date)
+answers: closed=0 skipped=1
+[exit 1]
+
+$ fm-tasks-axi.sh show lab-route --full
+task:
+  id: lab-route
+  title: Deployment route
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Staged rollout (recommended) or direct rollout?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:40:08Z\nCaptain hold origin: lab-origin\n\nOrigin: lab-origin\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through the captured result lavish-0fca9a3a925f8c25 sequence 1.\nTask: lab-route\nAnswer: later\nAnswer as shown to the captain: Deployment route -> later"
+[exit 0]
+
+$ fm-captain-hold.sh answers --source invalid date attempt
+skipped: lab-route (deferral must be a future YYYY-MM-DD date)
+answers: closed=0 skipped=1
+[exit 1]
+
+$ fm-tasks-axi.sh show lab-route --full
+task:
+  id: lab-route
+  title: Deployment route
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Staged rollout (recommended) or direct rollout?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:40:08Z\nCaptain hold origin: lab-origin\n\nOrigin: lab-origin\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through the captured result lavish-0fca9a3a925f8c25 sequence 1.\nTask: lab-route\nAnswer: later\nAnswer as shown to the captain: Deployment route -> later"
+[exit 0]
+
+$ fm-bearings-board.sh build /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-r2/home/bad-calendar.json
+fm-bearings-board: board data does not satisfy fm-bearings-board.v1: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-r2/home/bad-calendar.json
+[exit 1]
+
+$ fm-bearings-board.sh build /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-r2/home/today.json
+fm-bearings-board: board data does not satisfy fm-bearings-board.v1: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-r2/home/today.json
+[exit 1]
+
+$ fm-bearings-board.sh build /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-r2/home/merge-card.json
+fm-bearings-board: board data does not satisfy fm-bearings-board.v1: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-r2/home/merge-card.json
+[exit 1]
+
+$ fm-bearings-board.sh build /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-r2/home/credential-card.json
+fm-bearings-board: board data does not satisfy fm-bearings-board.v1: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-r2/home/credential-card.json
+[exit 1]
+
+$ fm-captain-hold.sh hold lab-work --title Release-gated work --reason Approve work or revisit later? --repo sample
+lab-work
+[exit 0]
+
+$ fm-captain-hold.sh answers --source dated release option
+deferred: lab-work until 2026-11-20
+answers: deferred=1
+answers: closed=0 skipped=0
+[exit 0]
+
+$ fm-tasks-axi.sh show lab-work --full
+task:
+  id: lab-work
+  title: Release-gated work
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Approve work or revisit later?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:42:56Z\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through dated release option.\nTask: lab-work\nAnswer: later\nAnswer as shown to the captain: Later"
+[exit 0]
+
+$ fm-captain-hold.sh answers --source ordinary release while away
+refused: lab-work (the away-posture record exists, and a captain hold is released only by the captain in an attended session; retry --release after the return archives the record)
+answers: closed=0 skipped=1
+[exit 1]
+
+$ fm-tasks-axi.sh show lab-work --full
+task:
+  id: lab-work
+  title: Release-gated work
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Approve work or revisit later?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:42:56Z\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through dated release option.\nTask: lab-work\nAnswer: later\nAnswer as shown to the captain: Later"
+[exit 0]
+
+$ fm-captain-hold.sh hold lab-prose --title Plain later label --reason Ordinary choice --repo sample
+lab-prose
+[exit 0]
+
+$ fm-captain-hold.sh answers --source unstructured label
+closed: lab-prose
+answers: closed=1 skipped=0
+[exit 0]
+
+$ fm-tasks-axi.sh show lab-prose --full
+task:
+  id: lab-prose
+  title: Plain later label
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "Ordinary choice"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: fe37f5c1233cd4e3262d621800b4cf814d8a4c30a7a35d5fc25a94ff979264ba\nResolution mode: answered\n\nCaptain decision:\nCaptain answered this call through unstructured label.\nTask: lab-prose\nAnswer: later\nAnswer as shown to the captain: Later"
+[exit 0]
+
+$ fm-captain-hold.sh answers --source stale closed card
+skipped: lab-prose (already closed)
+answers: closed=0 skipped=1
+[exit 1]
+
+$ fm-tasks-axi.sh show lab-prose --full
+task:
+  id: lab-prose
+  title: Plain later label
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "Ordinary choice"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: fe37f5c1233cd4e3262d621800b4cf814d8a4c30a7a35d5fc25a94ff979264ba\nResolution mode: answered\n\nCaptain decision:\nCaptain answered this call through unstructured label.\nTask: lab-prose\nAnswer: later\nAnswer as shown to the captain: Later"
+[exit 0]
+
+$ fm-captain-hold.sh hold lab-reconcile --title Reconcile only --reason Recheck current facts --repo sample
+lab-reconcile
+[exit 0]
+
+$ fm-tasks-axi.sh show lab-reconcile --full
+task:
+  id: lab-reconcile
+  title: Reconcile only
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Recheck current facts"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:43:09Z"
+[exit 0]
+
+$ fm-captain-hold.sh answers --source reserved reconcile
+refused: lab-reconcile (reconcile requests require a bound captured source)
+answers: closed=0 skipped=1
+[exit 1]
+
+$ fm-tasks-axi.sh show lab-reconcile --full
+task:
+  id: lab-reconcile
+  title: Reconcile only
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Recheck current facts"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T16:43:09Z"
+[exit 0]
+
+$ fm-captain-hold.sh hold lab-policy-close --title Policy decision --reason Staged rollout or direct rollout? --repo sample
+lab-policy-close
+[exit 0]
+
+$ fm-captain-hold.sh pr-policy lab-policy-close https://github.com/sample/sample/pull/42 merged close
+pr-policy: lab-policy-close https://github.com/sample/sample/pull/42 merged close
+[exit 0]
+
+Existing PR policy: {
+  "schema": "fm-hold-pr.v1",
+  "task": "lab-policy-close",
+  "url": "https://github.com/sample/sample/pull/42",
+  "on": "merged",
+  "action": "close",
+  "fingerprint": "25836aeed8c42332fad024968474c764609e8eb6723e13bcad031aa630ba6624",
+  "occurrence": 1
+}
+
+$ fm-captain-hold.sh answers --source dated board option
+deferred: lab-policy-close until 2026-11-20
+answers: deferred=1
+answers: closed=0 skipped=0
+[exit 0]
+
+After deferral: prior PR policy is absent.
+$ fm-tasks-axi.sh show lab-policy-close --full
+task:
+  id: lab-policy-close
+  title: "Policy decision https://github.com/sample/sample/pull/42"
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Staged rollout or direct rollout?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: "pr:https://github.com/sample/sample/pull/42"
+  body: "Captain hold set: 2026-11-13T16:43:13Z\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through dated board option.\nTask: lab-policy-close\nAnswer: later\nAnswer as shown to the captain: Later"
+[exit 0]
+
+$ fm-captain-hold.sh hold lab-policy-release --title Policy decision --reason Staged rollout or direct rollout? --repo sample
+lab-policy-release
+[exit 0]
+
+$ fm-captain-hold.sh pr-policy lab-policy-release https://github.com/sample/sample/pull/42 merged release
+pr-policy: lab-policy-release https://github.com/sample/sample/pull/42 merged release
+[exit 0]
+
+Existing PR policy: {
+  "schema": "fm-hold-pr.v1",
+  "task": "lab-policy-release",
+  "url": "https://github.com/sample/sample/pull/42",
+  "on": "merged",
+  "action": "release",
+  "fingerprint": "73e5e3b57ac8e777980c1324f496bc7d170a47b1825704d494020178a35a47dc",
+  "occurrence": 1
+}
+
+$ fm-captain-hold.sh answers --source dated board option
+deferred: lab-policy-release until 2026-11-20
+answers: deferred=1
+answers: closed=0 skipped=0
+[exit 0]
+
+After deferral: prior PR policy is absent.
+$ fm-tasks-axi.sh show lab-policy-release --full
+task:
+  id: lab-policy-release
+  title: "Policy decision https://github.com/sample/sample/pull/42"
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Staged rollout or direct rollout?"
+  hold_kind: captain
+  hold_until: 2026-11-20
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: "pr:https://github.com/sample/sample/pull/42"
+  body: "Captain hold set: 2026-11-13T16:43:20Z\n\nCaptain hold deferred until: 2026-11-20\nCaptain answered this call through dated board option.\nTask: lab-policy-release\nAnswer: later\nAnswer as shown to the captain: Later"
+[exit 0]
+
+$ fm-bearings-snapshot.sh --json
+{
+  "schema": "fm-bearings.v1",
+  "home": ".test-board-r2/home",
+  "generated": "2026-11-20T12:00:00Z",
+  "prs": "not_requested (run: /bearings include PRs)",
+  "contributions": {
+    "scope": "owned contributions per home",
+    "known": 1,
+    "checked": 0,
+    "counts": {
+      "captain": 1,
+      "fleet": 0,
+      "maintainer": 0,
+      "nobody": 0
+    },
+    "complete": false,
+    "proven_clear": false,
+    "unmeasured_homes": 0,
+    "unreadable_records": 0,
+    "unmeasured": 0,
+    "stale_verdicts": 0,
+    "missing_verdicts": 0,
+    "captain_omitted": 0,
+    "captain": [
+      {
+        "task": "lab-policy-close",
+        "url": "https://github.com/sample/sample/pull/42",
+        "kind": "pr",
+        "head": null,
+        "reason": "Staged rollout or direct rollout?",
+        "hold": "lab-policy-close",
+        "verdict_freshness": null,
+        "verdict_head": null,
+        "verdict_source": null,
+        "checked_at": null,
+        "owner": "(main)"
+      }
+    ]
+  },
+  "in_flight": [],
+  "secondmates": [],
+  "secondmate_reconcile": [],
+  "decisions_open": [
+    {
+      "id": "lab-route",
+      "key": "lab-route",
+      "verb": "captain-hold",
+      "summary": "Deployment route: Staged rollout (recommended) or direct rollout?",
+      "question": "Deployment route: Staged rollout (recommended) or direct rollout?",
+      "owner": "(main)"
+    },
+    {
+      "id": "lab-work",
+      "key": "lab-work",
+      "verb": "captain-hold",
+      "summary": "Release-gated work: Approve work or revisit later?",
+      "question": "Release-gated work: Approve work or revisit later?",
+      "owner": "(main)"
+    },
+    {
+      "id": "lab-reconcile",
+      "key": "lab-reconcile",
+      "verb": "captain-hold",
+      "summary": "Reconcile only: Recheck current facts",
+      "question": "Reconcile only: Recheck current facts",
+      "owner": "(main)"
+    },
+    {
+      "id": "lab-policy-close",
+      "key": "lab-policy-close",
+      "verb": "captain-hold",
+      "summary": "Policy decision: Staged rollout or direct rollout?",
+      "question": "Policy decision: Staged rollout or direct rollout?",
+      "owner": "(main)"
+    },
+    {
+      "id": "lab-policy-release",
+      "key": "lab-policy-release",
+      "verb": "captain-hold",
+      "summary": "Policy decision: Staged rollout or direct rollout?",
+      "question": "Policy decision: Staged rollout or direct rollout?",
+      "owner": "(main)"
+    }
+  ],
+  "landed": [],
+  "gates": [
+    {
+      "id": "lab-origin",
+      "title": "Review deployment routes",
+      "blocked_by": "-",
+      "reason": "-",
+      "owner": "(main)",
+      "filed": "2026-11-13"
+    }
+  ],
+  "reports": [],
+  "recorded_prs": [],
+  "omitted": [
+    {
+      "surface": "backlog item bodies",
+      "reveal": "--fields bodies"
+    },
+    {
+      "surface": "task paths",
+      "reveal": "--fields paths"
+    },
+    {
+      "surface": "watch/steer actions",
+      "reveal": "--fields actions"
+    },
+    {
+      "surface": "healthy endpoint detail",
+      "reveal": "--fields endpoints"
+    },
+    {
+      "surface": "full scout-report inventory",
+      "reveal": "--all-reports"
+    },
+    {
+      "surface": "live PR discovery + checks",
+      "reveal": "--include-prs"
+    }
+  ]
+}
+[exit 0]
+
+All live CLI state assertions passed.

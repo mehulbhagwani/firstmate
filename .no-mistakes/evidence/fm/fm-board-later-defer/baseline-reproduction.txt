@@ -1,0 +1,22 @@
+lab-route
+closed: lab-route
+answers: closed=1 skipped=0
+task:
+  id: lab-route
+  title: Deployment route
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "Staged rollout or direct rollout?"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: none
+  body: "Resolution recorded by fm-captain-hold.\nDecision digest: 0b0162cbf096a5c9ae029a70d2ca4a77b122b33e876317224278e005a2ecccd5\nResolution mode: answered\n\nCaptain decision:\nCaptain answered this call through captured real browser later answer.\nTask: lab-route\nAnswer: later\nAnswer as shown to the captain: Deployment route -> later - Revisit after the release."
+fm-captain-hold: task lab-route is already closed; a new captain call needs its own task

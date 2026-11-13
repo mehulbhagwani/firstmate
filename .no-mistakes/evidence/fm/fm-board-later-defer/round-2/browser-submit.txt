@@ -1,0 +1,158 @@
+uid=g9:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:4498/session/0fca9a3a925f8c25"
+  uid=g9:1_1 "Lavish"
+  uid=g9:1_2 "EDITOR"
+  uid=g9:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)"
+  uid=g9:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g9:1_5 button "More" expandable haspopup="menu"
+  uid=g9:1_6 Iframe
+    uid=g9:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:4498/artifact/0fca9a3a925f8c25/index.html?artifact_revision=1&artifact_load_token=7uongD0Xbfzyqbhqrx9HBsgnIw2EYPpu"
+      uid=g9:1_8 banner
+        uid=g9:1_9 "bearings"
+      uid=g9:1_10 main
+        uid=g9:1_11 "1"
+        uid=g9:1_12 "NEED YOU"
+        uid=g9:1_13 "0"
+        uid=g9:1_14 "UNDERWAY"
+        uid=g9:1_15 "0"
+        uid=g9:1_16 "LANDED RECENTLY"
+        uid=g9:1_17 "0"
+        uid=g9:1_18 "CHARTED NEXT"
+        uid=g9:1_19 "CAPTAIN'S CALL"
+        uid=g9:1_20 "1 ITEM WAIT ON YOU, CAPTAIN"
+        uid=g9:1_21 "DECISION"
+        uid=g9:1_22 "sample"
+        uid=g9:1_23 heading "Deployment route" level="3"
+        uid=g9:1_24 "ABOUT"
+        uid=g9:1_25 "Choose how the next release rolls out."
+        uid=g9:1_26 "DECIDE"
+        uid=g9:1_27 "Staged rollout (recommended) or direct rollout?"
+        uid=g9:1_28 form
+          uid=g9:1_29 radio "Staged rollout Roll out in stages."
+          uid=g9:1_30 "Staged rollout"
+          uid=g9:1_31 "Roll out in stages."
+          uid=g9:1_32 radio "Direct rollout Release to everyone."
+          uid=g9:1_33 "Direct rollout"
+          uid=g9:1_34 "Release to everyone."
+          uid=g9:1_35 radio "Later Revisit on 2026-11-20" checked
+          uid=g9:1_36 "Later"
+          uid=g9:1_37 "Revisit on 2026-11-20"
+          uid=g9:1_38 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g9:1_39 "Reconcile"
+          uid=g9:1_40 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g9:1_41 button "Queue answer" focusable focused
+          uid=g9:9_0 "QUEUED"
+        uid=g9:9_1 "card 1 of 1 · 1 answered"
+        uid=g9:1_43 button "Previous card" disableable disabled
+        uid=g9:1_44 button "Next card" disableable disabled
+        uid=g9:1_45 "CHARTED NEXT"
+        uid=g9:1_46 "Nothing is queued."
+        uid=g9:1_47 "NOTHING PICKED"
+        uid=g9:1_48 button "Queue dispatch order"
+        uid=g9:1_49 "UNDERWAY"
+        uid=g9:1_50 "Nothing is underway."
+        uid=g9:1_51 "RECENTLY LANDED"
+        uid=g9:1_52 "No recent completions are in the current baseline."
+        uid=g9:1_53 "fm-bearings-board.v1 · 2026-11-13T16:40Z"
+  uid=g9:1_54 complementary
+    uid=g9:1_55 heading "Conversation" level="2"
+    uid=g9:9_2 "QUEUED"
+    uid=g9:9_3 button "Edit queued prompt"
+    uid=g9:9_4 button "Remove queued prompt"
+    uid=g9:9_5 "<choice>"
+    uid=g9:9_6 "“Deployment route -> later”"
+    uid=g9:9_7 "Captain's Call answer - Deployment route: later
+
+Context data:
+{
+  "schema": "fm-bearings-answer.v1",
+  "question": "lab-route",
+  "selection": "later",
+  "note": "",
+  "defer_until": "2026-11-20"
+}"
+    uid=g9:1_56 textbox "Write a message for the agent..." multiline
+    uid=g9:1_57 button "Attach images"
+    uid=g9:1_58 status atomic live="polite" relevant="additions text"
+    uid=g9:1_59 button "Send & End"
+    uid=g9:1_60 button "Send to Agent"
+
+uid=g10:1_0 RootWebArea "Bearings - fleet board · Lavish" url="http://127.0.0.1:4498/session/0fca9a3a925f8c25"
+  uid=g10:1_1 "Lavish"
+  uid=g10:1_2 "EDITOR"
+  uid=g10:1_3 button "Annotate" description="Toggle annotate/explore mode (⌘I / Ctrl+I)"
+  uid=g10:1_4 button "Hide conversation" description="Hide conversation" expandable expanded
+  uid=g10:1_5 button "More" expandable haspopup="menu"
+  uid=g10:1_6 Iframe
+    uid=g10:1_7 RootWebArea "Bearings - fleet board" url="http://127.0.0.1:4498/artifact/0fca9a3a925f8c25/index.html?artifact_revision=1&artifact_load_token=7uongD0Xbfzyqbhqrx9HBsgnIw2EYPpu"
+      uid=g10:1_8 banner
+        uid=g10:1_9 "bearings"
+      uid=g10:1_10 main
+        uid=g10:1_11 "1"
+        uid=g10:1_12 "NEED YOU"
+        uid=g10:1_13 "0"
+        uid=g10:1_14 "UNDERWAY"
+        uid=g10:1_15 "0"
+        uid=g10:1_16 "LANDED RECENTLY"
+        uid=g10:1_17 "0"
+        uid=g10:1_18 "CHARTED NEXT"
+        uid=g10:1_19 "CAPTAIN'S CALL"
+        uid=g10:1_20 "1 ITEM WAIT ON YOU, CAPTAIN"
+        uid=g10:1_21 "DECISION"
+        uid=g10:1_22 "sample"
+        uid=g10:1_23 heading "Deployment route" level="3"
+        uid=g10:1_24 "ABOUT"
+        uid=g10:1_25 "Choose how the next release rolls out."
+        uid=g10:1_26 "DECIDE"
+        uid=g10:1_27 "Staged rollout (recommended) or direct rollout?"
+        uid=g10:1_28 form
+          uid=g10:1_29 radio "Staged rollout Roll out in stages."
+          uid=g10:1_30 "Staged rollout"
+          uid=g10:1_31 "Roll out in stages."
+          uid=g10:1_32 radio "Direct rollout Release to everyone."
+          uid=g10:1_33 "Direct rollout"
+          uid=g10:1_34 "Release to everyone."
+          uid=g10:1_35 radio "Later Revisit on 2026-11-20" checked
+          uid=g10:1_36 "Later"
+          uid=g10:1_37 "Revisit on 2026-11-20"
+          uid=g10:1_38 radio "Reconcile Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g10:1_39 "Reconcile"
+          uid=g10:1_40 "Re-check the latest state, then close this with evidence or keep it open with a note"
+          uid=g10:1_41 button "Queue answer"
+          uid=g10:9_0 "QUEUED"
+        uid=g10:9_1 "card 1 of 1 · 1 answered"
+        uid=g10:1_43 button "Previous card" disableable disabled
+        uid=g10:1_44 button "Next card" disableable disabled
+        uid=g10:1_45 "CHARTED NEXT"
+        uid=g10:1_46 "Nothing is queued."
+        uid=g10:1_47 "NOTHING PICKED"
+        uid=g10:1_48 button "Queue dispatch order"
+        uid=g10:1_49 "UNDERWAY"
+        uid=g10:1_50 "Nothing is underway."
+        uid=g10:1_51 "RECENTLY LANDED"
+        uid=g10:1_52 "No recent completions are in the current baseline."
+        uid=g10:1_53 "fm-bearings-board.v1 · 2026-11-13T16:40Z"
+  uid=g10:1_54 complementary
+    uid=g10:1_55 heading "Conversation" level="2"
+    uid=g10:10_0 "YOU"
+    uid=g10:10_1 "<choice>"
+    uid=g10:10_2 "“Deployment route -> later”"
+    uid=g10:10_3 "Captain's Call answer - Deployment route: later
+
+Context data:
+{
+  "schema": "fm-bearings-answer.v1",
+  "question": "lab-route",
+  "selection": "later",
+  "note": "",
+  "defer_until": "2026-11-20"
+}"
+    uid=g10:10_4 image "Seen 22:12" description="Seen 22:12"
+    uid=g10:10_5 image "Working: not yet" description="Working: not yet"
+    uid=g10:10_6 image "Done: not yet" description="Done: not yet"
+    uid=g10:10_7 "Working..."
+    uid=g10:1_56 textbox "Write a message for the agent..." multiline
+    uid=g10:1_57 button "Attach images"
+    uid=g10:1_58 status atomic live="polite" relevant="additions text"
+    uid=g10:1_59 button "Send & End"
+    uid=g10:1_60 button "Send to Agent" focusable focused
+

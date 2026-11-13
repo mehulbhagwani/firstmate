@@ -1,0 +1,12 @@
+Target: af29dedd0b2c3b6d071ce4f9680270291d22cfba
+Base: 427056c4181c41074ad24f051f79919330df0fa5
+
+The browser selected Later, entered a note, queued the answer, and sent it through real Lavish and the bound Firstmate process-event runner to real tasks-axi. The date was 2026-11-20. No mocked tools were used for the live browser or CLI checks. The refreshed board was composed from the real post-answer Bearings snapshot as its skill requires.
+
+The base revision consumed the same captured browser answer, closed the task, and refused the subsequent hold --until. The target preserved its hold, question/options, origin, hold-set timestamp, and selected date. Exact replay left state unchanged. The due-date check drove the real snapshot command with FM_BEARINGS_NOW=2026-11-20T12:00:00Z; the original question returned. This is a controlled clock input, not a seven-day wall-clock wait.
+
+The race used the production task lock and real answers/answer --release commands. A first instrumentation attempt timed out because Bash tracing went to redirected stderr; re-running with BASH_XTRACEFD isolated tracing and completed. The actual deferral was paused with SIGSTOP only after observing its lock wait, a real chat release completed, and SIGCONT resumed the deferral. It refused and preserved the released task exactly.
+
+Portable checks: bash tests/fm-bearings-board.test.sh and bash tests/fm-bearings-board-render.test.sh both exited 0. The full hold-lifecycle file was initially started, then deliberately stopped with SIGTERM after an unrelated hold-reason case passed, to keep validation focused. Its five selected board-deferral, PR-policy, concurrency, ordinary-board, and chat-intake tests all exited 0. These portable tests use fixtures/shims and are supplementary, not the live evidence.
+
+At a 390px viewport, the rendered empty Captain's Call subtitle extends the document to 464px. This is a real visual failure, reproduced on the base revision too. It was not introduced by the deferral change. Source layout changes are outside the assigned test-only phase.

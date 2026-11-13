@@ -1,0 +1,124 @@
+{
+  "schema": "fm-bearings.v1",
+  "home": ".test-board-r2/home",
+  "generated": "2026-11-20T12:00:00Z",
+  "prs": "not_requested (run: /bearings include PRs)",
+  "contributions": {
+    "scope": "owned contributions per home",
+    "known": 1,
+    "checked": 0,
+    "counts": {
+      "captain": 1,
+      "fleet": 0,
+      "maintainer": 0,
+      "nobody": 0
+    },
+    "complete": false,
+    "proven_clear": false,
+    "unmeasured_homes": 0,
+    "unreadable_records": 0,
+    "unmeasured": 0,
+    "stale_verdicts": 0,
+    "missing_verdicts": 0,
+    "captain_omitted": 0,
+    "captain": [
+      {
+        "task": "lab-policy-close",
+        "url": "https://github.com/sample/sample/pull/42",
+        "kind": "pr",
+        "head": null,
+        "reason": "Staged rollout or direct rollout?",
+        "hold": "lab-policy-close",
+        "verdict_freshness": null,
+        "verdict_head": null,
+        "verdict_source": null,
+        "checked_at": null,
+        "owner": "(main)"
+      }
+    ]
+  },
+  "in_flight": [],
+  "secondmates": [],
+  "secondmate_reconcile": [],
+  "decisions_open": [
+    {
+      "id": "lab-route",
+      "key": "lab-route",
+      "verb": "captain-hold",
+      "summary": "Deployment route: Staged rollout (recommended) or direct rollout?",
+      "question": "Deployment route: Staged rollout (recommended) or direct rollout?",
+      "owner": "(main)"
+    },
+    {
+      "id": "lab-work",
+      "key": "lab-work",
+      "verb": "captain-hold",
+      "summary": "Release-gated work: Approve work or revisit later?",
+      "question": "Release-gated work: Approve work or revisit later?",
+      "owner": "(main)"
+    },
+    {
+      "id": "lab-reconcile",
+      "key": "lab-reconcile",
+      "verb": "captain-hold",
+      "summary": "Reconcile only: Recheck current facts",
+      "question": "Reconcile only: Recheck current facts",
+      "owner": "(main)"
+    },
+    {
+      "id": "lab-policy-close",
+      "key": "lab-policy-close",
+      "verb": "captain-hold",
+      "summary": "Policy decision: Staged rollout or direct rollout?",
+      "question": "Policy decision: Staged rollout or direct rollout?",
+      "owner": "(main)"
+    },
+    {
+      "id": "lab-policy-release",
+      "key": "lab-policy-release",
+      "verb": "captain-hold",
+      "summary": "Policy decision: Staged rollout or direct rollout?",
+      "question": "Policy decision: Staged rollout or direct rollout?",
+      "owner": "(main)"
+    }
+  ],
+  "landed": [],
+  "gates": [
+    {
+      "id": "lab-origin",
+      "title": "Review deployment routes",
+      "blocked_by": "-",
+      "reason": "-",
+      "owner": "(main)",
+      "filed": "2026-11-13"
+    }
+  ],
+  "reports": [],
+  "recorded_prs": [],
+  "omitted": [
+    {
+      "surface": "backlog item bodies",
+      "reveal": "--fields bodies"
+    },
+    {
+      "surface": "task paths",
+      "reveal": "--fields paths"
+    },
+    {
+      "surface": "watch/steer actions",
+      "reveal": "--fields actions"
+    },
+    {
+      "surface": "healthy endpoint detail",
+      "reveal": "--fields endpoints"
+    },
+    {
+      "surface": "full scout-report inventory",
+      "reveal": "--all-reports"
+    },
+    {
+      "surface": "live PR discovery + checks",
+      "reveal": "--include-prs"
+    }
+  ]
+}

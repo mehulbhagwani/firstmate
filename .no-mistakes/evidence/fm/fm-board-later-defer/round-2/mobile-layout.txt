@@ -1,0 +1,31 @@
+{
+  "viewport": 390,
+  "scrollWidth": 390,
+  "bodyWidth": 390,
+  "headings": [
+    {
+      "text": "CAPTAIN'S CALL\nNOTHING NEEDS YOU, CAPTAIN",
+      "left": 28,
+      "right": 362,
+      "height": 39
+    },
+    {
+      "text": "CHARTED NEXT",
+      "left": 28,
+      "right": 362,
+      "height": 14
+    },
+    {
+      "text": "UNDERWAY",
+      "left": 28,
+      "right": 362,
+      "height": 14
+    },
+    {
+      "text": "RECENTLY LANDED",
+      "left": 28,
+      "right": 362,
+      "height": 14
+    }
+  ]
+}

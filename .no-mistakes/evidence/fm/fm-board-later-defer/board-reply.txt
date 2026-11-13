@@ -1,0 +1,4 @@
+reply:
+  file: /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-later/home/.lavish/bearings-board.html
+  status: sent
+next_step: Lavish Editor accepted the reply for /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-later/home/.lavish/bearings-board.html and is no longer showing Working. Run `lavish-axi poll /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7ASNNVRDV2EF9CRZYXFJVNE/.test-board-later/home/.lavish/bearings-board.html` when you are ready to wait for more feedback.
