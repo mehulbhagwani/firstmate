@@ -1,0 +1,5 @@
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7FYYJDDX5C4VWQNJG1AZ9/.l
+stopped pitest harness=pi backend=tmux endpoint=primary:fm-pitest worktree=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7FYYJDDX5C4VWQNJG1AZ9
+Exit status: 0
+After successful exit: agent=dead pane=%0
+foreground=zsh

@@ -1,3 +1,7 @@
+pi --no-session --no-context-files --no-extensions --no-skills --no-prompt-templates --offline[1;7m%[0m
+
+Mehuls-MacBook-Air% pi --no-session --no-context-files --no-extensions --no-skills --no-prompt-templates --offline
+
 
  [38;2;228;138;122m[48;2;79;142;179m▀[49m▀█[39m  [2mv1.5.2[0m
  [38;2;79;142;179m█▀[39m [38;2;234;182;93m█[39m [2mescape interrupt · ctrl+c/ctrl+d clear/exit · / commands · ! bash · ctrl+o more[0m
@@ -19,10 +23,8 @@
 [2m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 [0m
 [2m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-~/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ (detached)[0m
+~/.no-mistakes/worktrees/3ffccef5245c/01M7B7FYYJDDX5C4VWQNJG1AZ9 (detached)[0m
 [2m0.0%/0 (auto)                                                                                                    unknown
 
-[0msh-3.2$
-
-
+[0mMehuls-MacBook-Air%
 

@@ -1,0 +1,5 @@
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7B7FYYJDDX5C4VWQNJG1AZ9/.l
+error: task pitest's composer visibly holds pending text; refusing to type the /quit exit command because it would concatenate onto that text. Clear or submit the pending text, then retry 'exit'
+Exit status: 1
+After refused exit: agent=alive composer=pending
+Captured pane text before and after refusal is identical; unsent text remains present.

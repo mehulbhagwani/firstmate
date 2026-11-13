@@ -16,13 +16,15 @@
  Warning: tmux extended-keys is off. Modified Enter keys may not work. Add `set -g extended-keys on` to ~/.tmux.conf
  and restart tmux.
 
+
+
+
+
+
+
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-UNSUBMITTED verification input 
+pi --no-approve --no-session --no-context-files --no-extensions --no-skills --no-prompt-templates --offlinepreserve
+this unsent text 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-~/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ (detached)
+~/.no-mistakes/worktrees/3ffccef5245c/01M7B7FYYJDDX5C4VWQNJG1AZ9 (detached)
 0.0%/0 (auto)                                                                                                    unknown
-
-
-
-
-
