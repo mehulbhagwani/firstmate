@@ -1,0 +1,37 @@
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-lab-home.sh create <lab>/distinct
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/.live-decisions-9kiswmyz/distinct
+[exit 0]
+
+Worker status protocol append:
+blocked [at=1] key=mirror: mirror refuses
+blocked [at=2] key=agent: agent refused
+
+$ bash -c . "$1"; status_open_decisions_incremental "$2" "" "$3" _ <lab>/baseline/bin/fm-classify-lib.sh <lab>/distinct/state/task.status 
+default	blocked	agent refused[exit 0]
+
+Baseline reproduces the collapse into the shared default decision.
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-wake-drain.sh
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+task [key=mirror] blocked: mirror refuses
+task [key=agent] blocked: agent refused
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+OPEN DECISIONS: <key> is the [key=...] printed before the verb; a token inside a note is prose, not a key.
+[exit 0]
+
+Worker status protocol append:
+resolved key=mirror: answered
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-wake-drain.sh
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+task [key=agent] blocked: agent refused
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+OPEN DECISIONS: <key> is the [key=...] printed before the verb; a token inside a note is prose, not a key.
+[exit 0]
+
+Worker status protocol append:
+resolved	key=agent: answered
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-wake-drain.sh
+[exit 0]
+

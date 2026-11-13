@@ -1,0 +1,68 @@
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-lab-home.sh create <lab>/upgrade
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/.live-decisions-mp44wu4j/upgrade
+[exit 0]
+
+Worker status protocol append:
+blocked [at=1] key=a: waiting
+needs-decision key=b: choose
+
+$ bash -c . "$1"; status_open_decisions_incremental "$2" "" "$3" _ <lab>/baseline/bin/fm-classify-lib.sh <lab>/upgrade/state/task.status 
+default	blocked	waiting[exit 0]
+
+$ bash -c . "$1"; status_open_decisions_incremental "$2" "" "$3" _ <lab>/baseline/bin/fm-classify-lib.sh <lab>/upgrade/state/task.status timed
+default	blocked	unknown	-	waiting[exit 0]
+
+Actual baseline cache .task.open-decisions-cursor:
+version=9:unknown
+offset=59
+ident=strong:16777234:88401725:1794570636.123752180
+default	blocked	waiting
+
+Actual baseline cache .task.open-decisions-cursor.timed:
+version=9:unknown:timed3
+offset=59
+ident=strong:16777234:88401725:1794570636.123752180
+default	blocked	unknown	-	waiting
+
+Worker status protocol append:
+resolved key=a: answered
+
+$ bash -c . "$1"; status_open_decisions_incremental "$2" "" "$3" _ <lab>/pre-version-bump/bin/fm-classify-lib.sh <lab>/upgrade/state/task.status 
+default	blocked	waiting[exit 0]
+
+$ bash -c . "$1"; status_open_decisions_incremental "$2" "" "$3" _ <lab>/pre-version-bump/bin/fm-classify-lib.sh <lab>/upgrade/state/task.status timed
+default	blocked	unknown	-	waiting[exit 0]
+
+Pre-version-bump code reproduces the stale default and missing b in both caches.
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-wake-drain.sh
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+task [key=b] needs-decision: choose
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+OPEN DECISIONS: <key> is the [key=...] printed before the verb; a token inside a note is prose, not a key.
+[exit 0]
+
+$ bash -c . "$1"; status_open_decisions_incremental "$2" "" "$3" _ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-classify-lib.sh <lab>/upgrade/state/task.status timed
+b	needs-decision	unknown	-	choose[exit 0]
+
+Worker status protocol append:
+resolved key=b: answered
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-wake-drain.sh
+[exit 0]
+
+$ bash -c . "$1"; status_open_decisions_incremental "$2" "" "$3" _ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-classify-lib.sh <lab>/upgrade/state/task.status timed
+[exit 0]
+
+Migrated cache .task.open-decisions-cursor:
+version=10:unknown
+offset=109
+ident=strong:16777234:88401725:1794570636.123752180
+
+
+Migrated cache .task.open-decisions-cursor.timed:
+version=10:unknown:timed3
+offset=109
+ident=strong:16777234:88401725:1794570636.123752180
+
+

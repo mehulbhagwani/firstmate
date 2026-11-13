@@ -1,0 +1,18 @@
+[
+  {
+    "name": "distinct-keys",
+    "result": "pass"
+  },
+  {
+    "name": "precedence-and-invalid-input",
+    "result": "pass"
+  },
+  {
+    "name": "held-task-divergence",
+    "result": "pass"
+  },
+  {
+    "name": "cache-upgrade",
+    "result": "pass"
+  }
+]

@@ -1,0 +1,83 @@
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-lab-home.sh create <lab>/divergence
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/.live-decisions-9kiswmyz/divergence
+[exit 0]
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-tasks-axi.sh add task Investigate route --kind scout --repo sample
+ok: added task (scout, repo sample) -> Queued
+task:
+  id: task
+  title: Investigate route
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: scout
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start task` to move it to in flight
+  - Run `tasks-axi block task --by <other>` to record a dependency
+[exit 0]
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-captain-hold.sh hold route-call --title Choose route --reason Route choice pending --repo sample --origin task
+route-call
+[exit 0]
+
+Worker status protocol append:
+blocked [at=1] key=route-call: north or south
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-captain-hold.sh diverged
+[exit 0]
+
+Worker status protocol append:
+resolved	key=route-call: answered
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-captain-hold.sh diverged
+route-call	task	route-call	Choose route
+[exit 0]
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-wake-drain.sh
+RECORD DIVERGENCE (answered in the status log, still held in the backlog - nothing was closed automatically):
+route-call [key=route-call] reads resolved in task's status log but is still held for the captain: Choose route
+RECORD DIVERGENCE: reconcile each one - record the captain's own words with bin/fm-captain-hold.sh answer <task> --decision-file <path>, or re-open the status decision when that resolution was not the captain's word.
+[exit 0]
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-tasks-axi.sh show route-call --full
+task:
+  id: route-call
+  title: Choose route
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "Route choice pending"
+  hold_kind: captain
+  hold_until: "-"
+  kind: captain
+  repo: sample
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-11-13T11:48:49Z\nCaptain hold origin: task\n\nOrigin: task"
+[exit 0]
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-captain-hold.sh answer route-call --decision-file <lab>/divergence/answer.txt
+answered: route-call
+[exit 0]
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-captain-hold.sh diverged
+[exit 0]
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-wake-drain.sh
+[exit 0]
+

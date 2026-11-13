@@ -1,0 +1,33 @@
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-lab-home.sh create <lab>/boundaries
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/.live-decisions-9kiswmyz/boundaries
+[exit 0]
+
+Worker status protocol append:
+blocked [key=bracket] key=bare: [key=note] preserve both losing tokens
+blocked key=bare: [key=note] preserve losing note token
+needs-decision: [key=note] consume winning token
+blocked: legacy default
+blocked key=bad/slug: invalid key
+resolved key=bad/slug: must not close default
+resolved x=1: prose is not a transition
+working: resolved key=bare: prose must not close bare
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-wake-drain.sh
+OPEN DECISIONS (still open, folded from the durable status logs - not just the latest line):
+task [key=bracket] blocked: [key=note] preserve both losing tokens
+task [key=bare] blocked: [key=note] preserve losing note token
+task [key=note] needs-decision: consume winning token
+task [key=default] blocked: legacy default
+OPEN DECISIONS: close one by answering it: bin/fm-send.sh <task> --resolve-key <key> '<answer>'
+OPEN DECISIONS: <key> is the [key=...] printed before the verb; a token inside a note is prose, not a key.
+[exit 0]
+
+Worker status protocol append:
+resolved key=bracket: first closed
+resolved [key=bare]: second closed
+resolved: [key=note] third closed
+resolved: legacy closed
+
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7A581407Z5S7G21NMCF9MSC/bin/fm-wake-drain.sh
+[exit 0]
+
