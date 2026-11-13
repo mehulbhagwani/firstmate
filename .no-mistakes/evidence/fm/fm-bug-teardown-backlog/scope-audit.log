@@ -1,0 +1,19 @@
+$ git rev-parse HEAD
+ce55d8c66739255ceeb9ec355e58bb5ea31dc76b
+exit=0
+$ git diff --name-status 427056c4181c41074ad24f051f79919330df0fa5 HEAD
+M	bin/fm-pr-lib.sh
+M	bin/fm-teardown.sh
+M	docs/configuration.md
+M	docs/external-review-forge.md
+M	docs/gerrit-forge-integration.md
+M	tests/fm-crew-state.test.sh
+M	tests/fm-teardown.test.sh
+exit=0
+$ git ls-tree -r --name-only HEAD tests/.ci-*
+exit=0
+$ git diff 427056c4181c41074ad24f051f79919330df0fa5 HEAD -- AGENTS.md VISION.md
+exit=0
+$ git status --short
+exit=0
+The seven changed paths are product scripts, their documentation, and maintained tests. No tests/.ci-* files remain. AGENTS.md and VISION.md are byte-identical to the specified upstream base. No source or maintained-test edits were needed in this phase.

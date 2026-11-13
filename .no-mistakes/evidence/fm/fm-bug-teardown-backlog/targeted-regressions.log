@@ -1,23 +1,369 @@
 ok - teardown leaves opencode's busy plugin in the returned pool worktree as on main
-1..20
+1..16
 ok - no-mistakes worktree with pushed but unmerged work is refused
+ok - pushed work with a recorded but closed-unmerged PR is refused
 ok - forge=external work on the personal backup remote is retained while its review is unmerged
 ok - forge=external work missing from the personal backup remote is refused
-ok - pushed work with a recorded open PR is not refused
-ok - pushed work with a recorded but closed-unmerged PR is refused
 ok - pushed follow-up work after a merged PR is refused
-ok - pushed work with a recorded open Forgejo PR is not refused
-ok - pushed work with a closed-unmerged Forgejo PR is refused and retained
+ok - merged GitHub PRs prove head containment without gh after main changes the landed content
+ok - squash-merged PR refuses a replayed patch with a pushed but unlanded parent
+ok - merged PR replay excludes upstream commits proven on the refreshed default branch
+ok - open reviews retain unlanded work even when their heads contain every task commit
+ok - merged PR patch matching preserves indentation, allows exact replays, and refuses unsupported Git
 ok - teardown proves a Forgejo task landed from the merged pull request when the content check is inconclusive
 ok - teardown proves a pushed GitLab task landed from the merged merge request when the content check conflicts
-ok - teardown proves a squash- or train-merged GitLab MR landed from the MR head with or without an opt-in flag, and refuses an unpushed open one
-ok - branch pushed only to the no-mistakes mirror is refused as unlanded
-ok - merged PR does not allow teardown after a later local commit
-ok - merged PR patch matching preserves indentation, allows exact replays, and refuses unsupported Git
 ok - worktree whose content already landed in the default branch is torn down (content fallback)
-ok - content fallback refreshes origin default before comparing trees
+ok - the content-landed fallback checks a task's recorded base branch, not the default branch
 ok - dirty worktree is refused even when its committed work has landed (dirty always wins)
-ok - local-only worktree with HEAD on a fork remote is torn down and the home summary is refreshed
-ok - local-only worktree with truly unpushed work is refused (safety preserved)
-ok - local-only worktree with work merged into local main is torn down (no regression)
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ok - teardown closes its own backlog item before reporting success
 FM_TEST_COMPLETE
+
+CASE content-base-base
+/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/content-base-base/project: already current
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/content-base-base/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/content-base-base/data/backlog.md). Update /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/content-base-base/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE content-base-default
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/content-base-default/wt has work that is not landed.
+unpushed commits:
+507a6c0 add feature
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE content-landed
+/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/content-landed/project: synced e057d9c..dc27918
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/content-landed/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/content-landed/data/backlog.md). Update /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/content-landed/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 0s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE dirty-wt
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/dirty-wt/wt has uncommitted changes.
+uncommitted changes present (includes tracked edits)
+Commit them (or get the captain's explicit OK to discard, then --force).
+
+CASE ext-backup-refuse
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/ext-backup-refuse/wt has work that is not landed.
+unpushed commits:
+aca97a1 reviewed work
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE ext-backup-unmerged
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/ext-backup-unmerged/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE forgejo-merged-false
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/forgejo-merged-false/wt has work that is not landed.
+unpushed commits:
+3a226b8 edit shared from feature
+f9fba5f add feature
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE forgejo-merged-true
+/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/forgejo-merged-true/project: synced 47dd7ef..9c00061
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/forgejo-merged-true/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/forgejo-merged-true/data/backlog.md). Update /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/forgejo-merged-true/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE gitlab-mr-closed
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/gitlab-mr-closed/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE gitlab-mr-merged
+/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/gitlab-mr-merged/project: synced 2139f21..238b5d1
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/gitlab-mr-merged/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/gitlab-mr-merged/data/backlog.md). Update /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/gitlab-mr-merged/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE gitlab-mr-opened
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/gitlab-mr-opened/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE merged-github-gh-axi-current
+/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-github-gh-axi-current/project: synced d300aa4..9a20438
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-github-gh-axi-current/wt)
+Backlog: task-x1 is closed in /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-github-gh-axi-current/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE merged-github-gh-axi-descendant
+/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-github-gh-axi-descendant/project: synced 1a77542..f0e467a
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-github-gh-axi-descendant/wt)
+Backlog: task-x1 is closed in /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-github-gh-axi-descendant/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE merged-github-gh-axi-malformed
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-github-gh-axi-malformed/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE merged-github-gh-axi-missing
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-github-gh-axi-missing/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE merged-github-gh-axi-unrelated
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-github-gh-axi-unrelated/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE merged-replay-landed-upstream
+/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-replay-landed-upstream/project: synced f539480..f4cd36b
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-replay-landed-upstream/wt)
+Backlog: task-x1 is closed in /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/merged-replay-landed-upstream/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE nm-pushed-closed-pr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/nm-pushed-closed-pr/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE nm-pushed-unmerged
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/nm-pushed-unmerged/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE open-review-unlanded-forgejo
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/open-review-unlanded-forgejo/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE open-review-unlanded-gerrit
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/open-review-unlanded-gerrit/wt has work that is not landed.
+unpushed commits:
+89bf31b task feature
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE open-review-unlanded-github
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/open-review-unlanded-github/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE open-review-unlanded-gitlab
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/open-review-unlanded-gitlab/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE opencode-busy-wiring
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/opencode-busy-wiring/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/opencode-busy-wiring/data/backlog.md). Update /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/opencode-busy-wiring/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE pr-indentation-amended
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/pr-indentation-amended/wt has work that is not landed.
+unpushed commits:
+8d62f72 add YAML
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE pr-indentation-exact
+/private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/pr-indentation-exact/project: synced 98955a0..55cc9af
+teardown task-x1 complete (window firstmate:fm-task-x1, worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/pr-indentation-exact/wt)
+Backlog: task-x1 just finished (this home keeps no markdown backlog at /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/pr-indentation-exact/data/backlog.md). Update /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/pr-indentation-exact/data/backlog.md - move task-x1 to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CASE pr-indentation-old-git
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/pr-indentation-old-git/wt has work that is not landed.
+unpushed commits:
+f68c67d add YAML
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE pushed-followup-after-merged-pr
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/pushed-followup-after-merged-pr/wt has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+
+CASE squash-replayed-patch
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /private/var/folders/r4/kmrq4vl10mb42d_gl459xv7r0000gn/T/fm-teardown-tests.j3Ix6a/squash-replayed-patch/wt has work that is not landed.
+unpushed commits:
+6417676 add feature
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.

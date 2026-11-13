@@ -1,0 +1,8 @@
+state=MERGED
+merged=true
+head=83ee29a3cfbc4b20bd1893da095eda7d0db38de0
+
+Actual gh-axi invoked with node available and gh absent from PATH:
+error: "gh CLI is not installed — see https://cli.github.com"
+code: GH_NOT_INSTALLED
+exit=1

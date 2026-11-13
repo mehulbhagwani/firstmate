@@ -1,33 +1,49 @@
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-remote-job-reap-orphans.sh --dry-run
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s -f /dev/null new-session -d -s firstmate -n anchor -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention 'sleep 3600'
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s display-message -p '#{pid}'
-32641
-
-SCENARIO: unpublished
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished
-/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished
-$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/origin.git
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/origin.git symbolic-ref HEAD refs/heads/main
-$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/project
-warning: You appear to have cloned an empty repository.
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/project checkout -q -b main
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/project add baseline.txt
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/project commit -qm 'Initial lab content'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/project push -q origin main
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/project remote set-head origin main
-$ treehouse get --lease --no-fetch --base main -b fm/unpublished
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-lab-home.sh tmux-dir /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+/tmp/fml.0Kx4kC
+exit=0
+$ tmux -L fm-lab -f /dev/null new-session -d -s fm-lab -n primary -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B /bin/sleep 3600 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab display-message -p '#{pid}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+62085
+exit=0
+LIVE TOOLS: real Git, GitHub readers, tasks-axi, Treehouse and a private tmux server; no test stubs, no no-mistakes binary on PATH.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/pushed-only.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/pushed-only.git symbolic-ref HEAD refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/pushed-only.git config receive.shallowUpdate true [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q -b main /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/pushed-only [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/pushed-only add -- feature.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/pushed-only commit -qm baseline [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/pushed-only rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+748f2b7f23fd3e458236ab46599a2e1ed79b1698
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/pushed-only remote add origin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/pushed-only.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/pushed-only push -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/pushed-only remote set-head origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ treehouse get --lease --no-fetch --base main --branch fm/pushed-only [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/pushed-only]
 🌳 Setting up worktree...
-🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project' to release it.
-/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project add feature.txt
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project commit -qm 'Reviewed content'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project rev-parse HEAD
-19f14904ccb3298fa4cf4953d708fa7a556ba6e7
-$ tasks-axi add unpublished 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/data/backlog.md
-ok: added unpublished (ship) -> Queued
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab new-window -d -P -F '#{session_name}:#{window_name}' -t fm-lab -n fm-pushed-only -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B /bin/sleep 3600 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:fm-pushed-only
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh add pushed-only 'live teardown validation pushed-only' --kind ship [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: added pushed-only (ship) -> Queued
 task:
-  id: unpublished
-  title: Live retention check
+  id: pushed-only
+  title: live teardown validation pushed-only
   state: queued
   blocked: no
   blocked_by: none
@@ -44,35 +60,47 @@ task:
   links: none
   body: ""
 help[2]:
-  - Run `tasks-axi start unpublished --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/data/backlog.md` to move it to in flight
-  - Run `tasks-axi block unpublished --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/data/backlog.md` to record a dependency
-$ tasks-axi start unpublished --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/data/backlog.md
-ok: start unpublished -> In flight
+  - Run `tasks-axi start pushed-only` to move it to in flight
+  - Run `tasks-axi block pushed-only --by <other>` to record a dependency
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh start pushed-only [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: start pushed-only -> In flight
 help[1]:
-  - Run `tasks-axi done unpublished --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/data/backlog.md` when it ships
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s new-window -d -t firstmate -n fm-unpublished -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project 'sleep 3600'
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh unpublished
-fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished
+  - Run `tasks-axi done pushed-only --pr <url>` when it ships
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only add -- feature.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only commit -qm 'unlanded task' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+22eb260b228ecf4da3f6acf6b6616308435f31a2
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only push -q origin HEAD:refs/heads/fm/pushed-only [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+22eb260b228ecf4da3f6acf6b6616308435f31a2
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/pushed-only
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-teardown.sh pushed-only [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7
 ●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ●  WATCHER DOWN - SUPERVISION IS OFF
-●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 6s ago).
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 2s ago).
 ●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
 ●  This is a supervision warning only; the guarded operation WILL still run.
 ●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
 ●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project has work that is not landed.
-unpushed commits:
-19f1490 Reviewed content
+REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only has work that is not landed.
 Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project rev-parse HEAD
-19f14904ccb3298fa4cf4953d708fa7a556ba6e7
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/pool/.treehouse/project-ee1ec1/1/project branch --show-current
-fm/unpublished
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s has-session -t firstmate:fm-unpublished
-$ tasks-axi show unpublished --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/unpublished/data/backlog.md
+exit=1
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh show pushed-only [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
 task:
-  id: unpublished
-  title: Live retention check
+  id: pushed-only
+  title: live teardown validation pushed-only
   state: in_flight
   blocked: no
   blocked_by: none
@@ -88,209 +116,53 @@ task:
   deps: none
   links: none
   body: ""
-OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
-
-SCENARIO: pushed-no-review
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review
-/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review
-$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/origin.git
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/origin.git symbolic-ref HEAD refs/heads/main
-$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/project
-warning: You appear to have cloned an empty repository.
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/project checkout -q -b main
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/project add baseline.txt
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/project commit -qm 'Initial lab content'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/project push -q origin main
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/project remote set-head origin main
-$ treehouse get --lease --no-fetch --base main -b fm/pushed-no-review
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+22eb260b228ecf4da3f6acf6b6616308435f31a2
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/pushed-only
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/pushed-only-39239d/1/pushed-only status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab display-message -p -t fm-lab:fm-pushed-only '#{window_id}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+@1
+exit=0
+OBSERVED: refusal preserved HEAD, branch, working files, task metadata, backlog, and live endpoint.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/external-backup.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/external-backup.git symbolic-ref HEAD refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/external-backup.git config receive.shallowUpdate true [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q -b main /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/external-backup [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/external-backup add -- feature.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/external-backup commit -qm baseline [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/external-backup rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+c8b47ce808cbda28a2dd4c9b5ae1475213b72306
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/external-backup remote add origin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/external-backup.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/external-backup push -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/external-backup remote set-head origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ treehouse get --lease --no-fetch --base main --branch fm/external-backup [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/external-backup]
 🌳 Setting up worktree...
-🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project' to release it.
-/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project add feature.txt
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project commit -qm 'Reviewed content'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project rev-parse HEAD
-d0c43ba579cb08f25c60a0b8fa077e03975b9b02
-$ tasks-axi add pushed-no-review 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/data/backlog.md
-ok: added pushed-no-review (ship) -> Queued
-task:
-  id: pushed-no-review
-  title: Live retention check
-  state: queued
-  blocked: no
-  blocked_by: none
-  held: no
-  hold_reason: "-"
-  hold_kind: "-"
-  hold_until: "-"
-  kind: ship
-  repo: "-"
-  priority: "-"
-  created: 2026-11-13
-  closed: "-"
-  deps: none
-  links: none
-  body: ""
-help[2]:
-  - Run `tasks-axi start pushed-no-review --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/data/backlog.md` to move it to in flight
-  - Run `tasks-axi block pushed-no-review --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/data/backlog.md` to record a dependency
-$ tasks-axi start pushed-no-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/data/backlog.md
-ok: start pushed-no-review -> In flight
-help[1]:
-  - Run `tasks-axi done pushed-no-review --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/data/backlog.md` when it ships
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s new-window -d -t firstmate -n fm-pushed-no-review -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project 'sleep 3600'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project push -q origin HEAD:refs/heads/fm/pushed-no-review
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/project fetch -q origin
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh pushed-no-review
-fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review
-●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-●  WATCHER DOWN - SUPERVISION IS OFF
-●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 4s ago).
-●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
-●  This is a supervision warning only; the guarded operation WILL still run.
-●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
-●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project has work that is not landed.
-Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project rev-parse HEAD
-d0c43ba579cb08f25c60a0b8fa077e03975b9b02
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/pool/.treehouse/project-1b605e/1/project branch --show-current
-fm/pushed-no-review
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s has-session -t firstmate:fm-pushed-no-review
-$ tasks-axi show pushed-no-review --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/pushed-no-review/data/backlog.md
-task:
-  id: pushed-no-review
-  title: Live retention check
-  state: in_flight
-  blocked: no
-  blocked_by: none
-  held: no
-  hold_reason: "-"
-  hold_kind: "-"
-  hold_until: "-"
-  kind: ship
-  repo: "-"
-  priority: "-"
-  created: 2026-11-13
-  closed: "-"
-  deps: none
-  links: none
-  body: ""
-OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
-
-SCENARIO: external-no-backup
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup
-/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup
-$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/origin.git
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/origin.git symbolic-ref HEAD refs/heads/main
-$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/project
-warning: You appear to have cloned an empty repository.
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/project checkout -q -b main
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/project add baseline.txt
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/project commit -qm 'Initial lab content'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/project push -q origin main
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/project remote set-head origin main
-$ treehouse get --lease --no-fetch --base main -b fm/external-no-backup
-🌳 Setting up worktree...
-🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project' to release it.
-/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project add feature.txt
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project commit -qm 'Reviewed content'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project rev-parse HEAD
-5bc9f2c2e0814377d926657f3beb8dd740d2cd27
-$ tasks-axi add external-no-backup 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/data/backlog.md
-ok: added external-no-backup (ship) -> Queued
-task:
-  id: external-no-backup
-  title: Live retention check
-  state: queued
-  blocked: no
-  blocked_by: none
-  held: no
-  hold_reason: "-"
-  hold_kind: "-"
-  hold_until: "-"
-  kind: ship
-  repo: "-"
-  priority: "-"
-  created: 2026-11-13
-  closed: "-"
-  deps: none
-  links: none
-  body: ""
-help[2]:
-  - Run `tasks-axi start external-no-backup --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/data/backlog.md` to move it to in flight
-  - Run `tasks-axi block external-no-backup --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/data/backlog.md` to record a dependency
-$ tasks-axi start external-no-backup --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/data/backlog.md
-ok: start external-no-backup -> In flight
-help[1]:
-  - Run `tasks-axi done external-no-backup --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/data/backlog.md` when it ships
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s new-window -d -t firstmate -n fm-external-no-backup -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project 'sleep 3600'
-$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/backup.git
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/project remote add backup /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/backup.git
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh external-no-backup
-fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup
-●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-●  WATCHER DOWN - SUPERVISION IS OFF
-●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 5s ago).
-●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
-●  This is a supervision warning only; the guarded operation WILL still run.
-●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
-●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project has work that is not landed.
-unpushed commits:
-5bc9f2c Reviewed content
-Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project rev-parse HEAD
-5bc9f2c2e0814377d926657f3beb8dd740d2cd27
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/pool/.treehouse/project-ae63c4/1/project branch --show-current
-fm/external-no-backup
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s has-session -t firstmate:fm-external-no-backup
-$ tasks-axi show external-no-backup --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-no-backup/data/backlog.md
-task:
-  id: external-no-backup
-  title: Live retention check
-  state: in_flight
-  blocked: no
-  blocked_by: none
-  held: no
-  hold_reason: "-"
-  hold_kind: "-"
-  hold_until: "-"
-  kind: ship
-  repo: "-"
-  priority: "-"
-  created: 2026-11-13
-  closed: "-"
-  deps: none
-  links: none
-  body: ""
-OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
-
-SCENARIO: external-backup
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-lab-home.sh create /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup
-/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup
-$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/origin.git
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/origin.git symbolic-ref HEAD refs/heads/main
-$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project
-warning: You appear to have cloned an empty repository.
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project checkout -q -b main
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project add baseline.txt
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project commit -qm 'Initial lab content'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project push -q origin main
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project remote set-head origin main
-$ treehouse get --lease --no-fetch --base main -b fm/external-backup
-🌳 Setting up worktree...
-🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project' to release it.
-/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project add feature.txt
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project commit -qm 'Reviewed content'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project rev-parse HEAD
-1d4004ebe2316ae7aeb14d1eb619aa2d4f8f1b98
-$ tasks-axi add external-backup 'Live retention check' --kind ship --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/data/backlog.md
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab new-window -d -P -F '#{session_name}:#{window_name}' -t fm-lab -n fm-external-backup -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B /bin/sleep 3600 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:fm-external-backup
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh add external-backup 'live teardown validation external-backup' --kind ship [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
 ok: added external-backup (ship) -> Queued
 task:
   id: external-backup
-  title: Live retention check
+  title: live teardown validation external-backup
   state: queued
   blocked: no
   blocked_by: none
@@ -307,37 +179,45 @@ task:
   links: none
   body: ""
 help[2]:
-  - Run `tasks-axi start external-backup --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/data/backlog.md` to move it to in flight
-  - Run `tasks-axi block external-backup --by <other> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/data/backlog.md` to record a dependency
-$ tasks-axi start external-backup --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/data/backlog.md
+  - Run `tasks-axi start external-backup` to move it to in flight
+  - Run `tasks-axi block external-backup --by <other>` to record a dependency
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh start external-backup [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
 ok: start external-backup -> In flight
 help[1]:
-  - Run `tasks-axi done external-backup --pr <url> --file=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/data/backlog.md` when it ships
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s new-window -d -t firstmate -n fm-external-backup -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project 'sleep 3600'
-$ git init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/backup.git
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project remote add backup /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/backup.git
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project push -q backup HEAD:refs/heads/backup/external-backup
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project fetch -q backup
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh external-backup
-fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup
-●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-●  WATCHER DOWN - SUPERVISION IS OFF
-●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 10s ago).
-●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
-●  This is a supervision warning only; the guarded operation WILL still run.
-●  repair missing watcher supervision with a foreground checkpoint: bin/fm-watch-checkpoint.sh --seconds 180.
-●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project has work that is not landed.
+  - Run `tasks-axi done external-backup --pr <url>` when it ships
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup add -- feature.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup commit -qm 'unlanded backed-up task' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+0fa7d84f1f206052c2f32dd7aa3add3a74d55be0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/backup.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup remote add backup /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/backup.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup push -q backup HEAD:refs/heads/firstmate-backup/external-backup [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+0fa7d84f1f206052c2f32dd7aa3add3a74d55be0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/external-backup
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-teardown.sh external-backup [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7
+WARNING: watcher still down (same stale episode; last beat: 2s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup has work that is not landed.
 Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project rev-parse HEAD
-1d4004ebe2316ae7aeb14d1eb619aa2d4f8f1b98
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project branch --show-current
-fm/external-backup
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s has-session -t firstmate:fm-external-backup
-$ tasks-axi show external-backup --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/data/backlog.md
+exit=1
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh show external-backup [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
 task:
   id: external-backup
-  title: Live retention check
+  title: live teardown validation external-backup
   state: in_flight
   blocked: no
   blocked_by: none
@@ -353,29 +233,54 @@ task:
   deps: none
   links: none
   body: ""
-OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
-$ git clone -q /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/origin.git /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/land
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/land add feature.txt
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/land commit -qm 'Squash reviewed content into default'
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/land push -q origin main
-
-SCENARIO: dirty copy after landing
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh external-backup
-fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup
-WARNING: watcher still down (same stale episode; last beat: 36s ago, grace 300s) - full banner already printed this episode.
-REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project has uncommitted changes.
-uncommitted changes present (includes tracked edits)
-Commit them (or get the captain's explicit OK to discard, then --force).
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project rev-parse HEAD
-1d4004ebe2316ae7aeb14d1eb619aa2d4f8f1b98
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project branch --show-current
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+0fa7d84f1f206052c2f32dd7aa3add3a74d55be0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
 fm/external-backup
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s has-session -t firstmate:fm-external-backup
-$ tasks-axi show external-backup --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/data/backlog.md
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/external-backup-145a9c/1/external-backup status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab display-message -p -t fm-lab:fm-external-backup '#{window_id}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+@2
+exit=0
+OBSERVED: refusal preserved HEAD, branch, working files, task metadata, backlog, and live endpoint.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/landed-content.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/landed-content.git symbolic-ref HEAD refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/landed-content.git config receive.shallowUpdate true [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q -b main /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/landed-content [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/landed-content add -- feature.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/landed-content commit -qm baseline [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/landed-content rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+7e3371c10975f57be36ce751fedf10fe876b7c53
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/landed-content remote add origin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/landed-content.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/landed-content push -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/landed-content remote set-head origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ treehouse get --lease --no-fetch --base main --branch fm/landed-content [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/landed-content]
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab new-window -d -P -F '#{session_name}:#{window_name}' -t fm-lab -n fm-landed-content -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B /bin/sleep 3600 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:fm-landed-content
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh add landed-content 'live teardown validation landed-content' --kind ship [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: added landed-content (ship) -> Queued
 task:
-  id: external-backup
-  title: Live retention check
-  state: in_flight
+  id: landed-content
+  title: live teardown validation landed-content
+  state: queued
   blocked: no
   blocked_by: none
   held: no
@@ -390,25 +295,45 @@ task:
   deps: none
   links: none
   body: ""
-OBSERVED: refusal retained the exact task record, branch, commit, live worker, and In flight backlog item.
-
-SCENARIO: external backup after squash landing, with stale local default ref
-$ bash /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/bin/fm-teardown.sh external-backup
-fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup
-WARNING: watcher still down (same stale episode; last beat: 42s ago, grace 300s) - full banner already printed this episode.
-teardown: reaping leaked worktree process(es) for external-backup: 77745
+help[2]:
+  - Run `tasks-axi start landed-content` to move it to in flight
+  - Run `tasks-axi block landed-content --by <other>` to record a dependency
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh start landed-content [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: start landed-content -> In flight
+help[1]:
+  - Run `tasks-axi done landed-content --pr <url>` when it ships
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content add -- feature.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content commit -qm 'task change' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+4e1cf9ada994f08ac50062546f1240787bbeafa6
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content push -q origin HEAD:refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+4e1cf9ada994f08ac50062546f1240787bbeafa6
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/landed-content
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-teardown.sh landed-content [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7
+WARNING: watcher still down (same stale episode; last beat: 2s ago, grace 300s) - full banner already printed this episode.
 🌳 Worktree returned to pool.
-/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project: synced 0a84225..56f1cae
-teardown external-backup complete (window firstmate:fm-external-backup, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project)
-Backlog: external-backup is closed in /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project status --porcelain
-$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/project branch --list fm/external-backup
-$ tmux -S /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/s has-session -t firstmate:fm-external-backup
-can't find window: fm-external-backup
-$ tasks-axi show external-backup --file /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/data/backlog.md
+WARNING: watcher still down (same stale episode; last beat: 4s ago, grace 300s) - full banner already printed this episode.
+landed-content: synced 7e3371c..4e1cf9a
+teardown landed-content complete (window fm-lab:fm-landed-content, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/landed-content-c51748/1/landed-content)
+Backlog: landed-content is closed in /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh show landed-content [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
 task:
-  id: external-backup
-  title: Live retention check
+  id: landed-content
+  title: live teardown validation landed-content
   state: done
   blocked: no
   blocked_by: none
@@ -424,9 +349,714 @@ task:
   deps: none
   links: none
   body: ""
-$ treehouse status
-base  main  (repository default)
-1     available    ~/.no-mistakes/worktrees/3ffccef5245c/01M78S4JV9CSE8DJZX9VSYF54W/.live-retention/external-backup/pool/.treehouse/project-6fcd01/1/project  (detached)
-OBSERVED: task record and branch removed, worker stopped, pool copy clean, and backlog Done.
-
-All live scenarios passed.
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab list-windows -a -F '#{session_name}:#{window_name}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:primary
+fm-lab:fm-pushed-only
+fm-lab:fm-external-backup
+exit=0
+OBSERVED: cleanup closed the backlog task, removed its metadata, returned its real Treehouse slot, and closed only its lab endpoint.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/dirty-landed.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/dirty-landed.git symbolic-ref HEAD refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/dirty-landed.git config receive.shallowUpdate true [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q -b main /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/dirty-landed [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/dirty-landed add -- feature.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/dirty-landed commit -qm baseline [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/dirty-landed rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+a616dd34aa9dd3cd70361db422caa7a6834becc5
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/dirty-landed remote add origin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/dirty-landed.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/dirty-landed push -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/dirty-landed remote set-head origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ treehouse get --lease --no-fetch --base main --branch fm/dirty-landed [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/dirty-landed]
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab new-window -d -P -F '#{session_name}:#{window_name}' -t fm-lab -n fm-dirty-landed -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B /bin/sleep 3600 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:fm-dirty-landed
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh add dirty-landed 'live teardown validation dirty-landed' --kind ship [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: added dirty-landed (ship) -> Queued
+task:
+  id: dirty-landed
+  title: live teardown validation dirty-landed
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start dirty-landed` to move it to in flight
+  - Run `tasks-axi block dirty-landed --by <other>` to record a dependency
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh start dirty-landed [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: start dirty-landed -> In flight
+help[1]:
+  - Run `tasks-axi done dirty-landed --pr <url>` when it ships
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed add -- feature.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed commit -qm 'task change' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+8779b80078cdb70b9b4495f8816e16bac5486a04
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed push -q origin HEAD:refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+8779b80078cdb70b9b4495f8816e16bac5486a04
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/dirty-landed
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+?? new-work.txt
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-teardown.sh dirty-landed [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7
+WARNING: watcher still down (same stale episode; last beat: 1s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed has uncommitted changes.
+uncommitted changes present (untracked-only leftovers)
+untracked paths (up to 10):
+  new-work.txt
+Commit them (or get the captain's explicit OK to discard, then --force).
+exit=1
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh show dirty-landed [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+task:
+  id: dirty-landed
+  title: live teardown validation dirty-landed
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+8779b80078cdb70b9b4495f8816e16bac5486a04
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/dirty-landed
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/dirty-landed-7ad455/1/dirty-landed status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+?? new-work.txt
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab display-message -p -t fm-lab:fm-dirty-landed '#{window_id}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+@4
+exit=0
+OBSERVED: refusal preserved HEAD, branch, working files, task metadata, backlog, and live endpoint.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/open-pr.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/open-pr.git symbolic-ref HEAD refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/open-pr.git config receive.shallowUpdate true [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q -b main /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr fetch --quiet --depth=2 https://github.com/kunchenguid/firstmate.git refs/pull/5953/head [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr rev-parse FETCH_HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+e0506838f4c1b7cb64532f7e8028b7f55d7a2f76
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr rev-parse 'e0506838f4c1b7cb64532f7e8028b7f55d7a2f76^' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+20cc8de9d44643b440ee8078770a7b59bea03487
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr update-ref refs/heads/main 20cc8de9d44643b440ee8078770a7b59bea03487 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr reset --hard main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr remote add origin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/open-pr.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr push -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr remote set-head origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ treehouse get --lease --no-fetch --base main --branch fm/open-pr [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/open-pr]
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab new-window -d -P -F '#{session_name}:#{window_name}' -t fm-lab -n fm-open-pr -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B /bin/sleep 3600 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:fm-open-pr
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh add open-pr 'live teardown validation open-pr' --kind ship [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: added open-pr (ship) -> Queued
+task:
+  id: open-pr
+  title: live teardown validation open-pr
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start open-pr` to move it to in flight
+  - Run `tasks-axi block open-pr --by <other>` to record a dependency
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh start open-pr [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: start open-pr -> In flight
+help[1]:
+  - Run `tasks-axi done open-pr --pr <url>` when it ships
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr reset --hard e0506838f4c1b7cb64532f7e8028b7f55d7a2f76 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr push -q origin HEAD:refs/heads/fm/open-pr [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ gh-axi pr view 5953 --repo kunchenguid/firstmate --fields state,headRefOid [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+pull_request:
+  headRefOid: e0506838f4c1b7cb64532f7e8028b7f55d7a2f76
+  state: OPEN
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+e0506838f4c1b7cb64532f7e8028b7f55d7a2f76
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/open-pr
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-teardown.sh open-pr [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7
+WARNING: watcher still down (same stale episode; last beat: 3s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr has work that is not landed.
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+exit=1
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh show open-pr [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+task:
+  id: open-pr
+  title: live teardown validation open-pr
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+e0506838f4c1b7cb64532f7e8028b7f55d7a2f76
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/open-pr
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/open-pr-f0873f/1/open-pr status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab display-message -p -t fm-lab:fm-open-pr '#{window_id}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+@5
+exit=0
+OBSERVED: refusal preserved HEAD, branch, working files, task metadata, backlog, and live endpoint.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/replay-unlanded-parent.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/replay-unlanded-parent.git symbolic-ref HEAD refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/replay-unlanded-parent.git config receive.shallowUpdate true [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q -b main /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent fetch --quiet --depth=2 https://github.com/kunchenguid/firstmate.git refs/pull/8399/head [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent rev-parse FETCH_HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+83ee29a3cfbc4b20bd1893da095eda7d0db38de0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent rev-parse '83ee29a3cfbc4b20bd1893da095eda7d0db38de0^' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+bf0f34680a7618aa5baf36464fe77530fa79fa23
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent update-ref refs/heads/main bf0f34680a7618aa5baf36464fe77530fa79fa23 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent reset --hard main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent remote add origin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/replay-unlanded-parent.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent push -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent remote set-head origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ treehouse get --lease --no-fetch --base main --branch fm/replay-unlanded-parent [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent]
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab new-window -d -P -F '#{session_name}:#{window_name}' -t fm-lab -n fm-replay-unlanded-parent -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B /bin/sleep 3600 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:fm-replay-unlanded-parent
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh add replay-unlanded-parent 'live teardown validation replay-unlanded-parent' --kind ship [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: added replay-unlanded-parent (ship) -> Queued
+task:
+  id: replay-unlanded-parent
+  title: live teardown validation replay-unlanded-parent
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start replay-unlanded-parent` to move it to in flight
+  - Run `tasks-axi block replay-unlanded-parent --by <other>` to record a dependency
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh start replay-unlanded-parent [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: start replay-unlanded-parent -> In flight
+help[1]:
+  - Run `tasks-axi done replay-unlanded-parent --pr <url>` when it ships
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+bf0f34680a7618aa5baf36464fe77530fa79fa23
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent add -- validation-upstream.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent commit -qm 'parent work' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+904e14aabdae7236ed7d73e8fd4cdd7280af65a9
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent push -q origin HEAD:refs/heads/retained-parent [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent cherry-pick 83ee29a3cfbc4b20bd1893da095eda7d0db38de0 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+faa6ef98a05b9c63d1a94822b90daab699fd2ed0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent rev-parse '83ee29a3cfbc4b20bd1893da095eda7d0db38de0^{tree}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+f3eda9155863c0c716f009d2858ed761bb68975b
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent commit-tree f3eda9155863c0c716f009d2858ed761bb68975b -p bf0f34680a7618aa5baf36464fe77530fa79fa23 -m 'squash merge of published review' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+876831a5d40cb9f5ca03ed4fe529052bb217aced
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent reset --hard 876831a5d40cb9f5ca03ed4fe529052bb217aced [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent diff-tree --no-commit-id --name-only -r 83ee29a3cfbc4b20bd1893da095eda7d0db38de0 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+bin/fm-hermes-process-lib.sh
+tests/fm-hermes-harness.test.sh
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent add -- bin/fm-hermes-process-lib.sh [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent commit -qm 'later default branch rewrite' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+05581cdafce37231a8aa7bdf7f5d3b1824b9f8c2
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-unlanded-parent push -q origin HEAD:refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent fetch -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent merge-tree --write-tree origin/main HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=1
+$ gh-axi pr view 8399 --repo kunchenguid/firstmate --fields state,headRefOid [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+pull_request:
+  headRefOid: 83ee29a3cfbc4b20bd1893da095eda7d0db38de0
+  state: MERGED
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+faa6ef98a05b9c63d1a94822b90daab699fd2ed0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/replay-unlanded-parent
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-teardown.sh replay-unlanded-parent [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7
+WARNING: watcher still down (same stale episode; last beat: 3s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent has work that is not landed.
+unpushed commits:
+faa6ef9 fix(hermes): tolerate empty args under bash 3.2 set -u
+Open a PR and land it, merge the work into the default branch, or get the captain's explicit OK to discard, then --force.
+exit=1
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh show replay-unlanded-parent [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+task:
+  id: replay-unlanded-parent
+  title: live teardown validation replay-unlanded-parent
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+faa6ef98a05b9c63d1a94822b90daab699fd2ed0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/replay-unlanded-parent
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-unlanded-parent-553959/1/replay-unlanded-parent status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab display-message -p -t fm-lab:fm-replay-unlanded-parent '#{window_id}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+@6
+exit=0
+OBSERVED: refusal preserved HEAD, branch, working files, task metadata, backlog, and live endpoint.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/replay-landed-upstream.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/replay-landed-upstream.git symbolic-ref HEAD refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/replay-landed-upstream.git config receive.shallowUpdate true [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q -b main /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream fetch --quiet --depth=2 https://github.com/kunchenguid/firstmate.git refs/pull/8399/head [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream rev-parse FETCH_HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+83ee29a3cfbc4b20bd1893da095eda7d0db38de0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream rev-parse '83ee29a3cfbc4b20bd1893da095eda7d0db38de0^' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+bf0f34680a7618aa5baf36464fe77530fa79fa23
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream update-ref refs/heads/main bf0f34680a7618aa5baf36464fe77530fa79fa23 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream reset --hard main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream remote add origin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/replay-landed-upstream.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream push -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream remote set-head origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ treehouse get --lease --no-fetch --base main --branch fm/replay-landed-upstream [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream]
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab new-window -d -P -F '#{session_name}:#{window_name}' -t fm-lab -n fm-replay-landed-upstream -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B /bin/sleep 3600 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:fm-replay-landed-upstream
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh add replay-landed-upstream 'live teardown validation replay-landed-upstream' --kind ship [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: added replay-landed-upstream (ship) -> Queued
+task:
+  id: replay-landed-upstream
+  title: live teardown validation replay-landed-upstream
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start replay-landed-upstream` to move it to in flight
+  - Run `tasks-axi block replay-landed-upstream --by <other>` to record a dependency
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh start replay-landed-upstream [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: start replay-landed-upstream -> In flight
+help[1]:
+  - Run `tasks-axi done replay-landed-upstream --pr <url>` when it ships
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+bf0f34680a7618aa5baf36464fe77530fa79fa23
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream add -- validation-upstream.txt [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream commit -qm 'parent work' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+6b2e63eb2092e10a2f90c682d4f0332fb6f34e31
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream push -q origin HEAD:refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream cherry-pick 83ee29a3cfbc4b20bd1893da095eda7d0db38de0 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+8a1c3fec46ece693a9c10743e355e8ffac1141db
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream rev-parse '8a1c3fec46ece693a9c10743e355e8ffac1141db^{tree}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+d65040ab0145acea61e81e1b8a73443030df075d
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream commit-tree d65040ab0145acea61e81e1b8a73443030df075d -p 6b2e63eb2092e10a2f90c682d4f0332fb6f34e31 -m 'squash merge of published review' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+7a8ee2600e28d3e4061461a297a6922048646f62
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream reset --hard 7a8ee2600e28d3e4061461a297a6922048646f62 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream diff-tree --no-commit-id --name-only -r 83ee29a3cfbc4b20bd1893da095eda7d0db38de0 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+bin/fm-hermes-process-lib.sh
+tests/fm-hermes-harness.test.sh
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream add -- bin/fm-hermes-process-lib.sh [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream commit -qm 'later default branch rewrite' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+691a9327f9008914e27456229e5f649e7924699d
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/replay-landed-upstream push -q origin HEAD:refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream fetch -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream merge-tree --write-tree origin/main HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=1
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream update-ref refs/remotes/origin/main bf0f34680a7618aa5baf36464fe77530fa79fa23 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ gh-axi pr view 8399 --repo kunchenguid/firstmate --fields state,headRefOid [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+pull_request:
+  headRefOid: 83ee29a3cfbc4b20bd1893da095eda7d0db38de0
+  state: MERGED
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+8a1c3fec46ece693a9c10743e355e8ffac1141db
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/replay-landed-upstream
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-teardown.sh replay-landed-upstream [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7
+WARNING: watcher still down (same stale episode; last beat: 4s ago, grace 300s) - full banner already printed this episode.
+🌳 Worktree returned to pool.
+WARNING: watcher still down (same stale episode; last beat: 7s ago, grace 300s) - full banner already printed this episode.
+replay-landed-upstream: already current
+teardown replay-landed-upstream complete (window fm-lab:fm-replay-landed-upstream, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/replay-landed-upstream-d22ed5/1/replay-landed-upstream)
+Backlog: replay-landed-upstream is closed in /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh show replay-landed-upstream [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+task:
+  id: replay-landed-upstream
+  title: "live teardown validation replay-landed-upstream https://github.com/kunchenguid/f\n... (truncated, 98 chars total - use --full to see complete text)"
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: "pr:https://github.com/kunchenguid/firstmate/pull/8399"
+  body: ""
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab list-windows -a -F '#{session_name}:#{window_name}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:primary
+fm-lab:fm-pushed-only
+fm-lab:fm-external-backup
+fm-lab:fm-dirty-landed
+fm-lab:fm-open-pr
+fm-lab:fm-replay-unlanded-parent
+exit=0
+OBSERVED: cleanup closed the backlog task, removed its metadata, returned its real Treehouse slot, and closed only its lab endpoint.
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q --bare /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/merged-head.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/merged-head.git symbolic-ref HEAD refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/merged-head.git config receive.shallowUpdate true [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B init -q -b main /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head fetch --quiet --depth=2 https://github.com/kunchenguid/firstmate.git refs/pull/8399/head [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head rev-parse FETCH_HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+83ee29a3cfbc4b20bd1893da095eda7d0db38de0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head rev-parse '83ee29a3cfbc4b20bd1893da095eda7d0db38de0^' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+bf0f34680a7618aa5baf36464fe77530fa79fa23
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head update-ref refs/heads/main bf0f34680a7618aa5baf36464fe77530fa79fa23 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head reset --hard main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head remote add origin /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/remotes/merged-head.git [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head push -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head remote set-head origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ treehouse get --lease --no-fetch --base main --branch fm/merged-head [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head]
+🌳 Setting up worktree...
+🌳 Leased worktree at ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head. Run 'treehouse return ~/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head' to release it.
+/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab new-window -d -P -F '#{session_name}:#{window_name}' -t fm-lab -n fm-merged-head -c /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B /bin/sleep 3600 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:fm-merged-head
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh add merged-head 'live teardown validation merged-head' --kind ship [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: added merged-head (ship) -> Queued
+task:
+  id: merged-head
+  title: live teardown validation merged-head
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-11-13
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start merged-head` to move it to in flight
+  - Run `tasks-axi block merged-head --by <other>` to record a dependency
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh start merged-head [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ok: start merged-head -> In flight
+help[1]:
+  - Run `tasks-axi done merged-head --pr <url>` when it ships
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+bf0f34680a7618aa5baf36464fe77530fa79fa23
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head reset --hard 83ee29a3cfbc4b20bd1893da095eda7d0db38de0 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+83ee29a3cfbc4b20bd1893da095eda7d0db38de0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head rev-parse '83ee29a3cfbc4b20bd1893da095eda7d0db38de0^{tree}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+f3eda9155863c0c716f009d2858ed761bb68975b
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head commit-tree f3eda9155863c0c716f009d2858ed761bb68975b -p bf0f34680a7618aa5baf36464fe77530fa79fa23 -m 'squash merge of published review' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ec75d0bfc3e0d7a1846bbaf69f04b9da7bd5af3a
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head reset --hard ec75d0bfc3e0d7a1846bbaf69f04b9da7bd5af3a [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head diff-tree --no-commit-id --name-only -r 83ee29a3cfbc4b20bd1893da095eda7d0db38de0 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+bin/fm-hermes-process-lib.sh
+tests/fm-hermes-harness.test.sh
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head add -- bin/fm-hermes-process-lib.sh [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head commit -qm 'later default branch rewrite' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+ceb79fd34c3aafc2fdcb92a13f716beb1b9fb139
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/projects/merged-head push -q origin HEAD:refs/heads/main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head fetch -q origin main [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head merge-tree --write-tree origin/main HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=1
+$ gh-axi pr view 8399 --repo kunchenguid/firstmate --fields state,headRefOid [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+pull_request:
+  headRefOid: 83ee29a3cfbc4b20bd1893da095eda7d0db38de0
+  state: MERGED
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head rev-parse HEAD [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+83ee29a3cfbc4b20bd1893da095eda7d0db38de0
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head branch --show-current [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm/merged-head
+exit=0
+$ git -C /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head status --porcelain --untracked-files=all [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-teardown.sh merged-head [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7
+WARNING: watcher still down (same stale episode; last beat: 3s ago, grace 300s) - full banner already printed this episode.
+🌳 Worktree returned to pool.
+WARNING: watcher still down (same stale episode; last beat: 6s ago, grace 300s) - full banner already printed this episode.
+merged-head: already current
+teardown merged-head complete (window fm-lab:fm-merged-head, worktree /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/pool/.treehouse/merged-head-3be7d8/1/merged-head)
+Backlog: merged-head is closed in /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7/data/backlog.md. Run bin/fm-tasks-axi.sh ready for dependency-cleared candidates, check date gates, and dispatch only work whose blockers are gone and date is due.
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-tasks-axi.sh show merged-head [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+task:
+  id: merged-head
+  title: "live teardown validation merged-head https://github.com/kunchenguid/firstmate/pu\n... (truncated, 87 chars total - use --full to see complete text)"
+  state: done
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: "-"
+  closed: 2026-11-13
+  deps: none
+  links: "pr:https://github.com/kunchenguid/firstmate/pull/8399"
+  body: ""
+exit=0
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab list-windows -a -F '#{session_name}:#{window_name}' [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+fm-lab:primary
+fm-lab:fm-pushed-only
+fm-lab:fm-external-backup
+fm-lab:fm-dirty-landed
+fm-lab:fm-open-pr
+fm-lab:fm-replay-unlanded-parent
+exit=0
+OBSERVED: cleanup closed the backlog task, removed its metadata, returned its real Treehouse slot, and closed only its lab endpoint.
+$ tmux -S /tmp/fml.0Kx4kC/tmux-501/fm-lab kill-server [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+$ /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/bin/fm-lab-home.sh teardown /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B/.fm-live-teardown-qx8v_6j7 [cwd=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7AAZAZW9NNFVS2B8S7W072B]
+exit=0
+CLEANUP: disposable lab files and its private tmux server removed. Evidence retained.

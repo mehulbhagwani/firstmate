@@ -1,0 +1,5 @@
+1..3
+ok - terminal passed run with open PR does not claim merged
+ok - terminal passed run PR overrides stale task metadata
+ok - recorded merged PR reads done under the fleet snapshot's captured meta
+FM_TEST_COMPLETE
