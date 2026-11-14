@@ -1,0 +1,1 @@
+ok - fm-control exit: a pi parked on the Codex usage-limit banner with a stale working status still receives /quit on a pinned pi release, while any other error text or an unpinned release keeps the refusal

@@ -1,0 +1,2 @@
+ok - fm_backend_source: missing fm-composer-pi-adapter.sh refuses every dependent backend before sourcing
+ok - fm_backend_source: unreadable fm-composer-pi-adapter.sh refuses every dependent backend before sourcing

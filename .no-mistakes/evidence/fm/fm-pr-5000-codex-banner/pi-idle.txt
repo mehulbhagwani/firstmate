@@ -1,3 +1,10 @@
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+env PI_CODING_AGENT_DIR='/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7CXKTXMK8MCQX73PEE3SJS5/.v/pi' pi --offline
+ --no-session --no-context-files --no-extensions --no-mcp --no-skills --no-prompt-templates --no-themes --no-approve --n
+o-tools --tui-mode regularbash-3.2$ env PI_CODING_AGENT_DIR='/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7CXKTXM
+ --offline --no-session --no-context-files --no-extensions --no-mcp --no-skills --no-prompt-templates --no-themes --no-a
+pprove --no-tools --tui-mode regular
 
  ▀▀█  v1.5.2
  █▀ █ escape interrupt · ctrl+c/ctrl+d clear/exit · / commands · ! bash · ctrl+o more
@@ -9,7 +16,7 @@
  restart pi.
 
  Warning: No models available. Use /login to log into a provider via OAuth or API key. See:
- 
+
  /opt/homebrew/Cellar/pi-coding-agent/1.5.2/libexec/lib/node_modules/@earendil-works/pi-coding-agent/docs/providers.md
    /opt/homebrew/Cellar/pi-coding-agent/1.5.2/libexec/lib/node_modules/@earendil-works/pi-coding-agent/docs/models.md
 
@@ -17,12 +24,7 @@
  and restart tmux.
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
- 
+
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-~/.no-mistakes/worktrees/3ffccef5245c/01M7B1FCXHMPTN52EQE2EVH9ZJ (detached)
+~/.no-mistakes/worktrees/3ffccef5245c/01M7CXKTXMK8MCQX73PEE3SJS5 (detached)
 0.0%/0 (auto)                                                                                                    unknown
-
-
-
-
-

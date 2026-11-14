@@ -1,0 +1,15 @@
+Installed Pi: 1.5.2
+Idle composer: empty
+Running agent: alive
+Installed Pi accepted for banner exception: no
+Draft composer: pending
+Exit with unsent draft returned: 1
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7CXKTXMK8MCQX73PEE3SJS5/.v
+error: task probe's composer visibly holds pending text; refusing to type the /quit exit command because it would concatenate onto that text. Clear or submit the pending text, then retry 'exit'
+Unsent draft remains intact; no /quit appended.
+Cleared composer: empty
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7CXKTXMK8MCQX73PEE3SJS5/.v
+stopped probe harness=pi backend=tmux endpoint=primary:fm-probe worktree=/Users/mehul/.no-mistakes/worktrees/3ffccef5245c/01M7CXKTXMK8MCQX73PEE3SJS5
+Agent after exit: dead
+Preserved terminal: primary:fm-probe bash
+Live checks complete.

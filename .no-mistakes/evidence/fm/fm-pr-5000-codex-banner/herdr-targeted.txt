@@ -1,0 +1,4 @@
+ok - herdr recovery: an unknown Pi status needs a present pane, readable Pi identity and positive process evidence; pane closing stays strict
+ok - herdr stale registration: a shell-only pane with a lingering Pi record is agent-free with an explicit reason
+ok - herdr stale registration: no registered status can outrank a shell-only process view
+ok - herdr stale registration: a registered agent with a live Pi foreground process still reads alive

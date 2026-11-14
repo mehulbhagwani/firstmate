@@ -1,0 +1,4 @@
+ok - matrix: pi's separated composer needs identity + structure; the blank row alone never proves it
+ok - matrix: a dollar-first pi status footer reads empty; dead shells still refuse
+ok - matrix: pi's Codex usage-limit banner over an empty pair settles a stale status; probe-absent, foreign, near-miss, displaced, running, and typed shapes keep refusing
+ok - pi codex banner adapter requires a pinned version: only the named Pi executable when the caller knows it, every installed one otherwise
