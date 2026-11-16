@@ -1,0 +1,188 @@
+[
+  {
+    "name": "omitted-and-steering",
+    "session": "cap-1000",
+    "requested": {
+      "command": "printf START; sleep 3; printf SHOULD_NOT_FINISH"
+    },
+    "output": "START\n\nCommand timed out after 1 seconds",
+    "steeringAcknowledged": true,
+    "result": "pass",
+    "observedToolSeconds": 1.018,
+    "toolSeconds": 1.005
+  },
+  {
+    "name": "larger-explicit",
+    "session": "cap-1000",
+    "requested": {
+      "command": "sleep 3; printf SHOULD_NOT_FINISH",
+      "timeout": 60
+    },
+    "output": "Command timed out after 1 seconds",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 1.024,
+    "toolSeconds": 1.004
+  },
+  {
+    "name": "shorter-explicit",
+    "session": "cap-1000",
+    "requested": {
+      "command": "sleep 1; printf SHOULD_NOT_FINISH",
+      "timeout": 0.2
+    },
+    "output": "Command timed out after 0.2 seconds",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 0.279,
+    "toolSeconds": 0.204
+  },
+  {
+    "name": "equal-explicit",
+    "session": "cap-1000",
+    "requested": {
+      "command": "sleep 2; printf SHOULD_NOT_FINISH",
+      "timeout": 1
+    },
+    "output": "Command timed out after 1 seconds",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 1.016,
+    "toolSeconds": 1.011
+  },
+  {
+    "name": "quick-command",
+    "session": "cap-1000",
+    "requested": {
+      "command": "printf QUICK_WORKS"
+    },
+    "output": "QUICK_WORKS",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 0.041,
+    "toolSeconds": 0.003
+  },
+  {
+    "name": "subsecond",
+    "session": "cap-500",
+    "requested": {
+      "command": "sleep 2; printf SHOULD_NOT_FINISH"
+    },
+    "output": "Command timed out after 0.5 seconds",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 0.502,
+    "toolSeconds": 0.507
+  },
+  {
+    "name": "minimum",
+    "session": "cap-1",
+    "requested": {
+      "command": "sleep 1; printf SHOULD_NOT_FINISH"
+    },
+    "output": "Command timed out after 0.001 seconds",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 0.0,
+    "toolSeconds": 0.005
+  },
+  {
+    "name": "maximum-omitted",
+    "session": "cap-maximum",
+    "requested": {
+      "command": "printf MAXIMUM_WORKS"
+    },
+    "output": "MAXIMUM_WORKS",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 0.116,
+    "toolSeconds": 0.006
+  },
+  {
+    "name": "maximum-explicit",
+    "session": "cap-maximum",
+    "requested": {
+      "command": "printf MAXIMUM_CLAMPS",
+      "timeout": 2147483.648
+    },
+    "output": "MAXIMUM_CLAMPS",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 0.0,
+    "toolSeconds": 0.005
+  },
+  {
+    "name": "oversized-setting",
+    "session": "cap-oversized",
+    "requested": {
+      "command": "printf OVERSIZED_IGNORED"
+    },
+    "output": "OVERSIZED_IGNORED",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 0.154,
+    "toolSeconds": 0.006
+  },
+  {
+    "name": "oversized-preserves-explicit",
+    "session": "cap-oversized",
+    "requested": {
+      "command": "sleep 1; printf SHOULD_NOT_FINISH",
+      "timeout": 0.2
+    },
+    "output": "Command timed out after 0.2 seconds",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 0.295,
+    "toolSeconds": 0.206
+  },
+  {
+    "name": "leading-zero-ignored",
+    "session": "cap-invalid",
+    "requested": {
+      "command": "sleep 1.2; printf INVALID_IGNORED"
+    },
+    "output": "INVALID_IGNORED",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 1.317,
+    "toolSeconds": 1.369
+  },
+  {
+    "name": "unset-default",
+    "session": "cap-unset",
+    "requested": {
+      "command": "sleep 1.2; printf DEFAULT_WORKS"
+    },
+    "output": "DEFAULT_WORKS",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 1.348,
+    "toolSeconds": 1.289
+  },
+  {
+    "name": "unset-explicit",
+    "session": "cap-unset",
+    "requested": {
+      "command": "sleep 1; printf SHOULD_NOT_FINISH",
+      "timeout": 0.2
+    },
+    "output": "Command timed out after 0.2 seconds",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 0.375,
+    "toolSeconds": 0.206
+  },
+  {
+    "name": "worker-unaffected",
+    "session": "without-extension",
+    "requested": {
+      "command": "sleep 1.2; printf WORKER_WORKS"
+    },
+    "output": "WORKER_WORKS",
+    "steeringAcknowledged": false,
+    "result": "pass",
+    "observedToolSeconds": 1.452,
+    "toolSeconds": 1.365
+  }
+]

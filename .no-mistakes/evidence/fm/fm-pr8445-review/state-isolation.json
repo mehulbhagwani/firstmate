@@ -1,0 +1,28 @@
+{
+  "name": "test-state-isolation",
+  "result": "pass",
+  "runs": [
+    {
+      "run": 1,
+      "stdout": "ok - Pi Bash timeout cap is opt-in, bounded, and preserves shorter timeouts\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "run": 2,
+      "stdout": "ok - Pi Bash timeout cap is opt-in, bounded, and preserves shorter timeouts\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "run": 3,
+      "stdout": "ok - Pi Bash timeout cap is opt-in, bounded, and preserves shorter timeouts\n",
+      "stderr": "",
+      "exit": 0
+    }
+  ],
+  "worktreeMarkerUnchanged": true,
+  "runningPiMarkerUnchanged": true,
+  "runningPiMarkerMtimeUnchanged": true,
+  "runningPiMarkerSha256": "e0ac953fe8e6b7bf89c95f3f0e1344cb964064b56973ba43f21ad25906e8c1cf"
+}

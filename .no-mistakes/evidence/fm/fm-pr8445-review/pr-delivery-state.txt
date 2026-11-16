@@ -1,0 +1,14 @@
+pull_request:
+  closingIssuesReferences[1]:
+    - id: I_kwDOS4Me3c8AAAABY2J8Pg
+      number: 7608
+      repository:
+        id: R_kgDOS4Me3Q
+        name: firstmate
+        owner:
+          id: MDQ6VXNlcjMyMzMwMDY=
+          login: kunchenguid
+      url: "https://github.com/kunchenguid/firstmate/issues/7608"
+  headRefOid: 8db4010ccf59842c72c6869bafc6c9f704d2ac82
+  state: OPEN
+  url: "https://github.com/kunchenguid/firstmate/pull/8445"
