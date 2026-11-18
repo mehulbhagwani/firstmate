@@ -1,0 +1,24 @@
+ Warning: tmux extended-keys is off. Modified Enter keys may not work. Add `set
+ -g extended-keys on` to ~/.tmux.conf and restart tmux.
+
+
+ Run the bash command: sleep 2; printf LIVE_BASH_COMPLETED. Set the bash tool
+ timeout to 10 seconds.
+
+
+
+ $ sleep 2; printf LIVE_BASH_COMPLETED (timeout 10s)
+
+ Command timed out after 0.2 seconds
+
+ Took 0.2s
+
+
+ The command timed out after 0.2 seconds despite requesting a 10-second tool
+ timeout.
+
+────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────
+~/.no-mistakes/worktrees/6cd9116ff40c/01M7Q59ZH10BAEGG6YDTYN2V1C (detached)
+↑11k ↓54 R10k CH98.5% $0.048 (sub) 3.9%/272k (auto)            gpt-5.6-sol • low
