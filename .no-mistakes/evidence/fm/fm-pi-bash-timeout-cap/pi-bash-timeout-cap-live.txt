@@ -1,0 +1,3 @@
+The command timed out after 0.5 seconds.
+
+exit_status=0
