@@ -1,0 +1,13 @@
+FM_TEST_BEGIN 2026-11-25T08:13:53Z tests/fm-secondmate-liveness.test.sh family=secondmate expected_gate_skip=none
+ok - uncertainty: prefixed secondmate IDs count, alert, and clear independently
+ok - fm_backend_tmux_agent_state: separates live, dead, missing, ambiguous, and unreadable
+ok - fm_backend_tmux_agent_state: rejects malformed targets before probing tmux
+ok - fm_backend_herdr_agent_state: preserves missing/no-agent/live/unknown husk behavior
+ok - fm_backend_agent_state: routes tmux/Herdr and keeps Zellij unverified
+ok - sweep: a confirmed-dead secondmate endpoint is killed and respawned
+ok - sweep: a dead secondmate respawns on its recorded backend, not a changed default
+ok - sweep: secondmate recovery resolves its durable account despite a different ambient login
+ok - sweep: distinct secondmate relaunches serialize across the task-set lock
+ok - sweep: a tmux secondmate whose close fails keeps the existing best-effort kill and guarded spawn
+ok - sweep: an already-live secondmate is untouched and distinguishable in verbose diagnostics
+ok - sweep: an authoritatively missing Pi secondmate window is relaunched
