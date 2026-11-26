@@ -62,7 +62,8 @@
 # Classifier-only sources (never written into a record):
 #   endpoint-gone, herdr-native, rex-native, t3code-native, tern-native, grok-regex, rovo-regex, agy-regex, muse-session-log,
 #   cursor-transcript, missing, malformed, gen-mismatch, source-mismatch,
-#   kimi-unverified, codex-unverified, capture-failed, no-target, launch-prompt
+#   kimi-unverified, codex-unverified, capture-failed, no-target,
+#   launch-prompt, launch-auth, launch-unconfirmed
 #
 # Classification (fm_busy_classify): busy | idle | unknown | dead, always
 # with the producing source as the second token. Precedence:
@@ -79,11 +80,10 @@
 #      dialog, sign-in screen, or first-run menu - fm_busy_launch_prompt_parked
 #      owns the per-harness table). That combination classifies unknown
 #      launch-prompt instead: the launch never actually started the brief, so
-#      it must not read as proof of an active turn. A record that has
-#      advanced past fm-spawn (any real hook event) is NEVER reclassified
-#      this way, however its rendered tail looks, so a genuinely working turn
-#      keeps its ordinary busy verdict and the general BUSY_TURN_MAX_SECS
-#      bound is unchanged.
+#      it must not read as proof of an active turn. A Pi credential rejection
+#      before agent_start likewise reads unknown launch-auth. With or without
+#      a capture, an untouched launch seed past FM_BUSY_TURN_MAX_SECS reads
+#      unknown launch-unconfirmed. Neither rule changes a real hook verdict.
 #   5. no record at all: a native busy verdict from herdr, rex, or tern is trusted as busy
 #      (generation state is sufficient for busy, not for idle), then the
 #      muse session-log and cursor transcript pull sources, then the
@@ -364,13 +364,14 @@ fm_busy_source_trusted() {  # <harness> <source>
 }
 
 # fm_busy_record_read: parse and validate state/<id>.busy-state against the
-# armed gen. Prints "<state> <source> <event> <seq>" for a valid record.
+# armed gen. Prints "<state> <source> <event> <seq>" for a valid record,
+# with the validated record timestamp appended when requested.
 # Non-zero returns name the reason on stdout instead:
 #   missing      no record file (or no armed gen and no record)
 #   malformed    unparseable line, bad tokens, or a missing armed gen for an
 #                existing record
 #   gen-mismatch a record from a stale incarnation
-fm_busy_record_read() {  # <state-dir> <id>
+fm_busy_record_read() {  # <state-dir> <id> [--with-timestamp]
   local state=$1 id=$2 rec gen line extra ver f
   local r_gen='' r_seq='' r_state='' r_source='' r_event='' r_ts=''
   rec=$(fm_busy_record_path "$state" "$id")
@@ -416,6 +417,23 @@ fm_busy_record_read() {  # <state-dir> <id>
     return 1
   fi
   printf '%s %s %s %s' "$r_state" "$r_source" "$r_event" "$r_seq"
+  if [ "${3:-}" = --with-timestamp ]; then printf ' %s' "$r_ts"; fi
+}
+
+fm_busy_turn_max_secs() {
+  local value=${FM_BUSY_TURN_MAX_SECS:-3600}
+  case "$value" in *[!0-9]*) value=3600 ;; esac
+  [ "${#value}" -le 9 ] || value=3600
+  printf '%s' "$((10#$value))"
+}
+
+fm_busy_launch_seed_expired() {  # <record timestamp>
+  local then=$1 now bound
+  case "$then" in *[!0-9]*|'') return 1 ;; esac
+  [ "${#then}" -le 15 ] || return 1
+  bound=$(fm_busy_turn_max_secs)
+  now=$(date +%s) || return 1
+  [ "$((now - 10#$then))" -ge "$bound" ]
 }
 
 # ---------------------------------------------------------------------------
@@ -1069,6 +1087,17 @@ fm_busy_pi_launch_prompt_tail() {
     && printf '%s' "$buf" | grep -qiE 'Do not trust'
 }
 
+# Pi prints a credential error and /login advice when it refuses the first
+# prompt before starting an agent run. Trust neither signal on its own: the
+# brief itself is also in the pane. Only an untouched Pi launch seed can use
+# this backstop, so request errors and prompt-like text in active runs do not.
+fm_busy_pi_launch_auth_tail() {  # <tail40>
+  local buf
+  buf=$(printf '%s\n' "$1" | awk 'NF' | tail -18)
+  printf '%s\n' "$buf" | grep -qE '^[[:space:]]*Error: (No API key found for |Authentication failed for )' \
+    && printf '%s\n' "$buf" | grep -qE "^[[:space:]]*(Use /login to log into a provider|Run '/login )"
+}
+
 # fm_busy_gemini_launch_prompt_tail: Gemini's workspace-trust dialog ("Do you
 # trust the files in this folder?"), its first-run auth-method picker ("How
 # would you like to authenticate for this project?"), and the credential
@@ -1125,12 +1154,11 @@ fm_busy_launch_prompt_parked() {  # <harness>
 # process state. <tail40> is optional pre-captured plain output: the grok,
 # rovo, and agy arms capture it themselves through fm_backend_capture when it
 # is absent (or report unknown capture-failed if that is unavailable too),
-# while the launch-prompt backstop below has no capture fallback of its own -
-# without a supplied tail40 it is skipped entirely and a record still pinned
-# at the fm-spawn seed keeps reading busy fm-spawn, unchanged.
+# while the rendered launch checks have no capture fallback of their own.
+# Expiry of the launch seed applies even without a capture.
 fm_busy_classify() {  # <backend> <target> <harness> <id> <state-dir> [tail40]
   local backend=$1 target=$2 harness=$3 id=$4 state=$5 tail40=${6-}
-  local out rc r_state r_source native log
+  local out rc r_state r_source r_event r_seq r_ts native log
   # t3code first: the T3 server reports the session status for claude and
   # codex alike. Native uncertainty must not fall through to a stale idle
   # record or a harness-specific fallback.
@@ -1175,21 +1203,32 @@ fm_busy_classify() {  # <backend> <target> <harness> <id> <state-dir> [tail40]
       return 0
       ;;
   esac
-  out=$(fm_busy_record_read "$state" "$id") && rc=0 || rc=$?
+  out=$(fm_busy_record_read "$state" "$id" --with-timestamp) && rc=0 || rc=$?
   if [ "$rc" = 0 ]; then
-    r_state=${out%% *}
-    out=${out#* }
-    r_source=${out%% *}
-    if fm_busy_source_trusted "$harness" "$r_source"; then
-      if [ "$r_state" = busy ] && [ "$r_source" = fm-spawn ] && [ -n "$tail40" ] \
-        && printf '%s' "$tail40" | fm_busy_launch_prompt_parked "$harness"; then
-        printf 'unknown launch-prompt'
-      else
-        printf '%s %s' "$r_state" "$r_source"
-      fi
-    else
+    read -r r_state r_source r_event r_seq r_ts <<< "$out"
+    if ! fm_busy_source_trusted "$harness" "$r_source"; then
       printf 'unknown source-mismatch'
+      return 0
     fi
+    if [ "$r_state:$r_source:$r_event:$r_seq" = busy:fm-spawn:launch-brief:1 ]; then
+      if [ -n "$tail40" ] && printf '%s' "$tail40" | fm_busy_launch_prompt_parked "$harness"; then
+        printf 'unknown launch-prompt'
+        return 0
+      fi
+      case "$harness" in
+        pi|pi-signed)
+          if [ -n "$tail40" ] && fm_busy_pi_launch_auth_tail "$tail40"; then
+            printf 'unknown launch-auth'
+            return 0
+          fi
+          ;;
+      esac
+      if fm_busy_launch_seed_expired "$r_ts"; then
+        printf 'unknown launch-unconfirmed'
+        return 0
+      fi
+    fi
+    printf '%s %s' "$r_state" "$r_source"
     return 0
   fi
   case "$out" in

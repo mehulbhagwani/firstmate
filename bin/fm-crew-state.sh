@@ -374,6 +374,21 @@ map_log_state() {  # <line>
 LOG_LINE=$(status_current_line "$LOG" "$KIND")
 LOG_VERB=$(status_line_verb "$LOG_LINE")
 
+# Completed scout evidence can replace an old working event, not a later
+# declaration or an active turn. Verify decisions with the same gate teardown
+# uses; the report must belong to this incarnation and postdate the work log.
+scout_report_reconciled() {
+  [ "$KIND" = scout ] && [ "$LOG_VERB" = working ] || return 1
+  local report="${FM_DATA_OVERRIDE:-$FM_HOME/data}/$ID/report.md"
+  local gen_file
+  [ "$(meta_value decisions_reviewed)" = 1 ] || return 1
+  [ -f "$report" ] && [ ! -L "$report" ] && [ -s "$report" ] && [ -r "$report" ] || return 1
+  gen_file=$(fm_busy_gen_path "$STATE" "$ID")
+  [ -f "$gen_file" ] && [ ! "$report" -ot "$gen_file" ] && [ ! "$report" -ot "$LOG" ] || return 1
+  FM_HOME="$FM_HOME" FM_STATE_OVERRIDE="$STATE" \
+    "$SCRIPT_DIR/fm-captain-hold.sh" verify "$ID" >/dev/null 2>&1
+}
+
 # --- remote secondmate: the true source is the remote endpoint ---------------
 # A remote mate's recorded worktree and backend target live on its own host, so
 # the local worktree probe above and the local pane reads below would misreport
@@ -1610,7 +1625,11 @@ if [ "$KIND" != secondmate ]; then
   BUSY_VERDICT=$(crew_busy_verdict "$BACKEND_TARGET")
   case "${BUSY_VERDICT%% *}" in
     busy) emit working pane "harness busy (${BUSY_VERDICT#* })" ;;
-    idle) ;;
+    idle)
+      if scout_report_reconciled; then
+        emit "done" scout-report "report saved and decision inventory verified"
+      fi
+      ;;
     *) emit unknown pane "harness state unavailable ($BUSY_VERDICT)" ;;
   esac
 fi

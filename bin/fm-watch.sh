@@ -429,7 +429,7 @@ STALE_ESCALATE_SECS=${FM_STALE_ESCALATE_SECS:-240}  # idle secs before a provabl
 # the crew declared the wait itself, which takes the long pause cadence instead.
 # Set generously above any legitimate interval without observable progress,
 # including silent long tool calls, builds, or test runs.
-BUSY_TURN_MAX_SECS=${FM_BUSY_TURN_MAX_SECS:-3600}
+BUSY_TURN_MAX_SECS=$(fm_busy_turn_max_secs)
 # Optional foreground Pi model observation. Invalid/unset/zero stays off; a
 # current stream silent past this many seconds crosses BUSY_TURN_MAX_SECS early
 # and names that silence in its escalation reason.
@@ -2224,6 +2224,23 @@ wedge_timer_check() {  # <window> <since-file> <triage-label> <escalation-count-
         fi
         if wedge_dead_record "$win" "$since_file" "$label" "$age" "$hash" "$task"; then
           return 0
+        fi
+        # Re-read a scout only at the wedge threshold, and only when it has a
+        # report. First-sight status, open decisions, unread steers and endpoint
+        # failure still take their own paths; this stops counting wedges for a
+        # report the supervisor has already reviewed.
+        if [ -z "$dialog" ] && [ -n "$task" ] \
+          && [ -s "${FM_DATA_OVERRIDE:-$FM_HOME/data}/$task/report.md" ] \
+          && [ "$(window_kind "$win")" = scout ]; then
+          case "$("$FM_CREW_STATE_BIN" "$task" 2>/dev/null)" in
+            'state: done · source: scout-report · '*)
+              wedge_episode_end "$_wkey"
+              date +%s > "$since_file"
+              clear_write_tracking "$_wkey"
+              triage_log "absorbed $label (reviewed scout report, idle ${age}s): $win"
+              return 0
+              ;;
+          esac
         fi
         if wedge_defer_validating "$win" "$since_file" "$label" "$age" "$task"; then
           return 0
