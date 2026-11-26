@@ -1,0 +1,27 @@
+=== live deferral ordering check ===
+fixture: disposable markdown tasks-axi home
+answer input: live-defer-policy<TAB>later<TAB>Revisit<TAB><TAB>2099-07-20
+answers exit=1
+skipped: live-defer-policy (simulated transient hold backend failurefm-captain-hold: could not defer task live-defer-policy for the captain)
+answers: closed=0 skipped=1
+policy before failed re-hold: present=yes
+policy after failed re-hold: present=yes
+task after failed re-hold:
+task:
+  id: live-defer-policy
+  title: "Choose later https://github.com/sample/sample/pull/42"
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: "fm-hold-v1:Q2hvb3NlIGEgcm91dGU="
+  hold_kind: captain
+  hold_until: "-"
+  kind: scout
+  repo: sample
+  priority: "-"
+  created: 2026-11-27
+  closed: "-"
+  deps: none
+  links: "pr:https://github.com/sample/sample/pull/42"
+  body: "Captain hold set: 2026-11-26T23:08:21Z"
