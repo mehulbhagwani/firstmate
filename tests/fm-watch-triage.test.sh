@@ -2443,6 +2443,7 @@ test_reviewed_idle_scout_does_not_reescalate() {
   printf 'window=%s\nkind=scout\nharness=pi\nbackend=tmux\nworktree=%s\n' "$win" "$dir/wt" > "$state/wedge.meta"
   gen=$("$ROOT/bin/fm-busy-event.sh" arm "$state" wedge)
   "$ROOT/bin/fm-busy-event.sh" apply "$state" wedge idle --gen "$gen" --source pi-ext --event agent-settled
+  set_mtime "$(( $(date +%s) - 5 ))" "$state/wedge.busy-gen"
   FM_HOME="$dir" FM_TEST_PANE_COMMAND=pi wedge_threshold_round "$state" "$fakebin" "$out" "$capture" "$win" '' exit \
     || fail 'the idle scout with no report must still escalate'
   grep -F 'possible wedge, escalation 1' "$out" >/dev/null || fail "expected unfinished-scout escalation: $(cat "$out")"
