@@ -291,7 +291,8 @@ scout_report_reconciled() {
   [ "$(meta_value decisions_reviewed)" = 1 ] || return 1
   [ -f "$report" ] && [ ! -L "$report" ] && [ -s "$report" ] && [ -r "$report" ] || return 1
   gen_file=$(fm_busy_gen_path "$STATE" "$ID")
-  [ -f "$gen_file" ] && [ ! "$report" -ot "$gen_file" ] && [ ! "$report" -ot "$LOG" ] || return 1
+  # Stock macOS Bash compares whole seconds: a tie does not prove freshness.
+  [ -f "$gen_file" ] && [ -f "$LOG" ] && [ "$report" -nt "$gen_file" ] && [ "$report" -nt "$LOG" ] || return 1
   FM_HOME="$FM_HOME" FM_STATE_OVERRIDE="$STATE" \
     "$SCRIPT_DIR/fm-captain-hold.sh" verify "$ID" >/dev/null 2>&1
 }
