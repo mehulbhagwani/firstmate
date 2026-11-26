@@ -638,6 +638,14 @@ Portable launch-command coverage lives in `tests/fm-spawn-dispatch-profile.test.
 `bin/fm-busy-lib.sh`'s launch-prompt backstop (`fm_busy_launch_prompt_parked`) reclassifies a launch whose busy record is still pinned at the fm-spawn seed as `unknown launch-prompt`, rather than `busy fm-spawn`, when the captured pane matches that harness's own recognized trust, sign-in, or first-run dialog.
 Each signature below was live-verified against the real installed binary through `tests/fm-launch-prompt-signals-live-e2e.test.sh` (`FM_LAUNCH_PROMPT_SIGNALS_LIVE=1`), which is what refreshes this record after an upgrade.
 
+The same guard verifies Pi's preflight credential rejection against a credential-less loopback model, so it sends no provider request and neither creates nor reads operator credentials.
+Verified 2026-11-26 with `FM_LAUNCH_PROMPT_SIGNALS_LIVE=1 bash bin/fm-test-run.sh tests/fm-launch-prompt-signals-live-e2e.test.sh`:
+
+```text
+ok - pi 1.6.1: a real rejected first prompt never records a session or reads busy
+ok - pi-signed 1.6.0: a real rejected first prompt never records a session or reads busy
+```
+
 An initial Pi signature sourced only from the installed binary's own UI strings ("Project trust", the internal panel-title component, never the dialog's own rendered heading) was wrong and never matched the real screen.
 This guard's first live run caught that before it shipped, which is the evidence for why this class of check must be driven end to end rather than read off strings or a component name.
 

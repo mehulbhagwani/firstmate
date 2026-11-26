@@ -4190,6 +4190,31 @@ test_live_and_unproven_endpoints_still_wedge_escalate() {
   pass "a live wedged agent, an unattributable one, and an unreadable endpoint escalate unchanged"
 }
 
+test_reviewed_idle_scout_does_not_reescalate() {
+  local dir state fakebin out capture win=test:fm-wedge gen report
+  dir=$(wedge_threshold_fixture reviewed-idle-scout 'working: writing the report' 5 5)
+  state="$dir/state"; fakebin="$dir/fakebin"; out="$dir/watch.out"; capture="$dir/pane.txt"
+  # Run authoritative crew state against the same isolated tmux fixture.
+  printf '#!/bin/bash\nexec %q "$@"\n' "$ROOT/bin/fm-crew-state.sh" > "$fakebin/fm-crew-state.sh"
+  chmod +x "$fakebin/fm-crew-state.sh"
+  mkdir -p "$dir/wt" "$dir/data/wedge"
+  printf 'window=%s\nkind=scout\nharness=pi\nbackend=tmux\nworktree=%s\n' "$win" "$dir/wt" > "$state/wedge.meta"
+  gen=$("$ROOT/bin/fm-busy-event.sh" arm "$state" wedge)
+  "$ROOT/bin/fm-busy-event.sh" apply "$state" wedge idle --gen "$gen" --source pi-ext --event agent-settled
+  FM_HOME="$dir" FM_TEST_PANE_COMMAND=pi wedge_threshold_round "$state" "$fakebin" "$out" "$capture" "$win" '' exit \
+    || fail 'the idle scout with no report must still escalate'
+  grep -F 'possible wedge, escalation 1' "$out" >/dev/null || fail "expected unfinished-scout escalation: $(cat "$out")"
+  FM_HOME="$dir" ack_stopped_cycle "$state" || fail 'could not acknowledge the unfinished-scout wake'
+  report="$dir/data/wedge/report.md"
+  printf '# Findings\nThe investigation is complete.\n' > "$report"
+  printf 'decisions_reviewed=1\ndecision_keys=\n' >> "$state/wedge.meta"
+  : > "$out"
+  FM_HOME="$dir" FM_TEST_PANE_COMMAND=pi wedge_threshold_round "$state" "$fakebin" "$out" "$capture" "$win" '' absorb \
+    || fail "the idle scout with attested completion escalated again: $(cat "$out")"
+  ! grep -F 'possible wedge' "$out" >/dev/null || fail 'a new wedge was reported for the completed scout'
+  pass 'the watcher stops escalating a reviewed idle scout but still escalates an unfinished one'
+}
+
 # --- opt-in operator guards consulted at the wedge threshold -----------------
 # Upstream kunchenguid/firstmate#6919: docs/jev-guards.md says a CRITICAL guard
 # verdict explains worker silence and its caller should not escalate a wedge
@@ -7392,6 +7417,7 @@ test_wedge_escalation_marks_demand_deep_inspection_after_threshold
 test_wedge_escalation_resets_when_pane_becomes_active
 test_gone_endpoint_reports_once_instead_of_escalating_forever
 test_live_and_unproven_endpoints_still_wedge_escalate
+test_reviewed_idle_scout_does_not_reescalate
 test_wedge_guards_absent_config_keeps_the_unchanged_ladder
 test_wedge_guard_critical_defers_one_window_at_a_time_up_to_the_cap
 test_wedge_guard_failures_fail_open
