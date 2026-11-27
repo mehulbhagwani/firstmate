@@ -1,0 +1,8 @@
+Live product validation (real tmux backend, disposable tmux server/home)
+
+Scenario: shell-only endpoint with a valid terminal declaration
+
+Observed output from `bin/fm-crew-state.sh fm-live-terminal`:
+state: done · source: status-log · terminal delivery declaration
+
+This adversarial check confirms the agent-gone guard does not erase a valid terminal done declaration. The tmux server and disposable home were torn down after the run.

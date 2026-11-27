@@ -1,0 +1,17 @@
+Live product validation (real tmux backend, disposable tmux server/home)
+
+Scenario: readable shell-only Pi endpoint with stale working evidence
+
+Command surface:
+  bin/fm-crew-state.sh fm-live-pi
+
+Disposable setup:
+  real tmux session `live`, window `fm-live-pi`, command `bash -i`
+  FM_HOME and FM_STATE_OVERRIDE pointed at a disposable temporary home
+  meta recorded backend=tmux, harness=pi, kind=ship
+  status log contained: working: started before provider quota ended the harness
+
+Observed output:
+state: unknown · source: none · backend target gone: live:fm-live-pi (agent gone, pane shell remains)
+
+The tmux pane was readable and visibly retained its shell prompt; crew-state nevertheless classified the harness as gone and did not trust stale working evidence. The tmux server and disposable home were torn down after the run.
