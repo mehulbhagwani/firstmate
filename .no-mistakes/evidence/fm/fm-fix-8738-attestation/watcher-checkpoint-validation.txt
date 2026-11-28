@@ -1,0 +1,18 @@
+$ FM_TEST_ONLY=test_signal_paths_checkpoint_between_workers bash tests/fm-watch-triage.test.sh
+ok - signal paths checkpoint between workers
+$ FM_TEST_ONLY=test_zero_checkpoint_uses_default bash tests/fm-watch-beacon-progress.test.sh
+ok - a slow cycle keeps the beacon under the grace and the guard quiet (max age 1s)
+ok - a watcher stuck inside one step still goes stale and reads down (max age 10s)
+ok - zero checkpoint preserves cycle-top-only beacon writes
+ok - all watcher beacon progress tests passed
+$ targeted churn boundary cases
+== test_turn_ended_mixed_positive_evidence_batch_absorbed ==
+ok - a batch may satisfy positive evidence independently per task
+== test_turn_ended_mixed_positive_evidence_batch_default_off ==
+ok - per-task evidence composition stays off until the home opts in
+== test_status_and_turn_end_batch_never_uses_churn_evidence ==
+ok - a status-bearing batch never falls through to pane-churn evidence
+== test_turn_ended_churn_absorb_off_by_default ==
+ok - pane-churn turn-end absorb is off until a home opts in
+== test_turn_ended_churn_absorb_bounded ==
+ok - a perpetually churning pane surfaces once its bounded deferral window is spent
