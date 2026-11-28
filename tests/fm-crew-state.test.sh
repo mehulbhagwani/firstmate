@@ -3384,6 +3384,79 @@ test_scout_skips_run_lookup() {
   pass "scout skips the run lookup"
 }
 
+test_aged_unconfirmed_launch_is_not_working() {
+  reset_fakes
+  local d id=pi-unconfirmed gen out back
+  d=$(new_case "$id")
+  make_fakebin "$d" >/dev/null
+  mkdir "$d/wt"
+  fm_write_meta "$d/state/$id.meta" "window=fm:fm-$id" "worktree=$d/wt" kind=scout harness=pi
+  gen=$("$ROOT/bin/fm-busy-event.sh" arm "$d/state" "$id")
+  out=$(run_crew_state "$d" "$id")
+  assert_contains "$out" 'harness busy (fm-spawn)' 'a fresh launch still has a grace period'
+  FM_FAKE_BUSY=1
+  FM_FAKE_BUSY_TEXT=$'Error: No API key found for lab-oauth.\n\nUse /login to log into a provider via OAuth or API key.'
+  export FM_FAKE_BUSY_TEXT
+  out=$(run_crew_state "$d" "$id")
+  assert_contains "$out" 'state: unknown' 'a recognized Pi launch failure does not wait out the grace period'
+  assert_contains "$out" 'launch-auth' 'the verdict names the credential diagnostic'
+  unset FM_FAKE_BUSY_TEXT
+  back=$(( $(date +%s) - 3601 ))
+  printf 'v1 gen=%s seq=1 state=busy source=fm-spawn event=launch-brief ts=%s\n' "$gen" "$back" > "$d/state/$id.busy-state"
+  out=$(run_crew_state "$d" "$id")
+  assert_contains "$out" 'state: unknown' 'an old launch seed with no hook is not active work'
+  assert_contains "$out" 'launch-unconfirmed' 'the verdict explains why the launch is unverified'
+  printf 'v1 gen=%s seq=2 state=busy source=pi-ext event=agent-start ts=%s\n' "$gen" "$back" > "$d/state/$id.busy-state"
+  out=$(run_crew_state "$d" "$id")
+  assert_contains "$out" 'harness busy (pi-ext)' 'an equally old real start remains busy'
+  pass 'only the untouched launch seed expires; a real busy hook remains authoritative'
+}
+
+test_idle_scout_reconciles_attested_report() {
+  reset_fakes
+  local d id=scout-evidence out gen status report generation
+  d=$(new_case "$id")
+  status="$d/state/$id.status"
+  report="$d/data/$id/report.md"
+  generation="$d/state/$id.busy-gen"
+  make_fakebin "$d" >/dev/null
+  mkdir -p "$d/wt" "$d/data/$id"
+  fm_write_meta "$d/state/$id.meta" "window=fm:fm-$id" "worktree=$d/wt" kind=scout harness=claude
+  arm_idle_record "$d/state" "$id"
+  printf 'working: preparing the report\n' > "$status"
+  touch -t 202001010000 "$status" "$generation"
+  out=$(FM_HOME="$d" run_crew_state "$d" "$id")
+  assert_contains "$out" 'state: working · source: status-log' 'idle without a report is not completion'
+  printf '# Findings\nNo open decisions.\n' > "$report"
+  touch -t 202001010001 "$report"
+  out=$(FM_HOME="$d" run_crew_state "$d" "$id")
+  assert_contains "$out" 'state: working · source: status-log' 'an unreviewed report does not supersede status'
+  printf 'decisions_reviewed=1\ndecision_keys=\n' >> "$d/state/$id.meta"
+  out=$(FM_HOME="$d" run_crew_state "$d" "$id")
+  assert_contains "$out" 'state: done · source: scout-report' 'a reviewed report supersedes old working status when idle'
+  printf 'working: revisiting the findings\n' >> "$status"
+  touch -r "$report" "$status"
+  out=$(FM_HOME="$d" run_crew_state "$d" "$id")
+  assert_contains "$out" 'state: working · source: status-log' 'a report tied with a working event is not proof it is newer'
+  printf 'needs-decision [key=new-question]: current decision\n' >> "$status"
+  out=$(FM_HOME="$d" run_crew_state "$d" "$id")
+  assert_contains "$out" 'state: parked · source: status-log' 'a current decision is not suppressed'
+  printf 'resolved [key=new-question]: answered\nworking: revisiting the findings\n' >> "$status"
+  out=$(FM_HOME="$d" run_crew_state "$d" "$id")
+  assert_contains "$out" 'state: working · source: status-log' 'newer work invalidates the old report as completion evidence'
+  printf 'working: preparing the report\n' > "$status"
+  touch -t 202001010000 "$status"
+  gen=$("$ROOT/bin/fm-busy-event.sh" arm "$d/state" "$id")
+  touch -r "$report" "$generation"
+  "$ROOT/bin/fm-busy-event.sh" apply "$d/state" "$id" busy --gen "$gen" --source claude-hook --event user-prompt-submit
+  out=$(FM_HOME="$d" run_crew_state "$d" "$id")
+  assert_contains "$out" 'harness busy (claude-hook)' 'positive active work takes precedence over report evidence'
+  "$ROOT/bin/fm-busy-event.sh" apply "$d/state" "$id" idle --gen "$gen" --source claude-hook --event stop
+  out=$(FM_HOME="$d" run_crew_state "$d" "$id")
+  assert_contains "$out" 'state: working · source: status-log' 'a report tied with a replacement generation is not proof it belongs to the replacement'
+  pass 'only an idle scout with a reviewed report supersedes old working status'
+}
+
 # (j) torn-down worktree and missing meta are graceful (unknown/none, exit 0)
 test_torn_down_worktree() {
   reset_fakes
@@ -5937,6 +6010,8 @@ test_dead_window_still_reports_terminal_run_step
 test_dead_window_still_reports_active_run_step
 test_no_timeout_uses_perl_bound
 test_scout_skips_run_lookup
+test_aged_unconfirmed_launch_is_not_working
+test_idle_scout_reconciles_attested_report
 test_torn_down_worktree
 test_remote_alive_with_log_uses_status_log
 test_remote_alive_idle_is_healthy_not_gone

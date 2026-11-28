@@ -19,9 +19,10 @@
 # fm_backend_tmux_capture: `tmux capture-pane -p -S -40`), arms a scratch
 # busy-state record exactly as fm-spawn.sh does at launch, and requires
 # fm_busy_classify to report `unknown launch-prompt` instead of the record's
-# seeded `busy fm-spawn`. No prompt is ever submitted and no dialog is ever
-# answered (Escape only, never Enter), so no model tokens are spent and no
-# operator credential store is written to. An absent harness binary is
+# seeded `busy fm-spawn`. The Pi credential rejection case submits an initial
+# brief only to an offline, credential-less loopback model. No dialog is
+# answered, no model tokens are spent, and no operator credential store is
+# written to. An absent harness binary is
 # reported explicitly and skipped rather than silently passing over it; a run
 # that checked nothing fails.
 #
@@ -92,8 +93,8 @@ watcher_gate_not_busy() {  # <lab> <state> <target> <harness> <tail>
 # binary) via <cmd...> into a fresh worktree carrying <extra-file>
 # (path,content - empty means none), wait up to 15s for <expect-regex> to
 # render, capture the pane the production way, arm a scratch busy-state
-# record, and require the launch-prompt backstop to classify it unknown
-# launch-prompt. Never answers the dialog: Escape only, never Enter.
+# record, and require the requested launch-state verdict. Never answers a
+# dialog: Escape only, never Enter.
 #
 # Writes the captured tail to <tail-out> rather than returning it on stdout:
 # a caller that needs the tail (the Pi case, which reuses it for pi-signed and
@@ -101,10 +102,10 @@ watcher_gate_not_busy() {  # <lab> <state> <target> <harness> <tail>
 # capture that output, because `fail` calls `exit`, and `exit` inside a
 # `$(...)` subshell only ends that subshell - a real failure would be silently
 # swallowed there instead of failing the guard.
-check_harness() {  # <harness> <session> <extra-path> <extra-content> <expect-regex> <tail-out> <cmd...>
-  local harness=$1 session=$2 extra_path=$3 extra_content=$4 expect=$5 tail_out=$6
+check_harness() {  # <harness> <session> <extra-path> <extra-content> <expect-regex> <tail-out> <verdict> <cmd...>
+  local harness=$1 session=$2 extra_path=$3 extra_content=$4 expect=$5 tail_out=$6 verdict=$7
   local target="$session:w" lab state tail out
-  shift 6
+  shift 7
   lab=$(mktemp -d "${TMPDIR:-/tmp}/fm-launch-prompt-$harness.XXXXXX") || fail "$harness: could not create the isolated lab"
   LABS+=("$lab")
   mkdir -p "$lab/wt"
@@ -133,8 +134,8 @@ $tail"
   mkdir -p "$state"
   "$EV" arm "$state" t1 >/dev/null || fail "$harness: could not arm the scratch busy-state record"
   out=$(fm_busy_classify tmux w1 "$harness" t1 "$state" "$tail")
-  [ "$out" = "unknown launch-prompt" ] \
-    || fail "$harness: real launch parked on its prompt classified '$out', expected 'unknown launch-prompt'"
+  [ "$out" = "$verdict" ] \
+    || fail "$harness ${VERSION_OUT:-}: real launch classified '$out', expected '$verdict'"
   watcher_gate_not_busy "$lab" "$state" "$target" "$harness" "$tail"
 
   "$REAL_TMUX" -L "$SOCKET" send-keys -t "$target" Escape >/dev/null 2>&1 || true
@@ -148,7 +149,7 @@ if [ -x "${CLAUDE_BIN:-}" ]; then
   VERSION_OUT=$("$CLAUDE_BIN" --version 2>&1) || fail "claude --version failed: $VERSION_OUT"
   note "live claude version: $VERSION_OUT"
   check_harness claude fm-lp-claude-$$ '' '' \
-    'Is this a project you created or one you trust' '' \
+    'Is this a project you created or one you trust' '' 'unknown launch-prompt' \
     "$CLAUDE_BIN" --dangerously-skip-permissions hello
   pass "claude: a real launch parked on its own rendered trust dialog surfaces through the watcher gate"
 else
@@ -169,7 +170,7 @@ if [ -x "${PI_BIN:-}" ]; then
   PI_TAIL_FILE=$(mktemp "${TMPDIR:-/tmp}/fm-launch-prompt-pi-tail.XXXXXX") || fail "pi: could not create the tail capture file"
   LABS+=("$PI_TAIL_FILE")
   check_harness pi fm-lp-pi-$$ '.pi/extensions/dummy.ts' 'export default {};' \
-    'Trust project folder' "$PI_TAIL_FILE" \
+    'Trust project folder' "$PI_TAIL_FILE" 'unknown launch-prompt' \
     env HOME="$PI_HOME_LAB" "$PI_BIN" hello
   # pi-signed and omp share Pi's engine and the same project-trust gate
   # (fm_busy_launch_prompt_parked), so the one real capture also proves them,
@@ -183,6 +184,25 @@ if [ -x "${PI_BIN:-}" ]; then
       || fail "$h: the same real Pi trust-dialog capture classified '$out', expected 'unknown launch-prompt'"
   done
   pass "pi, pi-signed, omp: a real Pi-engine launch parked on its own rendered trust dialog surfaces through the watcher gate"
+  cat > "$PI_HOME_LAB/launch-auth.ts" <<'EOF'
+export default function (pi: any) {
+  pi.registerProvider("fm-local-auth-guard", {
+    baseUrl: "http://127.0.0.1:1", api: "openai-completions",
+    models: [{ id: "tiny", name: "Local launch guard", reasoning: false, input: ["text"],
+      contextWindow: 128000, maxTokens: 4096, cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 } }],
+  });
+}
+EOF
+  for h in pi pi-signed; do
+    bin=$(command -v "$h" 2>/dev/null) || { note "$h not installed - launch-auth signature not checked"; continue; }
+    VERSION_OUT=$("$bin" --version 2>&1) || fail "$h --version failed: $VERSION_OUT"
+    check_harness "$h" "fm-lp-auth-$h-$$" '' '' '/login to log into a provider|to re-authenticate' '' 'unknown launch-auth' \
+      env -i PATH="$PATH" HOME="$PI_HOME_LAB" PI_CODING_AGENT_DIR="$PI_HOME_LAB/auth-$h" PI_OFFLINE=1 TERM=xterm-256color \
+      "$bin" -e "$PI_HOME_LAB/launch-auth.ts" --model fm-local-auth-guard/tiny --session-dir "$PI_HOME_LAB/sessions-$h" hello
+    [ -z "$(find "$PI_HOME_LAB/sessions-$h" -name '*.jsonl' -print -quit 2>/dev/null)" ] \
+      || fail "$h $VERSION_OUT: auth preflight unexpectedly recorded a session"
+    pass "$h $VERSION_OUT: a real rejected first prompt never records a session or reads busy"
+  done
 else
   note "pi not installed - launch-prompt signature not checked"
 fi
@@ -192,7 +212,7 @@ if [ -x "${GEMINI_BIN:-}" ]; then
   VERSION_OUT=$("$GEMINI_BIN" --version 2>&1) || fail "gemini --version failed: $VERSION_OUT"
   note "live gemini version: $VERSION_OUT"
   check_harness gemini fm-lp-gemini-$$ '' '' \
-    'How would you like to authenticate for this project|Do you trust the files in this folder|Enter Gemini API Key' '' \
+    'How would you like to authenticate for this project|Do you trust the files in this folder|Enter Gemini API Key' '' 'unknown launch-prompt' \
     env GEMINI_CLI_TRUST_WORKSPACE=true GEMINI_API_KEY= "$GEMINI_BIN" -y hello
   pass "gemini: a real launch parked on its own rendered auth or trust dialog surfaces through the watcher gate"
 else
